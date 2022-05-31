@@ -10,6 +10,8 @@ import Home from './components/Home.vue'
   <nav>
     <router-link to="/">Home</router-link>
     <router-link to="/design">Design</router-link>
+    <router-link to="/3d">3d</router-link>
+    <router-link to="/resume">resume</router-link>
   </nav>
   <router-view />
 </template>

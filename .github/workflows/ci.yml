@@ -1,10 +1,9 @@
 name: Build and Deploy Demo
 #手动触发
 on:
-  workflow_dispatch:  #手动触发
-  #push:    #push触发
-    #branches:
-      #- master
+  #workflow_dispatch:  #手动触发
+  push:    #push触发
+    branches: [ master ]
 
 jobs:
   build-and-deploy:

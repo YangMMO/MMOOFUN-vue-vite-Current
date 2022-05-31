@@ -7,7 +7,7 @@ const count = ref(0)
 </script>
 
 <template>
-  456
+  123
 </template>
 
 <style scoped>
