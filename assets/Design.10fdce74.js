@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{d as _,r}from"./index.bb4964c7.js";const s=_({name:"Design",props:{msg:null},setup(t){return r(0),(n,a)=>" 123 "}});var c=e(s,[["__scopeId","data-v-42250b16"]]);export{c as default};
