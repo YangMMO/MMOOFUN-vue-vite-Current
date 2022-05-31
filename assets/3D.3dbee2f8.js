@@ -1,0 +1,1 @@
+import{_}from"./plugin-vue_export-helper.21dcd24c.js";import{d as e,r}from"./index.f98f376a.js";const t=e({name:"3D",props:{msg:null},setup(a){return r(0),(s,o)=>" 123 "}});var c=_(t,[["__scopeId","data-v-19a85942"]]);export{c as default};
