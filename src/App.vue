@@ -1,28 +1,49 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Home from './components/Home.vue'
-</script>
-
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" />
-  <Home msg="Hello Vue 3 + TypeScript + Vite" /> -->
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/design">Design</router-link> |
-    <router-link to="/3d">3d</router-link> |
-    <router-link to="/resume">resume</router-link>
-  </nav>
+  <div class="header">
+    <div class="title box box-shadow p8">
+      MMOO.FUN
+    </div>
+
+    <nav class="menu box box-shadow">
+      <router-link class="p8" to="/">{{ $t("header.home") }}</router-link>
+      <router-link class="p8" to="/design">{{ $t("header.design") }}</router-link>
+      <router-link class="p8" to="/model">{{ $t("header.model") }}</router-link>
+      <router-link class="p8" to="/resume">{{ $t("header.resume") }}</router-link>
+    </nav>
+  </div>
+
+
   <router-view />
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script lang="ts">
+
+</script>
+
+<style lang="scss">
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  color: $G85;
+  z-index: 9999;
+
+  .title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    a {
+      display: inline-block;
+      font-size: 1rem;
+    }
+  }
 }
 </style>

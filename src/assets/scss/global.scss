@@ -1,0 +1,46 @@
+/* 默认样式 */
+a {
+    text-decoration: none;
+    color: #262626;
+}
+
+/* 全局变量 */
+$G85: #262626;
+
+$W100: #fff;
+$B100: #000;
+
+
+/* 全局样式 */
+.box {
+    background-color: $W100;
+    border: 2px solid $G85;
+    border-radius: 4px;
+}
+
+
+.box-shadow {
+    transition: all .5s;
+    box-shadow: 8px 8px #262626;
+}
+
+.p4 {
+    padding: 4px;
+}
+
+.p8 {
+    padding: 8px;
+}
+
+.p12 {
+    padding: 12px;
+}
+
+.p16 {
+    padding: 16px;
+}
+
+.p20 {
+    padding: 20px;
+}
+
