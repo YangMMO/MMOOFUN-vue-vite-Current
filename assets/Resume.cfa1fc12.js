@@ -1,1 +1,0 @@
-import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{d as _,r}from"./index.f98f376a.js";const s=_({name:"Resume",props:{msg:null},setup(t){return r(0),(a,o)=>" 789 "}});var n=e(s,[["__scopeId","data-v-cb357740"]]);export{n as default};
