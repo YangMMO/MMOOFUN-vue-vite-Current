@@ -1,0 +1,1 @@
+import{_ as e,o as _,c as s}from"./index.5271b568.js";const t={name:"Design"},a={class:"f1"};function c(n,o,r,p,u,d){return _(),s("div",a," \u656C\u8BF7\u671F\u5F85... ")}var f=e(t,[["render",c],["__scopeId","data-v-04c66f9a"]]);export{f as default};
