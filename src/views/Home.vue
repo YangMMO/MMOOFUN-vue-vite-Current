@@ -1,5 +1,5 @@
 <template>
-  <div class="f1">
+  <div class="f1 text-black dark:text-white">
     网站升级中
     <br />
     框架：vite / vue3 / typescript / three.js / i18n / scss
@@ -20,7 +20,7 @@
 <style lang="scss" scoped>
 .f1 {
     display: flex;
-    width: 100%;
+    // width: 100%;
     height: 100vh;
     align-items: center;
     justify-content: center;

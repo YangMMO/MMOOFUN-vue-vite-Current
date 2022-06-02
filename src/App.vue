@@ -1,58 +1,85 @@
 <template>
+<div class="container-box bg-white dark:bg-black">
   <div class="header">
-    <div class="flex-header title box box-shadow p8">
+    <div class="flex-header title box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray">
       <img src="./assets/img/mmo.jpg" alt="">
       MMOO.FUN
     </div>
 
     <div class="menu-fun">
-      <!-- 语言 -->
-      <div class="flex-header lua box box-shadow p8"
-        @click="switchLang()"
-      ><i class="ri-globe-line"></i></div>
-      <!-- 主题 -->
-      <div class="flex-header lua box box-shadow p8"><i class="ri-sun-line"></i></div>
-      <!-- 菜单 -->
-      <div class="flex-header menu box box-shadow p8">
+            <!-- 菜单 -->
+      <div class="flex-header menu box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray">
         <!-- <div class=" ">{{ page }}{</div> -->
         <nav>
-          <router-link  to="/">{{ $t("header.home") }}</router-link>
-          <router-link  to="/design">{{ $t("header.design") }}</router-link>
+          <router-link  to="/" >{{ $t('header.home')  }}</router-link>
+          <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link>
           <router-link  to="/model">{{ $t("header.model") }}</router-link>
-          <router-link  to="/resume">{{ $t("header.resume") }}</router-link>
+          <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
         </nav>
 
       </div>
+
+      <!-- 语言 -->
+      <div class="flex-header lua box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray"
+        @click="switchLang()"
+      ><i class="ri-globe-line"></i></div>
+      <!-- 主题 -->
+      <div class="flex-header lua box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray"
+        @click="themesMode()"
+      ><i class="ri-sun-line"></i></div>
+
     </div>
 
   </div>
 
 
   <router-view />
+</div>
 </template>
 
 <script lang="ts">
 import i18n from "./i18n"
+import { defineComponent } from "vue";
 
-type PageType = "home" | "design" | "model" | "resume"
+// type PageType = "home" | "design" | "model" | "resume"
 
-export default {
+export default defineComponent({
   name: 'App',
   setup() {
     // i18n.setLocale('en')
     return {
-      page: 'home' as PageType,
+      page: 'home',
+      theme: 'light' as string,
     }
   },
   methods: {
+    // 切换语言
     switchLang() {
       i18n.setLocale(i18n.getLocale() === 'en' ? 'cn' : 'en')
+    },
+
+    // 切换主题
+    themesMode() {
+      if (this.theme === 'light') {
+        this.theme = 'dark'
+        const clsList = document.documentElement.classList;
+        if(!clsList.contains('dark')) {
+          document.documentElement.classList.add('dark');
+        }
+      } else {
+        this.theme = 'light'
+        document.documentElement.classList.remove('dark')
+      }
     }
   },
-}
+})
 </script>
 
 <style lang="scss">
+
+.container-box {
+  transition: all 0.5s ease-in-out;
+}
 .header {
   position: fixed;
   width: 100%;
@@ -107,13 +134,13 @@ export default {
   .menu {
     width: auto;
     nav {
-      transition: all .5s;
+      // transition: all .5s;
 
       a {
         padding: 8px;
         font-size: 1rem;
         font-weight: 600;
-        transition: all .5s;
+        // transition: all .5s;
       }
     }
 

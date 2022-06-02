@@ -1,0 +1,26 @@
+//主题参数
+$themes: (
+  light: (
+    bg_color: #fff,
+    font_color: #262626
+  ),
+  dark: (
+    bg_color: #111827,
+    font_color: #fff
+  )
+);
+
+//生成对应元素的主题样式代码
+@mixin theme {
+  @each $themes-key, $themes-map in $themes {
+    $themes-map: $themes-map !global;
+    [data-theme=#{$themes-key}] & {
+      @content;
+    }
+  }
+}
+
+//获取对应的主题数据
+@function t($key){
+  @return map-get($themes-map, $key);
+};

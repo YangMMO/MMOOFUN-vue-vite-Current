@@ -1,5 +1,5 @@
 <template>
-  <div class="f1">
+  <div class="f1 text-black dark:text-white">
     敬请期待......
   </div>
 </template>

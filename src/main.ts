@@ -5,6 +5,8 @@ import i18n from './i18n'
 
 import 'normalize.css'
 import 'remixicon/fonts/remixicon.css'
+import './index.css'
+// import 'tailwindcss/tailwind.css'
 
 const app = createApp(App)
 
