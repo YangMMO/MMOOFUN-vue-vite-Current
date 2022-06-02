@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as _}from"./index.d5e5e5a4.js";const o={name:"Model"},a={class:"f1 text-black dark:text-white"};function s(c,r,d,n,l,p){return _(),t("div",a," \u656C\u8BF7\u671F\u5F85...... ")}var i=e(o,[["render",s],["__scopeId","data-v-d859b226"]]);export{i as default};
