@@ -1,27 +1,22 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const count = ref(0)
-</script>
-
 <template>
-  456
+  <div class="f1">
+    敬请期待...
+  </div>
 </template>
 
-<style scoped>
-a {
-  color: #42b983;
-}
+<script lang="ts">
+  export default {
+    name: 'Design',
+  }
+</script>
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
+<style lang="scss" scoped>
+.f1 {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 </style>

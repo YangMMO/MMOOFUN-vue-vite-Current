@@ -4,6 +4,7 @@ import router from './router'
 import i18n from './i18n'
 
 import 'normalize.css'
+import 'remixicon/fonts/remixicon.css'
 
 const app = createApp(App)
 

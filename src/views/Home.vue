@@ -2,7 +2,7 @@
   <div class="f1">
     网站升级中
     <br />
-    框架：vue + three + typescript + vite
+    框架：vite / vue3 / typescript / three.js / i18n / scss
     <br />
     持续集成：github actions 
     <br />
@@ -21,7 +21,8 @@
 .f1 {
     display: flex;
     width: 100%;
-    align-content: center;
+    height: 100vh;
+    align-items: center;
     justify-content: center;
 }
 </style>
