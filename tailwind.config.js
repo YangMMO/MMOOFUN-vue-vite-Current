@@ -19,10 +19,10 @@ module.exports = {
        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
         inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
         none: 'none',
-        box_l: '8px 8px rgba(254,226,226, 0.85)',
-        box_l_h: '12px 12px rgba(252,165,165, 0.85)',
-        box_d: '8px 8px rgba(0,0,0, 0.85)',
-        box_d_h: '12px 12px rgba(0,0,0, 0.95)'
+        box_l: '4px 4px rgba(254,226,226, 0.85)',
+        box_l_h: '8px 8px rgba(252,165,165, 0.85)',
+        box_d: '4px 4px rgba(0,0,0, 0.85)',
+        box_d_h: '8px 8px rgba(0,0,0, 0.95)'
       }
   },
   plugins:[],
