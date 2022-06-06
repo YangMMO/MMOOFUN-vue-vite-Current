@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as _}from"./index.d5e5e5a4.js";const s={name:"Resume"},a={class:"f1 text-black dark:text-white"};function c(o,r,n,u,d,p){return _(),t("div",a," \u656C\u8BF7\u671F\u5F85......... ")}var i=e(s,[["render",c],["__scopeId","data-v-366bfc17"]]);export{i as default};
