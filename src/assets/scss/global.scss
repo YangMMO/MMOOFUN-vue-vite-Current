@@ -13,20 +13,23 @@ $B100: #000;
 
 /* 全局样式 */
 .box {
-    background-color: $W100;
-    border: 2px solid $G85;
+    // background-color: $W100;
+    // border: 2px solid $G85;
     border-radius: 4px;
+
+    // &:hover {
+    //     box-shadow: 12px 12px;
+    // }
 }
 
+// .box-shadow {
+//     // transition: all .5s;
+//     // box-shadow: 8px 8px rgba(252,165,165, 0.85);
 
-.box-shadow {
-    transition: all .5s;
-    box-shadow: 8px 8px #262626;
-
-    &:hover {
-        box-shadow: 12px 12px #262626;
-    }
-}
+//     &:hover {
+//         box-shadow: 12px 12px;
+//     }
+// }
 
 
 .p4 {
@@ -49,3 +52,6 @@ $B100: #000;
     padding: 20px;
 }
 
+.transition-all {
+    transition: all .5s;
+}

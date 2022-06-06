@@ -7,6 +7,7 @@ export default {
             plugin: '插件',
             resume: '简历',
             video: '视频',
+            update: '更新',
         },
         subscription: {
             bilibili: 'Bilibili',
@@ -22,6 +23,7 @@ export default {
             plugin: 'Plugin',
             resume: 'Resume',
             video: 'Video',
+            update: 'Update',
         }
     },
 }

@@ -1,30 +1,31 @@
 <template>
-<div class="container-box bg-white dark:bg-black">
+<div class="bg-white dark:bg-gray-800 transition-all">
   <div class="header">
-    <div class="flex-header title box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray">
+    <div class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all">
       <img src="./assets/img/mmo.jpg" alt="">
       MMOO.FUN
     </div>
 
     <div class="menu-fun">
             <!-- 菜单 -->
-      <div class="flex-header menu box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray">
-        <!-- <div class=" ">{{ page }}{</div> -->
+      <div class="flex-header menu box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all">
+        <!-- <div class=" ">{{ page }}</div> -->
         <nav>
-          <router-link  to="/" >{{ $t('header.home')  }}</router-link>
-          <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link>
+          <router-link  to="/">{{ $t('header.home')  }}</router-link>
+          <router-link  to="/design">{{ $t("header.design") }}</router-link>
           <router-link  to="/model">{{ $t("header.model") }}</router-link>
-          <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
+          <router-link  to="/resume">{{ $t("header.resume") }}</router-link>
+          <router-link  to="/update">{{ $t("header.update") }}</router-link>
         </nav>
 
       </div>
 
       <!-- 语言 -->
-      <div class="flex-header lua box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray"
+      <div class="flex-header lua box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
         @click="switchLang()"
       ><i class="ri-globe-line"></i></div>
       <!-- 主题 -->
-      <div class="flex-header lua box box-shadow p8 text-black dark:text-white bg-white dark:bg-gray"
+      <div class="flex-header lua box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
         @click="themesMode()"
       ><i class="ri-sun-line"></i></div>
 
@@ -77,9 +78,7 @@ export default defineComponent({
 
 <style lang="scss">
 
-.container-box {
-  transition: all 0.5s ease-in-out;
-}
+
 .header {
   position: fixed;
   width: 100%;
@@ -145,7 +144,7 @@ export default defineComponent({
     }
 
   }
-
-
 }
+
+
 </style>
