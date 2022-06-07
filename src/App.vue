@@ -44,13 +44,10 @@
 </div>
 </template>
 
-<script lang="ts">
+<script>
 import i18n from "./i18n"
-import { defineComponent } from "vue";
 
-// type PageType = "home" | "design" | "model" | "resume"
-
-export default defineComponent({
+export default {
   name: 'App',
   data() {
     return {
@@ -80,7 +77,7 @@ export default defineComponent({
       console.log(this.theme);
     }
   },
-})
+}
 </script>
 
 <style lang="scss">
@@ -167,9 +164,19 @@ export default defineComponent({
       }
 
       .ri-globe-line {
-        transition: transform 0.5s;
+        // transition: transform 0.5s;
         &:hover {
-          transform: rotateY(180deg);
+          // transform: rotateY(360deg);
+          animation: rotateY 1s infinite;
+        }
+
+        @keyframes rotateY {
+          from {
+            transform: rotateY(0deg);
+          }
+          to {
+            transform: rotateY(360deg);
+          }
         }
       }
     }

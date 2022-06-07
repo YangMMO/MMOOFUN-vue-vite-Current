@@ -2,7 +2,7 @@
   <div class="f1 text-black dark:text-white">
     网站升级中
     <br />
-    框架：vite / vue3 / typescript / three.js / i18n / scss / tailwindcss
+    框架：vite / vue3 / three.js / i18n / scss / tailwindcss
     <br />
     持续集成：github actions 
     <br />
@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
   export default {
     name: 'Home',
   }

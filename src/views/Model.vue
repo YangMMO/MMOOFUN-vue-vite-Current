@@ -4,10 +4,11 @@
   </div>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'Model',
-  }
+<script>
+
+export default {
+  name: 'Model',
+}
 </script>
 
 
