@@ -1,0 +1,1 @@
+import{_ as a,o as t,c as e}from"./index.b84d14af.js";const d={name:"Model"},n={class:"f1 text-black dark:text-white"};function o(p,r,s,i,c,_){return t(),e("div",n," \u656C\u8BF7\u671F\u5F85...... ")}var l=a(d,[["render",o],["__scopeId","data-v-23323f46"]]);export{l as default};
