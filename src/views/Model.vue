@@ -3,7 +3,7 @@
     <div class="divide-y">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
 
-      <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress ?  onProgress : 0 }} / {{ onTotal ? onTotal : onProgress}}</p>
+      <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress >= 100 ? '渲染中...' : onProgress }}</p>
       <div id="model-canvas"></div>
 
     </div>
@@ -32,12 +32,10 @@ export default {
     this.secne = null
     this.camera = null
     this.controls = null
-    this.onProgress = null
-    this.onTotal = null
+    this.onProgress = ''
 
     return {
-      onProgress: this.onProgress,
-      onTotal: this.onTotal
+      onProgress: this.onProgress
     }
   },
   methods: {
@@ -91,8 +89,9 @@ export default {
         that.animate();
 
       }, function(xhr) {
-        that.onProgress = xhr.loaded
-        that.onProgress = xhr.total
+        
+        that.onProgress = (xhr.loaded / xhr.total * 100).toFixed(2);
+        console.log(that.onProgress)
       }, function (e) {
 
         console.error(e);
