@@ -12,9 +12,9 @@
         <!-- <div class=" ">{{ page }}</div> -->
         <nav>
           <router-link  to="/">{{ $t('header.home')  }}</router-link>
-          <router-link  to="/design">{{ $t("header.design") }}</router-link>
+          <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link> -->
           <router-link  to="/model">{{ $t("header.model") }}</router-link>
-          <router-link  to="/resume">{{ $t("header.resume") }}</router-link>
+          <!-- <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
           <router-link  to="/update">{{ $t("header.update") }}</router-link>
         </nav>
 
