@@ -3,7 +3,7 @@
     <div class="divide-y">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
 
-      <p class="py-6">threejs示例，非作品展示</p>
+      <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress }}</p>
       <div id="model-canvas"></div>
 
     </div>
@@ -32,9 +32,10 @@ export default {
     this.secne = null
     this.camera = null
     this.controls = null
+    this.onProgress = ''
 
     return {
-
+      onProgress: this.onProgress
     }
   },
   methods: {
@@ -71,7 +72,7 @@ export default {
 
 
       const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath('src/assets/draco/');
+      dracoLoader.setDecoderPath('./src/assets/draco/');
 
       const loader = new GLTFLoader().setPath('/models/');
       loader.setDRACOLoader(dracoLoader);
@@ -87,7 +88,10 @@ export default {
 
         that.animate();
 
-      }, undefined, function (e) {
+      }, function(xhr) {
+
+        that.onProgress = (xhr.loaded / xhr.total * 100) + '%';
+      }, function (e) {
 
         console.error(e);
 
@@ -101,7 +105,6 @@ export default {
       if (this.mixer) {
         this.mixer.update(delta);
       }
-      // this.mixer.update(delta);
       this.controls.update();
       this.stats.update();
       this.renderer.render(this.scene, this.camera);
@@ -120,7 +123,7 @@ export default {
 
 #model-canvas {
   width: 100%;
-  height: 800px;
+  height: 880px;
   
 }
 .container {

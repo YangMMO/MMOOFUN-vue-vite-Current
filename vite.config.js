@@ -10,5 +10,8 @@ export default defineConfig({
         additionalData: '@import "./src/assets/scss/global.scss";'
       }
     }
-  }
+  },
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
 })
