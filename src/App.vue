@@ -74,7 +74,7 @@ export default {
         document.documentElement.classList.remove('dark')
       }
 
-      console.log(this.theme);
+      // console.log(this.theme);
     }
   },
 }

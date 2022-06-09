@@ -3,7 +3,7 @@
     <div class="divide-y">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
 
-      <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress >= 100 ? '渲染中...' : onProgress }}</p>
+      <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress >= 100 ? '渲染中...' : onProgress + '%' }}</p>
       <div id="model-canvas"></div>
 
     </div>
@@ -32,7 +32,7 @@ export default {
     this.secne = null
     this.camera = null
     this.controls = null
-    this.onProgress = ''
+    this.onProgress = 0
 
     return {
       onProgress: this.onProgress
@@ -46,6 +46,9 @@ export default {
 
       // 记录渲染统计信息
       this.stats = new Stats()
+      
+      this.stats.dom.style.position = 'absolute'
+
       container.appendChild(this.stats.dom)
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -91,7 +94,7 @@ export default {
       }, function(xhr) {
         
         that.onProgress = (xhr.loaded / xhr.total * 100).toFixed(2);
-        console.log(that.onProgress)
+        // console.log(that.onProgress)
       }, function (e) {
 
         console.error(e);
@@ -125,7 +128,7 @@ export default {
 #model-canvas {
   width: 100%;
   height: 880px;
-  
+  position: relative;
 }
 .container {
     padding: 120px 12px 0 12px;
