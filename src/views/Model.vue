@@ -72,7 +72,7 @@ export default {
 
 
       const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath('./src/assets/draco/');
+      dracoLoader.setDecoderPath('./src/static/draco/');
 
       const loader = new GLTFLoader().setPath('/models/');
       loader.setDRACOLoader(dracoLoader);
