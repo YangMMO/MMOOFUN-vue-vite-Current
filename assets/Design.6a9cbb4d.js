@@ -1,1 +1,0 @@
-import{_ as a,o as t,c as d}from"./index.2f595827.js";const e={name:"Design"},n={class:"f1 text-black dark:text-white"};function s(i,p,o,r,c,_){return t(),d("div",n," \u656C\u8BF7\u671F\u5F85... ")}var l=a(e,[["render",s],["__scopeId","data-v-b528d4f6"]]);export{l as default};
