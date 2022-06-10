@@ -1,10 +1,14 @@
 <template>
   <div class="container mx-auto text-black dark:text-white">
-    <div class="divide-y">
+    <div class="">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
 
+      <button
+        class="box px-4 py-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold"
+        @click="onClickLoader">加载模型</button>
+
       <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress >= 100 ? '渲染中...' : onProgress + '%' }}</p>
-      <div id="model-canvas"></div>
+      <div id="model-canvas" class="box overflow-hidden"></div>
 
     </div>
   </div>
@@ -63,8 +67,10 @@ export default {
       this.scene.background = new THREE.Color(0xbfe3dd);
       this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
-      this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
+      this.camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 1, 100);
       this.camera.position.set(5, 2, 8);
+
+      that.onClickLoader()
 
 
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -72,12 +78,25 @@ export default {
       this.controls.update();
       this.controls.enablePan = false;
       this.controls.enableDamping = true;
-
+      
+    },
+    animate: function () {
+      requestAnimationFrame(this.animate);
+      const delta = this.clock.getDelta();
+      if (this.mixer) {
+        this.mixer.update(delta);
+      }
+      this.controls.update();
+      this.stats.update();
+      this.renderer.render(this.scene, this.camera);
+    },
+    onClickLoader() {
+      let that = this
 
       const dracoLoader = new DRACOLoader();
       dracoLoader.setDecoderPath('./draco/');
 
-      const loader = new GLTFLoader().setPath('/models/');
+      const loader = new GLTFLoader().setPath('/src/assets/models/');
       loader.setDRACOLoader(dracoLoader);
       loader.load('LittlestTokyo.glb', function (gltf) {
 
@@ -91,8 +110,8 @@ export default {
 
         that.animate();
 
-      }, function(xhr) {
-        
+      }, function (xhr) {
+
         that.onProgress = (xhr.loaded / xhr.total * 100).toFixed(2);
         // console.log(that.onProgress)
       }, function (e) {
@@ -100,18 +119,6 @@ export default {
         console.error(e);
 
       });
-
-      
-    },
-    animate: function () {
-      requestAnimationFrame(this.animate);
-      const delta = this.clock.getDelta();
-      if (this.mixer) {
-        this.mixer.update(delta);
-      }
-      this.controls.update();
-      this.stats.update();
-      this.renderer.render(this.scene, this.camera);
     }
   },
   mounted() {

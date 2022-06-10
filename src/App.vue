@@ -85,11 +85,10 @@ export default {
     --stripes-color: hsla(0,0%,100%,0.4);
 }
 
-.bg-stripes {
+.bg-stripes{
   background-image: linear-gradient(45deg,var(--stripes-color) 12.5%,transparent 12.5%,transparent 50%,var(--stripes-color) 50%,var(--stripes-color) 62.5%,transparent 62.5%,transparent 100%);
   background-size: 5.66px 5.66px;
 }
-
 
 .switch-theme-enter-active,
 .switch-theme-leave-active {
