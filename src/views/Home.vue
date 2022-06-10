@@ -48,9 +48,7 @@
 </template>
 
 <script>
-import VueImageLoader from '@kevindesousa/vue-image-loader'
 
-console.log(VueImageLoader);
 
 export default {
   name: 'Home',
