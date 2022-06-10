@@ -1,47 +1,49 @@
 <template>
-<div class="container mx-auto bg-white dark:bg-gray-800 transition-all ">
-  <div class="header relative">
-    <div class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
-      <img src="./assets/img/mmo.jpg" alt="">
-      MMOO.FUN
-    </div>
+  <div class="container mx-auto bg-white dark:bg-gray-800 transition-all ">
+    <div class="header relative">
+      <div
+        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
+        <img src="./assets/img/mmo.jpg" alt="">
+        MMOO.FUN
+      </div>
 
-    <div class="menu-fun">
-            <!-- 菜单 -->
-      <div class="flex-header menu box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
-        <!-- <div class=" ">{{ page }}</div> -->
-        <nav>
-          <router-link  to="/">{{ $t('header.home')  }}</router-link>
-          <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link> -->
-          <router-link  to="/model">{{ $t("header.model") }}</router-link>
-          <!-- <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
-          <router-link  to="/update">{{ $t("header.update") }}</router-link>
-        </nav>
+      <div class="menu-fun">
+        <!-- 菜单 -->
+        <div
+          class="flex-header menu box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
+          <!-- <div class=" ">{{ page }}</div> -->
+          <nav>
+            <router-link to="/">{{ $t('header.home') }}</router-link>
+            <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link> -->
+            <router-link to="/model">{{ $t("header.model") }}</router-link>
+            <!-- <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
+            <router-link to="/update">{{ $t("header.update") }}</router-link>
+          </nav>
+
+        </div>
+
+        <!-- 语言 -->
+        <div
+          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          @click="switchLang()"><i class="ri-globe-line"></i></div>
+        <!-- 主题 -->
+
+        <div
+          class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          @click="themesMode()">
+          <Transition name="switch-theme">
+            <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
+            <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
+          </Transition>
+        </div>
 
       </div>
 
-      <!-- 语言 -->
-      <div class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-        @click="switchLang()"
-      ><i class="ri-globe-line"></i></div>
-      <!-- 主题 -->
-      
-      <div class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-      @click="themesMode()"
-      >
-        <Transition name="switch-theme">
-          <i class="ri-sun-line absolute" v-if="theme === 'light'" ></i>
-          <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
-        </Transition>
-      </div>
-
     </div>
 
+
+    <router-view />
   </div>
-
-
-  <router-view />
-</div>
 </template>
 
 <script>
@@ -105,6 +107,9 @@ export default {
   transform: translateY(-30px);
 }
 
+.icon-font-size {
+  font-size: 1.4rem;
+}
 
 .header {
   // position: fixed;
@@ -162,22 +167,48 @@ export default {
         width: 100%;
       }
 
-      .ri-globe-line {
-        // transition: transform 0.5s;
-        &:hover {
-          // transform: rotateY(360deg);
-          animation: rotateY 1s infinite;
+      // .ri-globe-line {
+      //   // transition: transform 0.5s;
+      //   &:hover {
+      //     // transform: rotateY(360deg);
+      //     animation: rotateY 1s infinite;
+      //   }
+
+      //   @keyframes rotateY {
+      //     from {
+      //       transform: rotateY(0deg);
+      //     }
+      //     to {
+      //       transform: rotateY(360deg);
+      //     }
+      //   }
+      // }
+    }
+
+    .lua {
+      &:hover {
+        // transform: rotateY(360deg);
+        animation: rotateY 1s 1;
+        transition: all 0.5s;
+      }
+    
+      @keyframes rotateY {
+        0% {
+          transform: rotateX(0deg);
+          box-shadow: none;
+        }
+    
+        90% {
+          transform: rotateX(360deg);
+          box-shadow: none;
         }
 
-        @keyframes rotateY {
-          from {
-            transform: rotateY(0deg);
-          }
-          to {
-            transform: rotateY(360deg);
-          }
+        100% {
+          transform: rotateX(360deg);
+          box-shadow: auto;
         }
       }
+      
     }
 
   }

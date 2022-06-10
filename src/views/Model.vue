@@ -96,7 +96,7 @@ export default {
       const dracoLoader = new DRACOLoader();
       dracoLoader.setDecoderPath('./draco/');
 
-      const loader = new GLTFLoader().setPath('/src/assets/models/');
+      const loader = new GLTFLoader().setPath('./models/');
       loader.setDRACOLoader(dracoLoader);
       loader.load('LittlestTokyo.glb', function (gltf) {
 

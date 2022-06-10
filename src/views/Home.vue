@@ -13,7 +13,10 @@
           <div class="box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
             <a href="https://www.bilibili.com/video/BV1Ar4y1F7JH?share_source=copy_web" target="_blank"
               rel="noopener noreferrer"
-              class="box px-4 py-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold">前往观看</a>
+              class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
+              <i class="ri-bilibili-line icon-font-size pr-2"></i>
+              <span class="font-semibold ">前往观看</span>
+            </a>
             <!-- <div>border-2</div> -->
           </div>
         </div>

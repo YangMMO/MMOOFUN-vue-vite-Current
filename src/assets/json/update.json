@@ -1,0 +1,23 @@
+[
+    {
+        "date": "2022-6-10",
+        "content": [
+            "搭建临时首页",
+            "黑暗模式样式调整",
+            "修复部分threejs引起的BUG（目前缓存卡顿问题未解决）",
+            "更新列表修改为使用v-for json"
+        ]
+    },{
+        "date": "2022-6-9",
+        "content": [
+            "搭建threejs渲染GLTF模型"
+        ]
+    },{
+        "date": "2022-6-3",
+        "content": [
+            "框架：vite / vue3 / typescript / three.js / i18n / scss / tailwindcss",
+            "持续集成: github actions (完成部署)"
+        ]
+    }
+]
+
