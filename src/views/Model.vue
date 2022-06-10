@@ -3,9 +3,9 @@
     <div class="">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
 
-      <button
+      <!-- <button
         class="box px-4 py-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold"
-        @click="onClickLoader">加载模型</button>
+        @click="onClickLoader">加载模型</button> -->
 
       <p class="py-6">threejs示例，非作品展示，加载模型进度: {{ onProgress >= 100 ? '渲染中...' : onProgress + '%' }}</p>
       <div id="model-canvas" class="box overflow-hidden"></div>
@@ -124,6 +124,9 @@ export default {
   mounted() {
     this.init()
     this.animate()
+  },
+  unmounted() {
+    cancelAnimationFrame(this.animate)
   }
   
 }

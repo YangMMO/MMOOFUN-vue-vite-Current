@@ -167,44 +167,27 @@ export default {
         width: 100%;
       }
 
-      // .ri-globe-line {
-      //   // transition: transform 0.5s;
-      //   &:hover {
-      //     // transform: rotateY(360deg);
-      //     animation: rotateY 1s infinite;
-      //   }
-
-      //   @keyframes rotateY {
-      //     from {
-      //       transform: rotateY(0deg);
-      //     }
-      //     to {
-      //       transform: rotateY(360deg);
-      //     }
-      //   }
-      // }
     }
 
     .lua {
       &:hover {
-        // transform: rotateY(360deg);
         animation: rotateY 1s 1;
         transition: all 0.5s;
       }
     
       @keyframes rotateY {
         0% {
-          transform: rotateX(0deg);
+          transform: rotate3d(0,0,0,0deg);
           box-shadow: none;
         }
     
-        90% {
-          transform: rotateX(360deg);
+        80% {
+          transform: rotate3d(0, 1, .5, 360deg);
           box-shadow: none;
         }
 
         100% {
-          transform: rotateX(360deg);
+          transform: rotate3d(0, 1, .5, 360deg);
           box-shadow: auto;
         }
       }

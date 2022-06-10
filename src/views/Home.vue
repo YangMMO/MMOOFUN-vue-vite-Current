@@ -6,10 +6,10 @@
 
       <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
         <div class="relative">
-          <img src="../assets/img/Arnold-6.jpg">
-          <!-- <div class="w-1/6 box absolute bottom-0 right-0 bg-red-300">
-          <img src="../assets/img/wechat-shop.jpg" class="p8">
-        </div> -->
+          <!-- Arnold图片 -->
+
+          <img src="../assets/img/Arnold-6.jpg" />
+          <!-- 按钮 -->
           <div class="box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
             <a href="https://www.bilibili.com/video/BV1Ar4y1F7JH?share_source=copy_web" target="_blank"
               rel="noopener noreferrer"
@@ -48,9 +48,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'Home',
+import VueImageLoader from '@kevindesousa/vue-image-loader'
+
+console.log(VueImageLoader);
+
+export default {
+  name: 'Home',
+  // components: { VueImageLoader },
+  data() {
+    return {
+      arnold: "../assets/img/Arnold-6.jpg"
+    }
   }
+}
 </script>
 
 
