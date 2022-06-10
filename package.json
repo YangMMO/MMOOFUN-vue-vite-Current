@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@kevindesousa/vue-image-loader": "^2.0.1",
     "remixicon": "^2.5.0",
     "sass": "^1.52.2",
     "sass-loader": "^13.0.0",
