@@ -1,6 +1,7 @@
 export default {
     cn: {
-        header: {
+        menu: {
+            menu: '菜单',
             home: '⾸页',
             design: '设计',
             model: '建模',
@@ -16,14 +17,15 @@ export default {
         }
     },
     en: {
-        header: {
-            home: 'Home',
-            design: 'Design',
-            model: 'Model',
-            plugin: 'Plugin',
-            resume: 'Resume',
-            video: 'Video',
-            update: 'Update',
+        menu: {
+            menu: 'MENU',
+            home: 'HOME',
+            design: 'DESIGN',
+            model: 'MODEL',
+            plugin: 'PlUGIN',
+            resume: 'RESUME',
+            video: 'VIDEO',
+            update: 'UPDATE',
         }
     },
 }

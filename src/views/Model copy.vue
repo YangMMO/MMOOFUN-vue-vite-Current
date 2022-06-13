@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto text-black dark:text-white">
     <div class="divide-y">
-      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
+      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.model") }}</h1>
 
       <div id="model-canvas"></div>
 

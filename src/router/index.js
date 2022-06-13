@@ -10,21 +10,21 @@ const routes = [
             description: "首页",
         }
     },
-    {
-        path: "/design",
-        name: "Design",
-        component: () => import("../views/Design.vue"),
-    },
+    // {
+    //     path: "/design",
+    //     name: "Design",
+    //     component: () => import("../views/Design.vue"),
+    // },
     {
         path: "/model",
         name: "Model",
         component: () => import("../views/Model.vue"),
     },
-    {
-        path: "/resume",
-        name: "Resume",
-        component: () => import("../views/Resume.vue"),
-    },
+    // {
+    //     path: "/resume",
+    //     name: "Resume",
+    //     component: () => import("../views/Resume.vue"),
+    // },
     {
         path: "/update",
         name: "Update",

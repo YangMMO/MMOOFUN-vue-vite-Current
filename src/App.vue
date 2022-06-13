@@ -1,26 +1,15 @@
 <template>
   <div class="container mx-auto bg-white dark:bg-gray-800 transition-all ">
-    <div class="header relative">
+    <div class="header relative select-none">
       <div
-        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
-        <img src="./assets/img/mmo.jpg" alt="">
-        MMOO.FUN
+        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold cursor-pointer ">
+        <router-link class="flex items-center" to="/">
+          <img src="./assets/img/mmo.jpg" alt="">
+          <span class="hidden sm:block">MMOO.FUN</span>
+        </router-link>
       </div>
 
       <div class="menu-fun">
-        <!-- 菜单 -->
-        <div
-          class="flex-header menu box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
-          <!-- <div class=" ">{{ page }}</div> -->
-          <nav>
-            <router-link to="/">{{ $t('header.home') }}</router-link>
-            <!-- <router-link  to="/design">{{ $t("header.design") }}</router-link> -->
-            <router-link to="/model">{{ $t("header.model") }}</router-link>
-            <!-- <router-link  to="/resume">{{ $t("header.resume") }}</router-link> -->
-            <router-link to="/update">{{ $t("header.update") }}</router-link>
-          </nav>
-
-        </div>
 
         <!-- 语言 -->
         <div
@@ -37,6 +26,24 @@
           </Transition>
         </div>
 
+        <!-- 菜单 -->
+        <div
+          class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
+          <div class="flex items-center show-menu ">
+            <!-- <div class="flex items-center show-menu" @click="isActiveMenu = !this.isActiveMenu"> -->
+            <span class="">{{ $t("menu.menu") }}</span>
+            <i class="ri-menu-2-line"></i>
+          </div>
+          <nav class="show-list hidden flex flex-col w-full box border-gray-900 dark:border-white">
+
+            <router-link v-for="item in routes" :key="item" @click="page = 1" :to="item.path"
+              class="hover:text-red-300 dark:hover:text-indigo-300">
+              {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
+            </router-link>
+
+          </nav>
+
+        </div>
       </div>
 
     </div>
@@ -48,13 +55,17 @@
 
 <script>
 import i18n from "./i18n"
+import routers from "./router"
 
 export default {
   name: 'App',
   data() {
     return {
-      page: 'home',
+      page: routers.options.routes[0].name,
       theme: 'light',
+      isActiveMenu: false,
+      i18n: i18n.messages.en.menu,
+      routes: routers.options.routes
     }
   },
   methods: {
@@ -77,6 +88,11 @@ export default {
       }
 
       // console.log(this.theme);
+    },
+
+    // 点击菜单
+    onClickMenu () {
+      this.isActiveMenu = !this.isActiveMenu
     }
   },
 }
@@ -127,6 +143,7 @@ export default {
 
   .title {
     position: absolute;
+    padding: 0 10px;
     top: 12px;
     left: 12px;
     font-size: 1rem;
@@ -134,11 +151,58 @@ export default {
     cursor: default;
 
     img {
-      margin-right: 8px;
       width: 20px;
       height: 20px;
       border-radius: 100%;
     }
+
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  .menu {
+    width: 120px;
+    height: auto;
+    cursor: pointer;
+
+    &:hover {
+      .show-list {
+        display: flex;
+      }
+    }
+
+    .show-menu {
+      width: 100%;
+      align-items: center;
+      height: 36px;
+      padding: 0 10px;
+      box-sizing: border-box;
+
+      span {
+        width: 100%;
+        margin-right: 4px;
+      }
+    }
+
+    .show-list {
+      width: calc(100% + 4px) ;
+      padding: 4px 0;
+      border-top-width: 2px;
+      
+      a {
+        padding: 4px 12px;
+        font-size: 1rem;
+
+        // &:hover {
+        //   .show-list {
+        //     display: flex;
+        //   }
+        // }
+      }
+      
+    }
+
   }
 
   .menu-fun {
@@ -196,21 +260,6 @@ export default {
 
   }
 
-
-  .menu {
-    width: auto;
-    nav {
-      // transition: all .5s;
-
-      a {
-        padding: 8px;
-        font-size: 1rem;
-        // font-weight: 600;
-        // transition: all .5s;
-      }
-    }
-
-  }
 }
 
 

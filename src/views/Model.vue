@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto text-black dark:text-white">
     <div class="">
-      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.model") }}</h1>
+      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.model") }}</h1>
 
       <!-- <button
         class="box px-4 py-2 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold"

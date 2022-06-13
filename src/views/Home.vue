@@ -2,7 +2,7 @@
 
   <div class="container mx-auto text-black dark:text-white">
     <div>
-      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("header.home") }}</h1>
+      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.home") }}</h1>
 
       <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
         <div class="relative">
@@ -10,7 +10,7 @@
 
           <img src="../assets/img/Arnold-6.jpg" />
           <!-- 按钮 -->
-          <div class="box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
+          <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
             <a href="https://www.bilibili.com/video/BV1Ar4y1F7JH?share_source=copy_web" target="_blank"
               rel="noopener noreferrer"
               class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
@@ -49,7 +49,6 @@
 
 <script>
 
-
 export default {
   name: 'Home',
   // components: { VueImageLoader },
@@ -63,6 +62,55 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.b-btn {
+  animation: bounce 5s infinite;
+
+  @keyframes bounce {
+    0% {
+      transform: rotate3d(0, 0, 0, 0deg) translate3d(0, 0, 0);
+    }
+
+    1% {
+      transform: rotate3d(0, 0, .5, 2deg) translate3d(2px, 0, 0);
+    }
+
+    2% {
+      transform: rotate3d(0, 0, .5, 0deg) translate3d(0px,-2px, 0);
+    }
+
+    3% {
+      transform: rotate3d(0, 0, .5, -2deg) translate3d(-2px, 0, 0);
+    }
+
+    4% {
+      transform: rotate3d(0, 0, .5, 0deg) translate3d(0px, 2px, 0);
+    }
+
+    5% {
+      transform: rotate3d(0, 0.2, 0, 5deg) translate3d(0px, 0, 0);
+    }
+
+    6% {
+      transform: rotate3d(0, 0.2, 0, 0deg);
+    }
+
+    7% {
+      transform: rotate3d(0, 0.2, 0, -5deg);
+    }
+
+    8% {
+      transform: rotate3d(0, 0.2, 0, 0deg);
+    }
+
+    100% {
+      transform: rotate3d(0, 0, .5, 0deg);
+    }
+  }
+  
+}
+
+
 
 .container {
   padding: 120px 12px 0 12px;
