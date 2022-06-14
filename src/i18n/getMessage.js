@@ -9,12 +9,15 @@ export default {
             resume: '简历',
             video: '视频',
             update: '更新',
+            about: '关于',
         },
         subscription: {
-            bilibili: 'Bilibili',
-            github: 'Github',
-            figma: 'Figma',
-        }
+            sub: '订阅关注',
+            bilibili: '二刺猿交友网',
+            github: '“同性”交友平台',
+            figma: '肥姑妈',
+        },
+
     },
     en: {
         menu: {
@@ -26,6 +29,13 @@ export default {
             resume: 'RESUME',
             video: 'VIDEO',
             update: 'UPDATE',
+            about: 'ABOUT',
+        },
+        subscription: {
+            sub: 'SUBSCRIPTION',
+            bilibili: 'Bilibili',
+            github: 'Github',
+            figma: 'Figma',
         }
     },
 }

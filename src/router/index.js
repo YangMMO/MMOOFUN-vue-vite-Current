@@ -11,11 +11,12 @@ const routes = [
         },
         menu: true
     },
-    // {
-    //     path: "/design",
-    //     name: "Design",
-    //     component: () => import("../views/Design.vue"),
-    // },
+    {
+        path: "/design",
+        name: "Design",
+        component: () => import("../views/Design.vue"),
+        menu: true
+    },
     {
         path: "/model",
         name: "Model",
@@ -29,10 +30,16 @@ const routes = [
         menu: true
     },
     {
-        path: "/update",
-        name: "Update",
-        component: () => import("../views/Update.vue"),
+        path: "/about",
+        name: "About",
+        component: () => import("../views/About.vue"),
         menu: true
+    },
+    {
+        path: "/test",
+        name: "Test",
+        component: () => import("../views/Test.vue"),
+        menu: false
     },
     {
         path: "/:error*",

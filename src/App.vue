@@ -28,7 +28,7 @@
 
         <!-- 菜单 -->
         <div
-          class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold">
+          class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold ">
           <div class="flex items-center show-menu ">
             <!-- <div class="flex items-center show-menu" @click="isActiveMenu = !this.isActiveMenu"> -->
             <span class="">{{ $t("menu.menu") }}</span>
@@ -53,8 +53,10 @@
 
     <router-view />
 
-    <div class="container footer border-t text-xs text-slate-400 text-center cursor-default">
-      <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
+    <div class="footer">
+      <div class="container border-t text-xs text-slate-400 text-center cursor-default">
+        <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +71,6 @@ export default {
     return {
       theme: 'light',
       isActiveMenu: false,
-      i18n: i18n.messages.en.menu,
       routes: routers.options.routes
     }
   },
@@ -106,8 +107,12 @@ export default {
 <style lang="scss">
 
 
+
 .footer {
-  padding: 12px;
+  margin: 12px;
+  .container {
+    padding: 12px;
+  }
 }
 
 .bg-stripes-white {
@@ -224,6 +229,7 @@ export default {
 
     .box {
       margin-right: 4px;
+      
       &:last-child {
         margin-right: 0;
       }

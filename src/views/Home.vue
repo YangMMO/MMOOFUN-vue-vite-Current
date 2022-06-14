@@ -2,10 +2,10 @@
 
   <div class="container mx-auto text-black dark:text-white">
     <div>
-      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.home") }}</h1>
+      <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.home") }}</h1>
 
       <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
-        <div class="relative">
+        <div class="relative select-none">
           <!-- Arnold图片 -->
 
           <img src="../assets/img/Arnold-6.jpg" />
@@ -25,6 +25,8 @@
           收费行为仅保护字幕成果
         </div>
       </div>
+
+      <img src="../assets/img/wechat-shop.jpg" class="w-3/12 mt-3 center m-auto select-none">
 
       <div class="py-6">
         <div
