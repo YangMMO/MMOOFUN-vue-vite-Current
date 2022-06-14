@@ -36,10 +36,12 @@
           </div>
           <nav class="show-list hidden flex flex-col w-full box border-gray-900 dark:border-white">
 
-            <router-link v-for="item in routes" :key="item" @click="page = 1" :to="item.path"
-              class="hover:text-red-300 dark:hover:text-indigo-300">
-              {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
-            </router-link>
+            <div v-for="item in routes" :key="item">
+              <router-link v-if="item.menu" :to="item.path"
+                class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block">
+                {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
+              </router-link>
+            </div>
 
           </nav>
 
@@ -50,6 +52,10 @@
 
 
     <router-view />
+
+    <div class="container footer border-t text-xs text-slate-400 text-center cursor-default">
+      <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
+    </div>
   </div>
 </template>
 
@@ -61,7 +67,6 @@ export default {
   name: 'App',
   data() {
     return {
-      page: routers.options.routes[0].name,
       theme: 'light',
       isActiveMenu: false,
       i18n: i18n.messages.en.menu,
@@ -99,6 +104,12 @@ export default {
 </script>
 
 <style lang="scss">
+
+
+.footer {
+  padding: 12px;
+}
+
 .bg-stripes-white {
     --stripes-color: hsla(0,0%,100%,0.4);
 }

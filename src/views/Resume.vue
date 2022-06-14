@@ -1,6 +1,13 @@
 <template>
-  <div class="f1 text-black dark:text-white">
-    敬请期待.........
+  <div class="container mx-auto text-black dark:text-white">
+    <div>
+      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.resume") }}</h1>
+
+      <div class="">
+        
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -12,11 +19,8 @@
 
 
 <style lang="scss" scoped>
-.f1 {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
+.container {
+  padding: 120px 12px 0 12px;
+  // position: absolute;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto text-black dark:text-white">
-    <div class="divide-y">
+    <div class="divide-y-0">
       <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.update") }}</h1>
 
-      <div v-for="data in datas" v-bind:key="data" class="py-6">
+      <div v-for="data in datas" v-bind:key="data" class="pb-6">
 
         <h2 class="text-xl mb-3">{{ data.date }}</h2>
 
