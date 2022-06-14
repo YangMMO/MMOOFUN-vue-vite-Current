@@ -3,10 +3,17 @@ import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          // isCustomElement: tag => tag.startsWith("perfect-srollbar")
+        }
+      }
+    }),
     /**
      *  把src/icons 下的所有svg 自动加载到body下，供组件使用
      */

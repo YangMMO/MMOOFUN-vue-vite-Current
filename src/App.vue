@@ -1,64 +1,66 @@
 <template>
-  <div class="container mx-auto bg-white dark:bg-gray-800 transition-all ">
-    <div class="header relative select-none">
-      <div
-        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold cursor-pointer ">
-        <router-link class="flex items-center" to="/">
-          <img src="./assets/img/mmo.jpg" alt="">
-          <span class="hidden sm:block">MMOO.FUN</span>
-        </router-link>
-      </div>
 
-      <div class="menu-fun">
-
-        <!-- 语言 -->
+    <div class="container mx-auto bg-white dark:bg-gray-800 transition-all ">
+      <div class="header relative select-none">
         <div
-          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="switchLang()"><i class="ri-globe-line"></i></div>
-        <!-- 主题 -->
-
-        <div
-          class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="themesMode()">
-          <Transition name="switch-theme">
-            <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
-            <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
-          </Transition>
+          class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold cursor-pointer ">
+          <router-link class="flex items-center" to="/">
+            <img src="./assets/img/mmo.jpg" alt="">
+            <span class="hidden sm:block">MMOO.FUN</span>
+          </router-link>
         </div>
 
-        <!-- 菜单 -->
-        <div
-          class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold ">
-          <div class="flex items-center show-menu ">
-            <!-- <div class="flex items-center show-menu" @click="isActiveMenu = !this.isActiveMenu"> -->
-            <span class="">{{ $t("menu.menu") }}</span>
-            <i class="ri-menu-2-line"></i>
+        <div class="menu-fun">
+
+          <!-- 语言 -->
+          <div
+            class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+            @click="switchLang()"><i class="ri-globe-line"></i></div>
+          <!-- 主题 -->
+
+          <div
+            class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+            @click="themesMode()">
+            <Transition name="switch-theme">
+              <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
+              <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
+            </Transition>
           </div>
-          <nav class="show-list hidden flex flex-col w-full box border-gray-900 dark:border-white">
 
-            <div v-for="item in routes" :key="item">
-              <router-link v-if="item.menu" :to="item.path"
-                class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block">
-                {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
-              </router-link>
+          <!-- 菜单 -->
+          <div
+            class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold ">
+            <div class="flex items-center show-menu ">
+              <!-- <div class="flex items-center show-menu" @click="isActiveMenu = !this.isActiveMenu"> -->
+              <span class="">{{ $t("menu.menu") }}</span>
+              <i class="ri-menu-2-line"></i>
             </div>
+            <nav class="show-list hidden flex flex-col w-full box border-gray-900 dark:border-white">
 
-          </nav>
+              <div v-for="item in routes" :key="item">
+                <router-link v-if="item.menu" :to="item.path"
+                  class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block">
+                  {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
+                </router-link>
+              </div>
 
+            </nav>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <router-view />
+
+      <div class="footer">
+        <div class="container border-t text-xs text-slate-400 text-center cursor-default">
+          <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
         </div>
       </div>
-
     </div>
 
-
-    <router-view />
-
-    <div class="footer">
-      <div class="container border-t text-xs text-slate-400 text-center cursor-default">
-        <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>

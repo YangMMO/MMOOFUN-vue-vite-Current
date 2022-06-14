@@ -9,7 +9,7 @@
         <div v-for="data in datas" v-bind:key="data"
           class="design-item box overflow-hidden text-xs text-slate-400 bg-slate-100 dark:bg-slate-900">
           <a :href="data.href" target="_blank">
-            <img :src="data.image" alt="">
+            <img :src="data.image" class="w-full">
             <div class="p12 text-black dark:text-white">
               <h2 class="text-lg mb-1">{{ data.title }}</h2>
               <p class="mb-3">{{ data.description }}</p>

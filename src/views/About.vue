@@ -7,17 +7,17 @@
         <p class="mb-6">{{ $t("subscription.sub") }}</p>
         <div class="flex select-none">
 
-          <a href="http://" target="_blank"
+          <a href="https://space.bilibili.com/5612894" target="_blank"
             class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
             <vue-feather type="tv" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.bilibili") }}</span>
           </a>
-          <a href="http://" target="_blank"
+          <a href="https://github.com/YangMMO" target="_blank"
             class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
             <vue-feather type="github" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.github") }}</span>
           </a>
-          <a href="http://" target="_blank"
+          <a href="https://www.figma.com/@MMO" target="_blank"
             class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
             <vue-feather type="figma" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.figma") }}</span>
