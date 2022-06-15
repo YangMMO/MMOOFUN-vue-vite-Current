@@ -147,11 +147,9 @@ export default {
 
 
 
-
-
-
 .decorate {
   z-index: -9999;
+  filter: blur(12px);
 }
 
 .sphere1 {
@@ -162,6 +160,7 @@ export default {
   top: -720px;
   border-radius: 9999px;
   background: linear-gradient(-45deg, rgba(255, 174, 202, 0.2), rgba(255, 225, 90, 0.2));
+  filter: blur(12px);
   
 }
 
@@ -173,6 +172,7 @@ export default {
   bottom: -200px;
   background: linear-gradient(-45deg, rgba(201, 255, 140, 0.12), rgba(191, 232, 255, 0.12));
   border-radius: 9999px;
+  filter: blur(12px);
 }
 
 .sphere3 {
@@ -183,6 +183,7 @@ export default {
   bottom: -120px;
   background: linear-gradient(-60deg, rgba(199, 130, 255, 0.08), rgba(255, 191, 236, 0.08));
   border-radius: 9999px;
+  filter: blur(12px);
 }
 
 
