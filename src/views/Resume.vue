@@ -10,7 +10,7 @@
           <h1 class="text-3xl font-semibold my-6 select-none">请输入暗号</h1>
           <input type="text" v-model="password" v-focus placeholder="天王盖地虎"
             class="p8 border-2 focus:outline-none focus:ring focus:border-blue-300 box text-center">
-          <span class="text-slate-400 text-xs py-2">猫锚吃老鼠</span>
+          <span class="text-slate-400 text-xs py-2">猫猫吃老鼠</span>
         </div>
 
         <div class="b-btn box pb-6 inset-x-0 bottom-0 text-center flex pb-4 justify-center select-none">
@@ -64,7 +64,7 @@ export default {
   },
   watch: {
     password: function(e) {
-      if (this.password === '猫锚吃老鼠') {
+      if (this.password === '猫猫吃老鼠') {
         this.unlock = true
       }
     }

@@ -6,6 +6,16 @@ a {
     color: #262626;
 }
 
+.mask-img-top {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 64px);
+    mask-image: linear-gradient(to bottom, transparent 0, black 64px);
+}
+
+.mask-img-bottom {
+    -webkit-mask-image: linear-gradient(to top, transparent 0, black 32px);
+    mask-image: linear-gradient(to top, transparent 0, black 32px);
+}
+
 /* 全局变量 */
 $G85: #262626;
 

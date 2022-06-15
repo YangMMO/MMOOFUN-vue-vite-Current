@@ -16,7 +16,8 @@
     "vue": "^3.2.25",
     "vue-feather": "^2.0.0",
     "vue-router": "^4.0.15",
-    "vue3-i18n": "^1.1.5"
+    "vue3-i18n": "^1.1.5",
+    "vue3-perfect-scrollbar": "^1.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
