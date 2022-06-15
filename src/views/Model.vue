@@ -38,6 +38,8 @@ export default {
     this.controls = null
     this.onProgress = 0
 
+    this._startFrame = false
+
     return {
       onProgress: this.onProgress
     }
@@ -81,14 +83,18 @@ export default {
       
     },
     animate: function () {
-      requestAnimationFrame(this.animate);
-      const delta = this.clock.getDelta();
-      if (this.mixer) {
-        this.mixer.update(delta);
+      if (this._startFrame) {
+        requestAnimationFrame(this.animate);
+        const delta = this.clock.getDelta();
+        if (this.mixer) {
+          this.mixer.update(delta);
+        }
+        this.controls.update();
+        this.stats.update();
+        this.renderer.render(this.scene, this.camera);
+      } else {
+        cancelAnimationFrame(this.animate)
       }
-      this.controls.update();
-      this.stats.update();
-      this.renderer.render(this.scene, this.camera);
     },
     onClickLoader() {
       let that = this
@@ -108,6 +114,7 @@ export default {
         that.mixer = new THREE.AnimationMixer(model);
         that.mixer.clipAction(gltf.animations[0]).play();
 
+        that._startFrame = true
         that.animate();
 
       }, function (xhr) {
@@ -123,10 +130,11 @@ export default {
   },
   mounted() {
     this.init()
-    this.animate()
+    // this.animate()
   },
   unmounted() {
-    cancelAnimationFrame(this.animate)
+    this._startFrame = false
+    // cancelAnimationFrame(this.animate)
   }
   
 }
