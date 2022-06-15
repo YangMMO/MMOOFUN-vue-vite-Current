@@ -1,9 +1,9 @@
 <template>
 
-  <div class="container mx-auto bg-white dark:bg-gray-800 transition-all">
+  <div class="container mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
       <div
-        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold cursor-pointer ">
+        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer ">
         <router-link class="flex items-center" to="/">
           <img src="./assets/img/mmo.jpg" alt="">
           <span class="hidden sm:block">MMOO.FUN</span>
@@ -14,12 +14,12 @@
 
         <!-- 语言 -->
         <div
-          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 "
           @click="switchLang()"><i class="ri-globe-line"></i></div>
         <!-- 主题 -->
 
         <div
-          class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 "
           @click="themesMode()">
           <Transition name="switch-theme">
             <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
@@ -52,9 +52,10 @@
     </div>
   </div>
 
-  <perfect-scrollbar class="relative h-screen mx-auto mask-img-top">
+  <!-- <perfect-scrollbar class="relative h-screen mx-auto mask-img-top"> -->
+  <div class=" mx-auto mask-img-top transition-all duration-1000">
     <!-- 路由页面 -->
-    <router-view class="" />
+    <router-view class="transition-all duration-1000" />
 
     <!-- 页脚 -->
     <div class="footer container mx-auto">
@@ -64,16 +65,24 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 装饰元素 -->
-    <div class="h-screen fixed w-full top-0 decorate">
-      <div class=" sphere1"></div>
-      <div class="sphere2"></div>
-      <div class="sphere3"></div>
+  <!-- 装饰元素 -->
+  <div class="h-screen fixed w-full top-0 decorate">
+    <div class="sphere1"
+      :style="[{ width: _innerWidth * 0.81 + 'px' }, { height: _innerWidth * 0.81 + 'px' }, { top: -(_innerWidth * 0.57) + 'px' }, { right: -(_innerWidth * 0.28) + 'px' }]">
     </div>
-
-
-  </perfect-scrollbar>
+    <div class="sphere2"
+      :style="[{ width: _innerWidth * 0.41 + 'px' }, { height: _innerWidth * 0.41 + 'px' }, { bottom: -(_innerWidth * 0.16) + 'px' }, { left: -(_innerWidth * 0.07) + 'px' }]">
+    </div>
+    <div class="sphere3"
+      :style="[{ width: _innerWidth * 0.3 + 'px' }, { height: _innerWidth * 0.3 + 'px' }, { bottom: -(_innerWidth * 0.105) + 'px' }, { right: -(_innerWidth * 0.06) + 'px' }]">
+    </div>
+    <!-- <div class="sphere1"></div> -->
+    <!-- <div class="sphere2"></div> -->
+    <!-- <div class="sphere3"></div> -->
+  </div>
+  <!-- </perfect-scrollbar> -->
 
 </template>
 
@@ -87,10 +96,23 @@ export default {
     return {
       theme: 'light',
       isActiveMenu: false,
-      routes: routers.options.routes
+      routes: routers.options.routes,
+      _innerWidth: window.innerWidth,
     }
   },
+  created() {
+    // this._focus()
+    window.addEventListener("resize", this._resize);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this._resize);
+  },
   methods: {
+    // 根据页面宽度计算出元素的宽度
+    _resize() {
+      this._innerWidth = window.innerWidth
+    },
+
     // 切换语言
     switchLang() {
       i18n.setLocale(i18n.getLocale() === 'en' ? 'cn' : 'en')
@@ -124,6 +146,10 @@ export default {
 
 
 
+
+
+
+
 .decorate {
   z-index: -9999;
 }
@@ -135,7 +161,7 @@ export default {
   right: -356px;
   top: -720px;
   border-radius: 9999px;
-  background: rgba(187, 69, 111, 0.05);
+  background: linear-gradient(-45deg, rgba(255, 174, 202, 0.2), rgba(255, 225, 90, 0.2));
   
 }
 
@@ -145,7 +171,7 @@ export default {
   height: 506px;
   left: -100px;
   bottom: -200px;
-  background: rgba(255, 222, 122, 0.1);
+  background: linear-gradient(-45deg, rgba(201, 255, 140, 0.12), rgba(191, 232, 255, 0.12));
   border-radius: 9999px;
 }
 
@@ -155,7 +181,7 @@ export default {
   height: 356px;
   right: -70px;
   bottom: -120px;
-  background: rgba(69, 187, 171, 0.05);
+  background: linear-gradient(-60deg, rgba(199, 130, 255, 0.08), rgba(255, 191, 236, 0.08));
   border-radius: 9999px;
 }
 
