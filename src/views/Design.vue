@@ -28,10 +28,18 @@
 </template>
 
 <script>
+import i18n from '../i18n';
 import designJson from '../assets/json/design.json';
 
 export default {
-  name: 'Update',
+  name: 'Design',
+  metaInfo: {
+    title: `MMOO.FUN | ${i18n.t("menu.design")}`,
+    meta: [{                 // set meta
+      name: 'keyWords',
+      content: 'MMOO.FUN, 个人网站, MMO,'
+    }]
+  },
   data() {
     return {
       datas: JSON.parse(JSON.stringify(designJson)),

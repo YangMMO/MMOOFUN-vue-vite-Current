@@ -8,7 +8,14 @@
 
 <script>
   export default {
-    name: 'Resume',
+    name: 'Test',
+    metaInfo: {
+      title: `MMOO.FUN | Test Link`,
+      meta: [{                 // set meta
+        name: 'keyWords',
+        content: 'MMOO.FUN, 个人网站, MMO,'
+      }]
+    },
   }
 </script>
 

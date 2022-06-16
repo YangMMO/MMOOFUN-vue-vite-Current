@@ -8,13 +8,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.15",
     "feather-icons": "^4.29.0",
+    "prerender-spa-plugin": "^3.4.0",
     "remixicon": "^2.5.0",
     "sass": "^1.52.2",
     "sass-loader": "^13.0.0",
     "three": "^0.141.0",
+    "vite-plugin-markdown": "^2.0.2",
     "vue": "^3.2.25",
     "vue-feather": "^2.0.0",
+    "vue-meta-info": "^0.1.7",
     "vue-router": "^4.0.15",
     "vue3-i18n": "^1.1.5",
     "vue3-perfect-scrollbar": "^1.6.0"
@@ -25,6 +29,7 @@
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
     "vite": "^2.9.9",
+    "vite-plugin-md": "^0.14.1",
     "vite-plugin-svg-icons": "^2.0.1"
   }
 }

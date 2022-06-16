@@ -46,14 +46,21 @@
 </template>
 
 <script>
+import i18n from '../i18n';
 import updateJson from '../assets/json/update.json';
 import SvgIcon from '../components/SvgIcon.vue';
 
 import feather from 'feather-icons/dist/feather.js';
 
-
 export default {
-  name: 'Update',
+  name: 'About',
+  metaInfo: {
+    title: `MMOO.FUN | ${i18n.t("menu.about")}`,
+    meta: [{                 // set meta
+      name: 'keyWords',
+      content: 'MMOO.FUN, 个人网站, MMO,'
+    }]
+  },
   data() {
     return {
       datas: JSON.parse(JSON.stringify(updateJson)),

@@ -1,50 +1,63 @@
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 
+import Home from "../views/Home.vue";
+import Design from "../views/Design.vue";
+import Model from "../views/Model.vue";
+import Resume from "../views/Resume.vue";
+import About from "../views/About.vue";
+import Test from "../views/Test.vue";
+import Page404 from "../views/404.vue";
+import Note from "../views/Note.vue";
+
+
+
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: () => import("../views/Home.vue"),
-        meta: {
-            title: "首页",
-            description: "首页",
-        },
+        component: Home,
         menu: true
     },
     {
         path: "/design",
         name: "Design",
-        component: () => import("../views/Design.vue"),
+        component: Design,
         menu: true
     },
     {
         path: "/model",
         name: "Model",
-        component: () => import("../views/Model.vue"),
+        component: Model,
+        menu: true
+    },
+    {
+        path: "/note",
+        name: "Note",
+        component: Note,
         menu: true
     },
     {
         path: "/resume",
         name: "Resume",
-        component: () => import("../views/Resume.vue"),
+        component: Resume,
         menu: true
     },
     {
         path: "/about",
         name: "About",
-        component: () => import("../views/About.vue"),
+        component: About,
         menu: true
     },
     {
         path: "/test",
         name: "Test",
-        component: () => import("../views/Test.vue"),
+        component: Test,
         menu: false
     },
     {
         path: "/:error*",
         name: "404",
-        component: () => import("../views/404.vue"),
+        component: Page404,
         menu: false
     }
 ]
@@ -54,4 +67,12 @@ const router = createRouter({
     routes
 })
 
-export default router
+
+const routesPath = []
+
+routes.forEach(route => {
+    routesPath.push(route.path)
+})
+
+export default router;
+export { routesPath }

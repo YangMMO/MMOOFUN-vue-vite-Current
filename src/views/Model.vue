@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import i18n from '../i18n';
 import * as THREE from "three";
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
@@ -27,6 +28,13 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 export default {
   name: 'Model',
+  metaInfo: {
+    title: `MMOO.FUN | ${i18n.t("menu.model")}`,
+    meta: [{                 // set meta
+      name: 'keyWords',
+      content: 'MMOO.FUN, 个人网站, MMO,'
+    }]
+  },
   data() {
     this.mixer = null
     this.clock = null

@@ -8,7 +8,14 @@
 
 <script>
   export default {
-    name: 'Resume',
+    name: '404',
+    metaInfo: {
+      title: `MMOO.FUN | 404 Not Found`,
+      meta: [{                 // set meta
+        name: 'keyWords',
+        content: 'MMOO.FUN, 个人网站, MMO,'
+    }]
+  },
   }
 </script>
 

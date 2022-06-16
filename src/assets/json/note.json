@@ -1,0 +1,39 @@
+[
+    {
+        "noteName": "typescript",
+        "chapter": [
+            {
+                "chapterName": "基本开发环境",
+                "pathArr": [{
+                    "title": "环境搭建",
+                    "path": "../markdown/typescript/环境搭建.md"
+                },{
+                    "title": "[资料] package.json文件介绍",
+                    "path": "../markdown/typescript/[资料] package.json文件介绍.md"
+                }]
+            },
+            {
+                "chapterName": "基本开发环境2",
+                "pathArr": [{
+                    "title": "环境搭建",
+                    "path": "../markdown/typescript/环境搭建.md"
+                },{
+                    "title": "[资料] package.json文件介绍",
+                    "path": "../markdown/typescript/[资料] package.json文件介绍.md"
+                }]
+            }
+        ]
+    },
+    {
+        "noteName": "houdini",
+        "chapter": [
+            {
+                "chapterName": "123456",
+                "pathArr": [{
+                    "title": "环境搭建",
+                    "path": "../markdown/typescript/环境搭建.md"
+                }]
+            }
+        ]
+    }
+]

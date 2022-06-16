@@ -38,12 +38,21 @@
 </template>
 
 <script>
+import i18n from '../i18n';
+
 const focus = {
   mounted: (el) => el.focus()
 }
 
 export default {
   name: 'Resume',
+  metaInfo: {
+    title: `MMOO.FUN | ${i18n.t("menu.resume")}`,
+    meta: [{                 // set meta
+      name: 'keyWords',
+      content: 'MMOO.FUN, 个人网站, MMO,'
+    }]
+  },
   directives: {
     focus
   },
@@ -58,9 +67,9 @@ export default {
     // this._focus()
   },
   methods: {
-    _focus() {
-      console.log(this);
-    },
+    // _focus() {
+    //   console.log(this);
+    // },
   },
   watch: {
     password: function(e) {
