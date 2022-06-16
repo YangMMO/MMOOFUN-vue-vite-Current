@@ -21,7 +21,7 @@ export default defineConfig({
     }),
 
     /* 引入markdown */
-    Markdown(),
+    // Markdown(),
     // mdPlugin.plugin({
     //   mode: ['html'],
     // }),

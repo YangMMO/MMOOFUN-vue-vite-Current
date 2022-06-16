@@ -30,12 +30,12 @@ const routes = [
         component: Model,
         menu: true
     },
-    {
-        path: "/note",
-        name: "Note",
-        component: Note,
-        menu: true
-    },
+    // {
+    //     path: "/note",
+    //     name: "Note",
+    //     component: Note,
+    //     menu: true
+    // },
     {
         path: "/resume",
         name: "Resume",

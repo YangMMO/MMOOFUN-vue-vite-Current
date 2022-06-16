@@ -3,7 +3,6 @@ const routes = [
     "/design",
     "Design",
     "/model",
-    "/note",
     "/resume",
     "/about",
     "/test",
