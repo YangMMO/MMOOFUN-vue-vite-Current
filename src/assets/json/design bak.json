@@ -12,6 +12,13 @@
         "description": "注意：请使用外网进行访问; 大屏数据可视化交互模型",
         "href": "https://my.spline.design/untitled-e611e1dcccc3af0f9fc6223a6aa5224e/",
         "tags": ["可交互","3D","动效"]
+    },
+    {
+        "title": "蓝梦之星 预订小程序",
+        "image": "../design/bdcruises.jpg",
+        "description": "注意：请使用外网进行访问; 大屏数据可视化交互模型",
+        "href": "https://modao.cc/app/5097427763ba1e560354daa7fa017e6603fe0d2e",
+        "tags": ["原型","UI"]
     }
     
 ]

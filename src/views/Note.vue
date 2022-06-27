@@ -4,8 +4,8 @@
     <div class="divide-y-0">
       <h1 class="text-3xl pb-9 font-semibold">{{ $t("menu.note") }}</h1>
 
-      <!-- <iframe src="https://www.yuque.com/books/share/a6be214a-325a-4104-b29d-c2ffd9f2598a?# 《Typescript》"
-        frameborder="0" class="w-full"></iframe> -->
+      <iframe src="https://www.yuque.com/books/share/a6be214a-325a-4104-b29d-c2ffd9f2598a?# 《Typescript》"
+        frameborder="0" class="w-full"></iframe>
 
       <!-- <ul v-for="note in data" :key="note" class="py-6">
         <li>
@@ -28,7 +28,7 @@
       <div>读取markdown文件内容，插入至html</div>
       <div>功能完善中</div>
       <div class="mb-6">以下为插入成功示例</div>
-      <v-md-preview :text="content" class="box overflow-hidden"></v-md-preview>
+      <!-- <v-md-preview :text="content" class="box overflow-hidden"></v-md-preview> -->
 
     </div>
   </div>
@@ -38,7 +38,7 @@
 import i18n from '../i18n';
 import noteJson from '../assets/json/note.json';
 
-import a1 from '../../public/markdown/typescript/环境搭建.md';
+// import a1 from '../../public/markdown/typescript/环境搭建.md';
 
 // JSON.parse(JSON.stringify(noteJson)).forEach(element => {
 //   element.chapter.forEach(e => {
@@ -73,26 +73,6 @@ export default {
   methods: {
     clickChapter (e) {
       console.log(e);
-
-      var promise = fetch(e).then(function (response) {
-
-        //response.status表示响应的http状态码
-        if (response.status === 200) {
-          //json是返回的response提供的一个方法,会把返回的json字符串反序列化成对象,也被包装成一个Promise了
-          return response.json();
-        } else {
-          return {}
-        }
-
-
-      });
-
-      promise = promise.then(function (data) {
-        //响应的内容
-        console.log(data);
-      }).catch(function (err) {
-        console.log(err);
-      })
     }
   }
 }
