@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
+  <div class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
       <div
         class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all">
@@ -146,6 +146,41 @@ export default {
 
 
 
+
+
+
+
+
+
+
+.bg-animate {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(./assets/img/resume_bg.png) center;
+    // animation: pulse 5s infinite;
+    opacity: 0.4;
+  }
+
+  // @keyframes pulse {
+  //   0% {
+  //     opacity: .4;
+  //   }
+
+  //   50% {
+  //     opacity: .8;
+  //   }
+
+  //   100% {
+  //     opacity: .4;
+  //   }
+  // }
+
+}
 
 .decorate {
   z-index: -9999;

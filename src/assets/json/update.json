@@ -1,5 +1,12 @@
 [
     {
+        "date": "2022-6-29",
+        "content": [
+            "新增 AntV G2Plot",
+            "迭代“简历”页面",
+            "迭代网站外观样式"
+        ]
+    },{
         "date": "2022-6-16",
         "content": [
             "新增SPA预渲染（SEO）"
@@ -43,7 +50,7 @@
     },{
         "date": "2022-6-3",
         "content": [
-            "框架：vite / vue3 / typescript / three.js / i18n / scss / tailwindcss",
+            "框架：vite / vue3 / three.js / i18n / scss / tailwindcss",
             "持续集成: github actions (完成部署)"
         ]
     }
