@@ -8,8 +8,8 @@
 
 ## 安装
 
-· 安装 [Node.js](https://nodejs.org/en/)
-· 安装 [Git](https://git-scm.com/downloads)
+- 安装 [Node.js](https://nodejs.org/en/)
+- 安装 [Git](https://git-scm.com/downloads)
 
 ## 安装插件
 
