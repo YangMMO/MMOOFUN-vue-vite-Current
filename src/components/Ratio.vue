@@ -1,32 +1,47 @@
 <template>
-  <div class="w-full mx-auto text-black dark:text-white">
-    <div class="calculate mx-auto box overflow-hidden">
+  <div class="w-full mx-auto text-white">
+    <div class="calculate bg-gradient-to-b from-slate-700 to-slate-900 mx-auto box overflow-hidden">
       <div class="calculate-c">
-        <div>
-          <span>常见比例</span>
-          <ul id="calculator-type">
-            <li><a class="c-active">16:9</a></li>
-            <li><a>21:9</a></li>
-            <li><a>4:3</a></li>
-            <li><a>2:1</a></li>
-            <li class="customize"><a>自定<input type="number" onkeyup="isCustomize()">:<input type="number"
-                  onkeyup="isCustomize()"></a></li>
-          </ul>
+
+        <div class=" bg-gradient-to-b from-slate-700 to-slate-800  py-12 px-3">
+          <!-- 常见比例 -->
+          <div class="text-center">
+            <button v-for="ratio in commonRatio" :key="ratio" @click="currentRatio = ratio; clearVal()"
+              :class="['box  p-1 px-2 ratio-item', { 'bg-gradient-to-b from-pink-500 to-pink-600 ': currentRatio === ratio}]">
+              {{ ratio.w ? `${ratio.w} : ${ratio.h}` : 'Custom' }}
+            </button>
+          </div>
+          <!-- 自定比例 -->
+          <div :class="['text-white text-center pt-3', { 'hidden': currentRatio.w !== 0 }]">
+            <input type="number" v-model="ratioWidth"
+              class="p4 border-2 focus:outline-none focus:ring focus:border-blue-300 box text-center text-black max-w-2xl w-3/12">
+            <span class="text-center w-1/12 inline-block">:</span>
+            <input type="number" v-model="ratioHeight"
+              class="p4 border-2 focus:outline-none focus:ring focus:border-blue-300 box text-center text-black max-w-2xl w-3/12">
+          </div>
         </div>
-        <div class="calculator" id="calculator">
-          <section id="width">
-            <h1 style="color: rgb(255, 255, 255); font-weight: 300;">宽</h1>
-            <input style="opacity: 0.3;" name="width" onkeyup="onKeyUp(event, this, 0)" value="" type="text"
-              placeholder="输入" onfocus="onFocus(this)" onblur="onBlur(this)">
+
+        <div class="py-20 px-3 flex items-center">
+          <section class="flex flex-col flex-auto w-5/12">
+            <h1 class="text-center mb-3 bg-clip-text text-transparent bg-gradient-to-b from-white ">
+              Width
+            </h1>
+            <input class="text-center bg-transparent outline-none text-3xl flex-auto" type="number" placeholder="NUMBER"
+              v-model="width" @keyup="calculate('width')">
           </section>
-          <section id="height">
-            <h1 style="color: rgb(255, 255, 255); font-weight: 300;">高</h1>
-            <input style="opacity: 0.3;" name="height" onkeyup="onKeyUp(event, this, 1)" value="" type="text"
-              placeholder="输入" onfocus="onFocus(this)" onblur="onBlur(this)">
+
+          <span class="w-2/12 text-center inline-block text-4xl font-thin flex-none">×</span>
+
+          <section class="flex flex-col flex-auto w-5/12">
+            <h1 class="text-center mb-3 bg-clip-text text-transparent bg-gradient-to-b from-white ">
+              Height
+            </h1>
+            <input class="text-center bg-transparent outline-none text-3xl flex-auto" type="number" placeholder="NUMBER"
+              v-model="height" @keyup="calculate('height')">
           </section>
-          <span>X</span>
+
         </div>
-        <p>MMOO.FUN制作</p>
+        <p class="text-center mb-6 opacity-20">By MMOO.FUN</p>
       </div>
 
     </div>
@@ -50,33 +65,44 @@ export default {
     }, {
       w: 2, h: 1
     }, {
-      w: 0, h: 0
-    }]
+        w: 0, h: 0
+      }]
     let scale = commonRatio[0].w / commonRatio[0].h;
 
     return {
       datas: JSON.parse(JSON.stringify(designJson)),
       toolsTabs: ['ratio', 'ratio'],
-      
+      currentRatio: commonRatio[0],
+      commonRatio: commonRatio,
+      width: '',
+      height: '',
+      ratioWidth: commonRatio.slice(-1)[0].w,
+      ratioHeight: commonRatio.slice(-1)[0].h,
     }
   },
   methods: {
-    calculate(num, ops) {
-      let result;
-      if (num === 'undefined') {
-        return;
+    /* 清除input值 */
+    clearVal(){
+      this.width = '';
+      this.height = '';
+    },
+    /* 计算 */
+    calculate(position) {
+      if (this.currentRatio.w === 0) {
+        this.width = this.ratioWidth;
+        this.height = this.ratioHeight;
+      } else {
+        this.width = this.currentRatio.w;
+        this.height = this.currentRatio.h;
       }
 
-      if (num > 0 && ops === 0) {
-        result = num / scale;
-        return Math.round(result);
+      if (position === 'width') {
+        this.height = Math.round(this.width / this.currentRatio.w * this.currentRatio.h);
+      } else {
+        this.width = Math.round(this.height / this.currentRatio.h * this.currentRatio.w);
       }
+    },
 
-      if (num > 0 && ops === 1) {
-        result = num * scale;
-        return Math.round(result);
-      }
-    }
   },
 }
 </script>
@@ -84,137 +110,24 @@ export default {
 
 <style lang="scss" scoped>
 
-.calculate {
-  width: 100%;
-  /* padding: 10px 20px; */
-}
-
-.calculate-c {
-  padding: 60px 20px;
-  background: #041828;
-}
-
-.calculate-c .customize input {
-  width: 60px;
-  height: 1.5rem;
-  margin: 0 10px;
-}
-
-.calculate-c .customize input::-webkit-outer-spin-button,
-.calculate-c .customize input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-.calculate-c .customize input[type="number"] {
+input[type=number] {
   -moz-appearance: textfield;
 }
 
-.calculate-c div {
-  display: flex;
-  justify-content: center;
-  color: #fff;
-  margin-bottom: 40px;
-}
-
-.calculate-c p {
-  display: inline-block;
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  width: 100%;
-  color: #fff;
-  font-size: 1rem;
-  text-align: center;
 }
 
-.calculate-c span {
-  font-size: 1.5rem;
-}
+.ratio-item {
+  margin-right: 8px;
+  margin-bottom: 8px;
 
-.calculate-c ul {
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
-  list-style: none;
+  &:last-child {
+    margin-right: 0;
+  }
 
-}
-
-.calculate-c ul a {
-  padding: 5px 20px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.c-active {
-  background-color: #fff;
-  color: #041828 !important;
-}
-
-.calculator {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
-.calculator section {
-  padding: 60px;
-  max-width: 400px;
-}
-
-/* .calculator section:first-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-} */
-
-.calculator section h1 {
-  color: rgb(255, 255, 255);
-  font-weight: 100;
-  font-size: 1em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.calculator section input {
-  width: 100%;
-  background: none;
-  border: 0;
-  font-weight: 700;
-  font-size: 3em;
-  text-align: center;
-  outline: none;
-  color: #fff;
-}
-
-.calculator section input::-webkit-input-placeholder {
-  color: #fff;
-}
-
-.calculator section input::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #fff;
-}
-
-.calculator section input:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #fff;
-}
-
-.calculator section input:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #fff;
-}
-
-.calculator span {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  top: 50%;
-  left: 50%;
-  margin-left: -30px;
-  margin-top: -30px;
-  text-align: center;
-  color: #fff;
-  font-size: 40px;
-  line-height: 60px;
-  background-color: #041828;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .container {

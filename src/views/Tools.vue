@@ -2,7 +2,7 @@
   <div class="container mx-auto text-black dark:text-white">
 
     <div class="divide-y-0">
-      <h1 class="text-3xl pb-9 font-semibold ">{{ $t("menu.tools") }}</h1>
+      <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.tools") }}</h1>
 
       <div class="flex flex-wrap select-none">
 
