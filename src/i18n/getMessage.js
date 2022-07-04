@@ -7,6 +7,7 @@ export default {
             model: '建模',
             note: '笔记',
             plugin: '插件',
+            tools: '工具',
             resume: '简历',
             video: '视频',
             update: '更新',
@@ -14,9 +15,17 @@ export default {
         },
         subscription: {
             sub: '订阅关注',
-            bilibili: '二刺猿交友网',
-            github: '“同性”交友平台',
-            figma: '肥姑妈',
+            bilibili: 'BiliBili',
+            github: 'Github',
+            figma: 'Figma',
+        },
+        tips: {
+            tips: '提示',
+            tips1: '敬请关注...'
+        },
+        tools: {
+            ratio: '固定比例计算器',
+            more: '更多',
         },
 
     },
@@ -28,6 +37,7 @@ export default {
             model: 'MODEL',
             note: 'NOTE',
             plugin: 'PlUGIN',
+            tools: 'TOOLS',
             resume: 'RESUME',
             video: 'VIDEO',
             update: 'UPDATE',
@@ -35,9 +45,17 @@ export default {
         },
         subscription: {
             sub: 'SUBSCRIPTION',
-            bilibili: 'Bilibili',
+            bilibili: 'BiliBili',
             github: 'Github',
             figma: 'Figma',
+        },
+        tips: {
+            tips: 'Tips',
+            tips1: 'Stay tuned...'
+        },
+        tools: {
+            ratio: 'Ratio Calculation',
+            more: 'More',
         }
     },
 }

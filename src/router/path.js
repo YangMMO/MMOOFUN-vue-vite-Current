@@ -1,8 +1,8 @@
 const routes = [
     "/",
     "/design",
-    "Design",
     "/model",
+    "/tools",
     "/resume",
     "/about",
     "/test",

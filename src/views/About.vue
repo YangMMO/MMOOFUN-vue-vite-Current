@@ -1,24 +1,25 @@
 <template>
   <div class="container mx-auto text-black dark:text-white">
     <div class="divide-y-0">
-      <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.about") }}</h1>
+      <!-- <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.about") }}</h1> -->
+      <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("subscription.sub") }}</h1>
 
       <div class="pb-6">
-        <p class="mb-6">{{ $t("subscription.sub") }}</p>
+        <!-- <p class="mb-6">{{ $t("subscription.sub") }}</p> -->
         <div class="flex select-none">
 
           <a href="https://space.bilibili.com/5612894" target="_blank"
-            class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
             <vue-feather type="tv" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.bilibili") }}</span>
           </a>
           <a href="https://github.com/YangMMO" target="_blank"
-            class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
             <vue-feather type="github" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.github") }}</span>
           </a>
           <a href="https://www.figma.com/@MMO" target="_blank"
-            class="flex-1 box flex flex-col place-items-center p-6 sub-item text-black dark:text-white bg-slate-100 dark:bg-slate-900">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
             <vue-feather type="figma" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.figma") }}</span>
           </a>

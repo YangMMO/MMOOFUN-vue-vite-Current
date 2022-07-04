@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from "vue-router
 import Home from "../views/Home.vue";
 import Design from "../views/Design.vue";
 import Model from "../views/Model.vue";
+import Tools from "../views/Tools.vue";
 import Resume from "../views/Resume.vue";
 import About from "../views/About.vue";
 import Test from "../views/Test.vue";
@@ -28,6 +29,12 @@ const routes = [
         path: "/model",
         name: "Model",
         component: Model,
+        menu: true
+    },
+    {
+        path: "/tools",
+        name: "Tools",
+        component: Tools,
         menu: true
     },
     // {
