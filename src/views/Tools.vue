@@ -33,6 +33,7 @@ import i18n from '../i18n';
 import designJson from '../assets/json/design.json';
 
 import Ratio from '../components/Ratio.vue'
+import Flygame from '../components/Flygame.vue'
 import More from '../components/More.vue'
 
 export default {
@@ -44,12 +45,12 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio, More },
+  components: { Ratio,  More,  },
   data() {
     return {
       datas: JSON.parse(JSON.stringify(designJson)),
       currentTab: 'ratio',
-      toolsTabs: ['ratio', 'more'],
+      toolsTabs: ['ratio', 'more', ],
     }
   },
   computed: {

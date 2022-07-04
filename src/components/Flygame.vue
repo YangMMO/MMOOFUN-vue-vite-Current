@@ -1,11 +1,6 @@
 <template>
   <div class="w-full mx-auto text-black dark:text-white">
-    <div
-      class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
-      <vue-feather type="tool" class="mb-3"></vue-feather>
-      <p>{{ $t("tips.tips1") }}</p>
-    </div>
-
+    <iframe src="http://flygame.mmoo.fun/" frameborder="0" class="w-full fly-game"></iframe>
   </div>
 </template>
 
@@ -15,7 +10,7 @@ import designJson from '../assets/json/design.json';
 
 
 export default {
-  name: 'More',
+  name: 'FlyGame',
   data() {
     return {
       datas: JSON.parse(JSON.stringify(designJson)),
@@ -26,5 +21,12 @@ export default {
 
 
 <style lang="scss" scoped>
+
+
+
+.fly-game {
+  width: 700px;
+  height: 600px;
+}
 
 </style>

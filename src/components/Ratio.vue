@@ -8,7 +8,7 @@
           <div class="text-center">
             <button v-for="ratio in commonRatio" :key="ratio" @click="currentRatio = ratio; clearVal()"
               :class="['box  p-1 px-2 ratio-item', { 'bg-gradient-to-b from-pink-500 to-pink-600 ': currentRatio === ratio}]">
-              {{ ratio.w ? `${ratio.w} : ${ratio.h}` : 'Custom' }}
+              {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}:${Math.round(ratio.h * 1000) / 1000}` : 'Custom' }}
             </button>
           </div>
           <!-- 自定比例 -->
@@ -56,17 +56,28 @@ import designJson from '../assets/json/design.json';
 export default {
   name: 'Ratio',
   data() {
-    let commonRatio = [{   //常见比例
-      w: 16, h: 9
-    }, {
-      w: 21, h: 9
-    }, {
-      w: 4, h: 3
-    }, {
-      w: 2, h: 1
-    }, {
-        w: 0, h: 0
-      }]
+    let commonRatio = [
+    // 常见比例
+    { w: 16, h: 9 },
+    { w: 16, h: 10 },
+    { w: 21, h: 9 },
+    { w: 4, h: 3 },
+    { w: 3, h: 2 },
+    { w: 3, h: 1 },
+    { w: 2, h: 1 },
+
+    // 自定比例
+    { w: 1.618, h: 1 },
+    { w: 1.414, h: 1 },
+    { w: 1.732, h: 1 },
+
+    // 自定比例 + 1
+    { w: 1 + 1.618, h: 1 },
+    { w: 1 + 1.414, h: 1 },
+    { w: 3.303, h: 1 },
+
+    {w: 0, h: 0}
+    ]
     let scale = commonRatio[0].w / commonRatio[0].h;
 
     return {
@@ -76,8 +87,8 @@ export default {
       commonRatio: commonRatio,
       width: '',
       height: '',
-      ratioWidth: commonRatio.slice(-1)[0].w,
-      ratioHeight: commonRatio.slice(-1)[0].h,
+      ratioWidth: 0,
+      ratioHeight: 0,
     }
   },
   methods: {
@@ -88,22 +99,34 @@ export default {
     },
     /* 计算 */
     calculate(position) {
-      if (this.currentRatio.w === 0) {
-        this.width = this.ratioWidth;
-        this.height = this.ratioHeight;
-      } else {
-        this.width = this.currentRatio.w;
-        this.height = this.currentRatio.h;
+
+      if (this.currentRatio.w !== 0) {
+        if (position === 'width') {
+          this.height = Math.round(this.width / this.currentRatio.w * this.currentRatio.h * 100) / 100;
+        } else {
+          this.width = Math.round(this.height / this.currentRatio.h * this.currentRatio.w * 100) / 100;
+        }
+        return;
       }
 
       if (position === 'width') {
-        this.height = Math.round(this.width / this.currentRatio.w * this.currentRatio.h);
+        this.height = Math.round(this.width / this.ratioWidth * this.ratioHeight * 100) / 100;
       } else {
-        this.width = Math.round(this.height / this.currentRatio.h * this.currentRatio.w);
+        this.width = Math.round(this.height / this.ratioHeight * this.ratioWidth * 100) / 100;
       }
+
+
     },
 
   },
+  watch: {
+    ratioWidth(val) {
+      this.ratioWidth = parseInt(val);
+    },
+    ratioHeight(val) {
+      this.ratioHeight = parseInt(val);
+    }
+  }
 }
 </script>
 

@@ -26,6 +26,7 @@ export default {
         tools: {
             ratio: '固定比例计算器',
             more: '更多',
+            flygame: '飞机大战',
         },
 
     },
@@ -56,6 +57,7 @@ export default {
         tools: {
             ratio: 'Ratio Calculation',
             more: 'More',
+            flygame: 'Fly Game',
         }
     },
 }
