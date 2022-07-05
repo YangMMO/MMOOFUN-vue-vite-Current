@@ -7,8 +7,10 @@
           <!-- 常见比例 -->
           <div class="text-center">
             <button v-for="ratio in commonRatio" :key="ratio" @click="currentRatio = ratio; clearVal()"
-              :class="['box  p-1 px-2 ratio-item', { 'bg-gradient-to-b from-pink-500 to-pink-600 ': currentRatio === ratio}]">
-              {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}:${Math.round(ratio.h * 1000) / 1000}` : 'Custom' }}
+              :class="['box  p-1 px-2 ratio-item', { 'bg-gradient-to-b from-pink-400 to-pink-600 ': currentRatio === ratio }, { 'bg-gradient-to-b from-blue-700 to-indigo-800 ': currentRatio !== ratio }]">
+              <!-- {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}:${Math.round(ratio.h * 1000) / 1000}` : 'Custom' }} -->
+              {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}` : 'Custom' }}
+              {{ ratio.h > 1 ? ` : ${Math.round(ratio.h * 1000) / 1000}` : '' }}
             </button>
           </div>
           <!-- 自定比例 -->
@@ -58,12 +60,12 @@ export default {
   data() {
     let commonRatio = [
     // 常见比例
-    { w: 16, h: 9 },
-    { w: 16, h: 10 },
     { w: 21, h: 9 },
+    { w: 16, h: 9 },
+    // { w: 16, h: 10 },
     { w: 4, h: 3 },
     { w: 3, h: 2 },
-    { w: 3, h: 1 },
+    // { w: 3, h: 1 },
     { w: 2, h: 1 },
 
     // 自定比例
@@ -72,8 +74,8 @@ export default {
     { w: 1.732, h: 1 },
 
     // 自定比例 + 1
-    { w: 1 + 1.618, h: 1 },
-    { w: 1 + 1.414, h: 1 },
+    // { w: 1 + 1.618, h: 1 },
+    // { w: 1 + 1.414, h: 1 },
     { w: 3.303, h: 1 },
 
     {w: 0, h: 0}
@@ -99,12 +101,11 @@ export default {
     },
     /* 计算 */
     calculate(position) {
-
       if (this.currentRatio.w !== 0) {
         if (position === 'width') {
-          this.height = Math.round(this.width / this.currentRatio.w * this.currentRatio.h * 100) / 100;
+          this.height = Math.round(this.width / this.currentRatio.w * this.currentRatio.h * 1000) / 1000;
         } else {
-          this.width = Math.round(this.height / this.currentRatio.h * this.currentRatio.w * 100) / 100;
+          this.width = Math.round(this.height / this.currentRatio.h * this.currentRatio.w * 1000) / 1000;
         }
         return;
       }
@@ -114,8 +115,6 @@ export default {
       } else {
         this.width = Math.round(this.height / this.ratioHeight * this.ratioWidth * 100) / 100;
       }
-
-
     },
 
   },
