@@ -26,9 +26,12 @@
         </div>
       </div>
 
-      <img src="../assets/img/wechat-shop.jpg" class="w-3/12 mt-3 center m-auto select-none">
+      <img src="../assets/img/wechat-shop.jpg" class="w-3/12 my-3 center m-auto select-none">
 
-      <div class="py-6">
+      <!-- 设计 -->
+      <ShowDesign></ShowDesign>
+
+      <div class="pb-6">
         <div
           class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
           <i class="ri-ruler-2-line text-3xl"></i>
@@ -52,9 +55,14 @@
 <script>
 import i18n from '../i18n';
 
+import ShowDesign from '../components/ShowDesign.vue';
+
 export default {
   name: 'Home',
   // components: { VueImageLoader },
+  components: {
+    ShowDesign,
+  },
   metaInfo: {
     title: `MMOO.FUN | ${i18n.t("menu.home")}`,
     meta: [{                 // set meta

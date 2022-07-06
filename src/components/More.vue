@@ -10,15 +10,12 @@
 </template>
 
 <script>
-import i18n from '../i18n';
-import designJson from '../assets/json/design.json';
-
 
 export default {
   name: 'More',
   data() {
     return {
-      datas: JSON.parse(JSON.stringify(designJson)),
+      
     }
   },
 }

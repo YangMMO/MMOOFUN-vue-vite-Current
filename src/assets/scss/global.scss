@@ -34,6 +34,13 @@ $B100: #000;
     // }
 }
 
+.box-b {
+    border-radius: 0 0 4px 4px;
+}
+.box-t {
+    border-radius: 4px 4px 0 0;
+}
+
 // .box-shadow {
 //     // transition: all .5s;
 //     // box-shadow: 8px 8px rgba(252,165,165, 0.85);
@@ -66,4 +73,49 @@ $B100: #000;
 
 .transition-all {
     transition: all .5s;
+}
+
+.gradient-orange {
+    color: $W100;
+    background: linear-gradient(90deg, #FF8D13 0%, #FF8D13 0%, #FF3C1E 100%, #FF3C1E 100%);
+}
+
+.gradient-green {
+    color: $W100;
+    background: linear-gradient(90deg, #42F02C 0%, #42F02C 0%, #05AF51 100%, #05AF51 100%);
+}
+
+.gradient-yellow {
+    color: $W100;
+    background: linear-gradient(90deg, #FFC300 0%, #FFC300 0%, #FF7B00 100%, #FF7B00 100%);
+}
+
+.gradient-blue {
+    color: $W100;
+    background: linear-gradient(90deg, #13CAFC 0%, #13CAFC 2%, #1670F6 100%, #1670F6 100%);
+}
+
+.gradient-red {
+    color: $W100;
+    background: linear-gradient(90deg, #FF5E86 0%, #FF5E86 0%, #F41130 100%, #F41130 100%);
+}
+
+.gradient-purple {
+    color: $W100;
+    background: linear-gradient(90deg, #E113FC 0%, #E113FC 0%, #6816F6 100%, #6816F6 100%);
+}
+
+.gradient-silver {
+    color: #76829E;
+    background: linear-gradient(90deg, #EAEAEA 0%, #EAEAEA 0%, #ADB3BF 100%, #ADB3BF 100%);
+}
+
+.gradient-gold {
+    color: #b47e00;
+    background: linear-gradient(90deg, #FFF6C5 0%, #FFF6C5 0%, #F3C862 100%, #F3C862 100%);
+}
+
+.gradient-drill {
+    color: #F1FBFF;
+    background: linear-gradient(90deg, #AACADC 0%, #AACADC 2%, #3C6F8C 100%, #3C6F8C 100%);
 }

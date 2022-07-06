@@ -63,9 +63,6 @@
 </template>
 
 <script>
-import i18n from '../i18n';
-import designJson from '../assets/json/design.json';
-
 
 export default {
   name: 'Ratio',
@@ -102,7 +99,6 @@ export default {
     ];
 
     return {
-      datas: JSON.parse(JSON.stringify(designJson)),
       toolsTabs: ['ratio', 'ratio'],
       currentRatio: commonRatio[0],
       commonRatio: commonRatio,
