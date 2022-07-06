@@ -10,8 +10,8 @@
         <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
         <div v-if="index % col === colInedx - 1" class="mb-3">
           <a :href="data.href" target="_blank">
-            <img :src="data.image" class="w-full">
-            <div class="p-4 pb-6 text-black dark:text-white border border-t-0 box-b">
+            <img :src="data.image" class="w-full bg-gray-50 dark:bg-slate-600">
+            <div class="p12 text-black dark:text-white border border-t-0 box-b">
               <h2 class="text-lg mb-1">{{ data.title }}</h2>
               <p class="mb-3 text-gray-400">{{ data.description }}</p>
               <span v-for="tag in data.tags" v-bind:key="tag" :class="`tag px-2 py-1 box inline-block ${tag.css}`">
@@ -42,21 +42,29 @@ export default {
       screenWidth: window.innerWidth,
     }
   },
+  methods: {
+    calculateCol() {
+      this.screenWidth = window.innerWidth;
+
+      // 判断 768 1024
+      if (this.screenWidth > 768 && this.screenWidth < 1024) {
+        this.col = 3;
+      } else if (this.screenWidth > 1024) {
+        this.col = 4;
+      } else {
+        this.col = 2;
+      }
+      
+    },
+  },
+  created() {
+    const that = this;
+    that.calculateCol();
+  },
   mounted() {
 
     const that = this;
-    window.onresize = function () {
-      that.screenWidth = window.innerWidth;
-
-      // 判断 768 1024
-      if (that.screenWidth > 768 && that.screenWidth < 1024) {
-        that.col = 2;
-      } else if (that.screenWidth > 1024) {
-        that.col = 3;
-      } else {
-        that.col = 2;
-      }
-    }
+    window.onresize = that.calculateCol;
   },
   unmounted() {
     window.onresize = null;
