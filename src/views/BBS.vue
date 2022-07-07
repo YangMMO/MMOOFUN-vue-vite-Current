@@ -132,10 +132,10 @@ export default {
         {
           "fields": {
             "bbsUsername": that.user,
-            "email": that.msg,
+            "email": that.email,
             "publicEmail": that.publicEmail,
-            "blog": that.email,
-            "msg": that.blog,
+            "blog": that.blog,
+            "msg": that.msg,
             "createDate": Date.parse(new Date())
           }
         }
