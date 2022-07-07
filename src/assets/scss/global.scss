@@ -119,3 +119,10 @@ $B100: #000;
     color: #F1FBFF;
     background: linear-gradient(90deg, #AACADC 0%, #AACADC 2%, #3C6F8C 100%, #3C6F8C 100%);
 }
+
+input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    display:inline-block;
+    vertical-align: middle;
+}

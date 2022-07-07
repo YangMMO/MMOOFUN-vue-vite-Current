@@ -5,6 +5,7 @@ const routes = [
     "/tools",
     "/resume",
     "/about",
+    "/bbs",
     "/test",
     "/:error*",
 ]

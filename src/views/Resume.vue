@@ -4,7 +4,7 @@
       <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.resume") }}</h1>
 
       <!-- 暗号 -->
-      <div :class="{ hidden: unlock === true}">
+      <div :class="{ 'hidden': unlock === true}">
         <div class="text-center pb-6 flex flex-col place-items-center">
           <i class="ri-lock-line text-3xl"></i>
           <h1 class="text-3xl font-semibold my-6 select-none">请输入暗号</h1>
@@ -23,7 +23,7 @@
       </div>
 
       <!-- 简历 -->
-      <div :class="['bg-white box transition-all mb-6 dark:text-black overflow-hidden', { hidden: unlock===false}]">
+      <div :class="['bg-white box transition-all mb-6 dark:text-black overflow-hidden', { 'hidden': unlock===false}]">
         <div class="bg-gradient-to-br from-green-50 to-blue-50 py-10 text-center basic-card">
           <div class="avatar inline-block mb-2"></div>
           <h3 class="text-xl mb-2">{{ resumeData.baseInfo.name }}</h3>

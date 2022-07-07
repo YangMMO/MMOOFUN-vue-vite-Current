@@ -1,43 +1,69 @@
 <template>
-  <!-- 瀑布流 -->
-  <div class="flex flex-wrap flex-row select-none">
-    <!-- 瀑布流列数 -->
-    <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
-      :class="[{ 'mr-3': colInedx === colInedx % col }]">
-      <!-- 瀑布流列内个数 -->
-      <div v-for="(data, index) in datas" :key="index"
-        class="design-item box overflow-hidden text-sm bg-white dark:bg-slate-900 ">
-        <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
-        <div v-if="index % col === colInedx - 1" class="mb-3">
-          <a :href="data.href" target="_blank">
-            <img :src="data.image" class="w-full bg-gray-50 dark:bg-slate-600">
-            <div class="p12 text-black dark:text-white border border-t-0 box-b">
-              <h2 class="text-lg mb-1">{{ data.title }}</h2>
-              <p class="mb-3 text-gray-400">{{ data.description }}</p>
-              <span v-for="tag in data.tags" v-bind:key="tag" :class="`tag px-2 py-1 box inline-block ${tag.css}`">
-                {{ tag.text }}
-              </span>
-            </div>
-          </a>
+  <div v-if="isGet === false" class="text-center">
+    <div class="align-middle py-6 box">
+      <vue-feather type="refresh-cw" class="animate-spin mb-1"></vue-feather>
+      <p>加载中</p>
+    </div>
+  </div>
+
+  <div v-else-if="isGet === true && isGetFinish === false " class="text-center">
+    <div class="align-middle py-6 box">
+      <vue-feather type="meh" class=" mb-1"></vue-feather>
+      <p>请求失败，刷新页面重试！</p>
+    </div>
+  </div>
+
+  <div v-else>
+    <!-- 瀑布流 -->
+    <div class="flex flex-wrap flex-row select-none">
+      <!-- 瀑布流列数 -->
+      <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
+        :class="[{ 'mr-3': colInedx === colInedx % col }]">
+        <!-- 瀑布流列内个数 -->
+        <div v-for="(data, index) in designData" :key="index"
+          class="design-item box overflow-hidden text-sm bg-white dark:bg-slate-900 ">
+          <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
+          <div v-if="index % col === colInedx - 1" class="mb-3">
+            <a :href="data.fields.url" target="_blank">
+              <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600">
+              <div class="p12 text-black dark:text-white border border-t-0 box-b">
+                <h2 class="text-lg mb-1">{{ data.fields.title }}</h2>
+                <p class="mb-3 text-gray-400">{{ data.fields.description }}</p>
+                <span v-for="tag in data.fields.tags" v-bind:key="tag"
+                  :class="`tag px-2 py-1 box inline-block ${caseTag(tag).css}`">
+                  {{ caseTag(tag).tagName }}
+                </span>
+              </div>
+            </a>
+          </div>
+
         </div>
 
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
-import i18n from '../i18n';
-import designJson from '../assets/json/design.json';
+// import i18n from '../i18n';
+// import designJson from '../assets/json/design.json';
+
+import { Vika } from "@vikadata/vika";
+const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO" });
+const DesignDatasheet = vika.datasheet("dstcZEVFbYA2wKmEov");
+const DesignTagsDatasheet = vika.datasheet("dsteuB41zaTS2cRPTe");
 
 
 export default {
   name: 'ShowDesign',
   data() {
     return {
-      datas: JSON.parse(JSON.stringify(designJson)),
+      // datas: JSON.parse(JSON.stringify(designJson)),
+
+      isGetFinish: false,
+      isGet: false,
+      designData: [],
+      designTagsData: [],
       col: 2,
       screenWidth: window.innerWidth,
     }
@@ -48,18 +74,67 @@ export default {
 
       // 判断 768 1024
       if (this.screenWidth > 768 && this.screenWidth < 1024) {
-        this.col = 3;
+        this.col = 2;
       } else if (this.screenWidth > 1024) {
-        this.col = 4;
+        this.col = 3;
       } else {
         this.col = 2;
       }
       
     },
+    caseTag (tag) {
+      let that = this;
+      that.designTagsData;
+      console.log();
+      
+      for (let i = 0; i < that.designTagsData.length; i++) {
+        if (that.designTagsData[i].recordId === tag) {
+          return that.designTagsData[i].fields
+        }
+      }
+    },
   },
-  created() {
+  async created() {
+    let design = false;
+    let designTags = false;
     const that = this;
-    that.calculateCol();
+
+    // design
+    await DesignDatasheet.records.query({ viewId: "viwCt936eRuqE" }).then(response => {
+      if (response.success) {
+        design = true;
+        that.designData = response.data.records;
+        // console.log(design, that.designData);
+      } else {
+        design = false;
+        console.error(response);
+      }
+    });
+
+    // design tags
+    await DesignTagsDatasheet.records.query({ viewId: "viwDqW2P7S6pH" }).then(response => {
+      if (response.success) {
+        designTags = true;
+        that.designTagsData = response.data.records;
+        // console.log(designTags, that.designTagsData);
+      } else {
+        designTags = false;
+        console.error(response);
+      }
+    });
+
+    // 已请求
+    that.isGet = true;
+
+    // 数据是否都已经加载完毕
+    if (design && designTags) {
+      // 已请求完成
+      that.isGetFinish = true;
+      // 调用瀑布流进行列数刷新
+      that.calculateCol();
+    }
+
+
   },
   mounted() {
 
@@ -84,14 +159,4 @@ export default {
   }
 }
 
-.design-item {
-  // width: calc(50% - 4px);
-  // height: auto;
-  // margin-right: 8px;
-  // margin-bottom: 8px;
-
-  // &:nth-child(even) {
-  //   margin-right: 0;
-  // }
-}
 </style>

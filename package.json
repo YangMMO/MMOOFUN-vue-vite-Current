@@ -10,7 +10,9 @@
   "dependencies": {
     "@antv/g2plot": "^2.4.20",
     "@kangc/v-md-editor": "^2.3.15",
+    "@vikadata/vika": "^1.0.7",
     "feather-icons": "^4.29.0",
+    "moment": "^2.29.4",
     "prerender-spa-plugin": "^3.4.0",
     "remixicon": "^2.5.0",
     "sass": "^1.52.2",

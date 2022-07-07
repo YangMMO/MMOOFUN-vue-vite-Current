@@ -12,6 +12,7 @@ export default {
             video: '视频',
             update: '更新',
             about: '关于',
+            bbs: '留言板',
         },
         subscription: {
             sub: '订阅关注',
@@ -43,6 +44,7 @@ export default {
             video: 'VIDEO',
             update: 'UPDATE',
             about: 'ABOUT',
+            bbs: 'BBS',
         },
         subscription: {
             sub: 'SUBSCRIPTION',

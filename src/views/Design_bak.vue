@@ -16,7 +16,6 @@ import designJson from '../assets/json/design.json';
 
 import ShowDesign from '../components/ShowDesign.vue';
 
-
 export default {
   name: 'Design',
   components: {

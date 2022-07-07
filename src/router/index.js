@@ -6,6 +6,7 @@ import Model from "../views/Model.vue";
 import Tools from "../views/Tools.vue";
 import Resume from "../views/Resume.vue";
 import About from "../views/About.vue";
+import BBS from "../views/BBS.vue";
 import Test from "../views/Test.vue";
 import Page404 from "../views/404.vue";
 import Note from "../views/Note.vue";
@@ -53,6 +54,12 @@ const routes = [
         path: "/about",
         name: "About",
         component: About,
+        menu: true
+    },
+    {
+        path: "/bbs",
+        name: "BBS",
+        component: BBS,
         menu: true
     },
     {

@@ -39,7 +39,7 @@ import More from '../components/More.vue'
 export default {
   name: 'Tools',
   metaInfo: {
-    title: `MMOO.FUN | ${i18n.t("menu.design")}`,
+    title: `MMOO.FUN | ${i18n.t("menu.tools")}`,
     meta: [{                 // set meta
       name: 'keyWords',
       content: 'MMOO.FUN, 个人网站, MMO,'
