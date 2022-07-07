@@ -30,7 +30,7 @@
         <!-- 菜单 -->
         <div
           class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
-          @mouseenter="isActiveMenu = ture" @mouseleave="isActiveMenu = false">
+          @click="isActiveMenu = !isActiveMenu">
           <!-- <div
             class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
             @click="isActiveMenu = !this.isActiveMenu"> -->
@@ -39,8 +39,7 @@
             <span class="">{{ $t("menu.menu") }}</span>
             <i class="ri-menu-2-line"></i>
           </div>
-          <nav
-            :class="['show-list flex flex-col w-full box border-gray-900 dark:border-white ', { 'hidden': isActiveMenu === false}]">
+          <nav v-show="isActiveMenu" :class="['show-list flex flex-col w-full box border-gray-900 dark:border-white ']">
 
             <div v-for="item in routes" :key="item" @click.stop="isActiveMenu = false">
               <router-link v-if="item.menu" :to="item.path"
