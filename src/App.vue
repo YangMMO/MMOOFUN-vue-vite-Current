@@ -160,14 +160,14 @@ export default {
 .bg-animate {
   &:before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: url(./assets/img/resume_bg.png) center;
     // animation: pulse 5s infinite;
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   // @keyframes pulse {
