@@ -1,5 +1,12 @@
 [
     {
+        "date": "2022-7-8",
+        "content": [
+            "设计Desgin 加入loading 骨架屏动画",
+            "迭代留言板功能",
+            "封装常用get loading error状态类插槽"
+        ]
+    },{
         "date": "2022-7-7",
         "content": [
             "改写 设计Desgin 页面为请求API方式",
@@ -34,7 +41,8 @@
     },{
         "date": "2022-6-16",
         "content": [
-            "新增SPA预渲染（SEO）"
+            "新增SPA预渲染（SEO）",
+            "引入markdown框架"
         ]
     },{
         "date": "2022-6-15",

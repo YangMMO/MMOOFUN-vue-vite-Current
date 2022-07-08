@@ -28,7 +28,7 @@ import MetaInfo from 'vue-meta-info'
 import VueMarkdownEditor from '@kangc/v-md-editor';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
-import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
+// import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
@@ -36,9 +36,9 @@ VueMarkdownEditor.use(vuepressTheme, {
 
 // // 加载markdown预览组件
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
-import '@kangc/v-md-editor/lib/style/preview.css';
-import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';    // github主题
-import '@kangc/v-md-editor/lib/theme/style/github.css';
+// import '@kangc/v-md-editor/lib/style/preview.css';
+// import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';    // github主题
+// import '@kangc/v-md-editor/lib/theme/style/github.css';
 // // highlightjs
 import hljs from 'highlight.js';
 // // emoji
@@ -48,12 +48,17 @@ import '@kangc/v-md-editor/lib/plugins/emoji/emoji.css';
 import createLineNumberPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
 // // 复制功能
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
+
+// // 内容定位
+import createAlignPlugin from '@kangc/v-md-editor/lib/plugins/align';
+
 VMdPreview.use(vuepressTheme, {
   Hljs: hljs,
 });
 VMdPreview.use(createEmojiPlugin());
 VMdPreview.use(createLineNumberPlugin());
 VMdPreview.use(createCopyCodePlugin());
+VMdPreview.use(createAlignPlugin());
 
 
 const app = createApp(App)

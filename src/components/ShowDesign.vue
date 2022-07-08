@@ -1,21 +1,35 @@
 <template>
-  <div v-if="isGet === false" class="text-center">
-    <div class="align-middle py-6 box">
-      <vue-feather type="refresh-cw" class="animate-spin mb-1"></vue-feather>
-      <p>加载中</p>
-    </div>
+  <div v-if="isGet === false">
+    <get-progress>
+      <slot>
+        <div class="flex flex-wrap flex-row select-none">
+          <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
+            :class="[{ 'mr-3': colInedx === colInedx % col }]">
+            <div v-for="(data, index) in 6" :key="index">
+              <div v-if="index % col === colInedx - 1" class="mb-3 bg-white">
+                <div class="mb-3 box overflow-hidden">
+                  <div class="w-full h-48 load-gradient "></div>
+                  <div class="p12 text-black dark:text-white border border-t-0 box-b">
+                    <h2 class="text-lg mb-2 load-gradient h-6 w-2/6 box"></h2>
+                    <p class="text-gray-400 load-gradient h-4 box"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </slot>
+    </get-progress>
   </div>
 
-  <div v-else-if="isGet === true && isGetFinish === false " class="text-center">
-    <div class="align-middle py-6 box">
-      <vue-feather type="meh" class=" mb-1"></vue-feather>
-      <p>请求失败，刷新页面重试！</p>
-    </div>
+  <div v-else-if="isGet === true && isGetFinish === false">
+    <get-error></get-error>
   </div>
+
 
   <div v-else>
     <!-- 瀑布流 -->
-    <div class="flex flex-wrap flex-row select-none">
+    <div class=" flex flex-wrap flex-row select-none">
       <!-- 瀑布流列数 -->
       <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
         :class="[{ 'mr-3': colInedx === colInedx % col }]">
@@ -47,6 +61,9 @@
 <script>
 // import i18n from '../i18n';
 // import designJson from '../assets/json/design.json';
+import getProgress from './getProgress.vue';
+import getError from './getError.vue';
+
 
 import { Vika } from "@vikadata/vika";
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO" });
@@ -56,6 +73,9 @@ const DesignTagsDatasheet = vika.datasheet("dsteuB41zaTS2cRPTe");
 
 export default {
   name: 'ShowDesign',
+  components: {
+    getProgress, getError
+  },
   data() {
     return {
       // datas: JSON.parse(JSON.stringify(designJson)),
