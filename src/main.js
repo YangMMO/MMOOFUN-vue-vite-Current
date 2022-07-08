@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 
+
 // 加载remixicon图标
 import 'remixicon/fonts/remixicon.css'
 
@@ -24,9 +25,11 @@ import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 // 加载mate seo方案
 import MetaInfo from 'vue-meta-info'
 
+// ---------------------------------------------
+
 // // 加载markdown编辑器
 import VueMarkdownEditor from '@kangc/v-md-editor';
-import '@kangc/v-md-editor/lib/style/base-editor.css';
+// import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 // import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
@@ -52,6 +55,10 @@ import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index
 // // 内容定位
 import createAlignPlugin from '@kangc/v-md-editor/lib/plugins/align';
 
+// // markdwon scss自定义
+import './assets/scss/vuepress.scss';
+import './assets/scss/base-editor.scss';
+
 VMdPreview.use(vuepressTheme, {
   Hljs: hljs,
 });
@@ -59,6 +66,8 @@ VMdPreview.use(createEmojiPlugin());
 VMdPreview.use(createLineNumberPlugin());
 VMdPreview.use(createCopyCodePlugin());
 VMdPreview.use(createAlignPlugin());
+
+// ---------------------------------------------
 
 
 const app = createApp(App)

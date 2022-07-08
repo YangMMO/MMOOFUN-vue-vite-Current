@@ -5,50 +5,11 @@
       <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.bbs") }}</h1>
 
       <!-- 墙面 -->
-      <div class="border-2 box mb-6 border-2  overflow-hidden">
-        <div class="border-b-2 border-t-2">
-          <v-md-preview :text="board" class=""></v-md-preview>
-        </div>
-      </div>
-
-
-      <!-- 提交 -->
-      <div class="flex flex-col box">
-        <label class="mb-3">留言昵称</label>
-        <input type="text" class="p8 border-2 focus:outline-none focus:ring focus:border-blue-300 box  mb-3"
-          v-model="user">
-        <label class="mb-3">留言信息 - Markdown</label>
-        <div class="mb-3 border-2 focus:outline-none focus:ring focus:border-blue-300 box overflow-hidden">
-          <v-md-editor height="240px" :disabled-menus="[]"
-            left-toolbar="preview | undo redo clear | bold italic strikethrough" right-toolbar="" v-model="msg">
-          </v-md-editor>
-        </div>
-
-        <label class="mb-3 ">邮箱</label>
-        <div class="mb-3 flex w-full items-center border-2 box-border box relative overflow-hidden">
-          <input type="text"
-            class="p8 box pl-6 focus:outline-none focus:ring focus:border-blue-300 flex-1 overflow-hidden"
-            v-model="email">
-          <div
-            class="px-6 py-6  border-l-2 focus:outline-none focus:ring focus:border-blue-300 text-center flex-initial absolute right-0 cursor-pointer"
-            @click="publicEmail === 0 ? publicEmail = 1 : publicEmail = 0">
-            {{ publicEmail === 1 ? '公开' : '不公开' }}
-          </div>
-
-        </div>
-
-        <label class="mb-3">分享您的个人网站</label>
-        <input type="text" class="p8 border-2 focus:outline-none focus:ring focus:border-blue-300 box  mb-3"
-          v-model="blog">
-
-
-        <!-- btn -->
-        <div class="b-btn box inset-x-0 bottom-0 text-center flex pb-4 justify-center select-none">
-          <div
-            class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center cursor-pointer"
-            @click="createBBS">
-            <i class="ri-chat-smile-3-line icon-font-size pr-2"></i>
-            <span class="font-semibold ">提交</span>
+      <div class="">
+        <div class="text-xl font-semibold mb-3">寄语</div>
+        <div class="border-l-2 border-r-2 box mb-6 overflow-hidden">
+          <div class="border-b-2 border-t-2 py-6">
+            <v-md-preview :text="board" class=""></v-md-preview>
           </div>
         </div>
       </div>
@@ -64,6 +25,7 @@
 
       <!-- 渲染读取的数据 -->
       <div v-else>
+        <div class="text-xl font-semibold mb-3">留言 {{ bbsDataLength }}</div>
         <div class="flex flex-wrap flex-row ">
           <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
             :class="[{ 'mr-3': colInedx === colInedx % col }]">
@@ -85,7 +47,64 @@
             </div>
           </div>
         </div>
+
+        <!-- 页数 -->
+        <div class="flex mb-6 items-center justify-center">
+          <div @click="currentPage <= 1 ? retrun : getBBS(currentPage--)"
+            class="border-2 border-gray-900 px-4 py-1 box"> 上一页
+          </div>
+          <div class="mx-6">{{ currentPage }}</div>
+          <div @click="currentPage >= totalPage ? retrun : getBBS(currentPage++)"
+            class="border-2 border-gray-900 px-4 py-1 box"> 下一页
+          </div>
+        </div>
+
       </div>
+
+
+      <!-- 提交 -->
+      <div class="flex flex-col box select-none mb-6">
+        <label class="mb-3">留言昵称 <span class="text-red-500">*</span></label>
+        <input type="text" class="p8 border-2 focus:outline-none box  mb-3" v-model="user">
+
+        <label class="mb-3">留言信息 - Markdown <span class="text-red-500">*</span></label>
+        <div :class="['mb-3 border-2  box overflow-hidden']">
+          <v-md-editor height="240px" :disabled-menus="[]" left-toolbar="undo redo clear | bold italic strikethrough"
+            right-toolbar="" v-model="msg">
+          </v-md-editor>
+        </div>
+
+        <label class="mb-3 ">邮箱 <span class="text-red-500">*</span></label>
+        <div class="mb-3 flex w-full items-center border-2 box-border box relative  ">
+          <input type="text" class="p8 pl-6 flex-1 overflow-hidden focus:outline-none" v-model="email">
+          <div
+            class="pr-6 pl-5  border-l-2 text-center flex-initial absolute right-0 cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white"
+            @click="publicEmail === 0 ? publicEmail = 1 : publicEmail = 0">
+            <i
+              :class="['icon-font-size pr-2 align-middle ', { 'ri-eye-2-line': publicEmail === 1 }, { 'ri-eye-close-line': publicEmail === 0 }]"></i>
+            <span>{{ publicEmail === 1 ? '公开' : '私密' }}</span>
+
+
+          </div>
+
+        </div>
+
+        <label class="mb-3">分享您的个人网站</label>
+        <input type="text" class="p8 border-2 focus:outline-none  box  mb-3" v-model="blog">
+
+
+        <!-- btn -->
+        <div class="b-btn box inset-x-0 bottom-0 text-center flex pb-4 justify-center select-none">
+          <div
+            class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center cursor-pointer"
+            @click="createBBS">
+            <i class="ri-chat-smile-3-line icon-font-size pr-2"></i>
+            <span class="font-semibold ">提交</span>
+          </div>
+        </div>
+      </div>
+
+
 
     </div>
   </div>
@@ -121,6 +140,7 @@ export default {
       isGetFinish: false,
       isGet: false,
       bbsData: [],
+      bbsDataLength: 0,
       screenWidth: window.innerWidth,
       col: 2,
       moment: moment,
@@ -133,8 +153,19 @@ export default {
       email: "",
       blog: "",
 
+      
+      getNum: 5,
+      currentPage: 1,
+      totalPage: 1,
     }
   },
+
+  watch: {
+    screenWidth(val) {
+      this.col = Math.floor(val / 300);
+    }
+  },
+
   async created() {
     await this.getBBS();
     this.calculateCol();
@@ -143,11 +174,27 @@ export default {
     createBBS() {
       let that = this;
 
-      console.log(that.user);
-      console.log(that.msg);
-      console.log(that.publicEmail);
-      console.log(that.email);
-      console.log(that.blog);
+      // console.log(that.user.length);
+      // console.log(that.msg.length);
+      // console.log(that.publicEmail);
+      // console.log(that.email.length);
+      // console.log(that.blog.length);
+
+      let isNotNull = that.user.length > 0 && that.msg.length > 0 && that.email.length > 0;
+
+      // console.log('空');
+
+      if (!isNotNull) {
+        console.log('没填写');
+        // that.$toast.open({
+        //   message: '请填写完整',
+        //   type: 'is-danger',
+        //   duration: 2000
+        // });
+
+        return;
+        
+      } 
 
 
       msgDatasheet.records.create([
@@ -166,27 +213,41 @@ export default {
           console.log('提交成功');
           // console.log(response.data);
           that.getBBS();
+          that.user = "";
+          that.msg = "";
+          that.publicEmail = 1;
+          that.email = "";
+          that.blog = "";
         } else {
           console.error(response);
         }
       })
     },
 
-    async getBBS() {
+    async getBBS(currentPage) {
       let success = false;
       const that = this;
+      that.currentPage = that.currentPage || currentPage;
 
       // design
-      await msgDatasheet.records.query({ viewId: "viwhuh8Q1ikXw" }).then(response => {
+      await msgDatasheet.records.query({ 
+        viewId: "viwhuh8Q1ikXw",
+        pageSize: 5,
+        pageNum: that.currentPage
+      }).then(response => {
         if (response.success) {
           success = true;
           that.bbsData = response.data.records;
-          console.log(that.bbsData);
+          that.bbsDataLength = response.data.total;
+          that.totalPage = that.bbsDataLength % that.getNum === 0 ? that.bbsDataLength / that.getNum : Math.floor(that.bbsDataLength / that.getNum) + 1;
+          console.log(response);
         } else {
           success = false;
           console.error(response);
         }
       });
+
+
 
 
       // 已请求
@@ -200,7 +261,6 @@ export default {
     },
 
     calculateCol() {
-      console.log(1);
       this.screenWidth = window.innerWidth;
 
       // 判断 768 1024
