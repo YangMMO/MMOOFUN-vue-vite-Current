@@ -9,17 +9,17 @@
         <div class="flex select-none">
 
           <a href="https://space.bilibili.com/5612894" target="_blank"
-            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-indigo-300">
             <vue-feather type="tv" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.bilibili") }}</span>
           </a>
           <a href="https://github.com/YangMMO" target="_blank"
-            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-indigo-300">
             <vue-feather type="github" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.github") }}</span>
           </a>
           <a href="https://www.figma.com/@MMO" target="_blank"
-            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-black">
+            class="flex-1 box flex flex-col place-items-center pt-3 pb-2 sub-item text-black dark:text-white border-2  hover:border-indigo-300">
             <vue-feather type="figma" class="mb-3"></vue-feather>
             <span class="text-center">{{ $t("subscription.figma") }}</span>
           </a>
@@ -36,7 +36,7 @@
         <h2 class="text-xl mb-3 select-none">{{ data.date }}</h2>
 
         <ul
-          class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
+          class="text-sm list-decimal list-inside bg-stripes bg-green-200 dark:bg-indigo-200 bg-stripes-white box p-4 text-slate-800">
           <li v-for="item in data.content" v-bind:key="item">{{ item }}</li>
         </ul>
 

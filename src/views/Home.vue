@@ -21,7 +21,8 @@
           </div>
         </div>
         <div class="p8 text-xs text-slate-400 text-center"><i
-            class="ri-error-warning-line align-middle pr-1 text-xs "></i>该教程仅用于学习交流，中文字幕由（MMOO.FUN - 续命牛黄解毒片）译制上传,
+            class="ri-error-warning-line align-middle pr-1 text-xs"></i>该教程仅用于学习交流，中文字幕由（MMOO.FUN
+          - 续命牛黄解毒片）译制上传,
           收费行为仅保护字幕成果
         </div>
       </div>

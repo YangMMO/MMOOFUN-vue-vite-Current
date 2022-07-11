@@ -11,7 +11,7 @@
 .v-md-textarea-editor pre,
 .v-md-textarea-editor textarea {
     box-sizing: border-box;
-    padding: 20px 20px 30px;
+    padding: 8px;
     overflow: hidden;
     color: #2c3e50;
     font-size: 14px;
@@ -401,8 +401,13 @@
     width: 200px
 }
 
+// 自定义
 .v-md-editor__left-area {
-    height: 100%;
+    height: 0;
+    overflow: hidden;
+    display: none;
+
+    // height: 100%;
     overflow: hidden;
     border-right: 1px solid #ddd;
     -webkit-transition: .3s;

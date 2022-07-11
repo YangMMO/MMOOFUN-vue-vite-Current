@@ -34,13 +34,13 @@
       <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
         :class="[{ 'mr-3': colInedx === colInedx % col }]">
         <!-- 瀑布流列内个数 -->
-        <div v-for="(data, index) in designData" :key="index"
-          class="design-item box overflow-hidden text-sm bg-white dark:bg-slate-900 ">
+        <div v-for="(data, index) in designData" :key="index" class="design-item box overflow-hidden text-sm ">
           <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
           <div v-if="index % col === colInedx - 1" class="mb-3">
             <a :href="data.fields.url" target="_blank">
               <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600">
-              <div class="p12 text-black dark:text-white border border-t-0 box-b">
+              <div
+                class="p12 text-black dark:text-white border border-t-0 dark:border-transparent box-b bg-white dark:bg-slate-900 transition-all duration-200">
                 <h2 class="text-lg mb-1">{{ data.fields.title }}</h2>
                 <p class="mb-3 text-gray-400">{{ data.fields.description }}</p>
                 <span v-for="tag in data.fields.tags" v-bind:key="tag"

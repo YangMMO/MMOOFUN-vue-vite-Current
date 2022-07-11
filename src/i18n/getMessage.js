@@ -29,7 +29,19 @@ export default {
             more: '更多',
             flygame: '飞机大战',
         },
-
+        bbs: {
+            user: '昵称',
+            msg: '留言 - Markdown',
+            email: '邮箱',
+            public: '公开',
+            anonymous: '匿名',
+            blog: '个人博客/网站',
+            submit: '提交',
+            sendWord: '寄语',
+            message: '留言',
+            prev: '上一页',
+            next: '下一页',
+        }
     },
     en: {
         menu: {
@@ -60,6 +72,19 @@ export default {
             ratio: 'Ratio Calculation',
             more: 'More',
             flygame: 'Fly Game',
+        },
+        bbs: {
+            user: 'User',
+            msg: 'Message - Markdown',
+            email: 'Email',
+            public: 'Public',
+            anonymous: 'Anonymous',
+            blog: 'Blog',
+            submit: 'Submit',
+            sendWord: 'Send Word',
+            message: 'Message',
+            prev: 'Prev',
+            next: 'Next',
         }
     },
 }

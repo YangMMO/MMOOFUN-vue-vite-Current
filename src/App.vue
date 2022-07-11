@@ -6,7 +6,7 @@
         class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all">
         <router-link class="flex items-center" to="/">
           <img src="./assets/img/mmo.jpg" alt="">
-          <span class="hidden sm:block">MMOO.FUN</span>
+          <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
         </router-link>
       </div>
 
@@ -29,7 +29,7 @@
 
         <!-- 菜单 -->
         <div
-          class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
+          :class="['flex-header flex-col menu relative shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold relative transition-all duration-200', { 'box': !isActiveMenu }, { 'box-t': isActiveMenu }]"
           @click="isActiveMenu = !isActiveMenu">
           <!-- <div
             class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
@@ -39,11 +39,12 @@
             <span class="">{{ $t("menu.menu") }}</span>
             <i class="ri-menu-2-line"></i>
           </div>
-          <nav v-show="isActiveMenu" :class="['show-list flex flex-col w-full box border-gray-900 dark:border-white ']">
+          <nav v-show="isActiveMenu"
+            :class="['show-list flex flex-col w-full border-gray-900 border-2 dark:border-white transition-all duration-200 absolute bg-white dark:bg-gray-800 ', { 'box-b': isActiveMenu }]">
 
             <div v-for="item in routes" :key="item" @click.stop="isActiveMenu = false">
               <router-link v-if="item.menu" :to="item.path"
-                class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block">
+                class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block text-black dark:text-white transition-all duration-200">
                 {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
               </router-link>
             </div>
@@ -243,7 +244,7 @@ export default {
 }
 
 .bg-stripes{
-  background-image: linear-gradient(45deg,var(--stripes-color) 12.5%,transparent 12.5%,transparent 50%,var(--stripes-color) 50%,var(--stripes-color) 62.5%,transparent 62.5%,transparent 100%);
+  background-image: linear-gradient(-45deg,var(--stripes-color) 12.5%,transparent 12.5%,transparent 50%,var(--stripes-color) 50%,var(--stripes-color) 62.5%,transparent 62.5%,transparent 100%);
   background-size: 5.66px 5.66px;
 }
 
@@ -326,8 +327,9 @@ export default {
 
     .show-list {
       width: calc(100% + 4px) ;
+      top: 36px;
       padding: 4px 0;
-      border-top-width: 2px;
+      // border-top-width: 2px;
       
       a {
         padding: 4px 12px;
