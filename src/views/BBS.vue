@@ -25,67 +25,73 @@
 
       <!-- 渲染读取的数据 -->
       <div v-else>
-        <div class="mb-3">
+        <div class="mb-3 select-none">
           <h2 class="text-xl font-semibold inline-block align-middle">{{ $t("bbs.message") }}</h2>
           <span class="align-middle text-sm  ml-2 px-3 py-0.5 bg-gray-100 box gradient-red">{{ bbsDataLength }}</span>
         </div>
 
-        <div class="flex flex-wrap flex-row">
-          <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
-            :class="[{ 'mr-3': colInedx === colInedx % col }]">
-            <div v-for="(data, index) in bbsData" :key="index">
-              <div class="border-2 mb-3 px-3 py-3 box" v-if=" index % col===colInedx - 1">
 
-                <div class="flex mb-3 items-center justify-center">
-                  <div class="flex-1">
-                    <i class="ri-ghost-smile-line align-middle icon-font-size pr-2"></i>
-                    <h3 class="text-lg align-middle inline-block font-semibold">{{
-                      data.fields.bbsUsername }}</h3>
-                  </div>
+        <div class="flex-1 flex flex-col">
+          <div v-for="(data, index) in bbsData" :key="index">
+            <div class="border mb-3 px-3 py-3 box">
 
-                  <p class="text-gray-400 flex-initial text-sm">
-                    {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
-                  </p>
+              <div class="flex mb-3 items-center justify-center">
+                <div class="flex-1">
+                  <i class="ri-ghost-smile-line align-middle icon-font-size pr-2"></i>
+                  <h3 class="text-lg align-middle inline-block font-semibold">{{
+                      data.fields.bbsUsername
+                  }}</h3>
                 </div>
 
-
-                <!-- <p>{{ }}</p> -->
-                <div class="mb-3 ">
-                  <v-md-preview :text="data.fields.msg" class="box overflow-hidden"></v-md-preview>
-                </div>
-
-                <div class="mb-3">
-                  <div class="text-sm">
-                    <p class="text-gray-400">
-                      {{ data.fields.publicEmail ? data.fields.email : $t("bbs.anonymous") }}
-                    </p>
-                    <p class="text-gray-400" v-show="data.fields.blog">{{ data.fields.blog}}</p>
-                  </div>
-                </div>
-
-                <div class="text-sm">
-                  点赞: {{ data.fields.like }}
-                </div>
-
-
-                <!-- {{ data.fields }} -->
-
+                <p class="text-gray-400 flex-initial text-sm">
+                  {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
+                </p>
               </div>
 
+
+              <!-- <p>{{ }}</p> -->
+              <div class="mb-3 ">
+                <v-md-preview :text="data.fields.msg" class="box overflow-hidden"></v-md-preview>
+              </div>
+
+              <div class="mb-3">
+                <div class="text-sm">
+                  <p class="text-gray-400">
+                    {{ data.fields.publicEmail ? data.fields.email : $t("bbs.anonymous") }}
+                  </p>
+                  <p class="text-gray-400" v-show="data.fields.blog">{{ data.fields.blog }}</p>
+                </div>
+              </div>
+
+              <div class="text-sm">
+                {{ $t("bbs.like") + " " + data.fields.like }}
+              </div>
+
+
+              <!-- {{ data.fields }} -->
+
             </div>
+
           </div>
         </div>
+
 
         <!-- 页数 -->
         <div class="flex mb-6 items-center justify-center">
           <!-- 上一页 -->
           <div @click="currentPage <= 1 ? retrun : getBBS(currentPage--)"
-            class="border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer ">{{ $t("bbs.prev") }}</div>
+            :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === 1 }, { 'cursor-pointer': currentPage !== 1 }]">
+            {{ $t("bbs.prev") }}
+          </div>
+
           <!-- 页码 -->
           <div class="mx-6">{{ currentPage }} / {{ totalPage }}</div>
+
           <!-- 下一页 -->
           <div @click="currentPage >= totalPage ? retrun : getBBS(currentPage++)"
-            class="border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer">{{ $t("bbs.next") }}</div>
+            :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === totalPage }, { 'cursor-pointer': currentPage !== totalPage }]">
+            {{ $t("bbs.next") }}
+          </div>
         </div>
       </div>
 
@@ -213,8 +219,6 @@ export default {
       isGet: false,
       bbsData: [],
       bbsDataLength: 0,
-      screenWidth: window.innerWidth,
-      col: 2,
       moment: moment,
 
       board: "::: align-center 🏄网上冲浪留下点什么再走吧😁🙈🍇",
@@ -230,7 +234,7 @@ export default {
       emailMaxLength: 32,
       blogMaxLength: 32,
 
-      
+
       getNum: 5,
       currentPage: 1,
       totalPage: 1,
@@ -242,16 +246,7 @@ export default {
       showPop: false,
     }
   },
-
-  watch: {
-    screenWidth(val) {
-      // this.col = Math.floor(val / 300);
-      this.col = 1;
-    }
-  },
-
   created() {
-    this.calculateCol();
     this.getBBS();
   },
   methods: {
@@ -288,8 +283,8 @@ export default {
         // });
 
         return;
-        
-      } 
+
+      }
 
 
 
@@ -332,7 +327,7 @@ export default {
       that.currentPage = that.currentPage || currentPage;
 
       // design
-      await msgDatasheet.records.query({ 
+      await msgDatasheet.records.query({
         viewId: "viwhuh8Q1ikXw",
         pageSize: that.getNum,
         pageNum: that.currentPage
@@ -342,15 +337,14 @@ export default {
           that.bbsData = response.data.records;
           that.bbsDataLength = response.data.total;
           that.totalPage = that.bbsDataLength % that.getNum === 0 ? that.bbsDataLength / that.getNum : Math.floor(that.bbsDataLength / that.getNum) + 1;
-          that.calculateCol();
+
           console.log(response);
         } else {
           success = false;
-          that.calculateCol();
+
           console.error(response);
         }
 
-        console.log(that.col);
       });
 
 
@@ -366,36 +360,14 @@ export default {
       }
     },
 
-    calculateCol() {
-      this.screenWidth = window.innerWidth;
 
-      // 判断 768 1024
-      if (this.screenWidth > 768 && this.screenWidth < 1024) {
-        this.col = 1;
-      } else if (this.screenWidth > 1024) {
-        this.col = 1;
-      } else {
-        this.col = 1;
-      }
-
-    },
-
-  },
-  mounted() {
-    const that = this;
-    window.onresize = that.calculateCol;
-  },
-  unmounted() {
-    window.onresize = null;
   },
 }
 </script>
 
 
 <style lang="scss" scoped>
-
-
-.bg-stripes-white{
+.bg-stripes-white {
   --stripes-color: hsla(0, 0%, 95%, 0.747);
 }
 
@@ -407,19 +379,20 @@ export default {
 
 .sticky {
   background: linear-gradient(-45deg, transparent 24px, #fff5c5 0);
+
   ::before {
     content: "";
-      position: absolute;
-      right: 0px;
-      bottom: 0px;
-      background: linear-gradient(-45deg, transparent 50%, #fce6ab 0);
-      width: 35px;
-      height: 35px;
-      border-radius: 4px 0 0 0;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background: linear-gradient(-45deg, transparent 50%, #fce6ab 0);
+    width: 35px;
+    height: 35px;
+    border-radius: 4px 0 0 0;
   }
 }
 
 .container {
-    padding: 120px 12px 0 12px;
+  padding: 120px 12px 0 12px;
 }
 </style>

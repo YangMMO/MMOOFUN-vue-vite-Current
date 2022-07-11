@@ -2,22 +2,13 @@
 
   <div class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
-      <div
-        class="flex-header title box p8 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all">
-        <router-link class="flex items-center" to="/">
+      <div class="flex-header title box ">
+        <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all" to="/">
           <img src="./assets/img/mmo.jpg" alt="">
           <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
         </router-link>
-      </div>
 
-      <div class="menu-fun">
-
-        <!-- 语言 -->
-        <div
-          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="switchLang()"><i class="ri-globe-line"></i></div>
         <!-- 主题 -->
-
         <div
           class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
           @click="themesMode()">
@@ -27,20 +18,32 @@
           </Transition>
         </div>
 
+        <!-- 语言 -->
+        <div
+          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          @click="switchLang()"><i class="ri-globe-line"></i></div>
+        </div>
+
+      <div class="menu-fun">
+
+
+
+
         <!-- 菜单 -->
         <div
-          :class="['flex-header flex-col menu relative shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold relative transition-all duration-200', { 'box': !isActiveMenu }, { 'box-t': isActiveMenu }]"
-          @click="isActiveMenu = !isActiveMenu">
+          :class="['flex-header flex-col menu  shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold relative transition-all duration-200 box overflow-hidden']"
+           @click="isActiveMenu = true" @mouseenter="isActiveMenu = !isActiveMenu" @mouseleave="isActiveMenu = false"
+>
+          
           <!-- <div
             class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
-            @click="isActiveMenu = !this.isActiveMenu"> -->
+            @click.stop="isActiveMenu = true"> -->
           <div class="flex items-center show-menu ">
-            <!-- <div class="flex items-center show-menu" @click="isActiveMenu = !this.isActiveMenu"> -->
             <span class="">{{ $t("menu.menu") }}</span>
             <i class="ri-menu-2-line"></i>
           </div>
           <nav v-show="isActiveMenu"
-            :class="['show-list flex flex-col w-full border-gray-900 border-2 dark:border-white transition-all duration-200 absolute bg-white dark:bg-gray-800 ', { 'box-b': isActiveMenu }]">
+            :class="['show-list flex flex-col w-full border-gray-900 border-t-2 dark:border-white transition-all duration-200  bg-white dark:bg-gray-800 ', { 'box-b': isActiveMenu }]">
 
             <div v-for="item in routes" :key="item" @click.stop="isActiveMenu = false">
               <router-link v-if="item.menu" :to="item.path"
@@ -117,6 +120,7 @@ export default {
     _resize() {
       this._innerWidth = window.innerWidth
     },
+
 
     // 切换语言
     switchLang() {
@@ -281,9 +285,13 @@ export default {
     box-sizing: border-box;
   }
 
+  .home {
+    height: 40px;
+    padding: 8px;
+  }
+
   .title {
     position: absolute;
-    padding: 0 10px;
     top: 12px;
     left: 12px;
     font-size: 1rem;
@@ -299,7 +307,58 @@ export default {
     span {
       margin-left: 8px;
     }
+
   }
+          .box {
+      margin-right: 4px;
+      float: left;
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .fun {
+      // position: absolute;
+      width: 40px;
+      position: relative;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-sizing: border-box;
+      text-align: center;
+      overflow: hidden;
+
+      i {
+        width: 100%;
+      }
+
+    }
+
+    .lua {
+      // position: absolute;
+      &:hover {
+        animation: rotateY 1s 1;
+        transition: all 0.5s;
+      }
+    
+      @keyframes rotateY {
+        0% {
+          transform: rotate3d(0,0,0,0deg);
+          box-shadow: none;
+        }
+    
+        80% {
+          transform: rotate3d(0, 1, .5, 360deg);
+          box-shadow: none;
+        }
+
+        100% {
+          transform: rotate3d(0, 1, .5, 360deg);
+          box-shadow: auto;
+        }
+      }
+      
+    }
 
   .menu {
     width: 120px;
@@ -350,56 +409,17 @@ export default {
     position: absolute;
     top: 12px; 
     right: 12px;
-    display: flex;
+    // display: flex;
+    
 
     .box {
       margin-right: 4px;
+      float: left;
       
       &:last-child {
         margin-right: 0;
       }
     }
-
-    .fun {
-      width: 40px;
-      position: relative;
-      font-size: 1.4rem;
-      cursor: pointer;
-      box-sizing: border-box;
-      text-align: center;
-      overflow: hidden;
-
-      i {
-        width: 100%;
-      }
-
-    }
-
-    .lua {
-      &:hover {
-        animation: rotateY 1s 1;
-        transition: all 0.5s;
-      }
-    
-      @keyframes rotateY {
-        0% {
-          transform: rotate3d(0,0,0,0deg);
-          box-shadow: none;
-        }
-    
-        80% {
-          transform: rotate3d(0, 1, .5, 360deg);
-          box-shadow: none;
-        }
-
-        100% {
-          transform: rotate3d(0, 1, .5, 360deg);
-          box-shadow: auto;
-        }
-      }
-      
-    }
-
   }
 
 }

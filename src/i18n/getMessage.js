@@ -41,6 +41,7 @@ export default {
             message: '留言',
             prev: '上一页',
             next: '下一页',
+           like: '点赞',
         }
     },
     en: {
@@ -85,6 +86,7 @@ export default {
             message: 'Message',
             prev: 'Prev',
             next: 'Next',
+            like: 'Like',
         }
     },
 }
