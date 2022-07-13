@@ -144,7 +144,7 @@ export default {
     });
 
     // 已请求
-    // that.isGet = true;
+    that.isGet = true;
 
     // 数据是否都已经加载完毕
     if (design && designTags) {
