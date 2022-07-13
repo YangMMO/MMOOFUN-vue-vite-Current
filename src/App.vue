@@ -71,7 +71,7 @@
     <div class="footer container mx-auto">
       <div class="container">
         <div class=" border-t text-xs text-slate-400 text-center cursor-default">
-          <span>©2018-2022 MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
+          <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN <a href="https://beian.miit.gov.cn/">粤ICP备17077157号</a></span>
         </div>
       </div>
     </div>
@@ -100,6 +100,12 @@
 import i18n from "./i18n"
 import routers from "./router"
 
+import moment from "./plugins/moment"
+
+import { Vika } from "@vikadata/vika";
+const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
+const webDatasheet = vika.datasheet("dstG8GQp2tuf0ZoqG2");
+
 export default {
   name: 'App',
   provide() {
@@ -114,21 +120,70 @@ export default {
       isActiveMenu: false,
       routes: routers.options.routes,
       _innerWidth: window.innerWidth,
+      moment: moment,
+      visitor: 0,
+      isVisits: false
     }
   },
   created() {
     // this._focus()
     window.addEventListener("resize", this._resize);
   },
+  mounted() {
+    // 判断loclstrage中是否有visitsDate字段，字段的日期是否等于今日
+    if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
+      // 更新visitsDate字段为今日日期
+      localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
+      // 更新
+      this.isVisits = true;
+    }
+    
+    this._visitor();
+
+  },
   unmounted() {
     window.removeEventListener("resize", this._resize);
   },
   methods: {
+    // 提交一次访问记录
+    async _visitor() {
+      let that = this;
+      await webDatasheet.records.query({ viewId: "viwyauFQyYRvf"}).then(response => {
+        if (response.success) {
+          let web = response.data.records[0];
+          that.visitor = web.fields.visitor;
+
+          if (!that.isVisits) {
+            return;
+          }
+
+          webDatasheet.records.update([{
+              "recordId": "recf87XyUxcH4",
+              "fields": {
+                "visitor": web.fields.visitor + 1
+              }
+            }
+          ]).then(response => {
+            if (response.success) {
+              that.visitor = web.fields.visitor + 1;
+              // console.log("提交成功");
+              // console.log(response.data);
+            } else {
+              console.error(response);
+            }
+          })
+
+          // console.log(web);
+        } else {
+          console.error(response);
+        }
+      });
+    },
+
     // 根据页面宽度计算出元素的宽度
     _resize() {
       this._innerWidth = window.innerWidth
     },
-
 
     // 切换语言
     switchLang() {

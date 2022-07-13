@@ -62,6 +62,9 @@ export default {
                 violation: '该留言含有违规或不雅用语，已被Ban掉！',
                 violationUser: '[Ban] 违规昵称',
             }
+        },
+        _: {
+                visitor: '访客',
         }
     },
     en: {
@@ -127,6 +130,9 @@ export default {
                 violation: 'This message contains illegal or inappropriate content, and has been banned!',
                 violationUser: '[Ban] Violation User Name',
             }
+        },
+        _: {
+                visitor: 'Visitor',
         }
     },
 }

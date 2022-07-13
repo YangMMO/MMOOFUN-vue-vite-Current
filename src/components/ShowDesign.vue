@@ -8,9 +8,9 @@
             <div v-for="(data, index) in 6" :key="index">
               <div v-if="index % col === colInedx - 1" class="mb-3 bg-white">
                 <div class="mb-3 box overflow-hidden">
-                  <div class="w-full h-48 load-gradient "></div>
+                  <div class="w-full h-48 load-gradient"></div>
                   <div class="p12 text-black dark:text-white border border-t-0 box-b">
-                    <h2 class="text-lg mb-2 load-gradient h-6 w-2/6 box"></h2>
+                    <h2 class="text-lg mb-2 load-gradient h-6 w-4/6 box"></h2>
                     <p class="text-gray-400 load-gradient h-4 box"></p>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export default {
     });
 
     // 已请求
-    that.isGet = true;
+    // that.isGet = true;
 
     // 数据是否都已经加载完毕
     if (design && designTags) {

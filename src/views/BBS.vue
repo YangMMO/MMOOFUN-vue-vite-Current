@@ -4,8 +4,12 @@
     <div class="divide-y-0">
       <div class="select-none pb-9">
         <h1 class="text-3xl  font-semibold select-none inline-block align-middle">{{ $t("menu.bbs") }}</h1>
-        <span class="align-middle text-sm  ml-2 px-3 py-0.5 bg-gray-100 box gradient-red">{{ bbsDataLength }}</span>
-      </div>
+        <span class="align-middle text-sm  ml-2 px-2 py-1 bg-gray-100 box gradient-red mr-1">{{ bbsDataLength }}</span>
+        <div class="align-middle text-sm px-2 py-1 box bg-black bg-opacity-30 text-white float-right">
+          <i class="ri-emotion-happy-line align-middle mr-1 inline-block"></i>
+          <span>{{ $t("_.visitor") + " " + app.visitor }}</span>
+        </div>
+     </div>
     
       <!-- 墙面 -->
       <div class="mb-6">
