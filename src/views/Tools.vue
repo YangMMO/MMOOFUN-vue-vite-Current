@@ -34,6 +34,7 @@ import designJson from '../assets/json/design.json';
 
 import Ratio from '../components/Ratio.vue'
 import Flygame from '../components/Flygame.vue'
+import Ratiofigma from '../components/Ratiofigma.vue'
 import More from '../components/More.vue'
 
 export default {
@@ -45,16 +46,17 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More,  },
+  components: { Ratio,  More, Ratiofigma },
   data() {
     return {
       datas: JSON.parse(JSON.stringify(designJson)),
       currentTab: 'ratio',
-      toolsTabs: ['ratio', 'more', ],
+      toolsTabs: ['ratio', 'ratioFigma','more', ],
     }
   },
   computed: {
     currentTabComponent() {
+      console.log(this.currentTab.toLowerCase());
       return this.currentTab.toLowerCase()
     }
   }
@@ -63,20 +65,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
-// .tab-button {
-//   padding: 6px 10px;
-//   border-top-left-radius: 3px;
-//   border-top-right-radius: 3px;
-//   border: 1px solid #ccc;
-//   cursor: pointer;
-//   margin-bottom: -1px;
-//   margin-right: -1px;
-// }
-
-// .tab-button:hover {
-//   background: #e0e0e0;
-// }
 
 
 .active {

@@ -4,31 +4,58 @@
     <div>
       <h1 class="text-3xl pb-9 font-semibold select-none">{{ $t("menu.home") }}</h1>
 
-      <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
-        <div class="relative select-none">
-          <!-- Arnold图片 -->
 
-          <img src="../assets/img/Arnold-6.jpg" />
-          <!-- 按钮 -->
-          <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
-            <a href="https://www.bilibili.com/video/BV1Ar4y1F7JH?share_source=copy_web" target="_blank"
-              rel="noopener noreferrer"
-              class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
-              <i class="ri-bilibili-line icon-font-size pr-2"></i>
-              <span class="font-semibold ">前往观看</span>
-            </a>
-            <!-- <div>border-2</div> -->
-          </div>
-        </div>
-        <div class="p8 text-xs text-slate-400 text-center"><i
-            class="ri-error-warning-line align-middle pr-1 text-xs"></i>该教程仅用于学习交流，中文字幕由（MMOO.FUN
-          - 续命牛黄解毒片）译制上传,
-          收费行为仅保护字幕成果
-        </div>
+      <div v-if="isGet === false">
+        <get-progress>
+          <slot>
+            <div class="flex flex-wrap flex-row select-none justify-center">
+              <div class="mb-3 box overflow-hidden w-full">
+                <div class="w-full h-96 load-gradient "></div>
+              </div>
+              <div class="mb-3 box overflow-hidden w-full">
+                <div class="w-full h-12 load-gradient "></div>
+              </div>
+              <div class="mb-3 box overflow-hidden w-48">
+                <div class="w-full h-48 load-gradient "></div>
+              </div>
+            </div>
+
+          </slot>
+        </get-progress>
       </div>
 
-      <img src="../assets/img/wechat-shop.jpg" class="w-3/12 my-3 center m-auto select-none">
+      <div v-else-if="isGet === true && isGetFinish === false">
+        <get-error></get-error>
+      </div>
 
+      <div v-else>
+        <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
+          <div class="relative select-none">
+            <!-- Arnold图片 -->
+
+            <img :src="data[0].fields.image[0].url" />
+            <!-- 按钮 -->
+            <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
+              <a :href="data[0].fields.url" target="_blank"
+                rel="noopener noreferrer"
+                class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
+                <i class="ri-bilibili-line icon-font-size pr-2"></i>
+                <span class="font-semibold ">{{ $t("home.watch") }}</span>
+              </a>
+              <!-- <div>border-2</div> -->
+            </div>
+          </div>
+          <div class="p8 text-xs text-slate-400 text-center">
+            <i
+              class="ri-error-warning-line align-middle pr-1 text-xs"></i>
+              {{ data[0].fields.description }}
+          </div>
+        </div>
+
+        <img :src="data[1].fields.image[0].url" class="w-3/12 my-3 center m-auto select-none">
+
+      </div>
+    
       <!-- 设计 -->
       <ShowDesign></ShowDesign>
 
@@ -57,12 +84,20 @@
 import i18n from '../i18n';
 
 import ShowDesign from '../components/ShowDesign.vue';
+import getProgress from '../components/getProgress.vue';
+import getError from '../components/getError.vue';
+
+import { Vika } from "@vikadata/vika";
+const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
+const homeDatasheet = vika.datasheet("dstHbwFl3wtUzW8fcK");
 
 export default {
   name: 'Home',
   // components: { VueImageLoader },
   components: {
     ShowDesign,
+    getProgress,
+    getError
   },
   metaInfo: {
     title: `MMOO.FUN | ${i18n.t("menu.home")}`,
@@ -73,7 +108,40 @@ export default {
   },
   data() {
     return {
-      arnold: "../assets/img/Arnold-6.jpg"
+      data: null,
+      isGetFinish: false,
+      isGet: false,
+    }
+  },
+  created() {
+    this.getHomeData();
+  },
+  methods: {
+    // 获取首页数据
+    async getHomeData() {
+      let banner = false;
+      const that = this;
+
+      // 请求数据
+      await homeDatasheet.records.query({ viewId: "viwgoAco0PAox"}).then(response => {
+        if (response.success) {
+          banner = true;
+          that.data = response.data.records;
+          // console.log(response.data.records);
+        } else {
+          banner = false;
+          console.error(response);
+        }
+      });
+
+      // 已请求
+      that.isGet = true;
+
+      // 数据是否都已经加载完毕
+      if (banner) {
+        // 已请求完成
+        that.isGetFinish = true;
+      }
     }
   }
 }

@@ -14,6 +14,9 @@ export default {
             about: '关于',
             bbs: '留言板',
         },
+        home: {
+            watch: '前往观看',
+        },
         subscription: {
             sub: '订阅关注',
             bilibili: 'BiliBili',
@@ -25,23 +28,40 @@ export default {
             tips1: '敬请关注...'
         },
         tools: {
+            view: '查看',
             ratio: '固定比例计算器',
             more: '更多',
             flygame: '飞机大战',
+            ratiofigma: '固定比例 (Figma)',
         },
         bbs: {
             user: '昵称',
             msg: '留言 - Markdown',
             email: '邮箱',
             public: '公开',
-            anonymous: '匿名',
+            hide: '隐藏',
             blog: '个人博客/网站',
             submit: '提交',
             sendWord: '寄语',
             message: '留言',
             prev: '上一页',
             next: '下一页',
-           like: '点赞',
+            like: '点赞',
+            floor: '楼',
+            _: {
+                submit_success: '提交成功',
+                submit_fail: '提交失败',
+                msg_empty: '请输入留言内容',
+                msg_length: '请检查字符长度',
+                email_format: '请检查邮箱格式',
+                close: '关闭',
+                over_submit: '今日提交次数已达上限',
+                like_fail: '点赞失败',
+                over_like: '今日点赞次数已达上限',
+                submitting: '提交中...',
+                violation: '该留言含有违规或不雅用语，已被Ban掉！',
+                violationUser: '[Ban] 违规昵称',
+            }
         }
     },
     en: {
@@ -59,6 +79,9 @@ export default {
             about: 'ABOUT',
             bbs: 'BBS',
         },
+        home: {
+            watch: 'WATCH',
+        },
         subscription: {
             sub: 'SUBSCRIPTION',
             bilibili: 'BiliBili',
@@ -70,16 +93,18 @@ export default {
             tips1: 'Stay tuned...'
         },
         tools: {
+            view:  'View',
             ratio: 'Ratio Calculation',
             more: 'More',
             flygame: 'Fly Game',
+            ratiofigma: 'Ratio (Figma)',
         },
         bbs: {
-            user: 'User',
+            user: 'User Name',
             msg: 'Message - Markdown',
             email: 'Email',
             public: 'Public',
-            anonymous: 'Anonymous',
+            hide: 'Hide',
             blog: 'Blog',
             submit: 'Submit',
             sendWord: 'Send Word',
@@ -87,6 +112,21 @@ export default {
             prev: 'Prev',
             next: 'Next',
             like: 'Like',
+            floor: 'Floor',
+            _: {
+                submit_success: 'Submit Success',
+                submit_fail: 'Submit Fail',
+                msg_empty: 'Please enter your message',
+                msg_length: 'Please check the length of the message',
+                email_format: 'Please check the email format',
+                close: 'Close',
+                over_submit: 'The number of submissions has reached the limit',
+                like_fail: 'Like Fail',
+                over_like: 'The number of likes has reached the limit',
+                submitting: 'Submitting...',
+                violation: 'This message contains illegal or inappropriate content, and has been banned!',
+                violationUser: '[Ban] Violation User Name',
+            }
         }
     },
 }

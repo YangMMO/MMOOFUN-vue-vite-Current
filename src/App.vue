@@ -3,10 +3,18 @@
   <div class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
       <div class="flex-header title box ">
-        <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all" to="/">
+        <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">
           <img src="./assets/img/mmo.jpg" alt="">
           <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
         </router-link>
+
+        <!-- 语言 -->
+        <div
+          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+          @click="switchLang()">
+          <i class="ri-globe-line"></i>
+        </div>
+
 
         <!-- 主题 -->
         <div
@@ -18,16 +26,10 @@
           </Transition>
         </div>
 
-        <!-- 语言 -->
-        <div
-          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="switchLang()"><i class="ri-globe-line"></i></div>
-        </div>
+
+      </div>
 
       <div class="menu-fun">
-
-
-
 
         <!-- 菜单 -->
         <div
@@ -100,9 +102,15 @@ import routers from "./router"
 
 export default {
   name: 'App',
+  provide() {
+    return {
+      app: this
+    }
+  },
   data() {
     return {
       theme: 'light',
+      lang: 'cn',
       isActiveMenu: false,
       routes: routers.options.routes,
       _innerWidth: window.innerWidth,
@@ -124,7 +132,9 @@ export default {
 
     // 切换语言
     switchLang() {
-      i18n.setLocale(i18n.getLocale() === 'en' ? 'cn' : 'en')
+      let newLang = i18n.getLocale() === 'en' ? 'cn' : 'en'
+      i18n.setLocale(newLang)
+      this.lang = newLang
     },
 
     // 切换主题
@@ -152,13 +162,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-
-
-
-
-
 
 
 
@@ -309,7 +312,7 @@ export default {
     }
 
   }
-          .box {
+    .box {
       margin-right: 4px;
       float: left;
       
@@ -337,7 +340,7 @@ export default {
     .lua {
       // position: absolute;
       &:hover {
-        animation: rotateY 1s 1;
+        // animation: rotateY 1s 1;
         transition: all 0.5s;
       }
     
