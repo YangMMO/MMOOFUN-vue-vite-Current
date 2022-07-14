@@ -95,6 +95,8 @@
   </div>
   <!-- </perfect-scrollbar> -->
 
+  <Flower1></Flower1>
+
 </template>
 
 <script>
@@ -103,12 +105,17 @@ import routers from "./router"
 
 import moment from "./plugins/moment"
 
+import Flower1 from './components/Flower_1.vue'
+
 import { Vika } from "@vikadata/vika";
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
 const webDatasheet = vika.datasheet("dstG8GQp2tuf0ZoqG2");
 
 export default {
   name: 'App',
+  components: {
+    Flower1
+  },
   provide() {
     return {
       app: this

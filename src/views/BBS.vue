@@ -424,9 +424,9 @@ export default {
       this.email = val.replace(/[^\w@.]/g, "");
     },
     // 实时监听每一个输入是否符合网址正则格式
-    blog(val) {
-      this.blog = val.replace(/[^\w@.]/g, "");
-    }
+    // blog(val) {
+    //   this.blog = val.replace(/[^\w@.]/g, "");
+    // }
     
   },
   mounted() {

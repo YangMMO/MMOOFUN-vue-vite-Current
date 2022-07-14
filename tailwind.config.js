@@ -25,10 +25,10 @@ module.exports = {
       box_d: '4px 4px rgba(0,0,0, 0.85)',
       box_d_h: '8px 8px rgba(0,0,0, 0.95)'
     },
-    backgroundImage: {
-      'load_gradient_l': "url('./src/assets/img/error.png')",
-      'load_gradient_d': "url('./src/assets/img/error.png')",
-    }
+    // backgroundImage: {
+    //   'load_gradient_l': "url('./src/assets/img/error.png')",
+    //   'load_gradient_d': "url('./src/assets/img/error.png')",
+    // }
   },
   plugins:[],
   varints: {
