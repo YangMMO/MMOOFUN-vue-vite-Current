@@ -123,17 +123,24 @@ $B100: #000;
 
 
 .load-gradient {
-    background-image: linear-gradient(-90deg, #f1f1f1, #f7f7f7, #f9f9f9, #f7f7f7, #f1f1f1);
-    background-size: 100% 100%;
+    background-size: 200% 100%;
     transition: all .4s ease-in-out;
-    animation: ggg 10s linear infinite;
+    animation: ggg 3s linear infinite;
+}
+
+.load_gradient_l {
+    background-image: linear-gradient(-90deg, #f1f1f1, #f7f7f7, #f9f9f9, #f7f7f7, #f1f1f1);
+}
+
+.load_gradient_d {
+    background-image: linear-gradient(-90deg, #445163, #3b485a, #2f4158, #3b485a, #445163);
 }
 
 @keyframes ggg {
     0% {
-        background-position: -200px 0;
+        background-position: 200% 0;
     }
     100% {
-        background-position: 200px 0;
+        background-position: -200% 0;
     }
 }

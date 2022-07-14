@@ -6,12 +6,12 @@
           <div class="flex-1 flex flex-col" v-for="colInedx in col" :key="colInedx"
             :class="[{ 'mr-3': colInedx === colInedx % col }]">
             <div v-for="(data, index) in 6" :key="index">
-              <div v-if="index % col === colInedx - 1" class="mb-3 bg-white">
+              <div v-if="index % col === colInedx - 1" class="mb-3 bg-gray-50 dark:bg-slate-600 box bg-opacity-80">
                 <div class="mb-3 box overflow-hidden">
-                  <div class="w-full h-48 load-gradient"></div>
-                  <div class="p12 text-black dark:text-white border border-t-0 box-b">
-                    <h2 class="text-lg mb-2 load-gradient h-6 w-4/6 box"></h2>
-                    <p class="text-gray-400 load-gradient h-4 box"></p>
+                  <div :class="['w-full h-48 load-gradient', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></div>
+                  <div class="p12 text-black dark:text-white box-b dark:border-transparent">
+                    <h2 :class="['text-lg mb-2 load-gradient h-6 w-4/6 box', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></h2>
+                    <p :class="['text-gray-400 load-gradient h-4 box', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></p>
                   </div>
                 </div>
               </div>
@@ -38,9 +38,9 @@
           <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
           <div v-if="index % col === colInedx - 1" class="mb-3">
             <a :href="data.fields.url" target="_blank">
-              <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600">
+              <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600 transition-all duration-75 ease-linear">
               <div
-                class="p12 text-black dark:text-white border border-t-0 dark:border-transparent box-b bg-white dark:bg-slate-900 transition-all duration-200">
+                class="p12 text-black dark:text-white box-b bg-gray-100 dark:bg-slate-700 transition-all duration-200">
                 <h2 class="text-lg mb-1">{{ data.fields.title }}</h2>
                 <p class="mb-3 text-gray-400">{{ data.fields.description }}</p>
                 <span v-for="tag in data.fields.tags" v-bind:key="tag"
@@ -76,6 +76,7 @@ export default {
   components: {
     getProgress, getError
   },
+  inject: ['app'],
   data() {
     return {
       // datas: JSON.parse(JSON.stringify(designJson)),

@@ -10,13 +10,13 @@
           <slot>
             <div class="flex flex-wrap flex-row select-none justify-center">
               <div class="mb-3 box overflow-hidden w-full">
-                <div class="w-full h-96 load-gradient "></div>
+                <div :class="['w-full h-96 load-gradient ', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></div>
               </div>
               <div class="mb-3 box overflow-hidden w-full">
-                <div class="w-full h-12 load-gradient "></div>
+                <div :class="['w-full h-12 load-gradient ', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></div>
               </div>
               <div class="mb-3 box overflow-hidden w-48">
-                <div class="w-full h-48 load-gradient "></div>
+                <div :class="['w-full h-48 load-gradient ', { 'load_gradient_l' : app.theme === 'light' }, { 'load_gradient_d': app.theme === 'dark'}]"></div>
               </div>
             </div>
 
@@ -29,7 +29,7 @@
       </div>
 
       <div v-else>
-        <div class="bg-slate-100 dark:bg-slate-900 box overflow-hidden">
+        <div class="bg-slate-100 dark:bg-slate-700 box overflow-hidden transition-all duration-75 ease-linear">
           <div class="relative select-none">
             <!-- Arnold图片 -->
 
@@ -38,7 +38,7 @@
             <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
               <a :href="data[0].fields.url" target="_blank"
                 rel="noopener noreferrer"
-                class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
+                class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center transition-all duration-75 ease-linear">
                 <i class="ri-bilibili-line icon-font-size pr-2"></i>
                 <span class="font-semibold ">{{ $t("home.watch") }}</span>
               </a>
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <img :src="data[1].fields.image[0].url" class="w-3/12 my-3 center m-auto select-none">
+        <img :src="data[1].fields.image[0].url" class="w-3/12 my-3 center m-auto select-none box">
 
       </div>
     
@@ -106,6 +106,7 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
+  inject: ['app'],
   data() {
     return {
       data: null,
