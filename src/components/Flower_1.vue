@@ -88,7 +88,7 @@
     </div>
 
     <!-- 花 -->
-    <div v-show="isShowFlower" class="relative container mx-6 self-end">
+    <div v-show="isShowFlower" class="relative container mx-8 self-end">
       <div class="f11 box-size absolute bottom-0 right-0"></div>
       <div class="f22 box-size absolute bottom-0 right-0"></div>
       <div class="f33 box-size absolute bottom-0 right-0" ></div>
@@ -96,29 +96,35 @@
     </div>
 
     <!-- 操作 -->
-    <div class="">
+    <div class="relative">
 
       <!-- 隐藏按钮 -->
-      <div class="gradient-purple close cursor-pointer" @click="isShowFlower = !isShowFlower">
-        <i :class="['ri-arrow-right-line inline-block transition-all duration-75 ease-linear -translate-x-1/2 -translate-y-1/2 ',{ 'rotate-45' : isShowFlower},{ '-rotate-90' : !isShowFlower}]"></i>
+      <div class="absolute right-0">
+        <div class="gradient-purple close cursor-pointer" @click="isShowFlower = !isShowFlower">
+          <i :class="['ri-arrow-right-line inline-block transition-all duration-75 ease-linear -translate-x-1/2 -translate-y-1/2 ',{ 'rotate-45' : isShowFlower},{ '-rotate-90' : !isShowFlower}]"></i>
+        </div>
       </div>
 
+
       <!-- 主操作 -->
-      <!-- <div v-show="isShowFlower" class="flex flex-col justify-end">
-          <div class="flex-1 flex flex-grow">
-            <div>123</div>
-            <div></div>
-            <div>
-              132
-            </div>
+      <div v-show="isShowFlower" class="flex flex-col justify-end text-sm mr-6">
+          <div class="flex-1 ">
+            <div class="func-icon w"></div>
+            <div class="text-center font-color">胶水</div>
           </div>
-          <div class="flex-1 flex flex-grow h-full">
-            <div></div>
-            <div>
-              132
-            </div>
+          <div class="flex-1 ">
+            <div class="func-icon l"></div>
+            <div class="text-center font-color">修剪</div>
           </div>
-      </div> -->
+          <div class="flex-1 ">
+            <div class="func-icon s"></div>
+            <div class="text-center font-color">晒花</div>
+          </div>
+          <div class="flex-1 ">
+            <div class="func-icon n"></div>
+            <div class="text-center font-color">施肥</div>
+          </div>
+      </div>
 
     </div>
   </div>
@@ -135,7 +141,7 @@ export default {
       // isGetFinish: false,
       // isGet: false,
 
-      isShowFlower: false,
+      isShowFlower: true,
     }
   },
 
@@ -144,6 +150,31 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.func-icon {
+  width: 44px;
+  height: 44px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.w {
+  background-image: url(../assets/img/flower/w.png);
+}
+
+.l {
+  background-image: url(../assets/img/flower/l.png);
+}
+
+.s {
+  background-image: url(../assets/img/flower/s.png);
+}
+
+.n {
+  background-image: url(../assets/img/flower/n.png);
+}
+
 
 .close {
   position: relative;

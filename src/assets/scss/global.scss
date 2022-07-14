@@ -144,3 +144,37 @@ $B100: #000;
         background-position: -200% 0;
     }
 }
+
+
+/** 
+* 文字描边
+*
+* @param $width  文字描边宽度
+* @param $blur   文字描边模糊距离 
+* @param $color  文字描边颜色
+*/
+@mixin font-stroke($width, $blur, $color) {
+    $obliqueWidth: $width * 1.414;
+    text-shadow: 0 -$width $blur $color,
+        /*上*/
+        $obliqueWidth -$obliqueWidth $blur $color,
+        /*右上*/
+        $width 0 $blur $color,
+        /*右*/
+        $obliqueWidth $obliqueWidth $blur $color,
+        /*右下*/
+        0 $width $blur $color,
+        /*下*/
+        -$obliqueWidth $obliqueWidth $blur $color,
+        /*左下*/
+        -$width 0 $blur $color,
+        /*左*/
+        -$obliqueWidth -$obliqueWidth $blur $color;
+    /*左上*/
+}
+
+//调用
+.text-stroke {
+    //结果与示例代码中 text-stroke 相同
+    @include font-stroke(1px, 0, #fff)
+}
