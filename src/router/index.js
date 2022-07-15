@@ -48,7 +48,7 @@ const routes = [
         path: "/resume",
         name: "Resume",
         component: Resume,
-        menu: true
+        menu: false
     },
     {
         path: "/about",

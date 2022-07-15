@@ -1,12 +1,13 @@
 <template>
-  <div class="fixed z-50 bottom-0 right-0 flex bg  transition-all duration-75 ease-linear">
+  <div class="sm:fixed z-50 bottom-0 right-0 flex bg  transition-all duration-75 ease-linear select-none bg-gray-50 bg-opacity-80 box backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200">
+    
     <!-- 数值面板 -->
-    <div v-show="isShowFlower" class="growth flex flex-col mb-2 transition-all duration-75 ease-linear">
+    <div v-show="isShowFlower" class="growth flex flex-col mb-2 transition-all duration-75 ease-linear p12 ">
       <!-- 雨露 -->
-      <div class="flex-1 content-center mb-2 text-sm">
+      <div class="flex-1 flex flex-col place-content-center mb-2 text-sm" >
         <div class="flex mb-1">
           <div class="icon water mr-1"></div>
-          <h3 class="font-color">雨露值</h3>
+          <h3 class="font-color ">雨露值</h3>
         </div>
 
         <div class="font-color-p flex items-center mb-1">
@@ -24,7 +25,7 @@
       </div>
 
       <!-- 爱心 -->
-      <div class="flex-1 content-center mb-2 text-sm">
+      <div class="flex-1 flex flex-col place-content-center mb-2 text-sm">
         <div class="flex mb-1">
           <div class="icon love mr-1"></div>
           <h3 class="font-color">爱心值</h3>
@@ -45,7 +46,7 @@
       </div>
 
       <!-- 阳光 -->
-      <div class="flex-1 content-center mb-2 text-sm">
+      <div class="flex-1 flex flex-col place-content-center mb-2 text-sm">
         <div class="flex mb-1">
           <div class="icon sun mr-1"></div>
           <h3 class="font-color">阳光值</h3>
@@ -66,7 +67,7 @@
       </div>
 
       <!-- 养分 -->
-      <div class="flex-1 content-center mb-2 text-sm transition-all duration-75 ease-linear">
+      <div class="flex-1 flex flex-col place-content-center mb-2 text-sm">
         <div class="flex mb-1">
           <div class="icon nutrition mr-1"></div>
           <h3 class="font-color">营养值</h3>
@@ -85,48 +86,53 @@
           <span>8703</span>
         </div>
       </div>
+
     </div>
 
     <!-- 花 -->
-    <div v-show="isShowFlower" class="relative container mx-8 self-end">
-      <div class="f11 box-size absolute bottom-0 right-0"></div>
-      <div class="f22 box-size absolute bottom-0 right-0"></div>
-      <div class="f33 box-size absolute bottom-0 right-0" ></div>
-      <div class="pot11 box-size absolute bottom-0 right-0" ></div>
+    <div v-show="isShowFlower">
+      <div class="relative container mx-8 self-end">
+        <div class="f22 box-size absolute bottom-0 right-0"></div>
+        <div class="f11 box-size absolute bottom-0 right-0"></div>
+        <div class="f33 box-size absolute bottom-0 right-0" ></div>
+        <div class="pot11 box-size absolute bottom-0 right-0" ></div>
+      </div>
+      <div class="text-center "> 建设中... </div>
     </div>
 
     <!-- 操作 -->
-    <div class="relative">
-
+    <div class="growth flex flex-col transition-all duration-75 ease-linear">
       <!-- 隐藏按钮 -->
-      <div class="absolute right-0">
-        <div class="gradient-purple close cursor-pointer" @click="isShowFlower = !isShowFlower">
-          <i :class="['ri-arrow-right-line inline-block transition-all duration-75 ease-linear -translate-x-1/2 -translate-y-1/2 ',{ 'rotate-45' : isShowFlower},{ '-rotate-90' : !isShowFlower}]"></i>
+      <div class="">
+        <div class="gradient-purple close cursor-pointer float-right" @click="isShowFlower = !isShowFlower">
+          <i :class="['ri-subtract-line inline-block transition-all duration-75 ease-linear -translate-x-1/2 -translate-y-1/2 ',{ ' ' : isShowFlower},{ '-rotate-45' : !isShowFlower}]"></i>
         </div>
       </div>
 
-
       <!-- 主操作 -->
-      <div v-show="isShowFlower" class="flex flex-col justify-end text-sm mr-6">
-          <div class="flex-1 ">
-            <div class="func-icon w"></div>
-            <div class="text-center font-color">胶水</div>
-          </div>
-          <div class="flex-1 ">
-            <div class="func-icon l"></div>
-            <div class="text-center font-color">修剪</div>
-          </div>
-          <div class="flex-1 ">
-            <div class="func-icon s"></div>
-            <div class="text-center font-color">晒花</div>
-          </div>
-          <div class="flex-1 ">
-            <div class="func-icon n"></div>
-            <div class="text-center font-color">施肥</div>
-          </div>
+      <div v-show="isShowFlower"  class="flex-1 content-center mb-2 text-sm flex flex-col mt-8 sm:pr-6">
+
+        <div class="flex-1 flex flex-col place-content-center">
+          <div class="func-icon w"></div>
+          <div class="text-center font-color">浇花</div>
+        </div>
+        <div class="flex-1 flex flex-col place-content-center">
+          <div class="func-icon l"></div>
+          <div class="text-center font-color">修剪</div>
+        </div>
+        <div class="flex-1 flex flex-col place-content-center">
+          <div class="func-icon s"></div>
+          <div class="text-center font-color">晒花</div>
+        </div>
+        <div class="flex-1 flex flex-col place-content-center">
+          <div class="func-icon n"></div>
+          <div class="text-center font-color">施肥</div>
+        </div>
+
       </div>
 
     </div>
+
   </div>
 </template>
 
@@ -141,7 +147,7 @@ export default {
       // isGetFinish: false,
       // isGet: false,
 
-      isShowFlower: true,
+      isShowFlower: false,
     }
   },
 
@@ -152,8 +158,9 @@ export default {
 <style lang="scss" scoped>
 
 .func-icon {
-  width: 44px;
-  height: 44px;
+  margin: 0 auto;
+  width: 28px;
+  height: 28px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -260,21 +267,18 @@ export default {
 
 .container {
   width: 120px;
-  height: 280px;
+  height: 300px;
 
   .box-size {
     width: 100%;
     height: 100%;
   }
 
-  .pot {
-    width: 100px;
-  }
 
   .pot11 {
     width: 100%;
     background-image: url(../assets/img/flower/pot_a1.png);
-    background-size: 100px 115px;
+    background-size: 92px 110px;
     background-position: bottom center;
     background-repeat: no-repeat;
   }
@@ -283,7 +287,7 @@ export default {
     width: 100%;
     background-image: url(../assets/img/flower/f_a1.png);
     background-size: 65px 160px;
-    background-position: 6px 40px;
+    background-position: left 6px bottom 78px;
     background-repeat: no-repeat;
     transition: all 0.5s;
     animation: f111 2s infinite alternate;
@@ -293,7 +297,7 @@ export default {
         transform: rotate(0deg) translateX(0px);
       }
       100% {
-        transform: rotate(-.5deg) translateX(-2px);
+        transform: rotate(-1deg) translateX(-1px);
       }
     }
   }
@@ -302,7 +306,7 @@ export default {
     width: 100%;
     background-image: url(../assets/img/flower/f_a2.png);
     background-size: 68px 220px;
-    background-position: 42px 0px;
+    background-position: left 42.5px bottom 64px;
     background-repeat: no-repeat;
     transition: all 0.5s;
     animation: f222 3s infinite alternate;
@@ -312,7 +316,7 @@ export default {
         transform: rotate(0deg) translateX(0px);
       }
       100% {
-        transform: rotate(1deg) translateX(2px);
+        transform: rotate(2deg) translateX(2px);
       }
     }
   }
@@ -321,17 +325,17 @@ export default {
     width: 100%;
     background-image: url(../assets/img/flower/f_a3.png);
     background-size: 68px 145px;
-    background-position: 44px 78px;
+    background-position: left 43px bottom 52px;
     background-repeat: no-repeat;
     transition: all 0.5s;
-    animation: f333 5s infinite alternate;
+    animation: f333 2.5s infinite alternate;
 
     @keyframes f333 {
       0% {
         transform: rotate(0deg) translateX(0px);
       }
       100% {
-        transform: rotate(1deg) translateX(2px);
+        transform: rotate(4deg) translateX(3px);
       }
     }
   }

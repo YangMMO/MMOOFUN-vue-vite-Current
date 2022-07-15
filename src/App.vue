@@ -67,6 +67,8 @@
     <!-- 路由页面 -->
     <router-view class="transition-all duration-1000" />
 
+    <Flower1></Flower1>
+
     <!-- 页脚 -->
     <div class="footer container mx-auto">
       <div class="container">
@@ -95,7 +97,7 @@
   </div>
   <!-- </perfect-scrollbar> -->
 
-  <Flower1></Flower1>
+  
 
 </template>
 
