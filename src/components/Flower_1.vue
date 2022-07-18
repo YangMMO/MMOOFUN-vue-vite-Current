@@ -1,5 +1,6 @@
 <template>
-  <div v-show="isShowFlower" class="fixed bg w-full bottom-0 left-0 bg-gray-50 bg-opacity-90 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p " :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[4].url : ''})` }">
+  <div  class="fixed bg w-full bottom-0 left-0 bg-gray-100 bg-opacity-90 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p " >
+    <!-- :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[4].url : ''})` }" -->
     <div class="flex">
       <!-- 数值面板 -->
       <div v-show="isShowFlower" class="growth p4 flex-1 flex transition-all duration-75 ease-linear gap-x-1">
@@ -94,11 +95,37 @@
       </div>
       <!-- 花 -->
       <div v-show="isShowFlower"  class="h-0 potw">
-        <div class="absolute flower bottom-0 right-0">
-          <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
-          <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
-          <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
-          <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
+        <div class="absolute bottom-0 -right-8 hover:right-0 transition-all duration-75 ease-linear flex">
+          <div class="flower relative">
+            <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
+            <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
+            <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
+            <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
+          </div>
+
+          <div class="flex flex-col place-content-evenly pt-6 pb-12">
+            <div class="cursor-pointer text-sm">
+              <div class="func-icon" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[10].url : ''})` }"></div>
+              <div class="text-center font-color cursor-pointer">浇花</div>
+            </div>
+            <div class="cursor-pointer text-sm">
+              <div class="func-icon" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[11].url : ''})` }"></div>
+              <div class="text-center font-color cursor-pointer">浇花</div>
+            </div>
+            <div class="cursor-pointer text-sm">
+              <div class="func-icon " :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[12].url : ''})` }"></div>
+              <div class="text-center font-color cursor-pointer">浇花</div>
+            </div>
+            <div class="cursor-pointer text-sm">
+              <div class="func-icon " :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[13].url : ''})` }"></div>
+              <div class="text-center font-color cursor-pointer">浇花</div>
+            </div>
+
+
+
+
+          </div>
+        
         </div>
       </div>
 
@@ -159,7 +186,7 @@ export default {
           "recordId": "recmKtgZTf6eH",
           "fields": {
             "water": 12,
-            "love": 11,
+            "love": 6,
             "sun": 3,
             "nutrition": 8,
             "date": that.moment().valueOf()
@@ -384,6 +411,11 @@ export default {
 .flower {
   width: 100px;
   height: 300px;
+
+  .func-icon {
+    width: 36px;
+    height: 36px;
+  }
 
   .box-size {
     width: 100%;
