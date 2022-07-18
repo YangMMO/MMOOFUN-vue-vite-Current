@@ -98,7 +98,7 @@ function makeMulti(string) {
 }
 
 let string = function () {
-  /* ## MMOO.FUN ##
+  /* MMOO.FUN
       ___          ___          ___     
      /\__\        /\__\        /\  \    
     /::|  |      /::|  |      /::\  \   
