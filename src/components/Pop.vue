@@ -1,8 +1,8 @@
 <template>
   <div v-if="show" class="table fixed left-0 top-0 bg w-full h-full">
     <div class="table-cell align-middle">
-      <div class="pop-container bg-white dark:bg-slate-800 box text-black dark:text-white">
-        <div class="p12 border-b border-gray-200 dark:border-slate-600">
+      <div class="pop-container border-2 border-black dark:border-slate-600 bg-white dark:bg-slate-800 box text-black dark:text-white shadow-box_d ">
+        <div class="p12 border-b-2 border-black dark:border-slate-600">
           <slot name="header">
             <div class="text-center">
               default body
@@ -10,7 +10,7 @@
           </slot>
         </div>
 
-        <div class="p12 ">
+        <div class="pt-3">
           <slot name="body">
             <div class="text-center">
               default body
@@ -21,7 +21,7 @@
         <div class="p12">
           <slot name="footer">
             <div class="text-center">
-              <button :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer']" @click="$emit('close')">
+              <button :class="['border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="$emit('close')">
                 关闭
               </button>
             </div>
@@ -47,7 +47,7 @@ export default {
 
 .bg {
   z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
 .pop-container {

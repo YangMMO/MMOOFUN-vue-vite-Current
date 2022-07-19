@@ -63,6 +63,16 @@ export default {
                 violationUser: '[Ban] 违规昵称',
             }
         },
+        flower: {
+            water: '雨露值',
+            love: '爱心值',
+            sun: '阳光值',
+            nutrition: '营养值',
+            watering: '浇水',
+            prune: '修剪',
+            sunlight: '阳光',
+            fertilize: '施肥',
+        },
         _: {
                 visitor: '访客',
         }
@@ -130,6 +140,16 @@ export default {
                 violation: 'This message contains illegal or inappropriate content, and has been banned!',
                 violationUser: '[Ban] Violation User Name',
             }
+        },
+        flower: {
+            water: 'Water',
+            love: 'Love',
+            sun: 'Sun',
+            nutrition: 'Nutrition',
+            watering: 'Watering',
+            prune: 'Prune',
+            sunlight: 'Sunlight',
+            fertilize: 'Fertilize',
         },
         _: {
                 visitor: 'Visitor',

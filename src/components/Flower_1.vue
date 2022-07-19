@@ -1,7 +1,8 @@
 <template>
   <div class="fixed bottom-0 left-0 w-full select-none" >
+    <div class="container ml-auto mr-auto">
     <transition name="translateY">
-      <div v-if="isShowFlower"  :class="['container relative ml-auto mr-auto bg  bg-purple-100   bg-opacity-95 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p transition-all duration-75 ease-linear  border-t-2 border-purple-200 box-t border-l-2 border-r-2 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h']"> 
+      <div v-if="isShowFlower"  :class="['container-p relative  bg  bg-purple-100   bg-opacity-95 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p transition-all duration-75 ease-linear   border-purple-400 box-t shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h']"> 
 
         <div :class="['flex pr-2 overflow-hidden']">
 
@@ -11,24 +12,24 @@
             <div v-if="isShowFunc" class="w-full bg py-2 ">
               <div class="flex space-x-2 " >
 
-                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="showPop = !showPop">
                   <span class="func-icon inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[10].url : ''})` }"></span>
-                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.watering") }}</span>
                 </div>
 
-                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="showPop = !showPop">
                   <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[11].url : ''})` }"></span>
-                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.prune") }}</span>
                 </div>
 
-                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="showPop = !showPop">
                   <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[12].url : ''})` }"></span>
-                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.sunlight") }}</span>
                 </div>
 
-                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="showPop = !showPop">
                   <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[13].url : ''})` }"></span>
-                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.fertilize") }}</span>
                 </div>
 
               </div>
@@ -43,7 +44,9 @@
                 <div class="flex mb-1">
                   <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[0].url : ''})` }"></div>
                   <h3 class="">
-                    <span class="font-color hidden  sm:inline-block mr-2">雨露值</span>
+                    <span class="font-color hidden  sm:inline-block mr-2">
+                      {{ $t("flower.water") }}
+                    </span>
                     <span class="text-xs inline-block font-color">
                       {{ isShowFlower ? `${flowerData.waterTotal}` : 0 }}
                     </span>
@@ -64,7 +67,9 @@
                 <div class="flex mb-1">
                   <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[1].url : ''})` }"></div>
                   <h3 class="">
-                    <span class="font-color hidden  sm:inline-block mr-2">爱心值</span>
+                    <span class="font-color hidden  sm:inline-block mr-2">
+                      {{ $t("flower.love") }}
+                    </span>
                     <span class="text-xs inline-block font-color">
                       {{ isShowFlower ? `${flowerData.loveTotal}` : 0 }}
                     </span>
@@ -86,7 +91,9 @@
                 <div class="flex mb-1">
                   <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[2].url : ''})` }"></div>
                   <h3 class="">
-                    <span class="font-color hidden  sm:inline-block mr-2">阳光值</span>
+                    <span class="font-color hidden  sm:inline-block mr-2">
+                      {{ $t("flower.sun") }}
+                    </span>
                     <span class="text-xs inline-block font-color">
                       {{ isShowFlower ? `${flowerData.sunTotal}` : 0 }}
                     </span>
@@ -109,7 +116,9 @@
                 <div class="flex mb-1">
                   <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[3].url : ''})` }"></div>
                   <h3 class="">
-                    <span class="font-color hidden  sm:inline-block">营养值</span>
+                    <span class="font-color hidden  sm:inline-block  mr-2">
+                      {{ $t("flower.nutrition") }}
+                    </span>
                     <span class="text-xs inline-block font-color">
                       {{ isShowFlower ? `${flowerData.nutritionTotal}` : 0 }}
                     </span>
@@ -139,6 +148,14 @@
                 <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
                 <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
                 <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
+
+                <div v-for="item in _randomNum" :key="item" class="absolute star" :style="[{
+                  backgroundImage: `url(${isShowFlower ? flowerData.flower_img[9].url : ''})` },
+                  { width: `${_getRandom(16,24)}px` },
+                  { height: `${_getRandom(18,26)}px` },
+                  { top: `${_getRandom(12,280)}px` },
+                  { left: `${_getRandom(4,96)}px` },
+                  { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
               </div>
  
             </div>
@@ -151,18 +168,43 @@
 
     <!-- 隐藏按钮 -->
     <div class="absolute bottom-4 right-0">
-      {{  }}
+      <!-- {{  }} -->
       <div class="gradient-purple close cursor-pointer float-right rounded-tl-full rounded-bl-full" @click="isShowFlower = !isShowFlower">
         <i :class="['ri-seedling-line inline-block transition-all duration-75 ease-linear -translate-x-1/3 -translate-y-1/2 ',{ ' ' : isShowFlower},{ '-rotate-45' : !isShowFlower}]"></i>
       </div>
     </div>
+    </div>
+
   </div>
+
+  <!-- 弹窗提示 -->
+  <Teleport to="body">
+    <Pop :show="showPop">
+      <template #header>
+        <div class="text-center">温馨提示</div>
+      </template>
+      <template #body>
+        <div class="text-center">该功能开发中</div>
+      </template>
+      <template #footer>
+        <div class="text-center">
+          <button :class="['border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="showPop = false;">
+            关闭
+          </button>
+        </div>
+
+      </template>
+    </Pop>
+  </Teleport>
+
 </template>
 
 <script>
 // import i18n from '../i18n';
+import Pop from '../components/Pop.vue';
 
 import moment from '../plugins/moment.js';
+
 
 import { Vika } from "@vikadata/vika";
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
@@ -173,11 +215,15 @@ const growthDatasheet = vika.datasheet("dstreYQWfqDMRiD1W3");
 export default {
   name: 'Flower_1',
   inject: ['app'],
+  components: {
+    Pop
+  },
   data() {
     return {
       isGetFinish: false,
       isGet: false,
       moment: moment, // 时间格式化
+      showPop: false, // 是否显示弹窗
 
       isShowFlower: false,
       flowerData: null,
@@ -190,13 +236,24 @@ export default {
       todayNutrition: 0,
 
       isShowFunc: false,
+      _randomNum: 1,
     }
   },
-  mounted() {
+   mounted() {
     this._getGrowthData();
     this._getFlowerData();
+    this._randomNum = this._getRandom(9, 12)
   },
   methods: {
+    // 创建一个结果随机数
+    _getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    // 创建一个两位小数的随机数
+    _getRandomFloat(min, max) {
+      return (Math.random() * (max - min + 1) + min).toFixed(2);
+    },
+
     // 设置今日数值
     _setTodayData(data) {
       console.log(data);
@@ -556,6 +613,43 @@ export default {
       }
     }
   }
+
+  .star {
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: star 2.5s infinite alternate;
+
+    // .sA1 {
+    //   animation: star 2s infinite alternate;
+    // }
+
+    // .sA2 {
+    //   animation: star 2.5s infinite alternate;
+    // }
+
+    // .sA3 {
+    //   animation: star 3.5s infinite alternate;
+    // }
+
+    // .sA4 {
+    //   animation: star 4s infinite alternate;
+    // }
+
+
+    @keyframes star {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+
+
 
 }
 
