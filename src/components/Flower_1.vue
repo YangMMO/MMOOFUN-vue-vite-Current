@@ -1,142 +1,160 @@
 <template>
-  <div  class="fixed bg w-full bottom-0 left-0 bg-gray-100 bg-opacity-90 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p " >
-    <!-- :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[4].url : ''})` }" -->
-    <div class="flex">
-      <!-- 数值面板 -->
-      <div v-show="isShowFlower" class="growth p4 flex-1 flex transition-all duration-75 ease-linear gap-x-1">
-        <!-- 雨露 -->
-        <div class="flex-1 flex flex-col place-content-center text-sm" >
-          <div class="flex mb-1">
-            <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[0].url : ''})` }"></div>
-            <h3 class="">
-              <span class="font-color">雨露值</span>
-              <span class="text-xs inline-block font-color">
-                {{ isShowFlower ? `(${flowerData.waterTotal})` : 0 }}
-              </span>
-            </h3>
+  <div class="fixed bottom-0 left-0 w-full select-none" >
+    <transition name="translateY">
+      <div v-if="isShowFlower"  :class="['container relative ml-auto mr-auto bg  bg-purple-100   bg-opacity-95 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200 font-color-p transition-all duration-75 ease-linear  border-t-2 border-purple-200 box-t border-l-2 border-r-2 shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h']"> 
 
+        <div :class="['flex pr-2 overflow-hidden']">
+
+          <transition name="opacity0" mode="out-in">
+
+            <!-- 操作面板 -->
+            <div v-if="isShowFunc" class="w-full bg py-2 ">
+              <div class="flex space-x-2 " >
+
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                  <span class="func-icon inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[10].url : ''})` }"></span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                </div>
+
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                  <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[11].url : ''})` }"></span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                </div>
+
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                  <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[12].url : ''})` }"></span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                </div>
+
+                <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out">
+                  <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[13].url : ''})` }"></span>
+                  <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">浇花</span>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- 数值面板 -->
+            <div v-else  class="growth flex-1 flex transition-all duration-75 ease-linear gap-x-1 py-2">
+              <!-- 雨露 -->
+              <div class="flex-1 flex flex-col place-content-center text-sm" >
+                <div class="flex mb-1">
+                  <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[0].url : ''})` }"></div>
+                  <h3 class="">
+                    <span class="font-color hidden  sm:inline-block mr-2">雨露值</span>
+                    <span class="text-xs inline-block font-color">
+                      {{ isShowFlower ? `${flowerData.waterTotal}` : 0 }}
+                    </span>
+                  </h3>
+
+                </div>
+
+                <div class="progress-1 w-full text-center border border-gray-300 ">
+                  <span class="progress-t text-xs w-full">
+                    {{ todayWater }}/{{ dayMaxGrowth }}
+                  </span>
+                  <div class="progress-bg" :style="{ width: `${ todayWater / dayMaxGrowth * 100}%`}"></div>
+                </div>
+              </div>
+
+              <!-- 爱心 -->
+              <div class="flex-1 flex flex-col place-content-center text-sm" >
+                <div class="flex mb-1">
+                  <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[1].url : ''})` }"></div>
+                  <h3 class="">
+                    <span class="font-color hidden  sm:inline-block mr-2">爱心值</span>
+                    <span class="text-xs inline-block font-color">
+                      {{ isShowFlower ? `${flowerData.loveTotal}` : 0 }}
+                    </span>
+                  </h3>
+
+                </div>
+
+                <div class="progress-1 w-full text-center border border-gray-300 ">
+                  <span class="progress-t text-xs w-full">
+                    {{ todayLove }}/{{ dayMaxGrowth }}
+                  </span>
+                  <div class="progress-bg" :style="{ width: `${ todayLove / dayMaxGrowth * 100}%`}"></div>
+                </div>
+              </div>
+
+
+              <!-- 阳光 -->
+              <div class="flex-1 flex flex-col place-content-center text-sm" >
+                <div class="flex mb-1">
+                  <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[2].url : ''})` }"></div>
+                  <h3 class="">
+                    <span class="font-color hidden  sm:inline-block mr-2">阳光值</span>
+                    <span class="text-xs inline-block font-color">
+                      {{ isShowFlower ? `${flowerData.sunTotal}` : 0 }}
+                    </span>
+                  </h3>
+
+                </div>
+
+                <div class="progress-1 w-full text-center border border-gray-300 ">
+                  <span class="progress-t text-xs w-full">
+                    {{ todaySun }}/{{ dayMaxGrowth }}
+                  </span>
+                  <div class="progress-bg" :style="{ width: `${ todaySun / dayMaxGrowth * 100}%`}"></div>
+                </div>
+              </div>
+
+
+
+              <!-- 养分 -->
+              <div class="flex-1 flex flex-col place-content-center text-sm" >
+                <div class="flex mb-1">
+                  <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[3].url : ''})` }"></div>
+                  <h3 class="">
+                    <span class="font-color hidden  sm:inline-block">营养值</span>
+                    <span class="text-xs inline-block font-color">
+                      {{ isShowFlower ? `${flowerData.nutritionTotal}` : 0 }}
+                    </span>
+                  </h3>
+
+                </div>
+
+                <div class="progress-1 w-full text-center border border-gray-300 ">
+                  <span class="progress-t text-xs w-full">
+                    {{ todayNutrition }}/{{ dayMaxGrowth }}
+                  </span>
+                  <div class="progress-bg" :style="{ width: `${ todayNutrition / dayMaxGrowth * 100}%`}"></div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </transition>
+
+          <!-- 花 -->
+          <div  class="h-0 potw">
+            <div class="absolute -bottom-1 -right-0 sm:-right-1 transition-all duration-75 ease-linear flex flex-col">
+
+              <div class="flower relative cursor-pointer" @click="isShowFunc = !isShowFunc">
+                <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
+                <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
+                <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
+                <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
+              </div>
+ 
+            </div>
           </div>
 
-          <div class="progress-1 w-full text-center border border-gray-200 ">
-            <span class="progress-t text-xs w-full">
-              {{ todayWater }}/{{ dayMaxGrowth }}
-            </span>
-            <div class="progress-bg" :style="{ width: `${ todayWater / dayMaxGrowth * 100}%`}"></div>
-          </div>
         </div>
-
-        <!-- 爱心 -->
-        <div class="flex-1 flex-col place-content-center text-sm" >
-          <div class="flex mb-1">
-            <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[1].url : ''})` }"></div>
-            <h3 class="">
-              <span class="font-color">爱心值</span>
-              <span class="text-xs inline-block font-color">
-                {{ isShowFlower ? `(${flowerData.loveTotal})` : 0 }}
-              </span>
-            </h3>
-
-          </div>
-
-          <div class="progress-1 w-full text-center border border-gray-200 ">
-            <span class="progress-t text-xs w-full">
-              {{ todayLove }}/{{ dayMaxGrowth }}
-            </span>
-            <div class="progress-bg" :style="{ width: `${ todayLove / dayMaxGrowth * 100}%`}"></div>
-          </div>
-        </div>
-
-
-        <!-- 阳光 -->
-        <div class="flex-1 flex-col place-content-center text-sm" >
-          <div class="flex mb-1">
-            <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[2].url : ''})` }"></div>
-            <h3 class="">
-              <span class="font-color">阳光值</span>
-              <span class="text-xs inline-block font-color">
-                {{ isShowFlower ? `(${flowerData.sunTotal})` : 0 }}
-              </span>
-            </h3>
-
-          </div>
-
-          <div class="progress-1 w-full text-center border border-gray-200 ">
-            <span class="progress-t text-xs w-full">
-              {{ todaySun }}/{{ dayMaxGrowth }}
-            </span>
-            <div class="progress-bg" :style="{ width: `${ todaySun / dayMaxGrowth * 100}%`}"></div>
-          </div>
-        </div>
-
-
-
-        <!-- 养分 -->
-        <div class="flex-1 flex-col place-content-center text-sm" >
-          <div class="flex mb-1">
-            <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[3].url : ''})` }"></div>
-            <h3 class="">
-              <span class="font-color">营养值</span>
-              <span class="text-xs inline-block font-color">
-                {{ isShowFlower ? `(${flowerData.nutritionTotal})` : 0 }}
-              </span>
-            </h3>
-
-          </div>
-
-          <div class="progress-1 w-full text-center border border-gray-200 ">
-            <span class="progress-t text-xs w-full">
-              {{ todayNutrition }}/{{ dayMaxGrowth }}
-            </span>
-            <div class="progress-bg" :style="{ width: `${ todayNutrition / dayMaxGrowth * 100}%`}"></div>
-          </div>
-        </div>
-
-
+          
       </div>
-      <!-- 花 -->
-      <div v-show="isShowFlower"  class="h-0 potw">
-        <div class="absolute bottom-0 -right-8 hover:right-0 transition-all duration-75 ease-linear flex">
-          <div class="flower relative">
-            <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
-            <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
-            <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
-            <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
-          </div>
+    </transition>
 
-          <div class="flex flex-col place-content-evenly pt-6 pb-12">
-            <div class="cursor-pointer text-sm">
-              <div class="func-icon" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[10].url : ''})` }"></div>
-              <div class="text-center font-color cursor-pointer">浇花</div>
-            </div>
-            <div class="cursor-pointer text-sm">
-              <div class="func-icon" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[11].url : ''})` }"></div>
-              <div class="text-center font-color cursor-pointer">浇花</div>
-            </div>
-            <div class="cursor-pointer text-sm">
-              <div class="func-icon " :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[12].url : ''})` }"></div>
-              <div class="text-center font-color cursor-pointer">浇花</div>
-            </div>
-            <div class="cursor-pointer text-sm">
-              <div class="func-icon " :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[13].url : ''})` }"></div>
-              <div class="text-center font-color cursor-pointer">浇花</div>
-            </div>
-
-
-
-
-          </div>
-        
-        </div>
+    <!-- 隐藏按钮 -->
+    <div class="absolute bottom-4 right-0">
+      {{  }}
+      <div class="gradient-purple close cursor-pointer float-right rounded-tl-full rounded-bl-full" @click="isShowFlower = !isShowFlower">
+        <i :class="['ri-seedling-line inline-block transition-all duration-75 ease-linear -translate-x-1/3 -translate-y-1/2 ',{ ' ' : isShowFlower},{ '-rotate-45' : !isShowFlower}]"></i>
       </div>
-
-      <!-- 隐藏按钮 -->
-      <div class="absolute bottom-0 right-0">
-        {{  }}
-        <div class="gradient-purple close cursor-pointer float-right " @click="isShowFlower = !isShowFlower">
-          <i :class="['ri-subtract-line inline-block transition-all duration-75 ease-linear -translate-x-1/2 -translate-y-1/2 ',{ ' ' : isShowFlower},{ '-rotate-45' : !isShowFlower}]"></i>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
@@ -170,6 +188,8 @@ export default {
       todayLove: 0,
       todaySun: 0,
       todayNutrition: 0,
+
+      isShowFunc: false,
     }
   },
   mounted() {
@@ -177,11 +197,20 @@ export default {
     this._getFlowerData();
   },
   methods: {
+    // 设置今日数值
+    _setTodayData(data) {
+      console.log(data);
+      this.todayWater = data.water;
+      this.todayLove = data.love;
+      this.todaySun = data.sun;
+      this.todayNutrition = data.nutrition;
+    },
+
     // 创建一条新的记录
-    _createGrowthData(data) {
+    async _createGrowthData(data) {
       let that = this;
 
-      growthDatasheet.records.update([
+      await growthDatasheet.records.update([
         {
           "recordId": "recmKtgZTf6eH",
           "fields": {
@@ -194,12 +223,15 @@ export default {
         }
       ]).then(response => {
         if (response.success) {
-          console.log(response.data);
+          let data = response.data.records[0].fields;
+          that._setTodayData(data);
+          // console.log(data);
         } else {
           console.error(response);
         }
       })
     },
+
     // 判断growthData的createDate是否是今天
     _isToday(date) {
       // 是否有异常，有则捕捉异常
@@ -209,8 +241,8 @@ export default {
         console.error(e);
         return false;
       }
-      
     },
+
     // 获取成长值数据
     async _getGrowthData() {
       let responseResult = false;
@@ -234,13 +266,10 @@ export default {
             that._createGrowthData();
             
           } else {
-            that.todayWater = that.growthData.water;
-            that.todayLove = that.growthData.love;
-            that.todaySun = that.growthData.sun;
-            that.todayNutrition = that.growthData.nutrition;
+            that._setTodayData(that.growthData);
           }
 
-          console.log(that.growthData);
+          // console.log(that.growthData);
         } else {
           console.error(response);
         }
@@ -286,10 +315,50 @@ export default {
 
 <style lang="scss" scoped>
 
+.opacity0-enter-active {
+  opacity: 100;
+  transition: opacity 0.3s ease;
+  animation: opacity0 .3s ease-out both;
+}
+
+.opacity0-leave-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: opacity0 .3s reverse ease-in both;
+}
+
+@keyframes opacity0 {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+
+.translateY-enter-active {
+  animation: translateY-in .5s ease-out both;
+}
+
+.translateY-leave-active {
+  animation: translateY-in .5s reverse ease-in both;
+}
+
+@keyframes translateY-in {
+  0% {
+    transform: translateY(360px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .func-icon {
   margin: 0 auto;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -405,7 +474,7 @@ export default {
 }
 
 .potw {
-  width: 100px;
+  width: 80px;
 }
 
 .flower {
@@ -491,6 +560,10 @@ export default {
 }
 
 .container {
+  padding: 0px 12px 0 12px;
+}
+
+.container-p {
   padding: 0px 12px 0 12px;
 }
 
