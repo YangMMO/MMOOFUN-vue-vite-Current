@@ -302,7 +302,7 @@
           </template>
           <template #footer>
             <div class="text-center">
-              <button :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer']" @click="showPop = false; submitStatus = ture">
+              <button :class="['border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="showPop = false; submitStatus = ture">
                 {{ submitStatusFooter }}
               </button>
             </div>
