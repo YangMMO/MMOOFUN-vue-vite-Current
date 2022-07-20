@@ -145,7 +145,7 @@ export default {
     if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
-      setTimeout(() => {
+      await setTimeout(() => {
         that.$refs.fl.updateGrowthData({ 'sun': that.$refs.fl.todaySun + 2 });
         that.$refs.fl.updateFlowerData({ 'sunTotal': that.$refs.fl.flowerData.sunTotal + 2 });
         that.$refs.fl.updateGrowthData({ 'love': that.$refs.fl.todayLove + 1 });

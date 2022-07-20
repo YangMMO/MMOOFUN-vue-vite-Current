@@ -196,20 +196,20 @@
                     { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
                 </div>
 
-                <div class="absolute bottom-8 w-16 left-1/2 -translate-x-1/2">
-                  <transition name="translateY">
-                    <div v-if="isShowFeedback" class=" bg-white rounded-full">
-                      <div class="flex p4 justify-center items-center">
-                        <div class="icon nutrition" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[3].url : ''})` }"></div>
+                <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2">
+                  <transition name="translateYPOP">
+                    <div v-if="isShowFeedback" class="relative">
+                      <div class=" absolute top-1 flex p4 justify-center items-center rounded-full filter blur-lg bg-purple-500 bg-opacity-20 w-full h-full">
+                      </div>
+                      <div class="flex p4 justify-center items-center bg-white rounded-full relative">
+                        <div class="icon nutrition" :style="[{ backgroundImage: `url(${isShowFlower ? feedbackImg : ''})` }]"></div>
                         <div class="text-xs inline-block font-color pr-1">
-                          {{ `+ 1 ` }}
+                          {{ ` + 1 ` }}
                         </div>
-
                       </div>
                     </div>
                   </transition>
                 </div>
-
   
               </div>
             </div>
@@ -304,15 +304,20 @@ export default {
       todayNutrition: 0,
 
       isShowFunc: false,
-      isShowFeedback: true,
+      isShowFeedback: false,
+      isShowFeedbackLove: false,
+      isShowFeedbackSun: false,
+      isShowFeedbackNutrition: false,
+      feedbackImg: null,
       _randomNum: 1,
 
     }
   },
-   mounted() {
-    this._getGrowthData();
-    this._getFlowerData();
+  async mounted() {
+    await this._getGrowthData();
+    await this._getFlowerData();
     this._randomNum = this._getRandom(9, 12);
+    this.feedbackImg = this.flowerData.flower_img[2].url;
   },
   methods: {
     // 设置POP提示
@@ -325,66 +330,64 @@ export default {
 
     watering () {
       let status = this._update('water');
+      this.feedbackImg = this.flowerData.flower_img[0].url
       if (status) {
-        // this._setShowPop(
-        //   i18n.t("flower._.watering_success"), 
-        //   `${i18n.t("flower.water")} + 1`, 
-        //   i18n.t("flower._.close"))
+        
       } else {
         this._setShowPop(
           i18n.t("flower._.watering_fail"), 
           i18n.t("flower._.watering_fail_body"), 
           i18n.t("flower._.dnt"))
+          this.showPop = true;
       }
-      this.showPop = true;
+      
     },
 
     prune () {
       let status = this._update('love');
+      this.feedbackImg = this.flowerData.flower_img[1].url
       if (status) {
-        // this._setShowPop(
-        //   i18n.t("flower._.prune_success"), 
-        //   `${i18n.t("flower.love")} + 1`, 
-        //   i18n.t("flower._.close"))
+        
       } else {
         this._setShowPop(
           i18n.t("flower._.prune_fail"), 
           i18n.t("flower._.prune_fail_body"), 
           i18n.t("flower._.dnt"))
+          this.showPop = true;
       }
-      this.showPop = true;
+      
     },
 
     sunlight () {
       let status = this._update('sun');
+      this.feedbackImg = this.flowerData.flower_img[2].url
+
       if (status) {
-        // this._setShowPop(
-        //   i18n.t("flower._.sunlight_success"), 
-        //   `${i18n.t("flower.sun")} + 1`, 
-        //   i18n.t("flower._.close"))
+
       } else {
         this._setShowPop(
           i18n.t("flower._.sunlight_fail"), 
           i18n.t("flower._.sunlight_fail_body"), 
           i18n.t("flower._.dnt"))
+
+          this.showPop = true;
       }
-      this.showPop = true;
+      
     },
 
     fertilize () {
       let status = this._update('nutrition');
+      this.feedbackImg = this.flowerData.flower_img[3].url
       if (status) {
-        // this._setShowPop(
-        //   i18n.t("flower._.fertilize_success"), 
-        //   `${i18n.t("flower.nutrition")} + 1`, 
-        //   i18n.t("flower._.close"))
+
       } else {
         this._setShowPop(
           i18n.t("flower._.fertilize_fail"), 
           i18n.t("flower._.fertilize_fail_body"), 
           i18n.t("flower._.dnt"))
+          this.showPop = true;
       }
-      this.showPop = true;
+      
     },
 
     _update (type) {
@@ -463,15 +466,18 @@ export default {
       let that = this;
 
       // 暂时不加最大限制
-      // let str = await Object.keys(object)[0];
-      // str = str.replace(str[0],str[0].toUpperCase());
+      let str = await Object.keys(object)[0];
+      str = str.replace(str[0],str[0].toUpperCase());
 
       // if (that[`today${str}`] >= that.dayMaxGrowth) {
       //   console.log(123);
       //   return;
       // }
+
+      // that[`isShowFeedback${str}`] = true;
       that.isShowFeedback = true;
       setTimeout(() => {
+        // that[`isShowFeedback${str}`] = false;
         that.isShowFeedback = false;
       }, 2000)
       
@@ -494,9 +500,13 @@ export default {
 
     async updateFlowerData (object) {
       let that = this;
+      let str = await Object.keys(object)[0];
+      str = str.replace(str[0],str[0].toUpperCase());
 
+      // that[`isShowFeedback${str}`] = true;
       that.isShowFeedback = true;
       setTimeout(() => {
+        // that[`isShowFeedback${str}`] = false;
         that.isShowFeedback = false;
       }, 2000)
 
@@ -659,6 +669,26 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.translateYPOP-enter-active {
+  animation: translateYPOP-in .5s ease-out both;
+}
+
+.translateYPOP-leave-active {
+  animation: translateYPOP-in .5s 2s reverse ease-in both;
+}
+
+@keyframes translateYPOP-in {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 100;
+    transform: translateY(0px);
+  }
+}
+
 
 .opacity0-enter-active {
   transition: all 0.3s ease;
