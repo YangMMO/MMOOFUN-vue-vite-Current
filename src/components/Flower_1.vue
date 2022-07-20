@@ -672,9 +672,19 @@ export default {
 
 .translateYPOP-enter-active {
   animation: translateYPOP-in .5s ease-out both;
+  -webkit-animation: translateYPOP-in .5s ease-out both;
+  -moz-animation: translateYPOP-in .5s ease-out both;
+  -ms-animation: translateYPOP-in .5s ease-out both;
+  -o-animation: translateYPOP-in .5s ease-out both;
+  animation: translateYPOP-in .5s ease-out both;
 }
 
 .translateYPOP-leave-active {
+  animation: translateYPOP-in .5s 2s reverse ease-in both;
+  -webkit-animation: translateYPOP-in .5s 2s reverse ease-in both;
+  -moz-animation: translateYPOP-in .5s 2s reverse ease-in both;
+  -ms-animation: translateYPOP-in .5s 2s reverse ease-in both;
+  -o-animation: translateYPOP-in .5s 2s reverse ease-in both;
   animation: translateYPOP-in .5s 2s reverse ease-in both;
 }
 
@@ -693,10 +703,20 @@ export default {
 .opacity0-enter-active {
   transition: all 0.3s ease;
   animation: opacity0 .3s ease-out both;
+  -webkit-animation: opacity0 .3s ease-out both;
+  -moz-animation: opacity0 .3s ease-out both;
+  -ms-animation: opacity0 .3s ease-out both;
+  -o-animation: opacity0 .3s ease-out both;
+  animation: opacity0 .3s ease-out both;
 }
 
 .opacity0-leave-active {
   transition: all 0.3s ease;
+  animation: opacity0 .3s reverse ease-in both;
+  -webkit-animation: opacity0 .3s reverse ease-in both;
+  -moz-animation: opacity0 .3s reverse ease-in both;
+  -ms-animation: opacity0 .3s reverse ease-in both;
+  -o-animation: opacity0 .3s reverse ease-in both;
   animation: opacity0 .3s reverse ease-in both;
 }
 
@@ -714,9 +734,19 @@ export default {
 
 .translateX-enter-active {
   animation: translateX-in 0.75s ease-out both;
+  -webkit-animation: translateX-in 0.75s ease-out both;
+  -moz-animation: translateX-in 0.75s ease-out both;
+  -ms-animation: translateX-in 0.75s ease-out both;
+  -o-animation: translateX-in 0.75s ease-out both;
+  animation: translateX-in 0.75s ease-out both;
 }
 
 .translateX-leave-active {
+  animation: translateX-in 0.75s reverse ease-in both;
+  -webkit-animation: translateX-in 0.75s reverse ease-in both;
+  -moz-animation: translateX-in 0.75s reverse ease-in both;
+  -ms-animation: translateX-in 0.75s reverse ease-in both;
+  -o-animation: translateX-in 0.75s reverse ease-in both;
   animation: translateX-in 0.75s reverse ease-in both;
 }
 
@@ -738,9 +768,19 @@ export default {
 
 .translateY-enter-active {
   animation: translateY-in 1.5s ease-out both;
+  -webkit-animation: translateY-in 1.5s ease-out both;
+  -moz-animation: translateY-in 1.5s ease-out both;
+  -ms-animation: translateY-in 1.5s ease-out both;
+  -o-animation: translateY-in 1.5s ease-out both;
+  animation: translateY-in 1.5s ease-out both;
 }
 
 .translateY-leave-active {
+  animation: translateY-in 1.5s reverse ease-in both;
+  -webkit-animation: translateY-in 1.5s reverse ease-in both;
+  -moz-animation: translateY-in 1.5s reverse ease-in both;
+  -ms-animation: translateY-in 1.5s reverse ease-in both;
+  -o-animation: translateY-in 1.5s reverse ease-in both;
   animation: translateY-in 1.5s reverse ease-in both;
 }
 
