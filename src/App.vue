@@ -67,7 +67,7 @@
     <!-- 路由页面 -->
     <router-view class="transition-all duration-1000" />
 
-    <Flower1></Flower1>
+    <Flower1 ref="fl"></Flower1>
 
     <!-- 页脚 -->
     <div class="footer container mx-auto">
@@ -139,16 +139,29 @@ export default {
     // this._focus()
     window.addEventListener("resize", this._resize);
   },
-  mounted() {
+  async mounted() {
+    let that = this;
     // 判断loclstrage中是否有visitsDate字段，字段的日期是否等于今日
     if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
+      setTimeout(() => {
+        that.$refs.fl.updateGrowthData({ 'sun': that.$refs.fl.todaySun + 2 });
+        that.$refs.fl.updateFlowerData({ 'sunTotal': that.$refs.fl.flowerData.sunTotal + 2 });
+        that.$refs.fl.updateGrowthData({ 'love': that.$refs.fl.todayLove + 1 });
+        that.$refs.fl.updateFlowerData({ 'loveTotal': that.$refs.fl.flowerData.loveTotal + 1 });
+        that.$refs.fl.updateGrowthData({ 'water': that.$refs.fl.todayWater + 1 });
+        that.$refs.fl.updateFlowerData({ 'waterTotal': that.$refs.fl.flowerData.waterTotal + 1 });
+      }, 1500);
+
       // 更新
       this.isVisits = true;
     }
     
     this._visitor();
+
+    
+
 
   },
   unmounted() {
@@ -176,6 +189,7 @@ export default {
           ]).then(response => {
             if (response.success) {
               that.visitor = web.fields.visitor + 1;
+
               // console.log("提交成功");
               // console.log(response.data);
             } else {

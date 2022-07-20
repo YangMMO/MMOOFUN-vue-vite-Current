@@ -302,7 +302,7 @@
           </template>
           <template #footer>
             <div class="text-center">
-              <button :class="['border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="showPop = false; submitStatus = ture">
+              <button :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer']" @click="showPop = false; submitStatus = ture">
                 {{ submitStatusFooter }}
               </button>
             </div>
@@ -352,6 +352,7 @@ import getError from '../components/getError.vue';
 
 
 import { Vika } from "@vikadata/vika";
+import { inject } from '@vue/runtime-core';
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
 const msgDatasheet = vika.datasheet("dstuYoi5jUdh0Z0Fvq");
 
@@ -373,6 +374,8 @@ export default {
   },
   inject: ['app'],
   data() {
+    let flower = inject('app').$refs.fl;
+
     return {
       // lang: this.lang,
       moment: moment, // 时间格式化
@@ -413,6 +416,8 @@ export default {
       submitStatusFooter: null, // 提交后的弹窗提示 底部
 
       showPop: false, // 是否显示弹窗
+      
+      flower: flower
     }
   },
   created() {
@@ -430,7 +435,7 @@ export default {
     
   },
   mounted() {
-      localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+      // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
       localStorage.setItem("submitNum", 0);
   },
   methods: {
@@ -464,13 +469,13 @@ export default {
       that.likeData = null;
 
       // 判断loclStorage的like 是否已经超过3次 如果超过3次则不能点赞
-      if (localStorage.getItem("date") === moment().format("YYYY-MM-DD")) {
+      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
         if (localStorage.getItem("like") >= that.likeMaxLength) {
           that.setShowPop(i18n.t("bbs._.like_fail"), i18n.t("bbs._.over_like"), i18n.t("bbs._.close"));
           return;
         }
       } else {
-        localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
         localStorage.setItem("like", 0);
       }
 
@@ -502,6 +507,9 @@ export default {
               that.getBBS();
               localStorage.setItem("like", parseInt(localStorage.getItem("like")) + 1);
 
+              that.flower.updateGrowthData({ 'nutrition': that.flower.todayNutrition + 1 });
+              that.flower.updateFlowerData({ 'nutritionTotal': that.flower.flowerData.nutritionTotal + 1 });
+
               // console.log(response.data);
             } else {
               that.isClickLike = false;
@@ -526,13 +534,13 @@ export default {
       let notEmpty, overMaxLength;
 
       // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
-      if (localStorage.getItem("date") === moment().format("YYYY-MM-DD")) {
+      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
         if (parseInt(localStorage.getItem("submitNum")) >= that.submitMaxNum) {
           that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
           return;
         }
       } else {
-        localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
         localStorage.setItem("submitNum", 0);
       }
 
@@ -599,8 +607,13 @@ export default {
           that.submitStatus = false;  // 提交成功后清除提交状态
 
           // 设置localStorage的date 为当前日期， submitNum +1
-          localStorage.setItem("date", moment().format("YYYY-MM-DD"));
-          localStorage.setItem("submitNum", parseInt(localStorage.getItem("submitNum")) + 1);
+          localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
+          localStorage.setItem("submitNum", 
+          
+          parseInt(localStorage.getItem("submitNum")) + 1);
+
+          that.flower.updateGrowthData({ 'nutrition': that.flower.todayNutrition + 1 });
+          that.flower.updateFlowerData({ 'nutritionTotal': that.flower.flowerData.nutritionTotal + 1 });
         } else {
           console.log('提交失败');
           console.error(response);
