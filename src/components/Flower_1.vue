@@ -30,17 +30,9 @@
               <div v-if="isShowFunc" class="w-full bg py-2 ">
                 <div class="flex space-x-2 " >
 
-                  <!-- <div class="p4">
-                    <div class="cursor-pointer pr-3 border-r border-purple-400 border-opacity-20">
-                      <div class="func-icon-1 relative bg rounded-full gradient-green m4 hover:scale-125 transition-all duration-75 ease-in-out" @click="showPop = !showPop">
-                        <i class="ri-seedling-fill text-base absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"></i>
-                      </div>
-                    </div>
-                  </div> -->
-
-                  <div class="p4">
+                  <div class="p4" >
                     <div class=" pr-3 border-r border-purple-400 border-opacity-20">
-                      <div class="func-icon-1 relative bg rounded-full gradient-green m4 ">
+                      <div class="func-icon-1 relative bg rounded-full gradient-green m4 cursor-pointer hover:scale-125 transition-all duration-75 ease-in-out" @click="cultivationHelp">
                         <i class="ri-seedling-fill text-base absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"></i>
                       </div>
                     </div>
@@ -94,7 +86,7 @@
                     <span class="progress-t text-xs w-full">
                       {{ todaySun }}/{{ dayMaxGrowth }}
                     </span>
-                    <div class="progress-bg" :style="{ width: `${ todaySun >= dayMaxGrowth ? 100 : todaySun / dayMaxGrowth * 100}%`}"></div>
+                    <div :class="[{'progress-bg-max': todaySun > dayMaxGrowth},{'progress-bg': todaySun <= dayMaxGrowth}]" :style="{ width: `${ todaySun >= dayMaxGrowth ? 100 : todaySun / dayMaxGrowth * 100}%`}"></div>
                   </div>
                 </div>
 
@@ -118,7 +110,7 @@
                     <span class="progress-t text-xs w-full">
                       {{ todayLove }}/{{ dayMaxGrowth }}
                     </span>
-                    <div class="progress-bg" :style="{ width: `${ todayLove >= dayMaxGrowth ? 100 : todayLove / dayMaxGrowth * 100}%`}"></div>
+                    <div :class="[{'progress-bg-max': todayLove > dayMaxGrowth},{'progress-bg': todayLove <= dayMaxGrowth}]" :style="{ width: `${ todayLove >= dayMaxGrowth ? 100 : todayLove / dayMaxGrowth * 100}%`}"></div>
                   </div>
                 </div>
 
@@ -142,7 +134,7 @@
                     <span class="progress-t text-xs w-full">
                       {{ todayWater }}/{{ dayMaxGrowth }}
                     </span>
-                    <div class="progress-bg" :style="{ width: `${ todayWater >= dayMaxGrowth ? 100 : todayWater / dayMaxGrowth * 100}%`}"></div>
+                    <div :class="[{'progress-bg-max': todayWater > dayMaxGrowth},{'progress-bg': todayWater <= dayMaxGrowth}]" :style="{ width: `${ todayWater >= dayMaxGrowth ? 100 : todayWater / dayMaxGrowth * 100}%`}"></div>
                   </div>
                 </div>
 
@@ -166,7 +158,7 @@
                     <span class="progress-t text-xs w-full">
                       {{ todayNutrition }}/{{ dayMaxGrowth }}
                     </span>
-                    <div class="progress-bg" :style="{ width: `${ todayNutrition >= dayMaxGrowth ? 100 : todayNutrition / dayMaxGrowth * 100}%`}"></div>
+                    <div :class="[{'progress-bg-max': todayNutrition > dayMaxGrowth},{'progress-bg': todayNutrition <= dayMaxGrowth}]" :style="{ width: `${ todayNutrition >= dayMaxGrowth ? 100 : todayNutrition / dayMaxGrowth * 100}%`}"></div>
                   </div>
                 </div>
 
@@ -196,7 +188,16 @@
                     { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
                 </div>
 
-                <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2">
+                <!-- 轻提示 -->
+                <FlowerPop :isShowFeedback="isShowFeedbackWater" :flower="flowerData" :imgIndex="0" :data="feedbackWater" :zIndex="_zIndexWater"></FlowerPop>
+
+                <FlowerPop :isShowFeedback="isShowFeedbackLove" :flower="flowerData" :imgIndex="1" :data="feedbackLove" :zIndex="_zIndexLove"></FlowerPop>
+
+                <FlowerPop :isShowFeedback="isShowFeedbackSun" :flower="flowerData" :imgIndex="2" :data="feedbackSun" :zIndex="_zIndexSun"></FlowerPop>
+
+                <FlowerPop :isShowFeedback="isShowFeedbackNutrition" :flower="flowerData" :imgIndex="3" :data="feedbackNutrition" :zIndex="_zIndexNutrition"></FlowerPop>
+                
+                <!-- <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2">
                   <transition name="translateYPOP">
                     <div v-if="isShowFeedback" class="relative">
                       <div class=" absolute top-1 flex p4 justify-center items-center rounded-full filter blur-lg bg-purple-500 bg-opacity-20 w-full h-full">
@@ -209,7 +210,7 @@
                       </div>
                     </div>
                   </transition>
-                </div>
+                </div> -->
   
               </div>
             </div>
@@ -221,7 +222,7 @@
 
       <!-- 隐藏按钮 -->
       <transition name="translateX" mode="out-in">
-        <div v-if="isShowFlower" class="absolute bottom-4 -right-5 text-lg">
+        <div v-if="isShowFlower && isGetFinish " class="absolute bottom-4 -right-5 text-lg">
           <div class="gradient-yellow close cursor-pointer rounded-tl-full rounded-bl-full " @click="toggleFlower">
               <i :class="['ri-sun-foggy-fill ri-drizzle-fill inline-block -translate-y-1/2']"></i>
           </div>
@@ -261,6 +262,7 @@
 <script>
 import i18n from '../i18n';
 import Pop from '../components/Pop.vue';
+import FlowerPop from '../components/Flower_Pop.vue';
 
 import moment from '../plugins/moment.js';
 
@@ -280,7 +282,7 @@ export default {
     }
   },
   components: {
-    Pop
+    Pop, FlowerPop
   },
   data() {
     return {
@@ -304,11 +306,21 @@ export default {
       todayNutrition: 0,
 
       isShowFunc: false,
-      isShowFeedback: false,
+      isShowFeedbackWater : false,
+      feedbackWater: 0,
+      _zIndexWater: 1000,
       isShowFeedbackLove: false,
+      feedbackLove: 0,
+      _zIndexLove: 1000,
       isShowFeedbackSun: false,
+      feedbackSun: 0,
+      _zIndexSun: 1000,
       isShowFeedbackNutrition: false,
-      feedbackImg: null,
+      feedbackNutrition: 0,
+      _zIndexNutrition: 1000,
+
+      _clickCount: 0,
+
       _randomNum: 1,
 
     }
@@ -317,9 +329,17 @@ export default {
     await this._getGrowthData();
     await this._getFlowerData();
     this._randomNum = this._getRandom(9, 12);
-    this.feedbackImg = this.flowerData.flower_img[2].url;
   },
   methods: {
+
+    // 栽培帮助
+    cultivationHelp() {
+      this._setShowPop(
+        i18n.t("flower._.cultivation_help"), 
+        i18n.t("flower._.cultivation_help_body"), 
+        i18n.t("flower._.cultivation_help_know"))
+    },
+
     // 设置POP提示
     _setShowPop(header, body, footer) {
       this.popHeader = header;
@@ -330,7 +350,6 @@ export default {
 
     watering () {
       let status = this._update('water');
-      this.feedbackImg = this.flowerData.flower_img[0].url
       if (status) {
         
       } else {
@@ -345,7 +364,6 @@ export default {
 
     prune () {
       let status = this._update('love');
-      this.feedbackImg = this.flowerData.flower_img[1].url
       if (status) {
         
       } else {
@@ -360,7 +378,6 @@ export default {
 
     sunlight () {
       let status = this._update('sun');
-      this.feedbackImg = this.flowerData.flower_img[2].url
 
       if (status) {
 
@@ -377,7 +394,6 @@ export default {
 
     fertilize () {
       let status = this._update('nutrition');
-      this.feedbackImg = this.flowerData.flower_img[3].url
       if (status) {
 
       } else {
@@ -397,17 +413,21 @@ export default {
       // 判断localstorage是否有flowerDate值,如果有则判断日期是否等于今日，如果没有则新建一个今日的日期
       let flowerDate = localStorage.getItem('flowerDate');
       if (flowerDate == moment().format('YYYY-MM-DD')) {
-        status = that._isUpdate(type, 1)
+        status = that._isUpdate(type, 1, true);
       } else {
         localStorage.setItem("flowerDate", moment().format("YYYY-MM-DD"));
-        status = that._isUpdate(type, 1)
+        status = that._isUpdate(type, 1, true)
       }
       return status;
     },
 
-    _isUpdate (type, addNum) {
+    
+    _isUpdate (type, addNum, record) {
       let that = this;
       let data = null;
+      record = record || false;
+      that._clickCount = that._clickCount + 1;
+
       switch (type) {
         case 'water':
           // 判断localstorage是否有water值
@@ -415,9 +435,9 @@ export default {
           if (parseInt(data) === 1) {
             return false;
           } else {
-            localStorage.setItem("water", 1);
-            that.updateGrowthData({ 'water': that.todayWater + addNum });
-            that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum });
+            if (record) localStorage.setItem("water", 1);
+            that.updateGrowthData({ 'water': that.todayWater + addNum }, addNum);
+            that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum }, addNum);
             return true;
           }
           break;
@@ -427,9 +447,9 @@ export default {
           if (parseInt(data) === 1) {
             return false;
           } else {
-            localStorage.setItem("love", 1);
-            that.updateGrowthData({ 'love': that.todayLove + addNum });
-            that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum });
+            if (record) localStorage.setItem("love", 1);
+            that.updateGrowthData({ 'love': that.todayLove + addNum }, addNum);
+            that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum }, addNum);
             return true;
           }
           break;
@@ -439,9 +459,9 @@ export default {
           if (parseInt(data) === 1) {
             return false;
           } else {
-            localStorage.setItem("sun", 1);
-            that.updateGrowthData({ 'sun': that.todaySun + addNum });
-            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum });
+            if (record) localStorage.setItem("sun", 1);
+            that.updateGrowthData({ 'sun': that.todaySun + addNum }, addNum);
+            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum }, addNum);
             return true;
           }
           break;
@@ -451,9 +471,9 @@ export default {
           if (parseInt(data) === 1) {
             return false;
           } else {
-            localStorage.setItem("nutrition", 1);
-            that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum });
-            that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum });
+            if (record) localStorage.setItem("nutrition", 1);
+            that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum }, addNum);
+            that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum }, addNum);
             return true;
           }
           break;
@@ -462,26 +482,15 @@ export default {
       }
     },
 
-    async updateGrowthData (object) {
+    async updateGrowthData (object, addNum) {
       let that = this;
-
-      // 暂时不加最大限制
       let str = await Object.keys(object)[0];
       str = str.replace(str[0],str[0].toUpperCase());
 
-      // if (that[`today${str}`] >= that.dayMaxGrowth) {
-      //   console.log(123);
-      //   return;
-      // }
-
-      // that[`isShowFeedback${str}`] = true;
-      that.isShowFeedback = true;
+      that[`isShowFeedback${str}`] = true;
       setTimeout(() => {
-        // that[`isShowFeedback${str}`] = false;
-        that.isShowFeedback = false;
+        that[`isShowFeedback${str}`] = false;
       }, 2000)
-      
-
       await growthDatasheet.records.update([
         {
           "recordId": "recmKtgZTf6eH",
@@ -492,23 +501,23 @@ export default {
           // console.log(response.data);
           that.growthData = response.data.records[0].fields;
           that._setTodayData(that.growthData);
+          that[`feedback${str}`] = addNum;
+          that[`_zIndex${str}`] = that._clickCount + 1;
         } else {
           console.error(response);
         }
       })
     },
 
-    async updateFlowerData (object) {
+    async updateFlowerData (object, addNum) {
       let that = this;
-      let str = await Object.keys(object)[0];
-      str = str.replace(str[0],str[0].toUpperCase());
+      // let str = await Object.keys(object)[0];
+      // str = str.replace(str[0],str[0].toUpperCase());
 
       // that[`isShowFeedback${str}`] = true;
-      that.isShowFeedback = true;
-      setTimeout(() => {
-        // that[`isShowFeedback${str}`] = false;
-        that.isShowFeedback = false;
-      }, 2000)
+      // setTimeout(() => {
+      //   that[`isShowFeedback${str}`] = false;
+      // }, 2000)
 
       await flowerDatasheet.records.update([
         {
@@ -519,16 +528,12 @@ export default {
         if (response.success) {
           // console.log(response.data);
           that.flowerData = response.data.records[0].fields;
+          // that[`feedback${str}`] = addNum;
         } else {
           console.error(response);
         }
       })
     },
-
-    // 栽培帮助
-    // cultivationHelp() {
-    //   this._setShowPop('帮助', '<div class="text-center">帮助</div>', '<div class="text-center">关闭</div>');
-    // },
 
     // 切换isShowFlower状态，1.5s
     toggleFlower() {
@@ -883,6 +888,13 @@ export default {
     height: 100%;
     transition: all 0.3s;
     background: linear-gradient(89.77deg, #ABCDFF 4.17%, #D8A6FF 98.05%);
+  }
+
+  .progress-bg-max {
+
+    height: 100%;
+    transition: all 0.3s;
+    background: linear-gradient(89.77deg, #ffd57b 4.17%, #ff97a5 98.05%);
   }
 
 }

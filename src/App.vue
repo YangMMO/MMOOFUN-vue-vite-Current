@@ -128,14 +128,18 @@ export default {
       isActiveMenu: false,
       routes: routers.options.routes,
       _innerWidth: window.innerWidth,
+      _scrollTop: window.scrollY,
       moment: moment,
       visitor: 0,
-      isVisits: false
+      isVisits: false,
+      firstVisit: true
     }
   },
   created() {
     // this._focus()
+    let that = this
     window.addEventListener("resize", this._resize);
+    window.addEventListener("scroll", that._scroll);
   },
   async mounted() {
     let that = this;
@@ -143,24 +147,32 @@ export default {
     if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
-      await setTimeout(() => {
+      setTimeout(() => {
         that.$refs.fl._isUpdate('sun', 2)
+      }, 2000);
+
+      setTimeout(() => {
         that.$refs.fl._isUpdate('love', 1)
+      }, 6000);
+
+      setTimeout(() => {
         that.$refs.fl._isUpdate('water', 1)
-      }, 1500);
+      }, 10000);
 
       // 更新
       this.isVisits = true;
     }
+
+    // setTimeout(() => {
+    //   that.$refs.fl.isShowFlower = false
+    // }, 10000);
     
     this._visitor();
-
-    
-
 
   },
   unmounted() {
     window.removeEventListener("resize", this._resize);
+    window.removeEventListener("scroll", this._scroll);
   },
   methods: {
     // 提交一次访问记录
@@ -202,6 +214,15 @@ export default {
     // 根据页面宽度计算出元素的宽度
     _resize() {
       this._innerWidth = window.innerWidth
+    },
+
+    _scroll() {
+      let that = this;
+      that._scrollTop = window.scrollY
+      if (that.firstVisit && that._scrollTop >= 400) {
+        that.firstVisit = false
+        that.$refs.fl.isShowFlower = false
+      }
     },
 
     // 切换语言

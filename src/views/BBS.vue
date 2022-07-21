@@ -502,13 +502,19 @@ export default {
           ]).then(response => {
             if (response.success) {
 
-              console.log('点赞成功');
+              // console.log('点赞成功');
               that.isClickLike = false;
               that.getBBS();
               localStorage.setItem("like", parseInt(localStorage.getItem("like")) + 1);
 
-              that.flower.updateGrowthData({ 'nutrition': that.flower.todayNutrition + 1 });
-              that.flower.updateFlowerData({ 'nutritionTotal': that.flower.flowerData.nutritionTotal + 1 });
+              // that.flower._isUpdate('nutrition', 1)
+              setTimeout(() => {
+                that.flower._isUpdate('nutrition', 2)
+              }, 0);
+              setTimeout(() => {
+                that.flower._isUpdate('water', 1)
+              }, 4000);
+                              
 
               // console.log(response.data);
             } else {
@@ -591,7 +597,7 @@ export default {
         }
       ]).then(response => {
         if (response.success) {
-          console.log('提交成功');
+          // console.log('提交成功');
           // console.log(response.data);
 
           // 提交成功后再次获取BBS数据
@@ -612,10 +618,18 @@ export default {
           
           parseInt(localStorage.getItem("submitNum")) + 1);
 
-          that.flower.updateGrowthData({ 'nutrition': that.flower.todayNutrition + 1 });
-          that.flower.updateFlowerData({ 'nutritionTotal': that.flower.flowerData.nutritionTotal + 1 });
+          setTimeout(() => {
+            that.flower._isUpdate('nutrition', 2)
+          }, 0);
+          setTimeout(() => {
+            that.flower._isUpdate('love', 1)
+          }, 4000);
+          setTimeout(() => {
+            that.flower._isUpdate('water', 1)
+          }, 4000);
+
         } else {
-          console.log('提交失败');
+          // console.log('提交失败');
           console.error(response);
           that.submitStatus = false;  // 提交成功后清除提交状态
         }
