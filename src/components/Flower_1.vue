@@ -397,15 +397,15 @@ export default {
       // 判断localstorage是否有flowerDate值,如果有则判断日期是否等于今日，如果没有则新建一个今日的日期
       let flowerDate = localStorage.getItem('flowerDate');
       if (flowerDate == moment().format('YYYY-MM-DD')) {
-        status = that._isUpdate(type)
+        status = that._isUpdate(type, 1)
       } else {
         localStorage.setItem("flowerDate", moment().format("YYYY-MM-DD"));
-        status = that._isUpdate(type)
+        status = that._isUpdate(type, 1)
       }
       return status;
     },
 
-    _isUpdate (type) {
+    _isUpdate (type, addNum) {
       let that = this;
       let data = null;
       switch (type) {
@@ -416,8 +416,8 @@ export default {
             return false;
           } else {
             localStorage.setItem("water", 1);
-            that.updateGrowthData({ 'water': that.todayWater + 1 });
-            that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + 1 });
+            that.updateGrowthData({ 'water': that.todayWater + addNum });
+            that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum });
             return true;
           }
           break;
@@ -428,8 +428,8 @@ export default {
             return false;
           } else {
             localStorage.setItem("love", 1);
-            that.updateGrowthData({ 'love': that.todayLove + 1 });
-            that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + 1 });
+            that.updateGrowthData({ 'love': that.todayLove + addNum });
+            that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum });
             return true;
           }
           break;
@@ -440,8 +440,8 @@ export default {
             return false;
           } else {
             localStorage.setItem("sun", 1);
-            that.updateGrowthData({ 'sun': that.todaySun + 1 });
-            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + 1 });
+            that.updateGrowthData({ 'sun': that.todaySun + addNum });
+            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum });
             return true;
           }
           break;
@@ -452,8 +452,8 @@ export default {
             return false;
           } else {
             localStorage.setItem("nutrition", 1);
-            that.updateGrowthData({ 'nutrition': that.todayNutrition + 1 });
-            that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + 1 });
+            that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum });
+            that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum });
             return true;
           }
           break;
@@ -657,8 +657,14 @@ export default {
 
         // 判断loclstrage中是否有visitsDate字段，字段的日期是否等于今日
         if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
-            that.updateGrowthData({ 'sun': that.todaySun + 1 });
-            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + 1 });
+
+            localStorage.setItem('water', 0);
+            localStorage.setItem('love', 0);
+            localStorage.setItem('sun', 0);
+            localStorage.setItem('nutrition', 0);
+            // that._isUpdate('sun', 1);
+            // that.updateGrowthData({ 'sun': that.todaySun + 1 });
+            // that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + 1 });
         }
       }
     },
@@ -978,23 +984,6 @@ export default {
     background-repeat: no-repeat;
     animation: star 2.5s infinite alternate;
 
-    // .sA1 {
-    //   animation: star 2s infinite alternate;
-    // }
-
-    // .sA2 {
-    //   animation: star 2.5s infinite alternate;
-    // }
-
-    // .sA3 {
-    //   animation: star 3.5s infinite alternate;
-    // }
-
-    // .sA4 {
-    //   animation: star 4s infinite alternate;
-    // }
-
-
     @keyframes star {
       0% {
         transform: scale(0);
@@ -1006,8 +995,6 @@ export default {
       }
     }
   }
-
-
 
 }
 

@@ -67,8 +67,6 @@
     <!-- 路由页面 -->
     <router-view class="transition-all duration-1000" />
 
-    <Flower1 ref="fl"></Flower1>
-
     <!-- 页脚 -->
     <div class="footer container mx-auto">
       <div class="container">
@@ -97,7 +95,7 @@
   </div>
   <!-- </perfect-scrollbar> -->
 
-  
+  <Flower1 ref="fl"></Flower1>
 
 </template>
 
@@ -146,12 +144,9 @@ export default {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
       await setTimeout(() => {
-        that.$refs.fl.updateGrowthData({ 'sun': that.$refs.fl.todaySun + 2 });
-        that.$refs.fl.updateFlowerData({ 'sunTotal': that.$refs.fl.flowerData.sunTotal + 2 });
-        that.$refs.fl.updateGrowthData({ 'love': that.$refs.fl.todayLove + 1 });
-        that.$refs.fl.updateFlowerData({ 'loveTotal': that.$refs.fl.flowerData.loveTotal + 1 });
-        that.$refs.fl.updateGrowthData({ 'water': that.$refs.fl.todayWater + 1 });
-        that.$refs.fl.updateFlowerData({ 'waterTotal': that.$refs.fl.flowerData.waterTotal + 1 });
+        that.$refs.fl._isUpdate('sun', 2)
+        that.$refs.fl._isUpdate('love', 1)
+        that.$refs.fl._isUpdate('water', 1)
       }, 1500);
 
       // 更新
