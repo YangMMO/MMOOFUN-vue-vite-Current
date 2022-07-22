@@ -186,6 +186,13 @@
                     { top: `${_getRandom(12,280)}px` },
                     { left: `${_getRandom(4,96)}px` },
                     { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
+                  
+                  <transition name="guide-opa">
+                    <div v-if="isGuide " @click="isGuide = false" class="absolute w-full h-full">
+                        <div class="guide bg absolute"  :style="[{
+                      backgroundImage: `url(${isShowFlower ? flowerData.flower_img[15].url : ''})` }]"></div>
+                      </div>
+                  </transition>
                 </div>
 
                 <div id="fpop"></div>
@@ -272,6 +279,7 @@ export default {
       popHeader: '',
       popBody: '',
       popFooter: '',
+      isGuide: true, // 是否显示引导
 
       isShowFlower: false,
       isToggle: false,
@@ -639,6 +647,55 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.guide-opa-enter-active {
+  animation: guide-opa-in .5s ease-out both;
+  -webkit-animation: guide-opa-in .5s ease-out both;
+  -moz-animation: guide-opa-in .5s ease-out both;
+  -ms-animation: guide-opa-in .5s ease-out both;
+  -o-animation: guide-opa-in .5s ease-out both;
+  animation: guide-opa-in .5s ease-out both;
+}
+
+.guide-opa-leave-active {
+  animation: guide-opa-in .5s ease-in both;
+  -webkit-animation: guide-opa-in .5s ease-in both;
+  -moz-animation: guide-opa-in .5s ease-in both;
+  -ms-animation: guide-opa-in .5s ease-in both;
+  -o-animation: guide-opa-in .5s ease-in both;
+  animation: guide-opa-in .5s ease-in both;
+}
+
+@keyframes guide-opa-in {
+  0% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.guide {
+  width: 64px;
+  height: 64px;
+  top: 70%;
+  left: 40%;
+  transition: all 0.20s;
+  
+  animation: guide-in 2.5s  ease-in-out reverse infinite;
+}
+
+@keyframes guide-in {
+  0% {
+    transform: translateY(0) translateX(0%);
+  }
+  50% {
+    transform: translateY(-10%) translateX(-10%);
+  }
+  100% {
+    transform: translateY(0) translateX(0%);
+  }
+}
 
 .translateYPOP-enter-active {
   animation: translateYPOP-in .5s ease-out both;
