@@ -2,7 +2,7 @@
   <div class="container mx-auto text-black dark:text-white">
 
     <div class="divide-y-0">
-      <div class="select-none pb-9">
+      <div class="select-none pb-9" id="sTop">
         <h1 class="text-3xl  font-semibold select-none inline-block align-middle">{{ $t("menu.bbs") }}</h1>
         <span class="align-middle text-sm  ml-2 px-2 py-1 bg-gray-100 box gradient-red mr-1">{{ bbsDataLength }}</span>
         <div class="align-middle text-sm px-2 py-1 box inline-block float-right text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">
@@ -12,10 +12,10 @@
      </div>
     
       <!-- 墙面 -->
-      <div class="mb-6">
+      <div class="mb-9">
         <!-- <div class="text-xl font-semibold mb-3">{{ $t("bbs.sendWord") }} </div> -->
         <div class="box sticky  overflow-hidden text-black dark:text-black">
-          <div class="py-12 bg-stripes bg-stripes-white">
+          <div class="py-12 px-3 bg-stripes bg-stripes-white">
             <v-md-preview :text="board" class=""></v-md-preview>
           </div>
         </div>
@@ -107,7 +107,7 @@
             <div v-show="!data.fields.ban">
               <div class="box flex mb-3">
                 <!-- 头像 -->
-                <div :class="['avatar mr-3 sm:mx-6 transition-all duration-75 ease-linear', { 'gradient-gold': data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-drill': !data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-silver': data.fields.violationUsername }, { 'gradient-silver': data.fields.publicEmail && data.fields.violationUsername }]">
+                <div :class="['avatar mr-3 sm:mr-6 transition-all duration-75 ease-linear', { 'gradient-gold': data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-drill': !data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-silver': data.fields.violationUsername }, { 'gradient-silver': data.fields.publicEmail && data.fields.violationUsername }]">
                   <i v-show="data.fields.publicEmail" class="ri-ghost-smile-line align-middle icon-font-size"></i>
                   <i v-show="!data.fields.publicEmail" class="ri-spy-line align-middle icon-font-size "></i>
                 </div>
@@ -151,7 +151,7 @@
               <div class="box flex">
                 
                 <!-- 响应占位元素 -->
-                <div class="avatar mx-6 flex-shrink-0 hidden sm:block"></div>
+                <div class="avatar mr-6 flex-shrink-0 hidden sm:block"></div>
                 
                 <div class="w-full">
                   <div class="mb-3 py-3 sm:py-0 text-gray-600 dark:text-gray-300 transition-all duration-75 ease-linear">
@@ -381,10 +381,11 @@ export default {
   },
   inject: ['app'],
   data() {
-    let flower = inject('app').$refs.fl;
+    let app = inject('app');
+    let flower = app.$refs.fl;
     return {
       // lang: this.lang,
-      // app: inject('app'),
+      // app: app,
       moment: moment, // 时间格式化
       isGetFinish: false, // 是否获取完成
       isGet: false, // 是否获取中
@@ -674,6 +675,12 @@ export default {
           // 计算总页数
           that.totalPage = that.bbsDataLength % that.getNum === 0 ? that.bbsDataLength / that.getNum : Math.floor(that.bbsDataLength / that.getNum) + 1; 
 
+          // window.scrollY = 0; // 回到顶部
+          // setTimeout(() => {
+            that.app._goTop('sTop')
+          // }, 200);
+          
+
           // console.log(response);
         } else {
           success = false;
@@ -732,14 +739,14 @@ export default {
 
 
 .sticky {
-  background: linear-gradient(-45deg, transparent 24px, #fff5c5 0);
+  background: linear-gradient(-45deg, transparent 24px, #ffe9c0 0);
 
   ::before {
     content: "";
     position: absolute;
     right: 0px;
     bottom: 0px;
-    background: linear-gradient(-45deg, transparent 50%, #fce6ab 0);
+    background: linear-gradient(-45deg, transparent 50%, #ffcd93 0);
     width: 35px;
     height: 35px;
     border-radius: 4px 0 0 0;

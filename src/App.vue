@@ -252,6 +252,19 @@ export default {
     onClickMenu () {
       this.isActiveMenu = !this.isActiveMenu
     },
+
+    _goTop(node) {
+      let that = this;
+      let top = window.document.getElementById(node).offsetTop - 10;
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-window.scrollY / 3);
+        document.documentElement.scrollTop = document.body.scrollTop =
+          that._scrollTop + ispeed;
+        if (that._scrollTop <= top) {
+          clearInterval(timer);
+        }
+      }, 10);
+    }
   },
 }
 </script>
