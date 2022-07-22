@@ -127,15 +127,18 @@
                     
                     <!-- 楼层 & 时间 -->
                     <div class="flex mb-3 text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">
-                      <p class="flex-initial text-sm select-none mr-3">
+                      <p class="flex-initial text-sm mr-3">
                         {{ 
                           (app.lang === 'en' ?  $t("bbs.floor") + ' ' : '第') + 
                           data.fields.id + 
                           (app.lang === 'en' ? "" : $t("bbs.floor"))
                         }}
                       </p>
-                      <p class="flex-initial text-sm select-none">
+                      <p class="flex-initial text-sm mr-3">
                         {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
+                      </p>
+                      <p class="flex-initial text-sm ">
+                        {{ data.fields.citySN && data.fields.publicEmail ? JSON.parse(data.fields.citySN).cname  : '' }}
                       </p>
                     </div>
                   </div>
