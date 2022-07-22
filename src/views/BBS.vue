@@ -421,11 +421,14 @@ export default {
 
       showPop: false, // 是否显示弹窗
       
-      flower: flower
+      flower: flower,
+
+      returnCitySN: null
     }
   },
   created() {
     this.getBBS();
+    
   },
   watch: {
     // 实时监听每一个输入是否符合邮箱正则格式
@@ -438,9 +441,13 @@ export default {
     // }
     
   },
-  mounted() {
+  async mounted() {
       // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+      let that = this;
       localStorage.setItem("submitNum", 0);
+      setTimeout(() => {
+        that.returnCitySN = document.returnCitySN
+      }, 1000);
   },
   methods: {
     // 设置POP提示
@@ -543,6 +550,10 @@ export default {
       let t = i18n.t
       let notEmpty, overMaxLength;
 
+      that.returnCitySN = document.returnCitySN
+
+      if (!that.returnCitySN) return
+
       // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
       if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
         if (parseInt(localStorage.getItem("submitNum")) >= that.submitMaxNum) {
@@ -597,7 +608,7 @@ export default {
             "blog": that.blog,
             "msg": that.msg,
             "citySN": JSON.stringify(document.returnCitySN),
-            "device": JSON.stringify(ua2obj()),
+            "device": JSON.stringify(that.returnCitySN),
             "createDate": Date.parse(new Date())
           }
         }
