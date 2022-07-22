@@ -1,12 +1,11 @@
 <template>
-  <!-- pop -->
-  <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2" :style="[{ zIndex: zIndex }]">
+  <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2" :style="[{ zIndex: visible.zIndex }]">
     <transition name="translateYPOP">
-      <div v-if="isShowFeedback" class="relative">
+      <div v-if="visible" class="relative">
         <div class=" absolute top-1 flex p4 justify-center items-center rounded-full filter blur-xl bg-purple-500 bg-opacity-50 w-full h-full">
         </div>
         <div class="flex p4 justify-center items-center bg-white rounded-full relative">
-          <div class="icon " :style="[{ backgroundImage: `url(${isShowFeedback ? flower.flower_img[imgIndex].url : ''})` }]"></div>
+          <div class="icon " :style="[{ backgroundImage: `url(${visible ? flower.flower_img[fType].url : ''})` }]"></div>
           <div class="text-xs inline-block font-color pr-1">
             {{ `  + ${data}` }}
           </div>
@@ -14,41 +13,50 @@
       </div>
     </transition>
   </div>
-
-
 </template>
 
 <script>
-
+import { ref } from 'vue';
 export default {
-  name: 'Flower_Pop',
+  name: 'MyDialog',
   props: {
-    isShowFeedback: Boolean,
-    flower: Object,
-    data: Number,
-    imgIndex: Number,
     zIndex: {
       type: Number,
       default: 0
-    }
+    },
+    data: Number,
+    fType: Number,
+    flower: Object,
   },
-  data() {
-    return {
-      // isShowFeedback: props,
+  setup(ctx) {
+    // console.log(ctx);
+    let visible = ref(false);
+
+    function close() {
+      visible.value = false;
     }
+
+    function show() {
+      visible.value = true;
+    }
+    return {
+      close,
+      show,
+      visible,
+      imgUrl: null
+      
+    };
   },
   mounted() {
-
+    setTimeout(() => {
+      this.close();
+    }, 2000);
   },
-  methods: {
-
-  },
-}
+};
 </script>
 
-
-<style lang="scss" scoped>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
 .translateYPOP-enter-active {
   animation: translateYPOP-in .5s ease-out both;
   -webkit-animation: translateYPOP-in .5s ease-out both;
@@ -85,6 +93,5 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
 }
-
 
 </style>

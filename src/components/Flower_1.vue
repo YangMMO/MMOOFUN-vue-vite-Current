@@ -188,29 +188,7 @@
                     { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
                 </div>
 
-                <!-- 轻提示 -->
-                <FlowerPop :isShowFeedback="isShowFeedbackWater" :flower="flowerData" :imgIndex="0" :data="feedbackWater" :zIndex="_zIndexWater"></FlowerPop>
-
-                <FlowerPop :isShowFeedback="isShowFeedbackLove" :flower="flowerData" :imgIndex="1" :data="feedbackLove" :zIndex="_zIndexLove"></FlowerPop>
-
-                <FlowerPop :isShowFeedback="isShowFeedbackSun" :flower="flowerData" :imgIndex="2" :data="feedbackSun" :zIndex="_zIndexSun"></FlowerPop>
-
-                <FlowerPop :isShowFeedback="isShowFeedbackNutrition" :flower="flowerData" :imgIndex="3" :data="feedbackNutrition" :zIndex="_zIndexNutrition"></FlowerPop>
-                
-                <!-- <div class="absolute -top-2 w-16 left-1/2 -translate-x-1/2">
-                  <transition name="translateYPOP">
-                    <div v-if="isShowFeedback" class="relative">
-                      <div class=" absolute top-1 flex p4 justify-center items-center rounded-full filter blur-lg bg-purple-500 bg-opacity-20 w-full h-full">
-                      </div>
-                      <div class="flex p4 justify-center items-center bg-white rounded-full relative">
-                        <div class="icon nutrition" :style="[{ backgroundImage: `url(${isShowFlower ? feedbackImg : ''})` }]"></div>
-                        <div class="text-xs inline-block font-color pr-1">
-                          {{ ` + 1 ` }}
-                        </div>
-                      </div>
-                    </div>
-                  </transition>
-                </div> -->
+                <div id="fpop"></div>
   
               </div>
             </div>
@@ -262,9 +240,9 @@
 <script>
 import i18n from '../i18n';
 import Pop from '../components/Pop.vue';
-import FlowerPop from '../components/Flower_Pop.vue';
 
 import moment from '../plugins/moment.js';
+import { showDialog } from '../plugins/showDialog.js';
 
 
 import { Vika } from "@vikadata/vika";
@@ -282,10 +260,11 @@ export default {
     }
   },
   components: {
-    Pop, FlowerPop
+    Pop
   },
   data() {
     return {
+      showDialog: showDialog,
       isGetFinish: false,
       isGet: false,
       moment: moment, // 时间格式化
@@ -306,20 +285,6 @@ export default {
       todayNutrition: 0,
 
       isShowFunc: false,
-      isShowFeedbackWater : false,
-      feedbackWater: 0,
-      _zIndexWater: 1000,
-      isShowFeedbackLove: false,
-      feedbackLove: 0,
-      _zIndexLove: 1000,
-      isShowFeedbackSun: false,
-      feedbackSun: 0,
-      _zIndexSun: 1000,
-      isShowFeedbackNutrition: false,
-      feedbackNutrition: 0,
-      _zIndexNutrition: 1000,
-
-      _clickCount: 0,
 
       _randomNum: 1,
 
@@ -422,75 +387,75 @@ export default {
     },
 
     
-    _isUpdate (type, addNum, record) {
+    async _isUpdate (type, addNum, record) {
       let that = this;
       let data = null;
       record = record || false;
-      that._clickCount = that._clickCount + 1;
+      this.isShowFlower = true;
 
-      switch (type) {
-        case 'water':
-          // 判断localstorage是否有water值
-          data = localStorage.getItem('water');
-          if (parseInt(data) === 1) {
-            return false;
-          } else {
-            if (record) localStorage.setItem("water", 1);
-            that.updateGrowthData({ 'water': that.todayWater + addNum }, addNum);
-            that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum }, addNum);
-            return true;
-          }
-          break;
-        case 'love':
-          // 判断localstorage是否有love值
-          data = localStorage.getItem('love');
-          if (parseInt(data) === 1) {
-            return false;
-          } else {
-            if (record) localStorage.setItem("love", 1);
-            that.updateGrowthData({ 'love': that.todayLove + addNum }, addNum);
-            that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum }, addNum);
-            return true;
-          }
-          break;
-        case 'sun':
-          // 判断localstorage是否有sun值
-          data = localStorage.getItem('sun');
-          if (parseInt(data) === 1) {
-            return false;
-          } else {
-            if (record) localStorage.setItem("sun", 1);
-            that.updateGrowthData({ 'sun': that.todaySun + addNum }, addNum);
-            that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum }, addNum);
-            return true;
-          }
-          break;
-        case 'nutrition':
-          // 判断localstorage是否有nutrition值
-          data = localStorage.getItem('nutrition');
-          if (parseInt(data) === 1) {
-            return false;
-          } else {
-            if (record) localStorage.setItem("nutrition", 1);
-            that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum }, addNum);
-            that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum }, addNum);
-            return true;
-          }
-          break;
-        default:
-          break;
+      if (that.flowerData) {
+        switch (type) {
+          case 'water':
+            // 判断localstorage是否有water值
+            data = localStorage.getItem('water');
+            if (parseInt(data) === 1) {
+              return false;
+            } else {
+              if (record) localStorage.setItem("water", 1);
+              that.updateGrowthData({ 'water': that.todayWater + addNum }, addNum, 0);
+              that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum });
+              return true;
+            }
+            break;
+          case 'love':
+            // 判断localstorage是否有love值
+            data = localStorage.getItem('love');
+            if (parseInt(data) === 1) {
+              return false;
+            } else {
+              if (record) localStorage.setItem("love", 1);
+              that.updateGrowthData({ 'love': that.todayLove + addNum }, addNum, 1);
+              that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum });
+              return true;
+            }
+            break;
+          case 'sun':
+            // 判断localstorage是否有sun值
+            data = localStorage.getItem('sun');
+            if (parseInt(data) === 1) {
+              return false;
+            } else {
+              if (record) localStorage.setItem("sun", 1);
+              that.updateGrowthData({ 'sun': that.todaySun + addNum }, addNum, 2);
+              that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum });
+              return true;
+            }
+            break;
+          case 'nutrition':
+            // 判断localstorage是否有nutrition值
+            data = localStorage.getItem('nutrition');
+            if (parseInt(data) === 1) {
+              return false;
+            } else {
+              if (record) localStorage.setItem("nutrition", 1);
+              that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum }, addNum, 3);
+              that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum });
+              return true;
+            }
+            break;
+          default:
+            break;
+        }
       }
+
+
     },
 
-    async updateGrowthData (object, addNum) {
+    async updateGrowthData (object, addNum, fType) {
       let that = this;
       let str = await Object.keys(object)[0];
       str = str.replace(str[0],str[0].toUpperCase());
 
-      that[`isShowFeedback${str}`] = true;
-      setTimeout(() => {
-        that[`isShowFeedback${str}`] = false;
-      }, 2000)
       await growthDatasheet.records.update([
         {
           "recordId": "recmKtgZTf6eH",
@@ -501,23 +466,17 @@ export default {
           // console.log(response.data);
           that.growthData = response.data.records[0].fields;
           that._setTodayData(that.growthData);
-          that[`feedback${str}`] = addNum;
-          that[`_zIndex${str}`] = that._clickCount + 1;
+          that.showDialog(that.flowerData, addNum, fType);
         } else {
           console.error(response);
         }
       })
     },
 
-    async updateFlowerData (object, addNum) {
+    async updateFlowerData (object) {
       let that = this;
       // let str = await Object.keys(object)[0];
       // str = str.replace(str[0],str[0].toUpperCase());
-
-      // that[`isShowFeedback${str}`] = true;
-      // setTimeout(() => {
-      //   that[`isShowFeedback${str}`] = false;
-      // }, 2000)
 
       await flowerDatasheet.records.update([
         {
