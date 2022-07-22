@@ -137,8 +137,8 @@
                       <p class="flex-initial text-sm mr-3">
                         {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
                       </p>
-                      <p class="flex-initial text-sm ">
-                        {{ data.fields.citySN && data.fields.publicEmail ? JSON.parse(data.fields.citySN).cname  : '' }}
+                      <p v-show="data.fields.publicEmail" class="flex-initial text-sm " >
+                        {{ data.fields.citySN ? JSON.parse(data.fields.citySN).cname  : '' }}
                       </p>
                     </div>
                   </div>
