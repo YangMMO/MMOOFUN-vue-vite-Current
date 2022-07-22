@@ -395,7 +395,7 @@ export default {
       totalPage: 1, // 总页数
 
       isClickLike: false, // 是否点赞
-      likeMaxLength: 9999, // 点赞最大长度
+      likeMaxLength: 10, // 点赞最大长度
 
       // 寄语内容
       board: "::: align-center 🏄网上冲浪留下点什么再走吧😁🙈🍇",
@@ -479,7 +479,7 @@ export default {
       that.addLike = 0;
       that.likeData = null;
 
-      // 判断loclStorage的like 是否已经超过3次 如果超过3次则不能点赞
+      // 判断loclStorage的like 是否已经超过likeMaxLength次数
       if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
         if (localStorage.getItem("like") >= that.likeMaxLength) {
           that.setShowPop(i18n.t("bbs._.like_fail"), i18n.t("bbs._.over_like"), i18n.t("bbs._.close"));
