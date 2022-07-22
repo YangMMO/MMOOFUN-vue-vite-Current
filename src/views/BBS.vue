@@ -135,7 +135,7 @@
                         }}
                       </p>
                       <p class="flex-initial text-sm mr-3">
-                        {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
+                        {{ moment(data.fields.createDate).format('YYYY-MM-DD HH:mm') }}
                       </p>
                       <p v-show="data.fields.publicEmail" class="flex-initial text-sm " >
                         {{ data.fields.citySN ? JSON.parse(data.fields.citySN).cname  : '' }}
@@ -448,9 +448,6 @@ export default {
       // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
       let that = this;
       localStorage.setItem("submitNum", 0);
-      setTimeout(() => {
-        that.returnCitySN = document.returnCitySN
-      }, 1000);
   },
   methods: {
     // 设置POP提示
@@ -610,8 +607,8 @@ export default {
             "publicEmail": that.publicEmail,
             "blog": that.blog,
             "msg": that.msg,
-            "citySN": JSON.stringify(document.returnCitySN),
-            "device": JSON.stringify(that.returnCitySN),
+            "citySN": JSON.stringify(that.returnCitySN),
+            "device": JSON.stringify(ua2obj()),
             "createDate": Date.parse(new Date())
           }
         }
