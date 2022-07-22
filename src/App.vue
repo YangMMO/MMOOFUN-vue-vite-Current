@@ -251,7 +251,7 @@ export default {
     // 点击菜单
     onClickMenu () {
       this.isActiveMenu = !this.isActiveMenu
-    }
+    },
   },
 }
 </script>

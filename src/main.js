@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
+import axios from 'axios'
 
 
 // 加载remixicon图标
@@ -81,9 +82,11 @@ app.use(VMdPreview)
 
 app.component(VueFeather.name, VueFeather);
 
-
+app.config.globalProperties.$axios = axios
 
 app.mount('#app')
+
+
 
 
 

@@ -66,7 +66,7 @@
                         }}
                       </p>
                       <p class="flex-initial text-sm select-none">
-                        {{ moment(data.fields.createDate).format('YYYY-MM-D h:mm') }}
+                        {{ moment(data.fields.createDate).format('YYYY-MM-DD h:mm') }}
                       </p>
                     </div>
                   </div>
@@ -346,6 +346,8 @@ import Pop from '../components/Pop.vue';
 import TipsPop from '../components/TipsPop.vue';
 
 import moment from '../plugins/moment.js';
+// import getUserAgent from '../plugins/getUserAgent.js';
+import ua2obj from 'ua2obj'
 
 import getProgress from '../components/getProgress.vue';
 import getError from '../components/getError.vue';
@@ -355,6 +357,8 @@ import { Vika } from "@vikadata/vika";
 import { inject } from '@vue/runtime-core';
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
 const msgDatasheet = vika.datasheet("dstuYoi5jUdh0Z0Fvq");
+
+
 
 
 export default {
@@ -375,9 +379,9 @@ export default {
   inject: ['app'],
   data() {
     let flower = inject('app').$refs.fl;
-
     return {
       // lang: this.lang,
+      // app: inject('app'),
       moment: moment, // 时间格式化
       isGetFinish: false, // 是否获取完成
       isGet: false, // 是否获取中
@@ -592,6 +596,8 @@ export default {
             "publicEmail": that.publicEmail,
             "blog": that.blog,
             "msg": that.msg,
+            "citySN": JSON.stringify(document.returnCitySN),
+            "device": JSON.stringify(ua2obj()),
             "createDate": Date.parse(new Date())
           }
         }
