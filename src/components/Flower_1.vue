@@ -3,12 +3,12 @@
     <div class="container ml-auto mr-auto">
       <!-- 背景模糊层 -->
       <transition name="translateY">
-        <div v-if="isShowFlower" class="absolute bg-purple-500 -bottom-12 left-0 w-full h-full transition-all duration-75 ease-linear filter blur-3xl"></div>
+        <div v-if="isShowFlower && flowerData" class="absolute bg-purple-500 -bottom-12 left-0 w-full h-full transition-all duration-75 ease-linear filter blur-3xl"></div>
       </transition>
       <transition name="translateY">
-        <div v-if="isShowFlower" class="relative ">
+        <div v-if="isShowFlower && flowerData" class="relative ">
           <div class="absolute -bottom-16 -right-0 sm:-right-1 transition-all duration-75 ease-linear flex flex-col">
-            <div class="flower relative cursor-pointer filter blur-3xl" @click="isShowFunc = !isShowFunc">
+            <div class="flower relative cursor-pointer filter blur-3xl" >
               <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
               <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
               <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
@@ -188,7 +188,7 @@
                     { animation: `star-100f0cfd ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
                   
                   <transition name="guide-opa">
-                    <div v-if="isGuide " @click="isGuide = false" class="absolute w-full h-full">
+                    <div v-if="isGuide " @click="isGuide = false;_isUpdate('nutrition', 1)" class="absolute w-full h-full">
                         <div class="guide bg absolute"  :style="[{
                       backgroundImage: `url(${isShowFlower ? flowerData.flower_img[15].url : ''})` }]"></div>
                       </div>

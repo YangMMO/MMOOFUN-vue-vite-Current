@@ -30,7 +30,6 @@
 
 <script>
 import i18n from '../i18n';
-import designJson from '../assets/json/design.json';
 
 import Ratio from '../components/Ratio.vue'
 import Flygame from '../components/Flygame.vue'

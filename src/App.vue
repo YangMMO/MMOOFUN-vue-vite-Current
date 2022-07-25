@@ -264,7 +264,7 @@ export default {
           clearInterval(timer);
         }
       }, 10);
-    }
+    },
   },
 }
 </script>

@@ -47,6 +47,7 @@ export default {
             prev: '上一页',
             next: '下一页',
             like: '点赞',
+            foot: '很孬',
             floor: '楼',
             _: {
                 submit_success: '提交成功',
@@ -58,6 +59,8 @@ export default {
                 over_submit: '今日提交次数已达上限',
                 like_fail: '点赞失败',
                 over_like: '今日点赞次数已达上限',
+                foot_fail: '踩踏失败',
+                over_foot: '今日踩踏次数已达上限',
                 submitting: '提交中...',
                 violation: '该留言含有违规或不雅用语，已被Ban掉！',
                 violationUser: '[Ban] 违规昵称',
@@ -144,6 +147,7 @@ export default {
             prev: 'Prev',
             next: 'Next',
             like: 'Like',
+            foot: 'Foot',
             floor: 'Floor',
             _: {
                 submit_success: 'Submit Success',
@@ -155,6 +159,8 @@ export default {
                 over_submit: 'The number of submissions has reached the limit',
                 like_fail: 'Like Fail',
                 over_like: 'The number of likes has reached the limit',
+                foot_fail: 'Stampede failed',
+                over_foot: 'The number of stampedes has reached the limit',
                 submitting: 'Submitting...',
                 violation: 'This message contains illegal or inappropriate content, and has been banned!',
                 violationUser: '[Ban] Violation User Name',

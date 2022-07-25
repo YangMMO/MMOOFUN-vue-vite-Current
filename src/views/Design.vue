@@ -12,7 +12,7 @@
 
 <script>
 import i18n from '../i18n';
-import designJson from '../assets/json/design.json';
+// import designJson from '../assets/json/design.json';
 
 import ShowDesign from '../components/ShowDesign.vue';
 
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      datas: JSON.parse(JSON.stringify(designJson)),
+      // datas: JSON.parse(JSON.stringify(designJson)),
     }
   },
 }

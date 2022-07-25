@@ -12,7 +12,7 @@
      </div>
     
       <!-- 墙面 -->
-      <div class="mb-9">
+      <div class="mb-6 ">
         <!-- <div class="text-xl font-semibold mb-3">{{ $t("bbs.sendWord") }} </div> -->
         <div class="box sticky  overflow-hidden text-black dark:text-black">
           <div class="py-12 px-3 bg-stripes bg-stripes-white">
@@ -29,12 +29,42 @@
       <div v-else-if="isGet === true && isGetFinish === false">
         <get-error></get-error>
       </div>
+      
 
       <!-- 渲染读取的数据 -->
-      <div v-else>
+      <div v-else class="mb-9 px-4 py-12 sm:px-8 bg-white dark:bg-slate-900  transition-all duration-75 ease-linea box">
+        <!-- 页数 -->
+        <div class="flex box-b items-center justify-center space-x-3 ">
+          <!-- 首页 -->
+          <div @click="currentPage <= 1 ? retrun : getBBS(1)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer transition-all duration-75 ease-linea']">
+            <i class="ri-arrow-left-s-line"></i>
+          </div>
 
-        <div class="flex flex-col">
-          <div v-for="(data, index) in bbsData" :key="index" class="mb-12 box">
+          <!-- 上一页 -->
+          <div @click="currentPage <= 1 ? retrun : getBBS(--currentPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box transition-all duration-75 ease-linea', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === 1 }, { 'cursor-pointer': currentPage !== 1 }]">
+            <i class="ri-arrow-left-s-line"></i>
+          </div>
+
+          <!-- 页码 -->
+          <div class="flex-1 text-center">{{ currentPage }} / {{ totalPage }}</div>
+
+          <!-- 下一页 -->
+          <div @click="currentPage >= totalPage ? retrun : getBBS(++currentPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer transition-all duration-75 ease-linea', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === totalPage }, { 'cursor-pointer': currentPage !== totalPage }]">
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+
+          <!-- 尾页 -->
+          <div @click="currentPage >= totalPage ? retrun : getBBS(totalPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer cursor-pointer transition-all duration-75 ease-linea']">
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+        </div>
+
+        <div class="flex flex-col py-12">
+          <div v-for="(data, index) in bbsData" :key="index" class="mb-12 last:mb-3 box ">
             <!-- 被BAN -->
             <div v-show="data.fields.ban">
               <div class="box flex mb-3">
@@ -48,7 +78,7 @@
                   <div class="flex justify-center flex-1 flex-col">
                     <div class="flex-1">
                       <div class="">
-                        <h3 class="text-lg align-middle inline-block font-semibold icon-font-size">
+                        <h3 class="text-lg align-middle inline-block font-semibold icon-font-size transition-all duration-75 ease-linea text-black dark:text-white">
                           {{ data.fields.violationUsername ? $t("bbs._.violationUser") :data.fields.bbsUsername }}
                         </h3>
                         <i class="ri-ghost-smile-line align-middle icon-font-size opacity-0"></i>
@@ -86,16 +116,25 @@
                     {{ $t("bbs._.violation") }}
                   </div>
                   
-                  <div class="w-full box bg-slate-100 mt-6 flow-root divide-x-2 divide-x-reverse">
+                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-right sm:text-left transition-all duration-75 ease-linear">
+
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-4 py-3 h-full cursor-not-allowed inline-block float-right sm:float-none text-gray-300">
-                      <!-- <i v-show="isClickLike" class="ri-loader-4-line align-middle animate-spin text-blue-500 inline-block"></i> -->
-                      <i  class="ri-thumb-up-line align-middle   "></i>
+                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-gray-300 ">
+                      <i  class="ri-thumb-up-fill align-middle"></i>
                       <span class="ml-2 sm:ml-1">
-                        {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }}
+                        <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
+                        {{ $t("bbs.like") + " " + data.fields.like}}
                       </span>
                     </div>
 
+                    <!-- 踩踩 -->
+                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-gray-300">
+                      <i  class="ri-thumb-down-fill align-middle"></i>
+                      <span class="ml-2 sm:ml-1">
+                        <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
+                        {{ $t("bbs.foot") + " " + data.fields.foot}}
+                      </span>
+                    </div>
                   </div>
 
                 </div>
@@ -108,7 +147,7 @@
               <div class="box flex mb-3">
                 <!-- 头像 -->
                 <div :class="['avatar mr-3 sm:mr-6 transition-all duration-75 ease-linear', { 'gradient-gold': data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-drill': !data.fields.publicEmail && !data.fields.violationUsername }, { 'gradient-silver': data.fields.violationUsername }, { 'gradient-silver': data.fields.publicEmail && data.fields.violationUsername }]">
-                  <i v-show="data.fields.publicEmail" class="ri-ghost-smile-line align-middle icon-font-size"></i>
+                  <i v-show="data.fields.publicEmail" class="ri-bear-smile-line align-middle icon-font-size"></i>
                   <i v-show="!data.fields.publicEmail" class="ri-spy-line align-middle icon-font-size "></i>
                 </div>
 
@@ -117,7 +156,7 @@
                   <div class="flex justify-center flex-1 flex-col">
                     <div class="flex-1">
                       <div class="">
-                        <h3 class="text-lg align-middle inline-block font-semibold icon-font-size">
+                        <h3 class="text-lg align-middle inline-block font-semibold icon-font-size transition-all duration-75 ease-linea text-black dark:text-white">
                           {{ data.fields.violationUsername ? $t("bbs._.violationUser") :data.fields.bbsUsername }}
                         </h3>
                         <i class="ri-ghost-smile-line align-middle icon-font-size opacity-0"></i>
@@ -148,7 +187,7 @@
               </div>
               <!-- {{ data.fields }} -->
 
-              <div class="box flex">
+              <div class="box flex ">
                 
                 <!-- 响应占位元素 -->
                 <div class="avatar mr-6 flex-shrink-0 hidden sm:block"></div>
@@ -178,13 +217,22 @@
                     </div>
                   </div>
                   
-                  <div class="w-full box bg-slate-100 mt-6 flow-root divide-x-2 divide-x-reverse">
+                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-right sm:text-left transition-all duration-75 ease-linear">
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-4 py-3 h-full cursor-pointer inline-block float-right sm:float-none text-gray-600" @click="like(data.fields.id)">
-                      <!-- <i v-show="isClickLike" class="ri-loader-4-line align-middle animate-spin text-blue-500 inline-block"></i> -->
-                      <i  class="ri-thumb-up-line align-middle   "></i>
+                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-blue-500 " @click="like(data.fields.id)">
+                      <i  class="ri-thumb-up-fill align-middle"></i>
                       <span class="ml-2 sm:ml-1">
-                        {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }}
+                        <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
+                        {{ $t("bbs.like") + " " + data.fields.like}}
+                      </span>
+                    </div>
+
+                    <!-- 踩踩 -->
+                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-purple-500" @click="foot(data.fields.id)">
+                      <i  class="ri-thumb-down-fill align-middle"></i>
+                      <span class="ml-2 sm:ml-1">
+                        <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
+                        {{ $t("bbs.foot") + " " + data.fields.foot}}
                       </span>
                     </div>
 
@@ -200,28 +248,41 @@
 
 
         <!-- 页数 -->
-        <div class="flex mb-6 items-center justify-center">
+        <div class="flex items-center justify-center  space-x-3 ">
+          <!-- 首页 -->
+          <div @click="currentPage <= 1 ? retrun : getBBS(1)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer']">
+            <i class="ri-arrow-left-s-line"></i>
+          </div>
+
           <!-- 上一页 -->
-          <div @click="currentPage <= 1 ? retrun : getBBS(currentPage--)"
-            :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === 1 }, { 'cursor-pointer': currentPage !== 1 }]">
-            {{ $t("bbs.prev") }}
+          <div @click="currentPage <= 1 ? retrun : getBBS(--currentPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === 1 }, { 'cursor-pointer': currentPage !== 1 }]">
+            <i class="ri-arrow-left-s-line"></i>
           </div>
 
           <!-- 页码 -->
-          <div class="mx-6">{{ currentPage }} / {{ totalPage }}</div>
+          <div class="flex-1 text-center">{{ currentPage }} / {{ totalPage }}</div>
 
           <!-- 下一页 -->
-          <div @click="currentPage >= totalPage ? retrun : getBBS(currentPage++)"
-            :class="['border-2 border-gray-900 dark:border-white px-4 py-1 box cursor-pointer', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === totalPage }, { 'cursor-pointer': currentPage !== totalPage }]">
-            {{ $t("bbs.next") }}
+          <div @click="currentPage >= totalPage ? retrun : getBBS(++currentPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer', { 'cursor-default border-gray-300 text-gray-300 dark:border-gray-600 dark:text-gray-600': currentPage === totalPage }, { 'cursor-pointer': currentPage !== totalPage }]">
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+
+          <!-- 尾页 -->
+          <div @click="currentPage >= totalPage ? retrun : getBBS(totalPage)"
+            :class="['border-2 border-gray-900 dark:border-white page-icon box cursor-pointer cursor-pointer']">
+            <i class="ri-arrow-right-s-line"></i>
           </div>
         </div>
+
       </div>
 
 
       <!-- 提交留言 -->
       <div class="flex flex-col box select-none mb-6 ">
-        <div class="text-xl font-semibold mb-6">{{ $t("bbs.message") }} </div>
+        <div class="text-xl font-semibold mb-6 text-center">{{ $t("bbs.message") }} </div>
 
         <!-- 用户名昵称 -->
         <label class="mb-3">{{ $t("bbs.user") }} <span class="text-red-500">*</span></label>
@@ -397,6 +458,8 @@ export default {
 
       isClickLike: false, // 是否点赞
       likeMaxLength: 10, // 点赞最大长度
+      isClickFoot: false, // 是否点赞
+      footMaxLength: 2, // 点赞最大长度
 
       // 寄语内容
       board: "::: align-center 🏄网上冲浪留下点什么再走吧😁🙈🍇",
@@ -431,7 +494,7 @@ export default {
     }
   },
   created() {
-    this.getBBS();
+    this.getBBS(this.currentPage);
     
   },
   watch: {
@@ -474,6 +537,68 @@ export default {
         return false;
       }
     },
+    // 踩踩
+    async foot(id) {
+      let that = this;
+      that.addFoot = 0;
+      that.footData = null;
+
+      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (localStorage.getItem("foot") >= that.footMaxLength) {
+          that.setShowPop(i18n.t("bbs._.foot_fail"), i18n.t("bbs._.over_foot"), i18n.t("bbs._.close"));
+          return;
+        }
+      } else {
+        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
+        localStorage.setItem("foot", 0);
+      }
+
+      if (that.isClickFoot) {
+        return;
+      }
+      that.isClickFoot = true;
+
+      msgDatasheet.records.query({
+        viewId: "viwhuh8Q1ikXw",
+        pageSize: 1,
+        filterByFormula: `{id} = ${id}`,
+      }).then(response => {
+        if (response.success) {
+          that.footData = response.data.records[0];
+
+          msgDatasheet.records.update([
+            {
+              "recordId": that.footData.recordId,
+              "fields": {
+                "foot": that.footData.fields.foot + 1,
+              }
+            },
+          ]).then(response => {
+            if (response.success) {
+
+              // console.log('踩踏成功');
+              that.isClickFoot = false;
+              that.getBBS();
+              localStorage.setItem("foot", parseInt(localStorage.getItem("foot")) + 1);
+              setTimeout(() => {
+                that.flower._isUpdate('love', 1)
+              }, 0);
+
+              // console.log(response.data);
+            } else {
+              that.isClickFoot = false;
+              console.error(response);
+            }
+          })
+
+          // console.log(that.footData);
+        } else {
+          console.error(response);
+        }
+
+      });
+    },
+
     // 点赞
     async like(id) {
       let that = this;
@@ -658,7 +783,16 @@ export default {
     async getBBS(currentPage) {
       let success = false;  // 是否获取成功
       const that = this;
-      that.currentPage = that.currentPage || currentPage; // 当前页码
+
+
+      // 已请求
+      if (that.isGet) {
+        that.isGet = false;
+        that.isGetFinish = false;
+      }
+
+      that.currentPage = currentPage; // 当前页码
+
 
       // design
       await msgDatasheet.records.query({
@@ -684,6 +818,7 @@ export default {
           // console.log(response);
         } else {
           success = false;
+          that.isGetFinish = false; // 获取失败
 
           console.error(response);
         }
@@ -707,6 +842,29 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.page-icon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.4rem;
+  }
+
+  &:nth-child(1) i, &:nth-child(2) i {
+    transform: translate(-50%, -50%);
+  }
+
+  &:nth-child(4) i, &:nth-child(5) i {
+    transform: translate(-47%, -50%);
+  }
+}
 
 .icon-size {
   font-size: 6rem;
