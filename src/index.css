@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes star-s {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.container {
+    padding: 0px 12px 0 12px;
+}
+
+.container-p {
+    padding: 0px 12px 0 12px;
+}

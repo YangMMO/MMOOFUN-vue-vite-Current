@@ -185,7 +185,7 @@
                     { height: `${_getRandom(18,26)}px` },
                     { top: `${_getRandom(12,280)}px` },
                     { left: `${_getRandom(4,96)}px` },
-                    { animation: `star-s-6056f8cc ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
+                    { animation: `star-s ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
                   
                   <transition name="guide-opa">
                     <div v-if="isGuide " @click="isGuide = false;_isUpdate('nutrition', 1)" class="absolute w-full h-full">
@@ -1021,22 +1021,6 @@ export default {
   }
 
 }
-@keyframes star-s {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.container {
-  padding: 0px 12px 0 12px;
-}
 
-.container-p {
-  padding: 0px 12px 0 12px;
-}
 
 </style>
