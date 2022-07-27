@@ -170,7 +170,7 @@
             <!-- 花 -->
 
               
-            <div  class="h-0 potw">
+            <div class="h-0 potw">
               <div class="absolute -bottom-1 -right-0 sm:-right-1 transition-all duration-75 ease-linear flex flex-col">
 
                 <div class="flower relative cursor-pointer" @click="isShowFunc = !isShowFunc">
@@ -180,7 +180,7 @@
                   <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
 
                   <div v-for="item in _randomNum" :key="item" class="absolute star" :style="[{
-                    backgroundImage: `url(${isShowFlower ? flowerData.flower_img[9].url : ''})` },
+                    backgroundImage: `url(${isShowFlower && flowerData ? flowerData.flower_img[9].url : ''})` },
                     { width: `${_getRandom(16,24)}px` },
                     { height: `${_getRandom(18,26)}px` },
                     { top: `${_getRandom(12,280)}px` },
@@ -190,7 +190,7 @@
                   <transition name="guide-opa">
                     <div v-if="isGuide " @click="isGuide = false;_isUpdate('nutrition', 1)" class="absolute w-full h-full">
                         <div class="guide bg absolute"  :style="[{
-                      backgroundImage: `url(${isShowFlower ? flowerData.flower_img[15].url : ''})` }]"></div>
+                      backgroundImage: `url(${isShowFlower && flowerData ? flowerData.flower_img[15].url : ''})` }]"></div>
                       </div>
                   </transition>
                 </div>

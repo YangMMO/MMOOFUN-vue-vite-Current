@@ -578,7 +578,7 @@ export default {
 
               // console.log('踩踏成功');
               that.isClickFoot = false;
-              that.getBBS();
+              that.getBBS(that.currentPage);
               localStorage.setItem("foot", parseInt(localStorage.getItem("foot")) + 1);
               setTimeout(() => {
                 that.flower._isUpdate('love', 1)
@@ -641,12 +641,13 @@ export default {
 
               // console.log('点赞成功');
               that.isClickLike = false;
-              that.getBBS();
+              that.getBBS(that.currentPage);
               localStorage.setItem("like", parseInt(localStorage.getItem("like")) + 1);
 
               // that.flower._isUpdate('nutrition', 1)
               setTimeout(() => {
                 that.flower._isUpdate('nutrition', 2)
+                // that.flower._isUpdate('water', 1)
               }, 0);
               setTimeout(() => {
                 that.flower._isUpdate('water', 1)
@@ -744,7 +745,7 @@ export default {
           // console.log(response.data);
 
           // 提交成功后再次获取BBS数据
-          that.getBBS();
+          that.getBBS(1);
 
           // 提交成功后清空输入框
           that.user = "";
@@ -763,13 +764,15 @@ export default {
 
           setTimeout(() => {
             that.flower._isUpdate('nutrition', 2)
+            // that.flower._isUpdate('love', 1)
+            // that.flower._isUpdate('water', 1)
           }, 0);
           setTimeout(() => {
-            that.flower._isUpdate('love', 1)
+            
           }, 4000);
           setTimeout(() => {
-            that.flower._isUpdate('water', 1)
-          }, 4000);
+            
+          }, 8000);
 
         } else {
           // console.log('提交失败');
@@ -804,7 +807,9 @@ export default {
           success = true; // 获取成功
           that.bbsData = response.data.records;
 
+
           that.bbsDataLength = response.data.total;   // 获取留言总数
+          // console.log(response.data);
 
           // 计算总页数
           that.totalPage = that.bbsDataLength % that.getNum === 0 ? that.bbsDataLength / that.getNum : Math.floor(that.bbsDataLength / that.getNum) + 1; 

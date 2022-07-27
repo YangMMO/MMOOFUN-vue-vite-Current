@@ -48,7 +48,6 @@ export default {
   components: { Ratio,  More, Ratiofigma },
   data() {
     return {
-      datas: JSON.parse(JSON.stringify(designJson)),
       currentTab: 'ratio',
       toolsTabs: ['ratio', 'ratioFigma','more', ],
     }

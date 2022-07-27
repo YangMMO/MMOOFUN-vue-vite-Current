@@ -148,7 +148,7 @@ export default {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
       setTimeout(() => {
-        that.$refs.fl._isUpdate('sun', 2)
+          that.$refs.fl._isUpdate('sun', 2)
       }, 2000);
 
       setTimeout(() => {
