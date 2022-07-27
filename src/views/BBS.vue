@@ -69,7 +69,7 @@
             <div v-show="data.fields.ban">
               <div class="box flex mb-3">
                 <!-- 头像 -->
-                <div :class="['avatar mr-3 sm:mx-6 transition-all duration-75 ease-linear', { 'gradient-silver': data.fields.publicEmail }, { 'gradient-silver': !data.fields.publicEmail }]">
+                <div :class="['avatar mr-3 sm:mr-6 transition-all duration-75 ease-linear', { 'gradient-silver': data.fields.publicEmail }, { 'gradient-silver': !data.fields.publicEmail }]">
                   <i class="ri-skull-line align-middle icon-font-size"></i>
                 </div>
 
@@ -109,17 +109,17 @@
               <div class="box flex">
                 
                 <!-- 响应占位元素 -->
-                <div class="avatar mx-6 flex-shrink-0 hidden sm:block"></div>
+                <div class="avatar mr-6 flex-shrink-0 hidden sm:block"></div>
                 
                 <div class="w-full">
                   <div class="mb-3 py-3 sm:py-0 text-red-400 dark:text-red-400 transition-all duration-75 ease-linear">
                     {{ $t("bbs._.violation") }}
                   </div>
                   
-                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-right sm:text-left transition-all duration-75 ease-linear">
+                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear">
 
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-gray-300 ">
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300 ">
                       <i  class="ri-thumb-up-fill align-middle"></i>
                       <span class="ml-2 sm:ml-1">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
@@ -128,8 +128,8 @@
                     </div>
 
                     <!-- 踩踩 -->
-                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-gray-300">
-                      <i  class="ri-thumb-down-fill align-middle"></i>
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300">
+                      <i  class="ri-thumb-down-fill align-text-bottom"></i>
                       <span class="ml-2 sm:ml-1">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
@@ -217,10 +217,10 @@
                     </div>
                   </div>
                   
-                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-right sm:text-left transition-all duration-75 ease-linear">
+                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear">
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-blue-500 " @click="like(data.fields.id)">
-                      <i  class="ri-thumb-up-fill align-middle"></i>
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block" @click="like(data.fields.id)">
+                      <i  class="ri-thumb-up-line align-middle"></i>
                       <span class="ml-2 sm:ml-1">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
                         {{ $t("bbs.like") + " " + data.fields.like}}
@@ -228,8 +228,8 @@
                     </div>
 
                     <!-- 踩踩 -->
-                    <div class="text-base sm:text-sm select-none px-3 py-3 h-full cursor-pointer inline-block text-purple-500" @click="foot(data.fields.id)">
-                      <i  class="ri-thumb-down-fill align-middle"></i>
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block" @click="foot(data.fields.id)">
+                      <i  class="ri-thumb-down-line align-text-bottom"></i>
                       <span class="ml-2 sm:ml-1">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
@@ -580,9 +580,9 @@ export default {
               that.isClickFoot = false;
               that.getBBS(that.currentPage);
               localStorage.setItem("foot", parseInt(localStorage.getItem("foot")) + 1);
-              setTimeout(() => {
-                that.flower._isUpdate('love', 1)
-              }, 0);
+
+              that.flower._isUpdate('love', 1)
+
 
               // console.log(response.data);
             } else {
@@ -644,15 +644,10 @@ export default {
               that.getBBS(that.currentPage);
               localStorage.setItem("like", parseInt(localStorage.getItem("like")) + 1);
 
-              // that.flower._isUpdate('nutrition', 1)
-              setTimeout(() => {
-                that.flower._isUpdate('nutrition', 2)
-                // that.flower._isUpdate('water', 1)
-              }, 0);
-              setTimeout(() => {
-                that.flower._isUpdate('water', 1)
-              }, 4000);
-                              
+
+              that.flower._isUpdate('nutrition', 2)
+              that.flower._isUpdate('water', 1)
+
 
               // console.log(response.data);
             } else {
@@ -762,17 +757,9 @@ export default {
           
           parseInt(localStorage.getItem("submitNum")) + 1);
 
-          setTimeout(() => {
-            that.flower._isUpdate('nutrition', 2)
-            // that.flower._isUpdate('love', 1)
-            // that.flower._isUpdate('water', 1)
-          }, 0);
-          setTimeout(() => {
-            
-          }, 4000);
-          setTimeout(() => {
-            
-          }, 8000);
+          that.flower._isUpdate('nutrition', 2)
+          that.flower._isUpdate('love', 1)
+          that.flower._isUpdate('water', 1)
 
         } else {
           // console.log('提交失败');

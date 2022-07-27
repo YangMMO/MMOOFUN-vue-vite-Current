@@ -108,6 +108,7 @@ import moment from "./plugins/moment"
 import Flower1 from './components/Flower_1.vue'
 
 import { Vika } from "@vikadata/vika";
+import { watch } from '@vue/runtime-core'
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
 const webDatasheet = vika.datasheet("dstG8GQp2tuf0ZoqG2");
 
@@ -147,25 +148,33 @@ export default {
     if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
       localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
-      setTimeout(() => {
+
+      watch(() => {
+        return that.$refs.fl.isShowFlower
+      }, (isShowFlower) => {
+        if (isShowFlower) {
           that.$refs.fl._isUpdate('sun', 2)
-      }, 2000);
+          that.$refs.fl._isUpdate('love', 1)
+          that.$refs.fl._isUpdate('water', 1)
+        }
+      })
+      // that.$refs.fl.isShowFlower = true;
 
-      setTimeout(() => {
-        that.$refs.fl._isUpdate('love', 1)
-      }, 6000);
+    //   setTimeout(() => {
+    //       that.$refs.fl._isUpdate('sun', 2)
+    //   }, 2000);
 
-      setTimeout(() => {
-        that.$refs.fl._isUpdate('water', 1)
-      }, 10000);
+    //   setTimeout(() => {
+    //     that.$refs.fl._isUpdate('love', 1)
+    //   }, 6000);
+
+    //   setTimeout(() => {
+    //     that.$refs.fl._isUpdate('water', 1)
+    //   }, 10000);
 
       // 更新
       this.isVisits = true;
     }
-
-    // setTimeout(() => {
-    //   that.$refs.fl.isShowFlower = false
-    // }, 10000);
     
     this._visitor();
 
@@ -219,7 +228,7 @@ export default {
     _scroll() {
       let that = this;
       that._scrollTop = window.scrollY
-      if (that.firstVisit && that._scrollTop >= 400) {
+      if (that.firstVisit && that._scrollTop >= 600) {
         that.firstVisit = false
         that.$refs.fl.isShowFlower = false
       }

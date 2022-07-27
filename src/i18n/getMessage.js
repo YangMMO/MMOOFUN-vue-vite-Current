@@ -46,8 +46,8 @@ export default {
             message: '留言',
             prev: '上一页',
             next: '下一页',
-            like: '点赞',
-            foot: '很孬',
+            like: '赞',
+            foot: '孬',
             floor: '楼',
             _: {
                 submit_success: '提交成功',

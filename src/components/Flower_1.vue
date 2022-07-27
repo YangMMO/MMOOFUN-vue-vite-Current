@@ -504,6 +504,10 @@ export default {
 
     // 切换isShowFlower状态，1.5s
     toggleFlower() {
+      if (!this.flowerData) {
+        return;
+      }
+      
       if (this.isToggle) return;
       this.isToggle = true;
       this.isShowFlower = !this.isShowFlower;
@@ -707,12 +711,12 @@ export default {
 }
 
 .translateYPOP-leave-active {
-  animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -webkit-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -moz-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -ms-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -o-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  animation: translateYPOP-in .5s 2s reverse ease-in both;
+  animation: translateYPOP-in .5s 0s reverse ease-in both;
+  -webkit-animation: translateYPOP-in .5s 0s reverse ease-in both;
+  -moz-animation: translateYPOP-in .5s 0s reverse ease-in both;
+  -ms-animation: translateYPOP-in .5s 0s reverse ease-in both;
+  -o-animation: translateYPOP-in .5s 0s reverse ease-in both;
+  animation: translateYPOP-in .5s 0s reverse ease-in both;
 }
 
 @keyframes translateYPOP-in {
