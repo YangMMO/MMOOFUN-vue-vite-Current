@@ -69,7 +69,7 @@
       <!-- 设计 -->
       <ShowDesign></ShowDesign>
 
-      <!-- <div class="pb-6">
+      <div class="pb-6">
         <div
           class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
           <i class="ri-ruler-2-line text-3xl"></i>
@@ -84,7 +84,7 @@
           <br />
           敬请期待...
         </div>
-      </div> -->
+      </div>
 
     </div>
   </div>

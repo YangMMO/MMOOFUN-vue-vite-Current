@@ -1,6 +1,6 @@
 # MMOO.FUN
 
-如果你也想搭建一个网站，Fork一下!
+如果你也想参考下工程，Fork一下!
 
 ## 网站参考地址
 
@@ -21,7 +21,7 @@
 
 ## 提交代码
 
-    git add .
+    git add *
     git commit -m "提交信息"
     git push
 
