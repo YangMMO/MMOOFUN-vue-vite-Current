@@ -16,6 +16,7 @@ export default {
         },
         home: {
             watch: '前往观看',
+            download: '资源下载',
         },
         subscription: {
             sub: '订阅关注',
@@ -116,6 +117,7 @@ export default {
         },
         home: {
             watch: 'WATCH',
+            download: 'DOWNLOAD',
         },
         subscription: {
             sub: 'SUBSCRIPTION',

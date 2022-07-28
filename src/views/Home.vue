@@ -52,14 +52,24 @@
           </div>
         </div>
 
-        <img :src="data[1].fields.image[0].url" class="w-3/12 my-3 center m-auto select-none box">
-
+        <div class=" m-auto flex mt-3 mb-6 flex-col sm:flex-row transition-all duration-75 ease-linear">
+          <div  class="md:w-3/12 w-full box mr-3 mb-3 sm:mb-0 select-none transition-all duration-75 ease-linear">
+            <img :src="data[1].fields.image[0].url" class="md:ml-0 ml-auto md:mr-0 mr-auto md:w-full w-4/12 box transition-all duration-75 ease-linear border dark:border-transparent">
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-700 box flex-1 p-3 transition-all duration-75 ease-linear">
+            <h3 class="text-slate-400 text-base mb-2 transition-all duration-75 ease-linear">{{ $t("home.download") }}</h3>
+            <div class="flex flex-col ">
+              <a :href="data[2].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear"><i class="ri-folder-2-line icon-font-size align-middle"></i>{{ data[2].fields.title }}</a>
+              <a :href="data[3].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear"><i class="ri-folder-2-line icon-font-size align-middle"></i>{{ data[3].fields.title }}</a>
+            </div>
+          </div>
+        </div>
       </div>
     
       <!-- 设计 -->
       <ShowDesign></ShowDesign>
 
-      <div class="pb-6">
+      <!-- <div class="pb-6">
         <div
           class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
           <i class="ri-ruler-2-line text-3xl"></i>
@@ -74,7 +84,7 @@
           <br />
           敬请期待...
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
