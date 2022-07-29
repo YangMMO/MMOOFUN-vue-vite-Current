@@ -4,7 +4,6 @@ import router from './router'
 import i18n from './i18n'
 import axios from 'axios'
 
-
 // 加载remixicon图标
 import 'remixicon/fonts/remixicon.css'
 
@@ -87,6 +86,7 @@ app.config.globalProperties.$axios = axios
 app.mount('#app')
 
 
+// ---------------------------------------------
 
 
 
