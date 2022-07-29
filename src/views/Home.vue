@@ -87,7 +87,7 @@
           <div class="bg-slate-100 dark:bg-slate-700 box flex-1 p-3 transition-all duration-75 ease-linear">
             <h3 class="text-slate-400 text-base mb-2 transition-all duration-75 ease-linear">{{ $t("home.download") }}</h3>
             <div class="flex flex-col text-sm space-y-1 " v-for="(item, index) in data" :key="index" v-show="index >= 2">
-              <a :href="data[2].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear flex place-items-center">
+              <a :href="data[index].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear flex place-items-center">
                 <i class="ri-folder-2-line text-base"></i>
                 <span class="">{{ data[index].fields.title }}</span>
               </a>
