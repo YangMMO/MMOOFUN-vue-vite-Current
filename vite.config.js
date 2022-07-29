@@ -55,12 +55,14 @@ export default defineConfig({
     ],
   },
   server: {
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://api.bilibili.com/x/relation/followers?vmid=5612894&pn=1&ps=50&order=asc',
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\/api/, '')
-    //   }
-    // }
+    proxy: {
+      '/bili': {
+        target: 'https://api.bilibili.com/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/bili/, '')
+      },
+
+      // https://elec.bilibili.com/api/query.rank.do?mid=5612894
+    }
   }
 })

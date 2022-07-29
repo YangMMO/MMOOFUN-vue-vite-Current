@@ -102,7 +102,6 @@
 <script>
 import i18n from "./i18n"
 import routers from "./router"
-// import requests from "./api/index.js"
 
 import moment from "./plugins/moment"
 
@@ -134,7 +133,8 @@ export default {
       moment: moment,
       visitor: 0,
       isVisits: false,
-      firstVisit: true
+      firstVisit: true,
+
     }
   },
   created() {
@@ -142,21 +142,6 @@ export default {
     let that = this
     window.addEventListener("resize", this._resize);
     window.addEventListener("scroll", that._scroll);
-
-    // requests({
-    //     url: '/api',
-    // }).then(res => {
-    //     // state.tableData = res.data
-    //     console.log(res);
-    // })
-
-    // this.$axios.get('/bilibili/api/query.rank.do?mid=5612894')
-    // .then((response) => {
-    //   console.log(response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
 
   },
   async mounted() {

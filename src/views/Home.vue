@@ -31,9 +31,10 @@
       <div v-else>
         <div class="bg-slate-100 dark:bg-slate-700 box overflow-hidden transition-all duration-75 ease-linear">
           <div class="relative select-none">
-            <!-- Arnold图片 -->
 
+            <!-- Arnold图片 -->
             <img :src="data[0].fields.image[0].url" />
+
             <!-- 按钮 -->
             <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
               <a :href="data[0].fields.url" target="_blank"
@@ -42,13 +43,40 @@
                 <i class="ri-bilibili-line icon-font-size pr-2"></i>
                 <span class="font-semibold ">{{ $t("home.watch") }}</span>
               </a>
-              <!-- <div>border-2</div> -->
             </div>
           </div>
-          <div class="p8 text-xs text-slate-400 text-center">
-            <i
-              class="ri-error-warning-line align-middle pr-1 text-xs"></i>
-              {{ data[0].fields.description }}
+
+          <!-- 视频数据 -->
+          <div v-show="bili" class="px-3 pt-3 pb-1 flex text-sm text-slate-400 justify-center space-x-4">
+            <div class="flex place-items-center">
+              <i class="ri-youtube-line pr-1 text-base"></i>
+              <span>{{ formatNum(bili.stat.view) }}</span>
+            </div>
+            <div class="flex place-items-center">
+              <i class="ri-message-2-line pr-1 text-base"></i>
+              <span>{{ formatNum(bili.stat.danmaku) }}</span>
+            </div>
+            <div class="flex place-items-center">
+              <i class="ri-thumb-up-line pr-1 text-base"></i>
+              <span>{{ formatNum(bili.stat.like) }}</span>
+            </div>
+            <div class="flex place-items-center">
+              <i class="ri-money-cny-circle-line pr-1 text-base"></i>
+              <span>{{ formatNum(bili.stat.coin) }}</span>
+            </div>
+            <div class="flex place-items-center">
+              <i class="ri-star-line pr-1 text-base"></i>
+              <span>{{ formatNum(bili.stat.favorite) }}</span>
+            </div>
+          </div>
+
+          <!-- 描述 -->
+          <div class="px-3 pb-3 text-xs text-slate-400 text-center">
+            <!-- <i
+              class="ri-error-warning-line align-middle pr-1 text-xs"></i> -->
+              <span>
+                {{ data[0].fields.description }}
+              </span>
           </div>
         </div>
 
@@ -58,9 +86,11 @@
           </div>
           <div class="bg-slate-100 dark:bg-slate-700 box flex-1 p-3 transition-all duration-75 ease-linear">
             <h3 class="text-slate-400 text-base mb-2 transition-all duration-75 ease-linear">{{ $t("home.download") }}</h3>
-            <div class="flex flex-col ">
-              <a :href="data[2].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear"><i class="ri-folder-2-line icon-font-size align-middle"></i>{{ data[2].fields.title }}</a>
-              <a :href="data[3].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear"><i class="ri-folder-2-line icon-font-size align-middle"></i>{{ data[3].fields.title }}</a>
+            <div class="flex flex-col text-sm space-y-1 " v-for="(item, index) in data" :key="index" v-show="index >= 2">
+              <a :href="data[2].fields.cloud" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-white transition-all duration-75 ease-linear flex place-items-center">
+                <i class="ri-folder-2-line text-base"></i>
+                <span class="">{{ data[index].fields.title }}</span>
+              </a>
             </div>
           </div>
         </div>
@@ -126,10 +156,15 @@ export default {
       data: null,
       isGetFinish: false,
       isGet: false,
+
+      bili: null
     }
   },
   created() {
     this.getHomeData();
+    this.getBiliData();
+
+
   },
   methods: {
     // 获取首页数据
@@ -138,7 +173,8 @@ export default {
       const that = this;
 
       // 请求数据
-      await homeDatasheet.records.query({ viewId: "viwgoAco0PAox"}).then(response => {
+      await homeDatasheet.records.query({ viewId: "viwgoAco0PAox"})
+      .then(response => {
         if (response.success) {
           banner = true;
           that.data = response.data.records;
@@ -157,7 +193,63 @@ export default {
         // 已请求完成
         that.isGetFinish = true;
       }
+    },
+
+    // 获取b站 bvid=BV1Ar4y1F7JH 数据
+    getBiliData() {
+      let that = this;
+      this.$axios.get('/bili/x/web-interface/view?bvid=BV1Ar4y1F7JH')
+      .then((response) => {
+        that.bili = response.data.data
+        // console.log(that.bili);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+      // this.$cookies.set("buvid3", "001D0F7E-EE79-C42F-ECB7-61F2142A99D471300infoc", "/", ".bilibili.com");
+      // this.$cookies.set("_uuid", "D961D1078-E10D6-86DB-6CD1-81449862237873662infoc", "/", ".bilibili.com");
+      // this.$cookies.set("rpdid", "|(ku|km)l~Yk0J'uYlRl)m~~J", "/", ".bilibili.com");
+      // this.$cookies.set("i-wanna-go-back", "-1", "/", ".bilibili.com");
+      // this.$cookies.set("buvid_fp_plain", "undefined", "/", ".bilibili.com");
+      // this.$cookies.set("b_ut", "5", "/", ".bilibili.com");
+      // this.$cookies.set("CURRENT_BLACKGAP", "0", "/", ".bilibili.com");
+      // this.$cookies.set("blackside_state", "0", "/", ".bilibili.com");
+      // this.$cookies.set("nostalgia_conf", "-1", "/", ".bilibili.com");
+      // this.$cookies.set("PVID", "1");
+      // this.$cookies.set("LIVE_BUVID", "AUTO1216557841817842", "/", ".bilibili.com");
+      // this.$cookies.set("sid", "6gbwl049");
+      // this.$cookies.set("CURRENT_QUALITY", "32", "/", ".bilibili.com");
+      // this.$cookies.set("CURRENT_FNVAL", "4048", "/", ".bilibili.com");
+      // this.$cookies.set("buvid4", "1EEE42C9-4762-6B1D-7456-AF79D132986172443-022060716-57HvyER1xz0r%2BXy4zU%2BjxQ%3D%3D", "/", ".bilibili.com");
+      // this.$cookies.set("bsource", "search_bing", "/", ".bilibili.com");
+      // this.$cookies.set("fingerprint", "b1e02949306e36b31481e002b2bd7317", "/", ".bilibili.com");
+      // this.$cookies.set("fingerprint3", "855903e20ec0058293209ae27b606883", "/", ".bilibili.com");
+      // this.$cookies.set("buvid_fp", "b1e02949306e36b31481e002b2bd7317", "/", ".bilibili.com");
+      // this.$cookies.set("bp_video_offset_5612894", "688205953003159600", "/", ".bilibili.com");
+      // this.$cookies.set("innersign", "0", "/", ".bilibili.com");
+      // this.$cookies.set("b_lsid", "8AC447B6_18248C734FF", "/", ".bilibili.com");
+      // this.$cookies.set("b_timer", "%7B%22ffp%22%3A%7B%22333.1007.fp.risk_001D0F7E%22%3A%221824886DE49%22%2C%22333.788.fp.risk_001D0F7E%22%3A%2218248871A4E%22%2C%22333.976.fp.risk_001D0F7E%22%3A%2218248D86869%22%2C%22333.934.fp.risk_001D0F7E%22%3A%2218232D88B69%22%2C%22333.999.fp.risk_001D0F7E%22%3A%2218248FE7203%22%2C%22666.4.fp.risk_001D0F7E%22%3A%22182338959BC%22%2C%22666.25.fp.risk_001D0F7E%22%3A%2218248276FFA%22%2C%22333.337.fp.risk_001D0F7E%22%3A%2218238BB10F0%22%2C%22333.880.fp.risk_001D0F7E%22%3A%2218233E3277C%22%2C%22333.885.fp.risk_001D0F7E%22%3A%2218248C070D1%22%2C%22333.22.fp.risk_001D0F7E%22%3A%221824887AE8A%22%2C%22333.979.fp.risk_001D0F7E%22%3A%2218248C09281%22%2C%22333.963.fp.risk_001D0F7E%22%3A%22182487F7E70%22%2C%22333.794.fp.risk_001D0F7E%22%3A%221824795021D%22%2C%22333.969.fp.risk_001D0F7E%22%3A%221824798A975%22%2C%22333.937.fp.risk_001D0F7E%22%3A%2218248EEDDDC%22%2C%22333.897.fp.risk_001D0F7E%22%3A%2218248C2A094%22%7D%7D", "/", ".bilibili.com");
+
+      // this.$axios.get('/bili/x/relation/followers?vmid=5612894&pn=1&ps=20',)
+      // .then((response) => {
+      //   console.log(response);
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // })
+    },
+
+    // 格式化千分位
+    formatNum(number) {
+      const num = String(number)
+      const reg = /\d{1,3}(?=(\d{3})+$)/g
+      const res = num.replace(/^(-?)(\d+)((\.\d+)?)$/, function(match, s1, s2, s3){
+        return s1 + s2.replace(reg, '$&,') + s3
+      })
+      return res
     }
+
   }
 }
 </script>

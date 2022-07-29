@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 import axios from 'axios'
+import VueCookies from 'vue-cookies'
 
 // 加载remixicon图标
 import 'remixicon/fonts/remixicon.css'
@@ -81,7 +82,10 @@ app.use(VMdPreview)
 
 app.component(VueFeather.name, VueFeather);
 
+axios.defaults.withCredentials = true // 允许携带cookie
 app.config.globalProperties.$axios = axios
+app.config.globalProperties.$cookies = VueCookies;
+
 
 app.mount('#app')
 
