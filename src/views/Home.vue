@@ -52,9 +52,9 @@
           </div>
         </div>
 
-        <div class=" m-auto flex mt-3 mb-6 flex-col sm:flex-row transition-all duration-75 ease-linear">
-          <div  class="md:w-3/12 w-full box mr-3 mb-3 sm:mb-0 select-none transition-all duration-75 ease-linear">
-            <img :src="data[1].fields.image[0].url" class="md:ml-0 ml-auto md:mr-0 mr-auto md:w-full w-4/12 box transition-all duration-75 ease-linear border dark:border-transparent">
+        <div class=" m-auto flex mt-3 mb-6 flex-col  transition-all duration-75 ease-linear">
+          <div  class="w-full box mr-3 mb-3 select-none transition-all duration-75 ease-linear">
+            <img :src="data[1].fields.image[0].url" class="ml-auto mr-auto w-3/12 box transition-all duration-75 ease-linear ">
           </div>
           <div class="bg-slate-100 dark:bg-slate-700 box flex-1 p-3 transition-all duration-75 ease-linear">
             <h3 class="text-slate-400 text-base mb-2 transition-all duration-75 ease-linear">{{ $t("home.download") }}</h3>

@@ -229,7 +229,7 @@
 
                     <!-- 踩踩 -->
                     <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block" @click="foot(data.fields.id)">
-                      <i  class="ri-thumb-down-line align-text-bottom"></i>
+                      <i  class="ri-thumb-down-line align-middle"></i>
                       <span class="ml-2 sm:ml-1">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
