@@ -47,7 +47,7 @@
           </div>
 
           <!-- 视频数据 -->
-          <div v-show="bili" class="px-3 pt-3 pb-1 flex text-sm text-slate-400 justify-center space-x-4">
+          <!-- <div v-show="bili" class="px-3 pt-3 pb-1 flex text-sm text-slate-400 justify-center space-x-4">
             <div class="flex place-items-center">
               <i class="ri-youtube-line pr-1 text-base"></i>
               <span>{{ formatNum(bili.stat.view) }}</span>
@@ -68,10 +68,10 @@
               <i class="ri-star-line pr-1 text-base"></i>
               <span>{{ formatNum(bili.stat.favorite) }}</span>
             </div>
-          </div>
+          </div> -->
 
           <!-- 描述 -->
-          <div class="px-3 pb-3 text-xs text-slate-400 text-center">
+          <div class="px-3 py-3 text-xs text-slate-400 text-center">
             <!-- <i
               class="ri-error-warning-line align-middle pr-1 text-xs"></i> -->
               <span>
@@ -162,9 +162,7 @@ export default {
   },
   created() {
     this.getHomeData();
-    this.getBiliData();
-
-
+    // this.getBiliData();
   },
   methods: {
     // 获取首页数据
