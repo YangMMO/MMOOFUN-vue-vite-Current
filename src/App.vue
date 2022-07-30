@@ -134,6 +134,7 @@ export default {
       visitor: 0,
       isVisits: false,
       firstVisit: true,
+      firstFlower: false,
 
     }
   },
@@ -154,10 +155,14 @@ export default {
       watch(() => {
         return that.$refs.fl.isShowFlower
       }, (isShowFlower) => {
-        if (isShowFlower) {
-          that.$refs.fl._isUpdate('sun', 2)
-          that.$refs.fl._isUpdate('love', 1)
-          that.$refs.fl._isUpdate('water', 1)
+        if (!that.firstFlower) {
+          console.log(that.firstFlower);
+          if (isShowFlower) {
+            that.$refs.fl._isUpdate('sun', 2)
+            that.$refs.fl._isUpdate('love', 1)
+            that.$refs.fl._isUpdate('water', 1)
+            that.firstFlower = true;
+          }
         }
       })
       // that.$refs.fl.isShowFlower = true;
@@ -264,6 +269,7 @@ export default {
       this.isActiveMenu = !this.isActiveMenu
     },
 
+    // 全局 跳转至顶部
     _goTop(node) {
       let that = this;
       let top = window.document.getElementById(node).offsetTop - 10;
@@ -276,6 +282,16 @@ export default {
         }
       }, 10);
     },
+
+    // 全局 格式化数字千分位
+    formatNum(number) {
+      const num = String(number)
+      const reg = /\d{1,3}(?=(\d{3})+$)/g
+      const res = num.replace(/^(-?)(\d+)((\.\d+)?)$/, function(match, s1, s2, s3){
+        return s1 + s2.replace(reg, '$&,') + s3
+      })
+      return res
+    }
   },
 }
 </script>

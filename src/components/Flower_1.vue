@@ -76,7 +76,7 @@
                         {{ $t("flower.sun") }}
                       </span>
                       <span class="text-xs inline-block font-color">
-                        {{ isShowFlower ? `${flowerData.sunTotal}` : 0 }}
+                        {{ isShowFlower ? app.formatNum(flowerData.sunTotal) : 0 }}
                       </span>
                     </h3>
 
@@ -100,7 +100,7 @@
                         {{ $t("flower.love") }}
                       </span>
                       <span class="text-xs inline-block font-color">
-                        {{ isShowFlower ? `${flowerData.loveTotal}` : 0 }}
+                        {{ isShowFlower ? app.formatNum(flowerData.loveTotal) : 0 }}
                       </span>
                     </h3>
 
@@ -124,7 +124,7 @@
                         {{ $t("flower.water") }}
                       </span>
                       <span class="text-xs inline-block font-color">
-                        {{ isShowFlower ? `${flowerData.waterTotal}` : 0 }}
+                        {{ isShowFlower ? app.formatNum(flowerData.waterTotal) : 0 }}
                       </span>
                     </h3>
 
@@ -148,7 +148,7 @@
                         {{ $t("flower.nutrition") }}
                       </span>
                       <span class="text-xs inline-block font-color">
-                        {{ isShowFlower ? `${flowerData.nutritionTotal}` : 0 }}
+                        {{ isShowFlower ? app.formatNum(flowerData.nutritionTotal) : 0 }}
                       </span>
                     </h3>
 
@@ -323,60 +323,63 @@ export default {
 
     watering () {
       let status = this._update('water');
-      if (status) {
-        
-      } else {
-        this._setShowPop(
-          i18n.t("flower._.watering_fail"), 
-          i18n.t("flower._.watering_fail_body"), 
-          i18n.t("flower._.dnt"))
-          this.showPop = true;
-      }
-      
+      status.then(res => {
+        if (res) {
+          
+        } else {
+          this._setShowPop(
+            i18n.t("flower._.watering_fail"), 
+            i18n.t("flower._.watering_fail_body"), 
+            i18n.t("flower._.dnt"))
+            this.showPop = true;
+        }
+      })
     },
 
     prune () {
       let status = this._update('love');
-      if (status) {
-        
-      } else {
-        this._setShowPop(
-          i18n.t("flower._.prune_fail"), 
-          i18n.t("flower._.prune_fail_body"), 
-          i18n.t("flower._.dnt"))
-          this.showPop = true;
-      }
-      
+      status.then(res => {
+        if (res) {
+          
+        } else {
+          this._setShowPop(
+            i18n.t("flower._.prune_fail"), 
+            i18n.t("flower._.prune_fail_body"), 
+            i18n.t("flower._.dnt"))
+            this.showPop = true;
+        }
+      })
     },
 
     sunlight () {
       let status = this._update('sun');
-
-      if (status) {
-
-      } else {
+      status.then(res => {
+        if (res) {
+          
+        } else {
         this._setShowPop(
           i18n.t("flower._.sunlight_fail"), 
           i18n.t("flower._.sunlight_fail_body"), 
           i18n.t("flower._.dnt"))
-
           this.showPop = true;
-      }
-      
+        }
+      })
+
     },
 
     fertilize () {
       let status = this._update('nutrition');
-      if (status) {
-
-      } else {
-        this._setShowPop(
-          i18n.t("flower._.fertilize_fail"), 
-          i18n.t("flower._.fertilize_fail_body"), 
-          i18n.t("flower._.dnt"))
-          this.showPop = true;
-      }
-      
+      status.then(res => {
+        if (res) {
+          
+        } else {
+          this._setShowPop(
+            i18n.t("flower._.fertilize_fail"), 
+            i18n.t("flower._.fertilize_fail_body"), 
+            i18n.t("flower._.dnt"))
+            this.showPop = true;
+        }
+      })
     },
 
     _update (type) {

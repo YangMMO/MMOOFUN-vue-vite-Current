@@ -67,12 +67,12 @@ export default {
 }
 
 .translateYPOP-leave-active {
-  animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -webkit-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -moz-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -ms-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  -o-animation: translateYPOP-in .5s 2s reverse ease-in both;
-  animation: translateYPOP-in .5s 2s reverse ease-in both;
+  animation: translateYPOP-in .5s .1s reverse ease-in both;
+  -webkit-animation: translateYPOP-in .5s .1s reverse ease-in both;
+  -moz-animation: translateYPOP-in .5s .1s reverse ease-in both;
+  -ms-animation: translateYPOP-in .5s .1s reverse ease-in both;
+  -o-animation: translateYPOP-in .5s .1s reverse ease-in both;
+  animation: translateYPOP-in .5s .1s reverse ease-in both;
 }
 
 @keyframes translateYPOP-in {
