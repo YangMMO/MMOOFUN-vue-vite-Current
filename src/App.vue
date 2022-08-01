@@ -70,7 +70,7 @@
     <!-- 页脚 -->
     <div class="footer container mx-auto">
       <div class="container">
-        <div class=" border-t text-xs text-slate-400 text-center cursor-default">
+        <div class=" border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
           <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN </span>
           <a class="text-slate-400" href="https://beian.miit.gov.cn/">粤ICP备17077157号</a>
         </div>
@@ -373,7 +373,7 @@ export default {
 .footer {
   // margin: 12px;
   .container {
-    padding: 12px 12px 0 12px;
+    padding: 12px 0px 0 0px;
 
     div {
       padding: 12px;
@@ -431,7 +431,7 @@ export default {
   .title {
     position: absolute;
     top: 12px;
-    left: 12px;
+    left: 0px;
     font-size: 1rem;
     // font-weight: 600;
     cursor: default;
@@ -546,7 +546,7 @@ export default {
   .menu-fun {
     position: absolute;
     top: 12px; 
-    right: 12px;
+    right: 0px;
     // display: flex;
     
 
