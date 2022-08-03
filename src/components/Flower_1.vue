@@ -22,6 +22,30 @@
       <transition name="translateY">
         <div v-if="isShowFlower"  :class="['container-p relative  bg  bg-purple-50  bg-opacity-95 backdrop-filter backdrop-grayscale backdrop-blur-3xl backdrop-contrast-200 font-color-p transition-all duration-75 ease-linear   border-purple-400 box-t ']"> 
 
+          <div v-show="isMouseHide" class="absolute w-full">
+            <div class="flex absolute mouse-box bg-purple-500 box px-4 py-2 left-1/2 -translate-x-1/2 -top-12 filter blur-lg bg-opacity-30">
+              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 ">
+                <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
+                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
+                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.15s'}"></div>
+                </div>
+              </div>
+              <span class="pl-3">{{ $t('flower.firstHide') }}</span>
+            </div>
+          </div>
+
+          <div v-show="isMouseHide" class="absolute w-full">
+            <div class="flex absolute mouse-box bg-purple-50 box px-4 py-2 left-1/2 -translate-x-1/2 -top-12 ">
+              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 ">
+                <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
+                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
+                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.15s'}"></div>
+                </div>
+              </div>
+              <span class="pl-3">{{ $t('flower.firstHide') }}</span>
+            </div>
+          </div>
+
           <div :class="['flex pr-2 overflow-hidden']">
 
             <transition name="opacity0" mode="out-in">
@@ -280,6 +304,7 @@ export default {
       popBody: '',
       popFooter: '',
       isGuide: true, // 是否显示引导
+      isMouseHide: true, // 滚动隐藏
 
       isShowFlower: false,
       isToggle: false,
@@ -654,6 +679,45 @@ export default {
 
 
 <style lang="scss" scoped>
+
+
+.mouse-box {
+  // left: -12px;
+  z-index: 2000;
+
+  span {
+    white-space:nowrap;
+  }
+
+  .mouse {
+    width: 18px;
+    height: 26px;
+  }
+
+  .mouse-roller {
+    width: 2px;
+    height: 8px;
+    overflow: hidden;
+    border-radius: 1px;
+    top: 4px;
+  }
+
+  .roller-animation {
+    width: 10px;
+    height: 2px;
+    // border-radius: 1px;
+    animation: roller-animation 1.2s linear infinite;
+  }
+
+  @keyframes roller-animation {
+    0% {
+      transform: translateY(-4px) translateX(-25%);
+    }
+    100% {
+      transform: translateY(10px) translateX(-25%);
+    }
+  }
+}
 
 .guide-opa-enter-active {
   animation: guide-opa-in .5s ease-out both;
