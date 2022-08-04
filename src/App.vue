@@ -235,7 +235,8 @@ export default {
     _scroll() {
       let that = this;
       that._scrollTop = window.scrollY
-      if (that.firstVisit && that._scrollTop >= 300) {
+      // if (that.firstVisit && that._scrollTop >= 300) {
+      if (that._scrollTop >= 300) {
         that.firstVisit = false
         that.$refs.fl.isShowFlower = false
         that.$refs.fl.isMouseHide = false

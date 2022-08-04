@@ -23,26 +23,40 @@
         <div v-if="isShowFlower"  :class="['container-p relative  bg  bg-purple-50  bg-opacity-95 backdrop-filter backdrop-grayscale backdrop-blur-3xl backdrop-contrast-200 font-color-p transition-all duration-75 ease-linear   border-purple-400 box-t ']"> 
 
           <div v-show="isMouseHide" class="absolute w-full">
-            <div class="flex absolute mouse-box bg-purple-500 box px-4 py-2 left-1/2 -translate-x-1/2 -top-12 filter blur-lg bg-opacity-30">
-              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 ">
+            <div class="flex absolute mouse-box bg-purple-500 box px-4 py-2  filter blur-lg bg-opacity-30">
+              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200">
                 <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
                   <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
                   <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.15s'}"></div>
                 </div>
               </div>
-              <span class="pl-3">{{ $t('flower.firstHide') }}</span>
+              <span class="pl-3 text-xs">{{ $t('flower.firstHide') }}</span>
             </div>
           </div>
 
           <div v-show="isMouseHide" class="absolute w-full">
-            <div class="flex absolute mouse-box bg-purple-50 box px-4 py-2 left-1/2 -translate-x-1/2 -top-12 ">
-              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 ">
+            <div class="flex absolute mouse-box bg-purple-50 box px-4 py-2 left-0  ">
+              <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 align-middle">
                 <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
                   <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
-                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.15s'}"></div>
+                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.3s'}"></div>
                 </div>
               </div>
-              <span class="pl-3">{{ $t('flower.firstHide') }}</span>
+
+              <div class="flex flex-col roller-arrow ml-0 text-purple-200 ">
+                <i class="ri-arrow-down-s-line"></i>
+                <i class="ri-arrow-down-s-line"></i>
+                <i class="ri-arrow-down-s-line"></i>
+              </div>
+              
+              <div class="ml-2 mr-1 text-xs table text-purple-500">
+                <div class="align-middle table-cell">
+                  {{ $t('flower.firstHide') }}
+                </div>
+              </div>
+
+
+
             </div>
           </div>
 
@@ -682,16 +696,17 @@ export default {
 
 
 .mouse-box {
-  // left: -12px;
-  z-index: 2000;
+  left: -12px;
+  top: -40px;
+  // z-index: 2000;
 
   span {
     white-space:nowrap;
   }
 
   .mouse {
-    width: 18px;
-    height: 26px;
+    width: 16px;
+    height: 22px;
   }
 
   .mouse-roller {
@@ -699,7 +714,7 @@ export default {
     height: 8px;
     overflow: hidden;
     border-radius: 1px;
-    top: 4px;
+    top: 3px;
   }
 
   .roller-animation {
@@ -709,12 +724,44 @@ export default {
     animation: roller-animation 1.2s linear infinite;
   }
 
+  .roller-arrow {
+    width: 16px;
+    i {
+      position: absolute;
+    }
+
+    :nth-child(1) {
+      top: 2px;
+      animation: roller-arrow-animation 1s 0s linear infinite;
+    }
+    :nth-child(2) {
+      top: 7px;
+      animation: roller-arrow-animation 1s .2s linear infinite;
+    }
+    :nth-child(3) {
+      top: 12px;
+      animation: roller-arrow-animation 1s .4s linear infinite;
+    }
+  }
+
   @keyframes roller-animation {
     0% {
       transform: translateY(-4px) translateX(-25%);
     }
     100% {
       transform: translateY(10px) translateX(-25%);
+    }
+  }
+
+  @keyframes roller-arrow-animation {
+    0% {
+      color:rgb(233,213,255,1)
+    }
+    50% {
+      color:rgb(168,85,247,1)
+    }
+    80% {
+      color:rgb(233,213,255,1)
     }
   }
 }
@@ -753,18 +800,18 @@ export default {
   left: 40%;
   transition: all 0.20s;
   
-  animation: guide-in 2.5s  ease-in-out reverse infinite;
+  animation: guide-in 4.5s ease-in-out reverse infinite;
 }
 
 @keyframes guide-in {
   0% {
-    transform: translateY(0) translateX(0%);
+    transform: translateY(0) translateX(0%) rotate(12deg);
   }
   50% {
-    transform: translateY(-10%) translateX(-10%);
+    transform: translateY(-2px) translateX(-2px) rotate(12deg);
   }
   100% {
-    transform: translateY(0) translateX(0%);
+    transform: translateY(0) translateX(0%) rotate(12deg);
   }
 }
 

@@ -76,7 +76,7 @@ export default {
             prune: '修剪',
             sunlight: '阳光',
             fertilize: '施肥',
-            firstHide: '下滑浏览隐藏（首次）',
+            firstHide: '下滑隐藏',
             _: {
                 cultivation_help: '栽培指引',
                 cultivation_help_body: '每日访问: <br>阳光值+2、爱心值+1、雨露值+1<br>访客互动: <br><互动选项>+1<br>留言板点赞: <br>营养值+2、雨露值+1<br>留言板留言:  <br>营养值+2、爱心值+1、雨露值+1',
@@ -178,7 +178,7 @@ export default {
             prune: 'Prune',
             sunlight: 'Sunlight',
             fertilize: 'Fertilize',
-            firstHide: 'Scroll Page Hide (First Time)',
+            firstHide: 'Scroll Hide',
             _: {
                 cultivation_help: 'Cultivation Help',
                 cultivation_help_body: 'Daily Visit: <br>Sunlight +2, Love +1, Water +1<br>Visitor Interaction: <br><Interaction Option> +1<br>BBS Like: <br>Nutrition +2, Water +1<br>BBS Message: <br>Nutrition +2, Love +1, Water +1',
