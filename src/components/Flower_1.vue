@@ -25,10 +25,6 @@
           <div v-show="isMouseHide" class="absolute w-full">
             <div class="flex absolute mouse-box bg-purple-500 box px-4 py-2  filter blur-lg bg-opacity-30">
               <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200">
-                <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
-                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
-                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.15s'}"></div>
-                </div>
               </div>
               <span class="pl-3 text-xs">{{ $t('flower.firstHide') }}</span>
             </div>
@@ -38,8 +34,8 @@
             <div class="flex absolute mouse-box bg-purple-50 box px-4 py-2 left-0  ">
               <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 align-middle">
                 <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
-                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
-                  <div class="absolute roller-animation bg-purple-200 left-1/2 -translate-x-1/2" :style="{animationDelay: '0.3s'}"></div>
+                  <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
+                  <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0.1s'}"></div>
                 </div>
               </div>
 
@@ -719,9 +715,10 @@ export default {
 
   .roller-animation {
     width: 10px;
-    height: 2px;
+    height: 4px;
+    background: linear-gradient(0deg, rgb(233,213,255,0), rgb(168,85,247,1) ,rgb(233,213,255,0));
     // border-radius: 1px;
-    animation: roller-animation 1.2s linear infinite;
+    animation: roller-animation 1s linear infinite;
   }
 
   .roller-arrow {
@@ -746,10 +743,10 @@ export default {
 
   @keyframes roller-animation {
     0% {
-      transform: translateY(-4px) translateX(-25%);
+      transform: translateY(-4px) translateX(-50%);
     }
     100% {
-      transform: translateY(10px) translateX(-25%);
+      transform: translateY(12px) translateX(-50%);
     }
   }
 
@@ -800,7 +797,7 @@ export default {
   left: 40%;
   transition: all 0.20s;
   
-  animation: guide-in 4.5s ease-in-out reverse infinite;
+  animation: guide-in 3.5s ease-in-out reverse infinite;
 }
 
 @keyframes guide-in {
@@ -808,7 +805,7 @@ export default {
     transform: translateY(0) translateX(0%) rotate(12deg);
   }
   50% {
-    transform: translateY(-2px) translateX(-2px) rotate(12deg);
+    transform: translateY(-4px) translateX(-4px) rotate(12deg);
   }
   100% {
     transform: translateY(0) translateX(0%) rotate(12deg);
