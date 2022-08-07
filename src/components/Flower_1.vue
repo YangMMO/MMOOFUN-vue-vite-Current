@@ -35,7 +35,7 @@
               <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 align-middle">
                 <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
                   <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
-                  <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0.1s'}"></div>
+                  <!-- <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0.4s'}"></div> -->
                 </div>
               </div>
 
@@ -716,9 +716,9 @@ export default {
   .roller-animation {
     width: 10px;
     height: 4px;
-    background: linear-gradient(0deg, rgb(233,213,255,0), rgb(168,85,247,1) ,rgb(233,213,255,0));
+    background: linear-gradient(0deg, rgb(233,213,255,1) 0%,rgb(233,213,255,1) 39%, rgb(168,85,247,0) 40%, rgb(168,85,247,0) 60%, rgb(233,213,255,1) 61%, rgb(233,213,255,1) 100%);
     // border-radius: 1px;
-    animation: roller-animation 1s linear infinite;
+    animation: roller-animation 1.5s linear infinite;
   }
 
   .roller-arrow {
