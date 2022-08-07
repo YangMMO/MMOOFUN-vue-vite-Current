@@ -4,7 +4,7 @@
             <i class="ri-terminal-box-line align-middle mr-2"></i>
             <span class="align-middle">3D NFT 方案</span>
         </h1>
-        <p class="mb-6">使用脚本化方式，随机修改材质/模型组合，批量导出PNG/GLB文件，部分示例 👇</p>
+        <p class="mb-6">脚本化随机修改材质/模型部件组合，批量导出PNG/GLB文件，部分示例（随机材质球） 👇</p>
         <ul class="grid grid-cols-3 gap-2">
             <li v-for="item in m_data" :key="item" class="box overflow-hidden">
                 <div>
