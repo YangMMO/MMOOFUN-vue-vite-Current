@@ -290,7 +290,7 @@
           :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': user.length > userMaxLength }]">
           <input type="text" :class="['w-full p8 focus:outline-none  dark:text-black text-black']" v-model="user">
           <div
-            :class="['pr-6 pl-5 text-center absolute right-0 bg-white text-red-500  text-sm', { 'hidden': user.length <= userMaxLength }]">
+            :class="['pr-3 pl-3 text-center absolute right-0 bg-white text-red-500  text-sm', { 'hidden': user.length <= userMaxLength }]">
             <i> {{ user.length }}/{{ userMaxLength }}</i>
           </div>
         </div>
@@ -305,7 +305,7 @@
             :class="['w-full dark:text-black text-black']">
           </v-md-editor>
           <div
-            :class="['mr-3 pr-3 ml-5 pl-3 py-1 box text-center absolute right-0 top-1.5 bg-white text-red-500  text-sm', { 'hidden': msg.length <= msgMaxLength }]">
+            :class="['pr-3 pl-3 py-1 box text-center absolute right-0 top-1.5 bg-white text-red-500  text-sm', { 'hidden': msg.length <= msgMaxLength }]">
             <i> {{ msg.length }}/{{ msgMaxLength }}</i>
           </div>
         </div>
@@ -317,15 +317,33 @@
           <input type="text" :class="['w-full p8 focus:outline-none  dark:text-black  text-black']" v-model="email">
           <div class=" absolute right-0 bg-white flex flex items-center justify-center">
             <div
-              :class="['pl-5 pr-1 text-center text-red-500  text-sm ', { 'hidden': email.length <= emailMaxLength }]">
+              :class="['pl-3 pr-1 text-center text-red-500  text-sm ', { 'hidden': email.length <= emailMaxLength }]">
               <i> {{ email.length }}/{{ emailMaxLength }}</i>
             </div>
             <div
-              class="pr-6 pl-5 text-center cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white h-full"
+              class="pr-3 pl-3 text-center cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white h-full"
               @click="publicEmail === 0 ? publicEmail = 1 : publicEmail = 0">
               <i
                 :class="['icon-font-size pr-2 align-middle ', { 'ri-eye-2-line': publicEmail === 1 }, { 'ri-eye-close-line': publicEmail === 0 }]"></i>
               <span>{{ publicEmail === 1 ? $t("bbs.public") : $t("bbs.hide") }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 验证码 -->
+        <label class="mb-3">{{ $t("bbs.code") }} <span class="text-red-500">*</span></label>
+        <div
+          :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': codeNum.length > codeNumMaxLength }]">
+          <input type="text" maxlength="6" :class="['w-full p8 focus:outline-none  dark:text-black  text-black']" v-model="codeNum">
+          <div class=" absolute right-0 bg-white flex flex items-center justify-center">
+            <div
+              :class="['pl-3 pr-1 text-center text-red-500  text-sm ', { 'hidden': codeNum.length <= codeNumMaxLength }]">
+              <i> {{ codeNum.length }}/{{ codeNumMaxLength }}</i>
+            </div>
+            <div
+              class="pr-3 pl-3 text-center cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white h-full" @click="_sendMailCode">
+              <i :class="['ri-mail-send-line icon-font-size pr-2 align-middle ']"></i>
+              <span>{{  $t("bbs.send") }}</span>
             </div>
           </div>
         </div>
@@ -336,7 +354,7 @@
           :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': blog.length > blogMaxLength }]">
           <input type="text" :class="['w-full p8 focus:outline-none dark:text-black text-black']" v-model="blog">
           <div
-            :class="['pr-6 pl-5 text-center absolute right-0 bg-white text-red-500  text-sm', { 'hidden': blog.length <= blogMaxLength }]">
+            :class="['pr-3 pl-3 text-center absolute right-0 bg-white text-red-500  text-sm', { 'hidden': blog.length <= blogMaxLength }]">
             <i> {{ blog.length }}/{{ blogMaxLength }}</i>
           </div>
         </div>
@@ -351,9 +369,9 @@
             <i class="ri-chat-smile-3-line icon-font-size pr-2"></i>
             <span class="font-semibold ">{{ $t("bbs.submit") }} </span>
           </div>
-        </div>
-      </div>
+        </div>   
 
+      </div>
 
       <!-- 弹窗提示 -->
       <Teleport to="body">
@@ -399,7 +417,10 @@
         </TipsPop>
       </Teleport>
 
-
+      <!-- 验证码 -->
+      <Teleport to="body">
+        <Verify v-show="isShowVerify" :show="isShowVerify" @close="isShowVerify = false" @slideSeccess="slideSeccess = true"></Verify>
+      </Teleport>
     </div>
   </div>
 </template>
@@ -408,6 +429,8 @@
 import i18n from '../i18n';
 import Pop from '../components/Pop.vue';
 import TipsPop from '../components/TipsPop.vue';
+import Verify from '../components/Verify.vue';
+
 
 import moment from '../plugins/moment.js';
 // import getUserAgent from '../plugins/getUserAgent.js';
@@ -422,7 +445,7 @@ import { inject } from '@vue/runtime-core';
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
 const msgDatasheet = vika.datasheet("dstuYoi5jUdh0Z0Fvq");
 
-
+import emailjs from '@emailjs/browser';
 
 
 export default {
@@ -439,6 +462,7 @@ export default {
     getError,
     Pop,
     TipsPop,
+    Verify
   },
   inject: ['app'],
   data() {
@@ -470,12 +494,14 @@ export default {
       publicEmail: 1,
       email: "",
       blog: "",
+      codeNum: "",
 
       // 提交数据长度限制
       userMaxLength: 12,
       msgMaxLength: 1000,
       emailMaxLength: 32,
       blogMaxLength: 32,
+      codeNumMaxLength: 6,
 
 
       submitStatus: false,  // 提交状态
@@ -490,7 +516,10 @@ export default {
       
       flower: flower,
 
-      returnCitySN: null
+      returnCitySN: null,
+      code: null,
+      isShowVerify: false,
+      slideSeccess: false,
     }
   },
   created() {
@@ -500,20 +529,60 @@ export default {
   watch: {
     // 实时监听每一个输入是否符合邮箱正则格式
     email(val) {
+      // console.log(val);
       this.email = val.replace(/[^\w@.]/g, "");
+    },
+    // 监听验证码不超6位
+    codeNum(val) {
+      let str = String(val)
+      str = str.replace(/[^\d]/g, "");
+      this.codeNum = str;
+
     },
     // 实时监听每一个输入是否符合网址正则格式
     // blog(val) {
     //   this.blog = val.replace(/[^\w@.]/g, "");
     // }
     
+    slideSeccess(val) {
+      console.log(val);
+    }
   },
   async mounted() {
-      // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
-      let that = this;
-      localStorage.setItem("submitNum", 0);
+    let that = this;
+    let storage = that.$storage; 
+    // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+    
+    storage.setStorageSync("submitNum", 0);
   },
   methods: {
+    // 发送验证码
+    _sendMailCode() {
+      let that = this;
+      that.isShowVerify = true;
+      that._randomCode()
+      // emailjs.send("service_bnhm4db","template_ssisb4d",{
+      //   code: that.code
+      // }, "7e_c9e0PcXjIE9o9S");
+    },
+    // 随机6位数字验证码
+    _randomCode() {
+      let that = this;
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += Math.floor(Math.random() * 10);
+      }
+      that.code = code;
+      that._resetCode();
+    },
+    // 5分钟后重置验证码为null
+    _resetCode() {
+      let that = this;
+      setTimeout(() => {
+        that.code = '888888';
+      }, 1000 * 5);
+    },
+
     // 设置POP提示
     setShowPop(header, body, footer) {
       this.submitStatusHeader = header;
@@ -540,17 +609,18 @@ export default {
     // 踩踩
     async foot(id) {
       let that = this;
+      let storage = that.$storage; 
       that.addFoot = 0;
       that.footData = null;
 
-      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
-        if (localStorage.getItem("foot") >= that.footMaxLength) {
+      if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (storage.getStorageSync("foot") >= that.footMaxLength) {
           that.setShowPop(i18n.t("bbs._.foot_fail"), i18n.t("bbs._.over_foot"), i18n.t("bbs._.close"));
           return;
         }
       } else {
-        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
-        localStorage.setItem("foot", 0);
+        storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
+        storage.setStorageSync("foot", 0);
       }
 
       if (that.isClickFoot) {
@@ -579,7 +649,7 @@ export default {
               // console.log('踩踏成功');
               that.isClickFoot = false;
               that.getBBS(that.currentPage);
-              localStorage.setItem("foot", parseInt(localStorage.getItem("foot")) + 1);
+              storage.setStorageSync("foot", parseInt(storage.getStorageSync("foot")) + 1);
 
               that.flower._isUpdate('love', 1)
 
@@ -598,22 +668,22 @@ export default {
 
       });
     },
-
     // 点赞
     async like(id) {
       let that = this;
       that.addLike = 0;
       that.likeData = null;
+      let storage = that.$storage; 
 
       // 判断loclStorage的like 是否已经超过likeMaxLength次数
-      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
-        if (localStorage.getItem("like") >= that.likeMaxLength) {
+      if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (storage.getStorageSync("like") >= that.likeMaxLength) {
           that.setShowPop(i18n.t("bbs._.like_fail"), i18n.t("bbs._.over_like"), i18n.t("bbs._.close"));
           return;
         }
       } else {
-        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
-        localStorage.setItem("like", 0);
+        storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
+        storage.setStorageSync("like", 0);
       }
 
       if (that.isClickLike) {
@@ -642,7 +712,7 @@ export default {
               // console.log('点赞成功');
               that.isClickLike = false;
               that.getBBS(that.currentPage);
-              localStorage.setItem("like", parseInt(localStorage.getItem("like")) + 1);
+              storage.setStorageSync("like", parseInt(storage.getStorageSync("like")) + 1);
 
 
               that.flower._isUpdate('nutrition', 2)
@@ -663,7 +733,6 @@ export default {
 
       });
     },
-
     // 创建一条新的留言
     createBBS() {
       let that = this;
@@ -671,50 +740,60 @@ export default {
       let isOverMaxLength = that.isOverMaxLength;
       let t = i18n.t
       let notEmpty, overMaxLength;
+      let storage = that.$storage; 
 
       that.returnCitySN = document.returnCitySN
 
-      if (!that.returnCitySN) return
+      // if (!that.returnCitySN) return
 
-      // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
-      if (localStorage.getItem("bbsDate") === moment().format("YYYY-MM-DD")) {
-        if (parseInt(localStorage.getItem("submitNum")) >= that.submitMaxNum) {
-          that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
-          return;
-        }
-      } else {
-        localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
-        localStorage.setItem("submitNum", 0);
-      }
-
-
-      // 判断提交中的状态
-      if (that.submitStatus) {
-        return;
-      }
+      // // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
+      // if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
+      //   if (parseInt(storage.getStorageSync("submitNum")) >= that.submitMaxNum) {
+      //     that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
+      //     return;
+      //   }
+      // } else {
+      //   storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
+      //   storage.setStorageSync("submitNum", 0);
+      // }
 
 
-      // 判断是否为空
-      notEmpty = isNotNull(that.user) || isNotNull(that.msg) || isNotNull(that.email);
-      if (notEmpty) {
-        console.log('没填写');
-        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_empty"), t("bbs._.close"));
-        return;
-      }
+      // // 判断提交中的状态
+      // if (that.submitStatus) {
+      //   return;
+      // }
 
-      // 判断是否超出最大长度
-      overMaxLength = isOverMaxLength(that.user, that.userMaxLength) || isOverMaxLength(that.msg, that.msgMaxLength) || isOverMaxLength(that.email, that.emailMaxLength);
-      if (overMaxLength) {
-        console.log('超出最大');
-        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_length"), t("bbs._.close"));
-        that.showPop = true;
-        return;
-      }
 
-      // 判断邮箱格式是否正确
-      if (!that.email.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
-        console.log('邮箱格式不正确');
-        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.email_format"), t("bbs._.close"));
+      // // 判断是否为空
+      // notEmpty = isNotNull(that.user) || isNotNull(that.msg) || isNotNull(that.email);
+      // if (notEmpty) {
+      //   console.log('没填写');
+      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_empty"), t("bbs._.close"));
+      //   return;
+      // }
+
+      // // 判断是否超出最大长度
+      // overMaxLength = isOverMaxLength(that.user, that.userMaxLength) || isOverMaxLength(that.msg, that.msgMaxLength) || isOverMaxLength(that.email, that.emailMaxLength);
+      // if (overMaxLength) {
+      //   console.log('超出最大');
+      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_length"), t("bbs._.close"));
+      //   that.showPop = true;
+      //   return;
+      // }
+
+      // // 判断邮箱格式是否正确
+      // if (!that.email.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
+      //   console.log('邮箱格式不正确');
+      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.email_format"), t("bbs._.close"));
+      //   that.showPop = true;
+      //   return;
+      // }
+
+      that.setShowPop(t("bbs._.submit_fail"), t("_.maintain"), t("bbs._.close"));
+return;
+
+      if (that.codeNum !== that.code) {
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
         that.showPop = true;
         return;
       }
@@ -752,10 +831,10 @@ export default {
           that.submitStatus = false;  // 提交成功后清除提交状态
 
           // 设置localStorage的date 为当前日期， submitNum +1
-          localStorage.setItem("bbsDate", moment().format("YYYY-MM-DD"));
-          localStorage.setItem("submitNum", 
+          storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
+          storage.setStorageSync("submitNum", 
           
-          parseInt(localStorage.getItem("submitNum")) + 1);
+          parseInt(storage.getStorageSync("submitNum")) + 1);
 
           that.flower._isUpdate('nutrition', 2)
           that.flower._isUpdate('love', 1)

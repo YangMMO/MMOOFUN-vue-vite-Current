@@ -147,16 +147,17 @@ export default {
   },
   async mounted() {
     let that = this;
-    // 判断loclstrage中是否有visitsDate字段，字段的日期是否等于今日
-    if (localStorage.getItem('visitorDate') !== moment().format('YYYY-MM-DD')) {
+    let storage = that.$storage; 
+
+    if (storage.getStorageSync('visitsDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
-      localStorage.setItem('visitorDate', moment().format('YYYY-MM-DD'));
+      storage.setStorageSync('visitorDate', moment().format('YYYY-MM-DD'));
 
       watch(() => {
         return that.$refs.fl.isShowFlower
       }, (isShowFlower) => {
         if (!that.firstFlower) {
-          console.log(that.firstFlower);
+          // console.log(that.firstFlower);
           if (isShowFlower) {
             that.$refs.fl._isUpdate('sun', 2)
             that.$refs.fl._isUpdate('love', 1)

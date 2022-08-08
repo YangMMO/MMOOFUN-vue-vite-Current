@@ -4,6 +4,7 @@ import router from './router'
 import i18n from './i18n'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
+import Vue3Storage from "vue3-storage";
 
 // 加载remixicon图标
 import 'remixicon/fonts/remixicon.css'
@@ -86,6 +87,7 @@ axios.defaults.withCredentials = true // 允许携带cookie
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$cookies = VueCookies;
 
+app.use(Vue3Storage)
 
 app.mount('#app')
 

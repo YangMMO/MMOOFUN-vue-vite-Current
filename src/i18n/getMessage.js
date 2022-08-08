@@ -50,6 +50,8 @@ export default {
             like: '赞',
             foot: '孬',
             floor: '楼',
+            code: '验证码',
+            send: '发送',
             _: {
                 submit_success: '提交成功',
                 submit_fail: '提交失败',
@@ -65,6 +67,7 @@ export default {
                 submitting: '提交中...',
                 violation: '该留言含有违规或不雅用语，已被Ban掉！',
                 violationUser: '[Ban] 违规昵称',
+                code_fail: '请输入正确的邮箱验证码',
             }
         },
         flower: {
@@ -97,8 +100,18 @@ export default {
                 dnt: '下次一定!',
             }
         },
+        verify: {
+            slide: '请向右滑动',
+            onDefault: "拖动滑块验证",
+            onAgain: '再来一次',
+            onRefresh: '已刷新验证码',
+            onFail: '验证失败',
+            onSuccess: '验证通过 邮件已发送',
+            close: '关闭',
+        },
         _: {
                 visitor: '访客',
+                maintain: '维护中',
         }
     },
     en: {
@@ -152,6 +165,8 @@ export default {
             like: 'Like',
             foot: 'Foot',
             floor: 'Floor',
+            code: 'Verification Code',
+            send : 'Send',
             _: {
                 submit_success: 'Submit Success',
                 submit_fail: 'Submit Fail',
@@ -167,6 +182,7 @@ export default {
                 submitting: 'Submitting...',
                 violation: 'This message contains illegal or inappropriate content, and has been banned!',
                 violationUser: '[Ban] Violation User Name',
+                code_fail: 'Please enter the correct email verification code',
             }
         },
         flower: {
@@ -199,8 +215,19 @@ export default {
                 dnt: 'Definitely Next Time !',
             }
         },
+        verify: {
+            slide: 'Please slide to the right',
+            onDefault: "Drag the slider to verify",
+            onAgain: 'Try again',
+            onRefresh: 'Refresh verification code',
+            onFail: 'Verification failed',
+            onSuccess: 'Verification via email sent',
+            close: 'Close',
+
+        },
         _: {
                 visitor: 'Visitor',
+                maintain: 'Maintain',
         }
     },
 }
