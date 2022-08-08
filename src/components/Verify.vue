@@ -40,7 +40,6 @@ export default {
   inject: ['app'],
   props: {
     show: Boolean,
-    slideSeccess: Function,
   },
   watch: {
     show() {
@@ -48,7 +47,7 @@ export default {
       this.msg = i18n.t("verify.onDefault")
     }
   },
-  setup() {
+  setup(props) {
     let msg = ref("");
     let text = ref("");
     const block = ref<SlideVerifyInstance>();
@@ -60,13 +59,14 @@ export default {
       block,
       msg,
       text,
-      accuracy: 1,
+      accuracy: 3,
       imgs: [img1, img2, img3],
       showBtn: true,
+      props,
     };
   },
   mounted() {
-    
+
   },
   methods: {
     handleClick() {
@@ -84,8 +84,10 @@ export default {
       // this.msg = i18n.t("verify.onSuccess") + `: ${(times / 1000).toFixed(1)}s`;
       this.msg = i18n.t("verify.onSuccess");
       this.showBtn = false;
-      this.$emit('slideSeccess')
-      // console.log(this.slideSeccess);
+      this.$emit('verifySeccess');
+      setTimeout(() => {
+        this.$emit('close');
+      }, 2000);
     },
     onFail() {
       this.msg = i18n.t("verify.onFail")
@@ -199,7 +201,9 @@ export default {
   display: none; 
 }
 
-
+.slide-verify-slider-text {
+  color: #cdcdcd;
+}
 
 canvas {
   border-radius: 2px !important;

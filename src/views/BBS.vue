@@ -343,7 +343,7 @@
             <div
               class="pr-3 pl-3 text-center cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white h-full" @click="_sendMailCode">
               <i :class="['ri-mail-send-line icon-font-size pr-2 align-middle ']"></i>
-              <span>{{  $t("bbs.send") }}</span>
+              <span>{{  $t("bbs.send") }}{{ resetSendTime > 0? ` (${resetSendTime})` : ''  }}</span>
             </div>
           </div>
         </div>
@@ -419,7 +419,7 @@
 
       <!-- 验证码 -->
       <Teleport to="body">
-        <Verify v-show="isShowVerify" :show="isShowVerify" @close="isShowVerify = false" @slideSeccess="slideSeccess = true"></Verify>
+        <Verify v-show="isShowVerify" :show="isShowVerify" @close="isShowVerify = false" @verifySeccess="slideSeccess = true"></Verify>
       </Teleport>
     </div>
   </div>
@@ -520,6 +520,7 @@ export default {
       code: null,
       isShowVerify: false,
       slideSeccess: false,
+      resetSendTime: 0,
     }
   },
   created() {
@@ -543,17 +544,25 @@ export default {
     // blog(val) {
     //   this.blog = val.replace(/[^\w@.]/g, "");
     // }
-    
     slideSeccess(val) {
-      console.log(val);
+      if (val === true) {
+        this.resetSendTime = 10;
+        let st = setInterval(() => {
+          if (this.resetSendTime > 0) {
+            this.resetSendTime -= 1;
+          } else {
+            clearTimeout(st);
+          }
+        }, 1000);
+      }
     }
   },
   async mounted() {
     let that = this;
-    let storage = that.$storage; 
+    let storage = that.$ls; 
     // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
     
-    storage.setStorageSync("submitNum", 0);
+    storage.set("submitNum", 0);
   },
   methods: {
     // 发送验证码
@@ -609,18 +618,18 @@ export default {
     // 踩踩
     async foot(id) {
       let that = this;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
       that.addFoot = 0;
       that.footData = null;
 
-      if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
-        if (storage.getStorageSync("foot") >= that.footMaxLength) {
+      if (storage.get("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (storage.get("foot") >= that.footMaxLength) {
           that.setShowPop(i18n.t("bbs._.foot_fail"), i18n.t("bbs._.over_foot"), i18n.t("bbs._.close"));
           return;
         }
       } else {
-        storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
-        storage.setStorageSync("foot", 0);
+        storage.set("bbsDate", moment().format("YYYY-MM-DD"));
+        storage.set("foot", 0);
       }
 
       if (that.isClickFoot) {
@@ -649,7 +658,7 @@ export default {
               // console.log('踩踏成功');
               that.isClickFoot = false;
               that.getBBS(that.currentPage);
-              storage.setStorageSync("foot", parseInt(storage.getStorageSync("foot")) + 1);
+              storage.set("foot", parseInt(storage.get("foot")) + 1);
 
               that.flower._isUpdate('love', 1)
 
@@ -673,17 +682,17 @@ export default {
       let that = this;
       that.addLike = 0;
       that.likeData = null;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
 
       // 判断loclStorage的like 是否已经超过likeMaxLength次数
-      if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
-        if (storage.getStorageSync("like") >= that.likeMaxLength) {
+      if (storage.get("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (storage.get("like") >= that.likeMaxLength) {
           that.setShowPop(i18n.t("bbs._.like_fail"), i18n.t("bbs._.over_like"), i18n.t("bbs._.close"));
           return;
         }
       } else {
-        storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
-        storage.setStorageSync("like", 0);
+        storage.set("bbsDate", moment().format("YYYY-MM-DD"));
+        storage.set("like", 0);
       }
 
       if (that.isClickLike) {
@@ -712,7 +721,7 @@ export default {
               // console.log('点赞成功');
               that.isClickLike = false;
               that.getBBS(that.currentPage);
-              storage.setStorageSync("like", parseInt(storage.getStorageSync("like")) + 1);
+              storage.set("like", parseInt(storage.get("like")) + 1);
 
 
               that.flower._isUpdate('nutrition', 2)
@@ -740,21 +749,21 @@ export default {
       let isOverMaxLength = that.isOverMaxLength;
       let t = i18n.t
       let notEmpty, overMaxLength;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
 
       that.returnCitySN = document.returnCitySN
 
       // if (!that.returnCitySN) return
 
       // // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
-      // if (storage.getStorageSync("bbsDate") === moment().format("YYYY-MM-DD")) {
-      //   if (parseInt(storage.getStorageSync("submitNum")) >= that.submitMaxNum) {
+      // if (storage.get("bbsDate") === moment().format("YYYY-MM-DD")) {
+      //   if (parseInt(storage.get("submitNum")) >= that.submitMaxNum) {
       //     that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
       //     return;
       //   }
       // } else {
-      //   storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
-      //   storage.setStorageSync("submitNum", 0);
+      //   storage.set("bbsDate", moment().format("YYYY-MM-DD"));
+      //   storage.set("submitNum", 0);
       // }
 
 
@@ -789,8 +798,11 @@ export default {
       //   return;
       // }
 
-      that.setShowPop(t("bbs._.submit_fail"), t("_.maintain"), t("bbs._.close"));
-return;
+//       that.setShowPop(t("bbs._.submit_fail"), t("_.maintain"), t("bbs._.close"));
+// return;
+
+      console.log(that.slideSeccess);
+      return
 
       if (that.codeNum !== that.code) {
         that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
@@ -831,10 +843,10 @@ return;
           that.submitStatus = false;  // 提交成功后清除提交状态
 
           // 设置localStorage的date 为当前日期， submitNum +1
-          storage.setStorageSync("bbsDate", moment().format("YYYY-MM-DD"));
-          storage.setStorageSync("submitNum", 
+          storage.set("bbsDate", moment().format("YYYY-MM-DD"));
+          storage.set("submitNum", 
           
-          parseInt(storage.getStorageSync("submitNum")) + 1);
+          parseInt(storage.get("submitNum")) + 1);
 
           that.flower._isUpdate('nutrition', 2)
           that.flower._isUpdate('love', 1)

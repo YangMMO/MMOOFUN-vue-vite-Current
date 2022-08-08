@@ -420,14 +420,14 @@ export default {
     _update (type) {
       let that = this;
       let status = null;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
 
       // 判断localstorage是否有flowerDate值,如果有则判断日期是否等于今日，如果没有则新建一个今日的日期
-      let flowerDate = storage.getStorageSync('flowerDate');
+      let flowerDate = storage.get('flowerDate');
       if (flowerDate == moment().format('YYYY-MM-DD')) {
         status = that._isUpdate(type, 1, true);
       } else {
-        storage.setStorageSync("flowerDate", moment().format("YYYY-MM-DD"));
+        storage.set("flowerDate", moment().format("YYYY-MM-DD"));
         status = that._isUpdate(type, 1, true)
       }
       return status;
@@ -439,17 +439,17 @@ export default {
       let data = null;
       record = record || false;
       this.isShowFlower = true;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
 
       if (that.flowerData) {
         switch (type) {
           case 'water':
             // 判断localstorage是否有water值
-            data = storage.getStorageSync('water');
+            data = storage.get('water');
             if (parseInt(data) === 1) {
               return false;
             } else {
-              if (record) storage.setStorageSync("water", 1);
+              if (record) storage.set("water", 1);
               that.updateGrowthData({ 'water': that.todayWater + addNum }, addNum, 0);
               that.updateFlowerData({ 'waterTotal': that.flowerData.waterTotal + addNum });
               return true;
@@ -457,11 +457,11 @@ export default {
             break;
           case 'love':
             // 判断localstorage是否有love值
-            data = storage.getStorageSync('love');
+            data = storage.get('love');
             if (parseInt(data) === 1) {
               return false;
             } else {
-              if (record) storage.setStorageSync("love", 1);
+              if (record) storage.set("love", 1);
               that.updateGrowthData({ 'love': that.todayLove + addNum }, addNum, 1);
               that.updateFlowerData({ 'loveTotal': that.flowerData.loveTotal + addNum });
               return true;
@@ -469,11 +469,11 @@ export default {
             break;
           case 'sun':
             // 判断localstorage是否有sun值
-            data = storage.getStorageSync('sun');
+            data = storage.get('sun');
             if (parseInt(data) === 1) {
               return false;
             } else {
-              if (record) storage.setStorageSync("sun", 1);
+              if (record) storage.set("sun", 1);
               that.updateGrowthData({ 'sun': that.todaySun + addNum }, addNum, 2);
               that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + addNum });
               return true;
@@ -481,11 +481,11 @@ export default {
             break;
           case 'nutrition':
             // 判断localstorage是否有nutrition值
-            data = storage.getStorageSync('nutrition');
+            data = storage.get('nutrition');
             if (parseInt(data) === 1) {
               return false;
             } else {
-              if (record) storage.setStorageSync("nutrition", 1);
+              if (record) storage.set("nutrition", 1);
               that.updateGrowthData({ 'nutrition': that.todayNutrition + addNum }, addNum, 3);
               that.updateFlowerData({ 'nutritionTotal': that.flowerData.nutritionTotal + addNum });
               return true;
@@ -648,7 +648,7 @@ export default {
       let responseResult = false;
       let that = this;
       that.responseResult = responseResult;
-      let storage = that.$storage; 
+      let storage = that.$ls; 
       
       if (this.isGet) {
         return;
@@ -673,12 +673,12 @@ export default {
         that.isShowFlower = true;
 
         // 判断loclstrage中是否有visitsDate字段，字段的日期是否等于今日
-        if (storage.getStorageSync('visitorDate') !== moment().format('YYYY-MM-DD')) {
+        if (storage.get('visitsDate') !== moment().format('YYYY-MM-DD')) {
 
-            storage.setStorageSync('water', 0);
-            storage.setStorageSync('love', 0);
-            storage.setStorageSync('sun', 0);
-            storage.setStorageSync('nutrition', 0);
+            storage.set('water', 0);
+            storage.set('love', 0);
+            storage.set('sun', 0);
+            storage.set('nutrition', 0);
             // that._isUpdate('sun', 1);
             // that.updateGrowthData({ 'sun': that.todaySun + 1 });
             // that.updateFlowerData({ 'sunTotal': that.flowerData.sunTotal + 1 });

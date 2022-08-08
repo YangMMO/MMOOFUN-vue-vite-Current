@@ -135,7 +135,6 @@ export default {
       isVisits: false,
       firstVisit: true,
       firstFlower: false,
-
     }
   },
   created() {
@@ -147,11 +146,11 @@ export default {
   },
   async mounted() {
     let that = this;
-    let storage = that.$storage; 
+    let storage = that.$ls; 
 
-    if (storage.getStorageSync('visitsDate') !== moment().format('YYYY-MM-DD')) {
+    if (storage.get('visitsDate') !== moment().format('YYYY-MM-DD')) {
       // 更新visitsDate字段为今日日期
-      storage.setStorageSync('visitorDate', moment().format('YYYY-MM-DD'));
+      storage.set('visitsDate', moment().format('YYYY-MM-DD'));
 
       watch(() => {
         return that.$refs.fl.isShowFlower
@@ -166,19 +165,6 @@ export default {
           }
         }
       })
-      // that.$refs.fl.isShowFlower = true;
-
-    //   setTimeout(() => {
-    //       that.$refs.fl._isUpdate('sun', 2)
-    //   }, 2000);
-
-    //   setTimeout(() => {
-    //     that.$refs.fl._isUpdate('love', 1)
-    //   }, 6000);
-
-    //   setTimeout(() => {
-    //     that.$refs.fl._isUpdate('water', 1)
-    //   }, 10000);
 
       // 更新
       this.isVisits = true;
