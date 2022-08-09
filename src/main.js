@@ -6,8 +6,7 @@ import axios from 'axios'
 import VueCookies from 'vue-cookies'
 import Storage from 'vue-ls';
 
-// 滚动条事件
-// import 'default-passive-events'
+// 触摸Event警告消除
 (function () {
   if (typeof EventTarget !== "undefined") {
     let func = EventTarget.prototype.addEventListener;

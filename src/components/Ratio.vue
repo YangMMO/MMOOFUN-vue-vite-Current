@@ -44,7 +44,7 @@
 
         </div>
         <div class="w-full text-center py-6">
-          <select name="" id="" class="box p8 bg-gradient-to-b from-slate-800 to-slate-800"
+          <select class="box p8 w-3/12 focus:outline-none dark:text-black text-black appearance-none" 
             @change="clickSelect($event)">
             <option v-for="item in floatRatio" :key="item" :selected="item.val === 100" class="text-black">
               {{ item.text }}

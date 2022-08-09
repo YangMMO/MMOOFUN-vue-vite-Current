@@ -223,7 +223,6 @@
                     <div v-show="data.fields.verify" class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block float-left " @click="isShowComment = true; commentID = data.fields.id">
                       <i  class="ri-chat-2-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
-                        <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.comment") }}
                       </span>
                     </div>
@@ -248,8 +247,15 @@
                     </div>
 
                   </div>
-                  <div v-show="data.fields.comment" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-3 py-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white">
-                    {{ data.fields.comment }}
+                  <div v-show="data.fields.comment" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-3 py-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
+                    <!-- <div v-for="comment in JSON.parse(data.fields.comment)" :key="comment"> -->
+                      <!-- <div>{{ comment.user }}</div>
+                      <div>{{ comment.commentMsg }}</div>
+                      <div>{{ comment.email }}</div>
+                      <div>{{ comment.time }}</div>
+                      <div>{{ comment.citySN }}</div> -->
+                      {{ data.fields.comment }}
+                    <!-- </div> -->
                   </div>
 
                 </div>
@@ -433,7 +439,7 @@
                       <div
                         :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': user.length > userMaxLength }]">
                         <!-- <input type="text" :class="['w-full p8 focus:outline-none  dark:text-black text-black']" v-model="user"> -->
-                        <select :class="['w-full p8 focus:outline-none  dark:text-black text-black']" v-model="selectUser" class="appearance-none">
+                        <select :class="['w-full p8 focus:outline-none  dark:text-black text-black appearance-none']" v-model="selectUser">
                           <option v-for="item in his_user" :key="item" class="text-black">
                             {{ item }}
                           </option>
@@ -463,7 +469,7 @@
                       <div class="b-btn box inset-x-0 bottom-0 text-center flex mt-3 pb-4 justify-center select-none">
                         <div
                           class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center cursor-pointer"
-                          @click="comment">
+                          @click="comment(commentID)">
                           <i class="ri-chat-2-line icon-font-size pr-2"></i>
                           <span class="font-semibold ">{{ $t("bbs.comment") }} </span>
                         </div>
@@ -635,6 +641,7 @@ export default {
       resetSendTime: 0,
       isShowComment: false,
       verifyEmail: '',
+      JSON: JSON,
     }
   },
   created() {
@@ -904,7 +911,7 @@ export default {
       });
     },
     // 评论
-    async comment(id) {
+    comment(id) {
       let that = this;
       let t = i18n.t;
       let newComment = {};
@@ -947,28 +954,25 @@ export default {
       }
 
       msgDatasheet.records.query({
-        viewId: "viwhuh8Q1ikXw",
         pageSize: 1,
-        filterByFormula: `{id} = ${that.commentID}`,
+        filterByFormula: `{id} = ${id}`,
       }).then(response => {
-
-        console.log(response.data);
-        return
         if (response.success) {
-          that.Data = response.data.records[0].fields;
+          that.data = response.data.records[0];
+
           let arr = [];
 
-          // if (that.Data.comment) {
-          //   arr = JSON.parse(that.Data.comment);
-          // } else {
+          if (that.data.fields.comment == undefined) {
             arr = [];
-          // }
+          } else {
+            arr = JSON.parse(that.data.fields.comment);
+          }
 
           arr.push(newComment);
 
           msgDatasheet.records.update([
             {
-              "recordId": that.Data.recordId,
+              "recordId": that.data.recordId,
               "fields": {
                 "comment": JSON.stringify(arr),
               }
