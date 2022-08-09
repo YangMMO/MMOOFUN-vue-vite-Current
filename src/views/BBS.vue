@@ -121,7 +121,7 @@
                     <!-- 点赞 -->
                     <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300 ">
                       <i  class="ri-thumb-up-fill align-middle"></i>
-                      <span class="ml-2 sm:ml-1">
+                      <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
                         {{ $t("bbs.like") + " " + data.fields.like}}
                       </span>
@@ -130,7 +130,7 @@
                     <!-- 踩踩 -->
                     <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300">
                       <i  class="ri-thumb-down-fill align-text-bottom"></i>
-                      <span class="ml-2 sm:ml-1">
+                      <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
                       </span>
@@ -204,7 +204,7 @@
                         <i class="ri-mail-line align-middle mr-1 text-base"></i>
                         <span class="align-middle">
                           <!-- {{ data.fields.publicEmail ? data.fields.email : $t("bbs.hide") }} -->
-                          {{ data.fields.email }}
+                          {{ data.fields.email }} {{ data.fields.verify ? $t("bbs.verify") : '' }}
                           </span>
                       </p>
                       <p class="text-gray-400" v-show="data.fields.blog">
@@ -217,25 +217,39 @@
                     </div>
                   </div>
                   
-                  <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear">
+                  <div :class="['w-full bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white', { 'box' : !data.fields.comment}, { 'box-t' : data.fields.comment}]">
+
+                    <!-- 评论 -->
+                    <div v-show="data.fields.verify" class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block float-left " @click="isShowComment = true; commentID = data.fields.id">
+                      <i  class="ri-chat-2-line align-middle"></i>
+                      <span class="ml-2 sm:ml-2">
+                        <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
+                        {{ $t("bbs.comment") }}
+                      </span>
+                    </div>
+
+                    
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block" @click="like(data.fields.id)">
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block float-right" @click="like(data.fields.id)">
                       <i  class="ri-thumb-up-line align-middle"></i>
-                      <span class="ml-2 sm:ml-1">
+                      <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
                         {{ $t("bbs.like") + " " + data.fields.like}}
                       </span>
                     </div>
 
                     <!-- 踩踩 -->
-                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block" @click="foot(data.fields.id)">
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block float-right" @click="foot(data.fields.id)">
                       <i  class="ri-thumb-down-line align-middle"></i>
-                      <span class="ml-2 sm:ml-1">
+                      <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
                       </span>
                     </div>
 
+                  </div>
+                  <div v-show="data.fields.comment" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-3 py-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white">
+                    {{ data.fields.comment }}
                   </div>
 
                 </div>
@@ -278,7 +292,6 @@
         </div>
 
       </div>
-
 
       <!-- 提交留言 -->
       <div class="flex flex-col box select-none mb-6 ">
@@ -341,9 +354,9 @@
               <i> {{ codeNum.length }}/{{ codeNumMaxLength }}</i>
             </div>
             <div
-              class="pr-3 pl-3 text-center cursor-pointer text-black dark:text-black h-full flex items-center justify-center bg-white h-full" @click="_sendMailCode">
+              :class="['pr-3 pl-3 text-center cursor-pointer h-full flex items-center justify-center bg-white h-full', {'text-black dark:text-black' : resetSendTime === 0 }, {'text-gray-400' : resetSendTime > 0}]" @click="_sendMailCode(email)">
               <i :class="['ri-mail-send-line icon-font-size pr-2 align-middle ']"></i>
-              <span>{{  $t("bbs.send") }}{{ resetSendTime > 0? ` (${resetSendTime})` : ''  }}</span>
+              <span>{{  $t("bbs.send") }}{{ resetSendTime > 0 ? ` (${resetSendTime})` : ''  }}</span>
             </div>
           </div>
         </div>
@@ -359,10 +372,8 @@
           </div>
         </div>
 
-
-
         <!-- btn -->
-        <div class="b-btn box inset-x-0 bottom-0 text-center flex pb-4 justify-center select-none">
+        <div class="b-btn box inset-x-0 bottom-0 text-center flex mt-3 pb-4 justify-center select-none">
           <div
             class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center cursor-pointer"
             @click="createBBS">
@@ -373,6 +384,100 @@
 
       </div>
 
+      <!-- 评论 -->
+      <Teleport to="body">
+        <div v-show="isShowComment" class="" @click="isShowComment = false">
+          <div class="table fixed left-0 top-0 bg-verify w-full h-full">
+            <div class="table-cell align-middle ">
+              <div class="container comment mx-auto">
+                <div class="p12">
+                  <div class="border-2 border-black dark:border-slate-600 shadow-box_d box text-black dark:text-white bg-white dark:bg-slate-800" @click.stop>
+                    <div class="flex flex-col box select-none m-3 sm:m-6">
+                      <div class="text-xl font-semibold mb-3 text-center">{{ $t("bbs.comment") }} </div>
+
+                      <p class="text-center mb-6 text-gray-400">{{ $t("bbs.comment_des") }}</p>
+
+                      <!-- 邮箱 -->
+                      <label class="mb-3">{{ $t("bbs.email") }} <span class="text-red-500">*</span></label>
+                      <div
+                        :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': searchEmail.length > emailMaxLength }]">
+                        <input type="text" :class="['w-full p8 focus:outline-none  dark:text-black  text-black']" v-model="searchEmail">
+                        <div class=" absolute right-0 bg-white flex flex items-center justify-center">
+                          <div
+                            :class="['pl-3 pr-1 text-center text-red-500  text-sm ', { 'hidden': searchEmail.length <= emailMaxLength }]">
+                            <i> {{ searchEmail.length }}/{{ emailMaxLength }}</i>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- 验证码 -->
+                      <label class="mb-3">{{ $t("bbs.code") }} <span class="text-red-500">*</span></label>
+                      <div
+                        :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': searchCodeNum.length > codeNumMaxLength }]">
+                        <input type="text" maxlength="6" :class="['w-full p8 focus:outline-none  dark:text-black  text-black']" v-model="searchCodeNum">
+                        <div class=" absolute right-0 bg-white flex flex items-center justify-center">
+                          <div
+                            :class="['pl-3 pr-1 text-center text-red-500  text-sm ', { 'hidden': searchCodeNum.length <= codeNumMaxLength }]">
+                            <i> {{ searchCodeNum.length }}/{{ codeNumMaxLength }}</i>
+                          </div>
+                          <div
+                            :class="['pr-3 pl-3 text-center cursor-pointer h-full flex items-center justify-center bg-white h-full', {'text-black dark:text-black' : resetSendTime === 0 }, {'text-gray-400' : resetSendTime > 0}]" @click="_sendMailCode(searchEmail)">
+                            <i :class="['ri-mail-send-line icon-font-size pr-2 align-middle ']"></i>
+                            <span>{{  $t("bbs.send") }}{{ resetSendTime > 0 ? ` (${resetSendTime})` : ''  }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 用户名昵称 -->
+                      <label class="mb-3">{{ $t("bbs.his_username") }} <span class="text-red-500">*</span></label>
+                      <div
+                        :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': user.length > userMaxLength }]">
+                        <!-- <input type="text" :class="['w-full p8 focus:outline-none  dark:text-black text-black']" v-model="user"> -->
+                        <select :class="['w-full p8 focus:outline-none  dark:text-black text-black']" v-model="selectUser" class="appearance-none">
+                          <option v-for="item in his_user" :key="item" class="text-black">
+                            {{ item }}
+                          </option>
+                        </select>
+                        <div
+                          :class="['pr-3 pl-3 text-center absolute right-0 bg-white text-red-500  text-sm', { 'hidden': user.length <= userMaxLength }]">
+                          <i> {{ user.length }}/{{ userMaxLength }}</i>
+                        </div>
+                      </div>
+
+                      <!-- 留言信息 -->
+                      <label class="mb-3">{{ $t("bbs.comment") }} <span class="text-red-500">*</span></label>
+                      <div
+                        :class="['mb-3 border-2  box overflow-hidden flex w-full items-center box-border box relative', { 'border-red-500': commentMsg.length > commentMsgMaxLength }]">
+
+                        <v-md-editor height="160px" :disabled-menus="[]"
+                          left-toolbar="undo redo clear | bold italic strikethrough ul ol" right-toolbar="" v-model="commentMsg"
+                          :class="['w-full dark:text-black text-black']">
+                        </v-md-editor>
+                        <div
+                          :class="['pr-3 pl-3 py-1 box text-center absolute right-0 top-1.5 bg-white text-red-500  text-sm', { 'hidden': commentMsg.length <= commentMsgMaxLength }]">
+                          <i> {{ commentMsg.length }}/{{ commentMsgMaxLength }}</i>
+                        </div>
+                      </div>
+
+                      <!-- btn -->
+                      <div class="b-btn box inset-x-0 bottom-0 text-center flex mt-3 pb-4 justify-center select-none">
+                        <div
+                          class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center cursor-pointer"
+                          @click="comment">
+                          <i class="ri-chat-2-line icon-font-size pr-2"></i>
+                          <span class="font-semibold ">{{ $t("bbs.comment") }} </span>
+                        </div>
+                      </div>   
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Teleport>
+
       <!-- 弹窗提示 -->
       <Teleport to="body">
         <Pop :show="showPop">
@@ -380,7 +485,7 @@
             <div class="text-center">{{ submitStatusHeader }}</div>
           </template>
           <template #body>
-            <div class="text-center">{{ submitStatusBody }}</div>
+            <div class="text-center px-3">{{ submitStatusBody }}</div>
           </template>
           <template #footer>
             <div class="text-center">
@@ -495,6 +600,12 @@ export default {
       email: "",
       blog: "",
       codeNum: "",
+      searchCodeNum: "",
+      searchEmail: "11436052@qq.com",
+      his_user: [],
+      selectUser: "",
+      commentID: null,
+      commentMsg: "",
 
       // 提交数据长度限制
       userMaxLength: 12,
@@ -502,6 +613,7 @@ export default {
       emailMaxLength: 32,
       blogMaxLength: 32,
       codeNumMaxLength: 6,
+      commentMsgMaxLength: 200,
 
 
       submitStatus: false,  // 提交状态
@@ -521,24 +633,65 @@ export default {
       isShowVerify: false,
       slideSeccess: false,
       resetSendTime: 0,
+      isShowComment: false,
+      verifyEmail: '',
     }
   },
   created() {
     this.getBBS(this.currentPage);
-    
+  },
+  async mounted() {
+    let that = this;
+    let storage = that.$ls; 
+    // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
+    this.app.$refs.fl.isShowFlower = false
+    storage.set("submitNum", 0);
   },
   watch: {
     // 实时监听每一个输入是否符合邮箱正则格式
     email(val) {
-      // console.log(val);
       this.email = val.replace(/[^\w@.]/g, "");
+    },
+    searchEmail(val) {
+      this.searchEmail = val.replace(/[^\w@.]/g, "");
     },
     // 监听验证码不超6位
     codeNum(val) {
       let str = String(val)
       str = str.replace(/[^\d]/g, "");
       this.codeNum = str;
+    },
+    async searchCodeNum(val) {
+      let that = this;
+      let str = String(val)
+      let searchEmail = that.searchEmail;
+      str = str.replace(/[^\d]/g, "");
+      this.searchCodeNum = str;
 
+      if (this.searchCodeNum.length == 6) {
+        await msgDatasheet.records.query({
+          filterByFormula: `{email} = "${searchEmail.toLowerCase()}"`,
+        }).then(response => {
+          if (response.success) {
+            that.commentData = response.data.records;
+
+            // console.log(that.commentData);
+
+            that.commentData.forEach((item, index) => {
+              if(that.his_user.indexOf(item.fields.bbsUsername) == -1) {
+                that.his_user.push(item.fields.bbsUsername);
+              }
+            });
+            that.selectUser = that.his_user[0];
+            that.verifyEmail = that.searchEmail;
+
+            // console.log(that.commentData);
+          } else {
+            console.error(response);
+          }
+
+        });
+      }
     },
     // 实时监听每一个输入是否符合网址正则格式
     // blog(val) {
@@ -547,6 +700,7 @@ export default {
     slideSeccess(val) {
       if (val === true) {
         this.resetSendTime = 10;
+        this._resetCode();
         let st = setInterval(() => {
           if (this.resetSendTime > 0) {
             this.resetSendTime -= 1;
@@ -555,21 +709,27 @@ export default {
           }
         }, 1000);
       }
-    }
-  },
-  async mounted() {
-    let that = this;
-    let storage = that.$ls; 
-    // localStorage.setItem("date", moment().format("YYYY-MM-DD"));
-    
-    storage.set("submitNum", 0);
+    },
   },
   methods: {
     // 发送验证码
-    _sendMailCode() {
+    _sendMailCode(val) {
       let that = this;
+      let t = i18n.t
+
+      if (that.resetSendTime > 0) {
+        that.setShowPop(t("bbs._.has_send"), t("bbs._.has_send_des"), t("bbs._.close"));
+        return;
+      }
+
+      if (val.length == 0) {
+        that.setShowPop(t("bbs.send_fail"), t("bbs._.email_format"), t("bbs._.close"));
+        return;
+      }
+
       that.isShowVerify = true;
       that._randomCode()
+
       // emailjs.send("service_bnhm4db","template_ssisb4d",{
       //   code: that.code
       // }, "7e_c9e0PcXjIE9o9S");
@@ -582,14 +742,15 @@ export default {
         code += Math.floor(Math.random() * 10);
       }
       that.code = code;
-      that._resetCode();
     },
     // 5分钟后重置验证码为null
     _resetCode() {
       let that = this;
       setTimeout(() => {
-        that.code = '888888';
-      }, 1000 * 5);
+        that._randomCode();
+        console.log('已重置', that.code);
+        that.slideSeccess = false;
+      }, 1000 * 3);
     },
 
     // 设置POP提示
@@ -742,6 +903,100 @@ export default {
 
       });
     },
+    // 评论
+    async comment(id) {
+      let that = this;
+      let t = i18n.t;
+      let newComment = {};
+      that.returnCitySN = document.returnCitySN
+
+      // 判断提交中的状态
+      if (that.submitStatus) {
+        return;
+      }
+
+      // 判断是否已选择用户名
+      if (that.selectUser === '') {
+        that.setShowPop(t("bbs._.comment_fail"), t("bbs._.comment_fail_des"), t("bbs._.close"));
+        that.showPop = true;
+        return;
+      }
+      
+      // 判断验证码是否正确
+      if (that.searchCodeNum !== that.code) {
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
+        that.showPop = true;
+        return;
+      }
+
+      // 判断输入的内容是否为空
+      if (that.isNotNull(that.commentMsg)) {
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.commentMsg_empty"), t("bbs._.close"));
+        that.showPop = true;
+        return
+      }
+      
+      that.submitStatus = true;
+
+      newComment = {
+        user: that.selectUser,
+        email: that.verifyEmail,
+        commentMsg: that.commentMsg,
+        time: moment().format("YYYY-MM-DD HH:mm:ss"),
+        citySN: that.returnCitySN
+      }
+
+      msgDatasheet.records.query({
+        viewId: "viwhuh8Q1ikXw",
+        pageSize: 1,
+        filterByFormula: `{id} = ${that.commentID}`,
+      }).then(response => {
+
+        console.log(response.data);
+        return
+        if (response.success) {
+          that.Data = response.data.records[0].fields;
+          let arr = [];
+
+          // if (that.Data.comment) {
+          //   arr = JSON.parse(that.Data.comment);
+          // } else {
+            arr = [];
+          // }
+
+          arr.push(newComment);
+
+          msgDatasheet.records.update([
+            {
+              "recordId": that.Data.recordId,
+              "fields": {
+                "comment": JSON.stringify(arr),
+              }
+            },
+          ]).then(response => {
+            if (response.success) {
+              that.his_user = []; // 重置为空
+              that.searchEmail = ''; // 重置为空
+              that.searchCodeNum = ''; // 重置为空
+              that.selectUser = ''; // 重置为空
+              that.resetSendTime = 0;
+              that.commentMsg = ''; // 重置为空
+
+              that.submitStatus = false;  // 提交成功后清除提交状态
+
+              that.isShowComment = false; // 关闭评论框
+              that.getBBS(that.currentPage);
+
+            } else {
+              console.error(response);
+            }
+          })
+        } else {
+          console.error(response);
+        }
+
+      });
+    },
     // 创建一条新的留言
     createBBS() {
       let that = this;
@@ -753,57 +1008,52 @@ export default {
 
       that.returnCitySN = document.returnCitySN
 
-      // if (!that.returnCitySN) return
+      if (!that.returnCitySN) return
 
-      // // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
-      // if (storage.get("bbsDate") === moment().format("YYYY-MM-DD")) {
-      //   if (parseInt(storage.get("submitNum")) >= that.submitMaxNum) {
-      //     that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
-      //     return;
-      //   }
-      // } else {
-      //   storage.set("bbsDate", moment().format("YYYY-MM-DD"));
-      //   storage.set("submitNum", 0);
-      // }
-
-
-      // // 判断提交中的状态
-      // if (that.submitStatus) {
-      //   return;
-      // }
+      // 判断loclStorage 的date 字段是否与今天相同, 如果相同则 判断 判断loclStorage 的submitNum 是否大于5次，如果大于5次则不能提交
+      if (storage.get("bbsDate") === moment().format("YYYY-MM-DD")) {
+        if (parseInt(storage.get("submitNum")) >= that.submitMaxNum) {
+          that.setShowPop(t("bbs._.submit_fail"), t("bbs._.over_submit"), t("bbs._.close"));
+          return;
+        }
+      } else {
+        storage.set("bbsDate", moment().format("YYYY-MM-DD"));
+        storage.set("submitNum", 0);
+      }
 
 
-      // // 判断是否为空
-      // notEmpty = isNotNull(that.user) || isNotNull(that.msg) || isNotNull(that.email);
-      // if (notEmpty) {
-      //   console.log('没填写');
-      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_empty"), t("bbs._.close"));
-      //   return;
-      // }
+      // 判断提交中的状态
+      if (that.submitStatus) {
+        return;
+      }
 
-      // // 判断是否超出最大长度
-      // overMaxLength = isOverMaxLength(that.user, that.userMaxLength) || isOverMaxLength(that.msg, that.msgMaxLength) || isOverMaxLength(that.email, that.emailMaxLength);
-      // if (overMaxLength) {
-      //   console.log('超出最大');
-      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_length"), t("bbs._.close"));
-      //   that.showPop = true;
-      //   return;
-      // }
 
-      // // 判断邮箱格式是否正确
-      // if (!that.email.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
-      //   console.log('邮箱格式不正确');
-      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.email_format"), t("bbs._.close"));
-      //   that.showPop = true;
-      //   return;
-      // }
+      // 判断是否为空
+      notEmpty = isNotNull(that.user) || isNotNull(that.msg) || isNotNull(that.email);
+      if (notEmpty) {
+        console.log('没填写');
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_empty"), t("bbs._.close"));
+        return;
+      }
 
-//       that.setShowPop(t("bbs._.submit_fail"), t("_.maintain"), t("bbs._.close"));
-// return;
+      // 判断是否超出最大长度
+      overMaxLength = isOverMaxLength(that.user, that.userMaxLength) || isOverMaxLength(that.msg, that.msgMaxLength) || isOverMaxLength(that.email, that.emailMaxLength);
+      if (overMaxLength) {
+        console.log('超出最大');
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.msg_length"), t("bbs._.close"));
+        that.showPop = true;
+        return;
+      }
 
-      console.log(that.slideSeccess);
-      return
+      // 判断邮箱格式是否正确
+      if (!that.email.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
+        console.log('邮箱格式不正确');
+        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.email_format"), t("bbs._.close"));
+        that.showPop = true;
+        return;
+      }
 
+      // 判断验证码是否正确
       if (that.codeNum !== that.code) {
         that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
         that.showPop = true;
@@ -816,7 +1066,8 @@ export default {
         {
           "fields": {
             "bbsUsername": that.user,
-            "email": that.email,
+            "email": that.email.toLowerCase(),
+            "verify": 1,
             "publicEmail": that.publicEmail,
             "blog": that.blog,
             "msg": that.msg,
@@ -839,6 +1090,9 @@ export default {
           that.publicEmail = 1;
           that.email = "";
           that.blog = "";
+          that.codeNum = "";
+          that.resetSendTime = 0;
+
 
           that.submitStatus = false;  // 提交成功后清除提交状态
 
@@ -997,4 +1251,9 @@ export default {
 .container {
   padding: 120px 12px 0 12px;
 }
+
+.comment {
+  padding: 0 !important;
+}
+
 </style>

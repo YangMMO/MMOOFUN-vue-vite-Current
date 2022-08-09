@@ -1,24 +1,25 @@
 <template>
-<div class="table fixed left-0 top-0 bg-verify w-full h-full">
-  <div class="table-cell align-middle">
-    <div class="pop-container-verify border-2 border-black dark:border-slate-600 text-black dark:text-white shadow-box_d box bg-white">
-      <div class="p12 border-b-2 border-black dark:border-slate-600  dark:bg-slate-800 ">
-        <slide-verify
-          :slider-text="text"
-          :accuracy="accuracy"
-          :imgs="imgs"
-          @again="onAgain"
-          @success="onSuccess"
-          @fail="onFail"
-          @refresh="onRefresh"
-        ></slide-verify>
-        <!-- <button class="btn" @click="handleClick">在父组件可以点我刷新哦</button> -->
-        <div class="my-3 text-center">{{ msg }}</div>
-        <button v-show="showBtn" :class="['w-full border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="$emit('close')">关闭</button>
+  <div class="table fixed left-0 top-0 bg-verify w-full h-full" @touchmove.prevent  @click="$emit('close')">
+    <div class="table-cell align-middle">
+      <div class="pop-container-verify border-2 border-black dark:border-slate-600 text-black dark:text-white shadow-box_d box bg-white" @click.stop>
+        <div class="p12 border-b-2 border-black dark:border-slate-600  dark:bg-slate-800 ">
+          <slide-verify
+            ref="block"
+            :slider-text="text"
+            :accuracy="accuracy"
+            :imgs="imgs"
+            @again="onAgain"
+            @success="onSuccess"
+            @fail="onFail"
+            @refresh="onRefresh"
+          ></slide-verify>
+          <!-- <button class="btn" @click="handleClick">在父组件可以点我刷新哦</button> -->
+          <div class="mt-3 text-center">{{ msg }}{{ endTime > 0 ? ` (${endTime})` : '' }}</div>
+          <!-- <button v-show="showBtn" :class="['w-full border-2 border-black dark:border-slate-600 px-4 py-1 box cursor-pointer']" @click="$emit('close')">关闭</button> -->
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -42,15 +43,17 @@ export default {
     show: Boolean,
   },
   watch: {
-    show() {
-      this.text = i18n.t("verify.slide")
-      this.msg = i18n.t("verify.onDefault")
+    show(val) {
+      if (val === true) {
+        this.handleRefresh();
+      }
     }
   },
   setup(props) {
     let msg = ref("");
     let text = ref("");
-    const block = ref<SlideVerifyInstance>();
+    let endTime = ref(0);
+    let block = ref<SlideVerifyInstance>();
 
     text.value = i18n.t("verify.slide")
     msg.value = i18n.t("verify.onDefault")
@@ -63,16 +66,19 @@ export default {
       imgs: [img1, img2, img3],
       showBtn: true,
       props,
+      endTime,
     };
   },
   mounted() {
-
+  
   },
   methods: {
-    handleClick() {
-      // 刷新
+    // 刷新
+    handleRefresh() {
       this.block.refresh();
-      this.msg = "";
+      this.text = i18n.t("verify.slide")
+      this.msg = i18n.t("verify.onDefault")
+      // this.showBtn = true;
     },
     onAgain() {
       this.msg = i18n.t("verify.onAgain")
@@ -83,11 +89,19 @@ export default {
     onSuccess(times) {
       // this.msg = i18n.t("verify.onSuccess") + `: ${(times / 1000).toFixed(1)}s`;
       this.msg = i18n.t("verify.onSuccess");
-      this.showBtn = false;
+      // this.showBtn = false;
       this.$emit('verifySeccess');
-      setTimeout(() => {
-        this.$emit('close');
-      }, 2000);
+      this.endTime = 3;
+
+      let st = setInterval(() => {
+        if (this.endTime > 1) {
+          --this.endTime;
+        } else {
+          this.endTime = 0;
+          this.$emit('close');
+          clearInterval(st);
+        }
+      }, 1000);
     },
     onFail() {
       this.msg = i18n.t("verify.onFail")

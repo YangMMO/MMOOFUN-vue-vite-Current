@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
+  <div id="ct" class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
       <div class="flex-header title box ">
         <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">

@@ -52,6 +52,11 @@ export default {
             floor: '楼',
             code: '验证码',
             send: '发送',
+            send_fail: '非有效邮箱',
+            verify: '已验证',
+            comment: '评论',
+            comment_des: '仅支持已留言的用户进行评论',
+            his_username: '历史昵称',
             _: {
                 submit_success: '提交成功',
                 submit_fail: '提交失败',
@@ -68,6 +73,11 @@ export default {
                 violation: '该留言含有违规或不雅用语，已被Ban掉！',
                 violationUser: '[Ban] 违规昵称',
                 code_fail: '请输入正确的邮箱验证码',
+                has_send: '邮件已发送',
+                has_send_des: '请稍后再试',
+                comment_fail: '评论失败',
+                comment_fail_des: '请检查是否已通过邮箱验证，并已选择历史昵称',
+                commentMsg_empty: '请输入评论内容',
             }
         },
         flower: {
@@ -167,6 +177,11 @@ export default {
             floor: 'Floor',
             code: 'Verification Code',
             send : 'Send',
+            send_fail: 'Invalid Email',
+            verify: 'Verified',
+            comment: 'Comment',
+            comment_des: 'Only users who have left a comment are supported to comment',
+            his_username: 'Historical Username',
             _: {
                 submit_success: 'Submit Success',
                 submit_fail: 'Submit Fail',
@@ -183,6 +198,11 @@ export default {
                 violation: 'This message contains illegal or inappropriate content, and has been banned!',
                 violationUser: '[Ban] Violation User Name',
                 code_fail: 'Please enter the correct email verification code',
+                has_send: 'Email has been sent',
+                has_send_des: 'Please try again later',
+                comment_fail: 'Comment failed',
+                comment_fail_des: 'Please check that you have been verified by email and have selected a historical nickname',
+                commentMsg_empty: 'Please enter a Comment',
             }
         },
         flower: {
@@ -223,7 +243,6 @@ export default {
             onFail: 'Verification failed',
             onSuccess: 'Verification via email sent',
             close: 'Close',
-
         },
         _: {
                 visitor: 'Visitor',
