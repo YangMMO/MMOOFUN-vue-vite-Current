@@ -118,9 +118,18 @@
                   
                   <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear">
 
+                    <!-- 评论 -->
+                    <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left text-gray-300 dark:text-gray-500 transition-all duration-75 ease-linear']">
+                      <i  class="ri-chat-2-line align-middle"></i>
+                      <span class="ml-2 sm:ml-2">
+                        {{ $t("bbs.comment") }}
+                      </span>
+                    </div>
+
+                    
                     <!-- 点赞 -->
-                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300 ">
-                      <i  class="ri-thumb-up-fill align-middle"></i>
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-right text-gray-300 dark:text-gray-500 transition-all duration-75 ease-linear" >
+                      <i  class="ri-thumb-up-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.like") + " " + data.fields.like : data.fields.like }} -->
                         {{ $t("bbs.like") + " " + data.fields.like}}
@@ -128,12 +137,26 @@
                     </div>
 
                     <!-- 踩踩 -->
-                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block text-gray-300">
-                      <i  class="ri-thumb-down-fill align-text-bottom"></i>
+                    <div class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-right text-gray-300 dark:text-gray-500 transition-all duration-75 ease-linear">
+                      <i  class="ri-thumb-down-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
                         <!-- {{ app._innerWidth > 640 ? $t("bbs.foot") + data.fields.foot : data.fields.foot }} -->
                         {{ $t("bbs.foot") + " " + data.fields.foot}}
                       </span>
+                    </div>
+
+                  </div>
+                  <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
+                    <div v-for="(comment, i) in (JSON.parse(data.fields.comment))" :key="comment" :i="i" class="w-full mb-3 last:mb-0">
+                      <div class="flex w-full">
+                        <div class="font-semibold flex-shrink-0">{{ comment.user }}</div>
+                        <span class="mx-1">:&nbsp;</span>
+                        <div class="text-gray-600 dark:text-gray-300 transition-all duration-75 ease-linear">{{ comment.commentMsg }}</div>
+                      </div>
+                      <div class="flex w-full flex-row-reverse">
+                        <div class="text-sm  text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">{{ comment.time }}</div>
+                        
+                      </div>
                     </div>
                   </div>
 
@@ -220,7 +243,7 @@
                   <div :class="['w-full bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white', { 'box' : !data.fields.comment}, { 'box-t' : data.fields.comment}]">
 
                     <!-- 评论 -->
-                    <div v-show="data.fields.verify" class="text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full cursor-pointer inline-block float-left " @click="isShowComment = true; commentID = data.fields.id">
+                    <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left transition-all duration-75 ease-linear', { 'text-gray-900 dark:text-white cursor-pointer' : data.fields.verify }, { 'text-gray-300 dark:text-gray-500' : !data.fields.verify }]" @click="data.fields.verify ? isShowComment = true : ''; commentID = data.fields.id">
                       <i  class="ri-chat-2-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
                         {{ $t("bbs.comment") }}
@@ -247,15 +270,21 @@
                     </div>
 
                   </div>
-                  <div v-show="data.fields.comment" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-3 py-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
-                    <!-- <div v-for="comment in JSON.parse(data.fields.comment)" :key="comment"> -->
-                      <!-- <div>{{ comment.user }}</div>
-                      <div>{{ comment.commentMsg }}</div>
-                      <div>{{ comment.email }}</div>
-                      <div>{{ comment.time }}</div>
+                  <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
+                    <div v-for="(comment, i) in (JSON.parse(data.fields.comment))" :key="comment" :i="i" class="w-full mb-3 last:mb-0">
+                      <div class="flex w-full">
+                        <div class="font-semibold flex-shrink-0">{{ comment.user }}</div>
+                        <span class="mx-1">:&nbsp;</span>
+                        <div class="text-gray-600 dark:text-gray-300 transition-all duration-75 ease-linear">{{ comment.commentMsg }}</div>
+                      </div>
+                      <div class="flex w-full flex-row-reverse">
+                        <div class="text-sm text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">{{ comment.time }}</div>
+                        
+                      </div>
+
+                      <!-- <div>{{ comment.email }}</div>
                       <div>{{ comment.citySN }}</div> -->
-                      {{ data.fields.comment }}
-                    <!-- </div> -->
+                    </div>
                   </div>
 
                 </div>
@@ -607,7 +636,7 @@ export default {
       blog: "",
       codeNum: "",
       searchCodeNum: "",
-      searchEmail: "11436052@qq.com",
+      searchEmail: "",
       his_user: [],
       selectUser: "",
       commentID: null,
@@ -706,7 +735,7 @@ export default {
     // }
     slideSeccess(val) {
       if (val === true) {
-        this.resetSendTime = 10;
+        this.resetSendTime = 60;
         this._resetCode();
         let st = setInterval(() => {
           if (this.resetSendTime > 0) {
@@ -737,9 +766,17 @@ export default {
       that.isShowVerify = true;
       that._randomCode()
 
-      // emailjs.send("service_bnhm4db","template_ssisb4d",{
-      //   code: that.code
-      // }, "7e_c9e0PcXjIE9o9S");
+      emailjs.send("service_bnhm4db","template_ssisb4d",{
+        code: that.code
+      }, "7e_c9e0PcXjIE9o9S").then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+        // 另一个发送邮箱
+        emailjs.send("service_9af3g3t","template_zt564ws",{
+          code: that.code
+        }, "sVO-ExwB5toRTtZ2H");
+      });
     },
     // 随机6位数字验证码
     _randomCode() {
@@ -755,9 +792,9 @@ export default {
       let that = this;
       setTimeout(() => {
         that._randomCode();
-        console.log('已重置', that.code);
+        // console.log('已重置', that.code);
         that.slideSeccess = false;
-      }, 1000 * 3);
+      }, 60000 * 5);
     },
 
     // 设置POP提示
@@ -989,7 +1026,13 @@ export default {
               that.submitStatus = false;  // 提交成功后清除提交状态
 
               that.isShowComment = false; // 关闭评论框
+
               that.getBBS(that.currentPage);
+
+              that.flower._isUpdate('nutrition', 1)
+              that.flower._isUpdate('love', 1)
+              that.flower._isUpdate('water', 1)
+              that.flower._isUpdate('sun', 1)
 
             } else {
               console.error(response);
@@ -1133,7 +1176,7 @@ export default {
       that.currentPage = currentPage; // 当前页码
 
 
-      // design
+      // 
       await msgDatasheet.records.query({
         viewId: "viwhuh8Q1ikXw",
         pageSize: that.getNum,
@@ -1150,10 +1193,8 @@ export default {
           // 计算总页数
           that.totalPage = that.bbsDataLength % that.getNum === 0 ? that.bbsDataLength / that.getNum : Math.floor(that.bbsDataLength / that.getNum) + 1; 
 
-          // window.scrollY = 0; // 回到顶部
-          // setTimeout(() => {
-            that.app._goTop('sTop')
-          // }, 200);
+
+          that.app._goTop('sTop')
           
 
           // console.log(response);

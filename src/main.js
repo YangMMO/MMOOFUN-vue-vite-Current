@@ -7,19 +7,19 @@ import VueCookies from 'vue-cookies'
 import Storage from 'vue-ls';
 
 // 触摸Event警告消除
-(function () {
-  if (typeof EventTarget !== "undefined") {
-    let func = EventTarget.prototype.addEventListener;
-    EventTarget.prototype.addEventListener = function (type, fn, capture) {
-      this.func = func;
-      if (typeof capture !== "boolean") {
-        capture = capture || {};
-        capture.passive = false;
-      }
-      this.func(type, fn, capture);
-    };
-  };
-}());
+// (function () {
+//   if (typeof EventTarget !== "undefined") {
+//     let func = EventTarget.prototype.addEventListener;
+//     EventTarget.prototype.addEventListener = function (type, fn, capture) {
+//       this.func = func;
+//       if (typeof capture !== "boolean") {
+//         capture = capture || {};
+//         capture.passive = false;
+//       }
+//       this.func(type, fn, capture);
+//     };
+//   };
+// }());
 
 // 加载remixicon图标
 import 'remixicon/fonts/remixicon.css'

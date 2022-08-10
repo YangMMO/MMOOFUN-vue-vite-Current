@@ -512,6 +512,8 @@ export default {
       ]).then(response => {
         if (response.success) {
           // console.log(response.data);
+          that.isShowFlower = true;
+          
           that.growthData = response.data.records[0].fields;
           that._setTodayData(that.growthData);
           that.showDialog(that.flowerData, addNum, fType);
