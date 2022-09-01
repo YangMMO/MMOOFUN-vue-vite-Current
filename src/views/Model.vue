@@ -8,6 +8,7 @@
         @click="onClickLoader">加载模型</button> -->
 
       <NFT1></NFT1>
+      <!-- <threeCar></threeCar> -->
       <threeEx></threeEx>
     </div>
   </div>
