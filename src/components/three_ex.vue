@@ -199,7 +199,8 @@ export default {
 
       }, function (xhr) {
 
-        that.onProgress = (xhr.loaded / xhr.total * 100);
+        // that.onProgress = (xhr.loaded / xhr.total * 100).toFixed(2);
+        that.onProgress = xhr.loaded;
         // console.log(that.onProgress)
       }, function (e) {
 
