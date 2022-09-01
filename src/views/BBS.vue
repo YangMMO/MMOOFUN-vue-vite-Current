@@ -767,14 +767,16 @@ export default {
       that._randomCode()
 
       emailjs.send("service_bnhm4db","template_ssisb4d",{
-        code: that.code
+        code: that.code,
+        to: that.email
       }, "7e_c9e0PcXjIE9o9S").then(res => {
         console.log(res);
       }).catch(err => {
         console.log(err);
         // 另一个发送邮箱
         emailjs.send("service_9af3g3t","template_zt564ws",{
-          code: that.code
+          code: that.code,
+          to: that.email
         }, "sVO-ExwB5toRTtZ2H");
       });
     },
