@@ -3,8 +3,8 @@
     <h1 class="text-xl pb-6 font-semibold select-none">模型展示</h1>
     <div class="w-full">
 
-      <div class="mb-1">
-        <button v-for="item in modelNameArr" :key="item.name" class="button-m box p-1 px-2 tools-item border-2 border-gray-300 dark:border-gray-600 m"  @click="onClickLoader(item.glb)">{{ item.name }}</button>
+      <div class="mb-3 grid grid-cols-4 gap-2">
+        <button v-for="item in modelNameArr" :key="item.name" class="box p-1 px-2 tools-item border-2 border-gray-300 dark:border-gray-600 m"  @click="onClickLoader(item.glb)">{{ item.name }}</button>
       </div>
 
       <p class="pb-3">加载进度: {{ onProgress }}</p>
@@ -69,13 +69,16 @@ export default {
       onTotal: this.onProgress,
       modelNameArr: [
         {
-          name: 'Three官方示例',
+          name: 'Three 官方示例 (4MB)',
           glb:  'LittlestTokyo.glb'
         }, {
-          name: 'NFT车模型1',
-          glb:  'car2_2.glb'
+          name: '3D NFT Car 1 (3.8MB)',
+          glb:  'car1_0.glb'
         }, {
-          name: 'NFT车模型2',
+          name: '3D NFT Car 2 (3.7MB)',
+          glb:  'car2_0.glb'
+        }, {
+          name: '3D NFT Car 3 (4.7MB)',
           glb:  'car3_0.glb'
         }
       ]
@@ -181,7 +184,20 @@ export default {
             that.mixer.clipAction(gltf.animations[0]).play();
 
             break;
-          case 'car2_2.glb':
+          case 'car1_0.glb':
+            model.position.set(2, 0, 0);
+            model.scale.set(6, 6, 6);
+
+            //调用方式，设置x、y、z轴的旋转
+            yAxis = new THREE.Vector3(0, 1, 0);
+            //模型、旋转轴和旋转角度（弧度）
+            that.rotateAroundWorldAxis(model, yAxis, Math.PI / 1.4);
+
+            that.group.add(model)
+            that.scene.add(that.group);
+
+            break;
+          case 'car2_0.glb':
             model.position.set(2, 0, 0);
             model.scale.set(6, 6, 6);
 
@@ -260,9 +276,5 @@ export default {
 }
 .container {
     padding: 120px 12px 0 12px;
-}
-.button-m {
-  margin-right: 8px;
-  margin-bottom: 8px;
 }
 </style>
