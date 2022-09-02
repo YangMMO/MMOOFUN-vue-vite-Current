@@ -9,7 +9,7 @@
 
       <p class="pb-3">加载进度: {{ onProgress }}</p>
 
-      <div id="model-canvas" class="box overflow-hidden"></div>
+      <div id="model-canvas" :class="['box overflow-hidden', {'bg-gray-100': !_isLoading}]"></div>
 
     </div>
   </div>
@@ -63,6 +63,7 @@ export default {
 
     this._startFrame = false
     this._isLoading = false
+    this.runAnimate = false;
 
     return {
       onProgress: this.onProgress,
@@ -226,6 +227,7 @@ export default {
           default: 
             break;
         }
+        that.animate();
 
       }, function (xhr) {
 
@@ -238,7 +240,6 @@ export default {
         } else {
           that._startFrame = true;
           that._isLoading = false;
-          that.animate();
         }
       }, function (e) {
 
