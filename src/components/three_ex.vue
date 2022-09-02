@@ -2,11 +2,13 @@
   <div class="mx-auto text-black dark:text-white mb-9">
     <h1 class="text-xl pb-6 font-semibold select-none">模型展示</h1>
     <div class="w-full">
+
       <div class="mb-1">
         <button v-for="item in modelNameArr" :key="item.name" class="button-m box p-1 px-2 tools-item border-2 border-gray-300 dark:border-gray-600 m"  @click="onClickLoader(item.glb)">{{ item.name }}</button>
       </div>
-      <p class="pb-3">加载模型进度: {{ onProgress }}</p>
-      <!-- <button @click="onClickLoader('car2_2.glb')">three官方示例</button> -->
+
+      <p class="pb-3">进度: {{ onProgress }} / {{ onTotal }}</p>
+
       <div id="model-canvas" class="box overflow-hidden"></div>
 
     </div>
@@ -15,6 +17,13 @@
 
 <script>
 import i18n from '../i18n';
+
+import { Vika } from "@vikadata/vika";
+
+const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
+const glb_Datasheet = vika.datasheet("dstLlVn0WmXTN7yd6M");
+
+
 import * as THREE from "three";
 
 import Stats from 'three/examples/jsm/libs/stats.module.js';
@@ -45,13 +54,19 @@ export default {
     this.secne = null
     this.camera = null
     this.controls = null
+    this.dracoLoader = null
+    this.loader = null;
+
     this.onProgress = 0
+    this.onTotal = 0
     this.group = null
 
     this._startFrame = false
+    this._isLoading = false
 
     return {
       onProgress: this.onProgress,
+      onTotal: this.onProgress,
       modelNameArr: [
         {
           name: 'Three官方示例',
@@ -67,7 +82,7 @@ export default {
     }
   },
   methods: {
-    init() {
+    async init() {
       let that = this
       this.clock = new THREE.Clock()
       const container = document.getElementById('model-canvas')
@@ -91,12 +106,14 @@ export default {
       this.scene.background = new THREE.Color(0xbfe3dd);
       this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
-      this.camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 1, 80);
-      this.camera.position.set(50, 20, 8);
+      this.camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 1, 100);
+      this.camera.position.set(40, 10, 0);
 
       this.group = new THREE.Group();
 
       that.onClickLoader(that.modelNameArr[0].glb)
+      // await that.getGlb(that.getGlb(that.glb_data[0].fields.id))
+      // console.log(await that.glb_data);
 
 
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -104,7 +121,6 @@ export default {
       this.controls.update();
       this.controls.enablePan = false;
       this.controls.enableDamping = true;
-      
     },
     animate: function () {
       if (this._startFrame) {
@@ -115,38 +131,46 @@ export default {
         }
         this.controls.update();
         this.stats.update();
+        
         this.renderer.render(this.scene, this.camera);
       } else {
         cancelAnimationFrame(this.animate)
       }
     },
-    onClickLoader(modelName) {
+    onClickLoader(modelGlb) {
       let that = this;
+      let xAxis;
+      let yAxis;
+      let zAxis;
 
-      const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath('./draco/');
+      if (that._isLoading) {
+        console.log('加载中');
+        return;
+      }
 
-      const loader = new GLTFLoader().setPath('./models/');
-      loader.setDRACOLoader(dracoLoader);
-      loader.load(modelName, function (gltf) {
-        const model = gltf.scene;
-        let xAxis;
-        let yAxis;
-        let zAxis;
+      that.dracoLoader = new DRACOLoader();
+      that.dracoLoader.setDecoderPath('./draco/');
 
-        that.group.children.forEach(child => {
+      that.loader = new GLTFLoader().setPath('./models/');
+      that.loader.setDRACOLoader(that.dracoLoader);
+
+      that.group.children.forEach(child => {
           that.group.remove(child);
-        });
+      });
+      that.scene.remove(that.group)
 
-        switch(modelName) {
+      that.mixer = null;
+
+      that.loader.load(modelGlb, function (gltf) {
+        const model = gltf.scene;
+
+        switch(modelGlb) {
           case 'LittlestTokyo.glb':
             model.position.set(1, 4, 0);
             model.scale.set(0.05, 0.05, 0.05);
 
-            //调用方式，设置x、y、z轴的旋转
-            xAxis = new THREE.Vector3(1, 0, 0);
+            //调用方式，设置x、y、z轴的旋转);
             yAxis = new THREE.Vector3(0, 1, 0);
-            zAxis = new THREE.Vector3(0, 0, 2);
             //模型、旋转轴和旋转角度（弧度）
             that.rotateAroundWorldAxis(model, yAxis, Math.PI / 1.4);
 
@@ -156,52 +180,50 @@ export default {
             that.mixer = new THREE.AnimationMixer(model);
             that.mixer.clipAction(gltf.animations[0]).play();
 
-            that._startFrame = true;
             break;
           case 'car2_2.glb':
             model.position.set(2, 0, 0);
             model.scale.set(6, 6, 6);
 
             //调用方式，设置x、y、z轴的旋转
-            xAxis = new THREE.Vector3(1, 0, 0);
             yAxis = new THREE.Vector3(0, 1, 0);
-            zAxis = new THREE.Vector3(0, 0, 2);
             //模型、旋转轴和旋转角度（弧度）
             that.rotateAroundWorldAxis(model, yAxis, Math.PI / 1.4);
 
             that.group.add(model)
             that.scene.add(that.group);
 
-            that._startFrame = true;
             break;
           case 'car3_0.glb':
             model.position.set(2, 0, 0);
             model.scale.set(6, 6, 6);
 
             //调用方式，设置x、y、z轴的旋转
-            xAxis = new THREE.Vector3(1, 0, 0);
             yAxis = new THREE.Vector3(0, 1, 0);
-            zAxis = new THREE.Vector3(0, 0, 2);
             //模型、旋转轴和旋转角度（弧度）
-            that.rotateAroundWorldAxis(model, yAxis, Math.PI / 1.4);
+            that.rotateAroundWorldAxis(model, yAxis, Math.PI / 4);
 
             that.group.add(model)
             that.scene.add(that.group);
 
-            that._startFrame = true;
             break;
           default: 
             break;
         }
 
-
-        that.animate();
-
       }, function (xhr) {
 
         // that.onProgress = (xhr.loaded / xhr.total * 100).toFixed(2);
         that.onProgress = xhr.loaded;
-        // console.log(that.onProgress)
+        that.onTotal = xhr.total;
+        if (xhr.loaded < xhr.total) {
+          that._startFrame = false;
+          that._isLoading = true
+        } else {
+          that._startFrame = true;
+          that._isLoading = false;
+          that.animate();
+        }
       }, function (e) {
 
         console.error(e);
@@ -214,7 +236,7 @@ export default {
       rotWorldMatrix.multiply(object.matrix); 
       object.matrix = rotWorldMatrix; 
       object.rotation.setFromRotationMatrix(object.matrix);
-    }
+    },
   },
   mounted() {
     this.init()
@@ -223,7 +245,7 @@ export default {
   unmounted() {
     this._startFrame = false
     // cancelAnimationFrame(this.animate)
-  }
+  },
   
 }
 </script>

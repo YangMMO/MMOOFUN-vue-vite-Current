@@ -23,7 +23,7 @@ import i18n from '../../i18n';
 import { Vika } from "@vikadata/vika";
 
 const vika = new Vika({ token: "uskXc86WRaBC0WpUZhWeOHO", fieldKey: "name" });
-const datasheet = vika.datasheet("dstY5719T5rY2ddMig");
+const NFT1_Datasheet = vika.datasheet("dstY5719T5rY2ddMig");
 
 
 export default {
@@ -45,10 +45,10 @@ export default {
   },
   created() {
     let that = this;
-    datasheet.records.query({ viewId: "viwiZvDkRkpS6"}).then(response => {
+    NFT1_Datasheet.records.query({ viewId: "viwiZvDkRkpS6"}).then(response => {
         if (response.success) {
             that.m_data = response.data.records;
-            console.log(that.m_data);
+            // console.log(that.m_data);
         } else {
             console.error(response);
         }
