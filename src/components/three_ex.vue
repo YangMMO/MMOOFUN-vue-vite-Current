@@ -82,8 +82,11 @@ export default {
           name: '3D NFT Car 3 (4.7MB)',
           glb:  'car3_0.glb'
         }, {
-          name: '自助机模型',
+          name: '自助机模型 1 (0.2MB)',
           glb:  'apparatus.glb'
+        }, {
+          name: '自助机模型 2 (0.8MB)',
+          glb:  'apparatus1.glb'
         }
       ]
     }
@@ -229,6 +232,19 @@ export default {
             break;
           case 'apparatus.glb':
             model.position.set(0, -14, 0);
+            model.scale.set(20, 20, 20);
+
+            //调用方式，设置x、y、z轴的旋转
+            yAxis = new THREE.Vector3(0, 1, 0);
+            //模型、旋转轴和旋转角度（弧度）
+            that.rotateAroundWorldAxis(model, yAxis, Math.PI / 4);
+
+            that.group.add(model)
+            that.scene.add(that.group);
+
+            break;
+          case 'apparatus1.glb':
+            model.position.set(0, -16, 0);
             model.scale.set(20, 20, 20);
 
             //调用方式，设置x、y、z轴的旋转
