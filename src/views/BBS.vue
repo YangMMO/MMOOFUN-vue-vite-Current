@@ -119,12 +119,12 @@
                   <div class="w-full box bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear">
 
                     <!-- 评论 -->
-                    <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left text-gray-300 dark:text-gray-500 transition-all duration-75 ease-linear']">
+                    <!-- <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left text-gray-300 dark:text-gray-500 transition-all duration-75 ease-linear']">
                       <i  class="ri-chat-2-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
                         {{ $t("bbs.comment") }}
                       </span>
-                    </div>
+                    </div> -->
 
                     
                     <!-- 点赞 -->
@@ -146,7 +146,8 @@
                     </div>
 
                   </div>
-                  <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
+                  <!-- 留言显示 -->
+                  <!-- <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
                     <div v-for="(comment, i) in (JSON.parse(data.fields.comment))" :key="comment" :i="i" class="w-full mb-3 last:mb-0">
                       <div class="flex w-full">
                         <div class="font-semibold flex-shrink-0">{{ comment.user }}</div>
@@ -158,7 +159,7 @@
                         
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
 
@@ -243,12 +244,12 @@
                   <div :class="['w-full bg-slate-100 dark:bg-slate-700 mt-6 flow-root px-3 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white', { 'box' : !data.fields.comment}, { 'box-t' : data.fields.comment}]">
 
                     <!-- 评论 -->
-                    <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left transition-all duration-75 ease-linear', { 'text-gray-900 dark:text-white cursor-pointer' : data.fields.verify }, { 'text-gray-300 dark:text-gray-500' : !data.fields.verify }]" @click="data.fields.verify ? isShowComment = true : ''; commentID = data.fields.id">
+                    <!-- <div :class="['text-base sm:text-sm select-none px-0 py-1 mx-3 my-2 h-full inline-block float-left transition-all duration-75 ease-linear', { 'text-gray-900 dark:text-white cursor-pointer' : data.fields.verify }, { 'text-gray-300 dark:text-gray-500' : !data.fields.verify }]" @click="data.fields.verify ? isShowComment = true : ''; commentID = data.fields.id">
                       <i  class="ri-chat-2-line align-middle"></i>
                       <span class="ml-2 sm:ml-2">
                         {{ $t("bbs.comment") }}
                       </span>
-                    </div>
+                    </div> -->
 
                     
                     <!-- 点赞 -->
@@ -270,7 +271,9 @@
                     </div>
 
                   </div>
-                  <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
+                  
+                  <!-- 留言显示 -->
+                  <!-- <div v-if="data.fields.comment != undefined" class="w-full box-b bg-slate-50 dark:bg-slate-600 flow-root px-6 py-6 text-left transition-all duration-75 ease-linear text-gray-900 dark:text-white" >
                     <div v-for="(comment, i) in (JSON.parse(data.fields.comment))" :key="comment" :i="i" class="w-full mb-3 last:mb-0">
                       <div class="flex w-full">
                         <div class="font-semibold flex-shrink-0">{{ comment.user }}</div>
@@ -282,10 +285,8 @@
                         
                       </div>
 
-                      <!-- <div>{{ comment.email }}</div>
-                      <div>{{ comment.citySN }}</div> -->
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
 
@@ -379,7 +380,7 @@
         </div>
 
         <!-- 验证码 -->
-        <label class="mb-3">{{ $t("bbs.code") }} <span class="text-red-500">*</span></label>
+        <!-- <label class="mb-3">{{ $t("bbs.code") }} <span class="text-red-500">*</span></label>
         <div
           :class="['mb-3 flex w-full items-center border-2 box-border box relative', { 'border-red-500': codeNum.length > codeNumMaxLength }]">
           <input type="text" maxlength="6" :class="['w-full p8 focus:outline-none  dark:text-black  text-black']" v-model="codeNum">
@@ -394,7 +395,7 @@
               <span>{{  $t("bbs.send") }}{{ resetSendTime > 0 ? ` (${resetSendTime})` : ''  }}</span>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 个人网站 -->
         <label class="mb-3">{{ $t("bbs.blog") }} </label>
@@ -1103,11 +1104,11 @@ export default {
       }
 
       // 判断验证码是否正确
-      if (that.codeNum !== that.code) {
-        that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
-        that.showPop = true;
-        return;
-      }
+      // if (that.codeNum !== that.code) {
+      //   that.setShowPop(t("bbs._.submit_fail"), t("bbs._.code_fail"), t("bbs._.close"));
+      //   that.showPop = true;
+      //   return;
+      // }
 
       that.submitStatus = true;
       console.log('提交中');
