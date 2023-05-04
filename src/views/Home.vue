@@ -34,7 +34,7 @@
 
             <!-- Arnold图片 -->
             <!-- <img :src="data[0].fields.image[0].url" /> -->
-            <img src="../assets/img/arnold-6.jpg" />
+            <img src="../src/assets/img/arnold-6.jpg" />
             <!-- 按钮 -->
             <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
               <a :href="data[0].fields.url" target="_blank"
