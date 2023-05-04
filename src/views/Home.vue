@@ -33,8 +33,8 @@
           <div class="relative select-none">
 
             <!-- Arnold图片 -->
-            <img :src="data[0].fields.image[0].url" />
-
+            <!-- <img :src="data[0].fields.image[0].url" /> -->
+            <img src="src/assets/img/arnold-6.jpg" />
             <!-- 按钮 -->
             <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
               <a :href="data[0].fields.url" target="_blank"
@@ -82,7 +82,8 @@
 
         <div class=" m-auto flex mt-3 mb-6 flex-col  transition-all duration-75 ease-linear">
           <div  class="w-full box mr-3 mb-3 select-none transition-all duration-75 ease-linear">
-            <img :src="data[1].fields.image[0].url" class="ml-auto mr-auto w-3/12 box transition-all duration-75 ease-linear ">
+            <!-- <img :src="data[1].fields.image[0].url" class="ml-auto mr-auto w-3/12 box transition-all duration-75 ease-linear "> -->
+            <img src="src/assets/img/wechat-shop.jpg" class="ml-auto mr-auto w-3/12 box transition-all duration-75 ease-linear ">
           </div>
           <div class="bg-slate-100 dark:bg-slate-700 box flex-1 p-3 transition-all duration-75 ease-linear">
             <h3 class="text-slate-400 text-base mb-2 transition-all duration-75 ease-linear">{{ $t("home.download") }}</h3>
