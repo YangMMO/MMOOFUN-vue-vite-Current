@@ -8,18 +8,18 @@
       <transition name="translateY">
         <div v-if="isShowFlower && flowerData" class="relative ">
           <div class="absolute -bottom-16 -right-0 sm:-right-1 transition-all duration-75 ease-linear flex flex-col">
-            <!-- <div class="flower relative cursor-pointer filter blur-3xl" >
-              <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
-              <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
-              <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
-              <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div>
-            </div> -->
             <div class="flower relative cursor-pointer filter blur-3xl" >
+              <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[5].url) : ''})` }"></div>
+              <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[6].url) : ''})` }"></div>
+              <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[7].url) : ''})` }"></div>
+              <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[8].url) : ''})` }"></div>
+            </div>
+            <!-- <div class="flower relative cursor-pointer filter blur-3xl" >
               <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a2.png' : ''})` }"></div>
               <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a1.png' : ''})` }"></div>
               <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a3.png' : ''})` }"></div>
               <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/pot_a1.png' : ''})` }"></div>
-            </div>
+            </div> -->
           </div>
         </div>
       </transition>
@@ -40,7 +40,7 @@
             <div class="flex absolute mouse-box bg-purple-50 box px-4 py-2 left-0  ">
               <div class="relative mouse border-2 rounded-full border-purple-400 bg-purple-200 align-middle">
                 <div class="absolute mouse-roller left-1/2 -translate-x-1/2 bg-purple-400">
-                  <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0s'}"></div>
+                  <!-- <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0s'}"></div> -->
                   <!-- <div class="absolute roller-animation -translate-x-1/2" :style="{animationDelay: '0.4s'}"></div> -->
                 </div>
               </div>
@@ -78,28 +78,28 @@
                     </div>
                   </div>
 
-                  <!-- <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="sunlight">
-                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[12].url : ''})` }"></span>
+                  <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="sunlight">
+                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[12].url) : ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.sunlight") }}</span>
                   </div>
 
                   <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="prune">
-                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[11].url : ''})` }"></span>
+                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[11].url) : ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.prune") }}</span>
                   </div>
 
 
                   <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="watering">
-                    <span class="func-icon inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[10].url : ''})` }"></span>
+                    <span class="func-icon inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[10].url) : ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.watering") }}</span>
                   </div>
 
                   <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="fertilize">
-                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[13].url : ''})` }"></span>
+                    <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[13].url) : ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.fertilize") }}</span>
-                  </div> -->
+                  </div>
 
-                  <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="sunlight">
+                  <!-- <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="sunlight">
                     <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/s.png' : ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.sunlight") }}</span>
                   </div>
@@ -118,7 +118,7 @@
                   <div class="cursor-pointer text-sm p4 hover:scale-125 transition-all duration-75 ease-in-out" @click="fertilize">
                     <span class="func-icon  inline-block align-middle" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/n.png': ''})` }"></span>
                     <span class="text-center font-color cursor-pointer ml-2 hidden  sm:inline-block">{{ $t("flower.fertilize") }}</span>
-                  </div>
+                  </div> -->
                 </div>
 
               </div>
@@ -130,8 +130,8 @@
                 <!-- 阳光 -->
                 <div class="flex-1 flex flex-col place-content-center text-sm" >
                   <div class="flex mb-1">
-                    <!-- <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[2].url : ''})` }"></div> -->
-                    <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_3.png' : ''})` }"></div>
+                    <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[2].url) : ''})` }"></div>
+                    <!-- <div class="icon sun mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_3.png' : ''})` }"></div> -->
                     <h3 class="">
                       <span class="font-color hidden  sm:inline-block mr-2">
                         {{ $t("flower.sun") }}
@@ -155,8 +155,8 @@
                 <!-- 爱心 -->
                 <div class="flex-1 flex flex-col place-content-center text-sm" >
                   <div class="flex mb-1">
-                    <!-- <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[1].url : ''})` }"></div> -->
-                    <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_2.png' : ''})` }"></div>
+                    <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[1].url) : ''})` }"></div>
+                    <!-- <div class="icon love mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_2.png' : ''})` }"></div> -->
                     <h3 class="">
                       <span class="font-color hidden  sm:inline-block mr-2">
                         {{ $t("flower.love") }}
@@ -180,8 +180,8 @@
                 <!-- 雨露 -->
                 <div class="flex-1 flex flex-col place-content-center text-sm" >
                   <div class="flex mb-1">
-                    <!-- <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[0].url : ''})` }"></div> -->
-                    <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_1.png' : ''})` }"></div>
+                    <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[0].url) : ''})` }"></div>
+                    <!-- <div class="icon water mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_1.png' : ''})` }"></div> -->
                     <h3 class="">
                       <span class="font-color hidden  sm:inline-block mr-2">
                         {{ $t("flower.water") }}
@@ -205,8 +205,8 @@
                 <!-- 养分 -->
                 <div class="flex-1 flex flex-col place-content-center text-sm" >
                   <div class="flex mb-1">
-                    <!-- <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[3].url : ''})` }"></div> -->
-                    <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_4.png' : ''})` }"></div>
+                    <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[3].url) : ''})` }"></div>
+                    <!-- <div class="icon nutrition mr-1" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/icon_4.png' : ''})` }"></div> -->
                     <h3 class="">
                       <span class="font-color hidden  sm:inline-block  mr-2">
                         {{ $t("flower.nutrition") }}
@@ -238,42 +238,43 @@
               <div class="absolute -bottom-1 -right-0 sm:-right-1 transition-all duration-75 ease-linear flex flex-col">
 
                 <div class="flower relative cursor-pointer" @click="isShowFunc = !isShowFunc">
-                  <!-- <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[5].url : ''})` }"></div>
-                  <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[6].url : ''})` }"></div>
-                  <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[7].url : ''})` }"></div>
-                  <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? flowerData.flower_img[8].url : ''})` }"></div> -->
+                  <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[5].url) : ''})` }"></div>
+                  <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[6].url) : ''})` }"></div>
+                  <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[7].url) : ''})` }"></div>
+                  <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? getImage(flowerData.flower_img[8].url) : ''})` }"></div>
 
-                  <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a2.png' : ''})` }"></div>
+                  <!-- <div class="f22 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a2.png' : ''})` }"></div>
                   <div class="f11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a1.png' : ''})` }"></div>
                   <div class="f33 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/f_a3.png' : ''})` }"></div>
-                  <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/pot_a1.png' : ''})` }"></div>
-                  <!-- <div v-for="item in _randomNum" :key="item" class="absolute star" :style="[{
-                    backgroundImage: `url(${isShowFlower && flowerData ? flowerData.flower_img[9].url : ''})` },
-                    { width: `${_getRandom(16,24)}px` },
-                    { height: `${_getRandom(18,26)}px` },
-                    { top: `${_getRandom(12,280)}px` },
-                    { left: `${_getRandom(4,96)}px` },
-                    { animation: `star-s ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div> -->
+                  <div class="pot11 box-size absolute bottom-0 right-0" :style="{ backgroundImage: `url(${isShowFlower ? './asets/img/flower/pot_a1.png' : ''})` }"></div> -->
                   <div v-for="item in _randomNum" :key="item" class="absolute star" :style="[{
-                    backgroundImage: `url(${isShowFlower && flowerData ? './asets/img/flower/star_a1.png' : ''})` },
+                    backgroundImage: `url(${isShowFlower && flowerData ? getImage(flowerData.flower_img[9].url) : ''})` },
                     { width: `${_getRandom(16,24)}px` },
                     { height: `${_getRandom(18,26)}px` },
                     { top: `${_getRandom(12,280)}px` },
                     { left: `${_getRandom(4,96)}px` },
                     { animation: `star-s ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div>
+                  <!-- <div v-for="item in _randomNum" :key="item" class="absolute star" :style="[{
+                    backgroundImage: `url(${isShowFlower && flowerData ? './asets/img/flower/star_a1.png' : ''})` },
+                    { width: `${_getRandom(16,24)}px` },
+                    { height: `${_getRandom(18,26)}px` },
+                    { top: `${_getRandom(12,280)}px` },
+                    { left: `${_getRandom(4,96)}px` },
+                    { animation: `star-s ` + `${_getRandomFloat(2.5,4)}s  infinite alternate` }]" ></div> -->
                   
-                  <!-- <transition name="guide-opa">
+                  <transition name="guide-opa">
                     <div v-if="isGuide " @click="isGuide = false;_isUpdate('nutrition', 1)" class="absolute w-full h-full">
                         <div class="guide bg absolute"  :style="[{
-                      backgroundImage: `url(${isShowFlower && flowerData ? flowerData.flower_img[15].url : ''})` }]"></div>
+                      backgroundImage: `url(${isShowFlower && flowerData ? getImage(flowerData.flower_img[15].url) : ''})` }]"></div>
                       </div>
-                  </transition> -->
-                  <transition name="guide-opa">
+                  </transition>
+
+                  <!-- <transition name="guide-opa">
                     <div v-if="isGuide " @click="isGuide = false;_isUpdate('nutrition', 1)" class="absolute w-full h-full">
                         <div class="guide bg absolute"  :style="[{
                       backgroundImage: `url(${isShowFlower && flowerData ? './asets/img/flower/h.png' : ''})` }]"></div>
                       </div>
-                  </transition>
+                  </transition> -->
                   
                 </div>
 
@@ -387,6 +388,15 @@ export default {
     this._randomNum = this._getRandom(9, 12);
   },
   methods: {
+
+    getImage(url){
+      // console.log(url);
+      // 把现在的图片连接传进来，返回一个不受限制的路径
+      if(url !== undefined){
+        return url.replace(/^(http)[s]*(\:\/\/)/,'https://images.weserv.nl/?url=');
+      }
+    },
+
 
     // 栽培帮助
     cultivationHelp() {

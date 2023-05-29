@@ -5,7 +5,7 @@
         <div class=" absolute top-1 flex p4 justify-center items-center rounded-full filter blur-xl bg-purple-500 bg-opacity-50 w-full h-full">
         </div>
         <div class="flex p4 justify-center items-center bg-white rounded-full relative">
-          <div class="icon " :style="[{ backgroundImage: `url(${visible ? flower.flower_img[fType].url : ''})` }]"></div>
+          <div class="icon " :style="[{ backgroundImage: `url(${visible ? getImage(flower.flower_img[fType].url) : ''})` }]"></div>
           <div class="text-xs inline-block font-color pr-1">
             {{ `  + ${data}` }}
           </div>
@@ -39,6 +39,8 @@ export default {
     function show() {
       visible.value = true;
     }
+
+    console.log(ctx)
     return {
       close,
       show,
@@ -52,6 +54,15 @@ export default {
       this.close();
     }, 2000);
   },
+  methods: {
+    getImage(url){
+      // console.log(url);
+      // 把现在的图片连接传进来，返回一个不受限制的路径
+      if(url !== undefined){
+        return url.replace(/^(http)[s]*(\:\/\/)/,'https://images.weserv.nl/?url=');
+      }
+    },
+  }
 };
 </script>
 
