@@ -37,7 +37,7 @@
         <div v-for="(data, index) in designData" :key="index" class="design-item box overflow-hidden text-sm ">
           <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
           <div v-if="index % col === colInedx - 1" class="mb-3">
-            <a :href="data.fields.url" target="_blank">
+            <a :href="data.fields.url.text" target="_blank">
               <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600 transition-all duration-75 ease-linear">
               <div
                 class="p12 text-black dark:text-white box-b bg-gray-100 dark:bg-slate-700 transition-all duration-200">
