@@ -2,7 +2,7 @@ export default {
     cn: {
         menu: {
             menu: '菜单',
-            home: '⾸页',
+            home: '主页',
             design: '设计',
             model: '建模',
             note: '笔记',

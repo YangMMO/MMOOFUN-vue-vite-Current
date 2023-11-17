@@ -13,13 +13,6 @@
           <span class="text-slate-400 text-xs py-2">猫猫吃老鼠</span>
         </div>
 
-        <div class="b-btn box pb-6 inset-x-0 bottom-0 text-center flex pb-4 justify-center select-none">
-          <a href="http://resume.mmoo.fun/" target="_blank" rel="noopener noreferrer"
-            class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
-            <i class="ri-share-line icon-font-size pr-2"></i>
-            <span class="font-semibold ">查看旧版</span>
-          </a>
-        </div>
       </div>
 
       <!-- 简历 -->
@@ -38,10 +31,22 @@
           <div id="chart" class="flex-1 bg-white"></div>
         </div>
 
-
+      <!-- 施工 -->
+      <div class="pb-6">
+        <div
+        class="text-sm list-decimal list-inside bg-stripes bg-rose-200 dark:bg-indigo-200 bg-stripes-white box p-4 dark:text-slate-800">
+        <i class="ri-ruler-2-line text-3xl"></i>
+        <i class="ri-compasses-2-line text-3xl"></i>
+        <i class="ri-paint-brush-line text-3xl"></i>
+        
+        <br />
+        施工中
+        <br />
+        敬请期待...
+        </div>
       </div>
 
-
+      </div>
     </div>
   </div>
 </template>
@@ -92,7 +97,7 @@ export default {
     }
   },
   created() {
-    // this.password = '猫猫吃老鼠';
+    this.password = '猫猫吃老鼠';
 
   },
   mounted() {
