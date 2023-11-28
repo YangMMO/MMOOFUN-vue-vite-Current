@@ -3,9 +3,12 @@
   <div id="ct" class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
     <div class="header relative select-none">
       <div class="flex-header title box ">
-        <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">
-          <img src="./assets/img/mmo.jpg" alt="">
+        <!-- <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">
+          <img src="./assets/img/mmo.png" alt="">
           <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
+        </router-link> -->
+        <router-link class="home box flex items-center drop-shadow-box_l hover:drop-shadow-box_l_h dark:drop-shadow-box_d dark:hover:drop-shadow-box_d_h  cursor-pointer transition-all " to="/">
+          <img src="./assets/img/mmo.png" alt="">
         </router-link>
 
         <!-- 语言 -->
@@ -298,6 +301,11 @@ export default {
     width: 100%;
     height: 100%;
     background: url(./assets/img/resume_bg.png) center;
+      background-image:
+         radial-gradient(rgba(122, 122, 122, 0.3) 10%, transparent 0),
+         radial-gradient(rgba(122, 122, 122, 0.3) 10%, transparent 0);
+    background-size: 20px 20px;
+    background-position:0;
     // animation: pulse 5s infinite;
     opacity: 0.3;
   }
@@ -330,7 +338,7 @@ export default {
   right: -356px;
   top: -720px;
   border-radius: 9999px;
-  background: linear-gradient(-45deg, rgba(255, 174, 202, 0.2), rgba(255, 225, 90, 0.2));
+  background: linear-gradient(-45deg, rgba(255, 174, 202, 0.1), rgba(255, 225, 90, 0.1));
   filter: blur(12px);
   
 }
@@ -341,7 +349,7 @@ export default {
   height: 506px;
   left: -100px;
   bottom: -200px;
-  background: linear-gradient(-45deg, rgba(201, 255, 140, 0.12), rgba(191, 232, 255, 0.12));
+  background: linear-gradient(-45deg, rgba(201, 255, 140, 0.06), rgba(191, 232, 255, 0.06));
   border-radius: 9999px;
   filter: blur(12px);
 }
@@ -352,7 +360,7 @@ export default {
   height: 356px;
   right: -70px;
   bottom: -120px;
-  background: linear-gradient(-60deg, rgba(199, 130, 255, 0.08), rgba(255, 191, 236, 0.08));
+  background: linear-gradient(-60deg, rgba(199, 130, 255, 0.04), rgba(255, 191, 236, 0.04));
   border-radius: 9999px;
   filter: blur(12px);
 }
@@ -414,7 +422,7 @@ export default {
 
   .home {
     height: 40px;
-    padding: 8px;
+    // padding: 8px;
   }
 
   .title {
@@ -426,9 +434,9 @@ export default {
     cursor: default;
 
     img {
-      width: 20px;
-      height: 20px;
-      border-radius: 100%;
+      // width: 20px;
+      height: 40px;
+      // border-radius: 100%;
     }
 
     span {
@@ -437,7 +445,7 @@ export default {
 
   }
     .box {
-      margin-right: 4px;
+      margin-right: 8px;
       float: left;
       
       &:last-child {
