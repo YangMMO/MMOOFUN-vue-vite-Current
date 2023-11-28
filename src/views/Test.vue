@@ -1,6 +1,6 @@
 <template>
-  <div class="container text-gray-900 dark:text-white flex flex-col place-items-center">
-    <img src="../assets/img/mmo.png" class="w-2/5 rounded-full my-6 ">
+  <div class="container mx-auto text-gray-900 dark:text-white flex flex-col place-items-center">
+    <img src="../assets/img/mmo.png" class="w-2/5 my-6 ">
     <h1 class="text-3xl font-semibold my-6">这是一个临时数据链接</h1>
     <span class="text-slate-400 mb-12 text-xs">你访问到了作者进行测试时插入的临时数据，说明该功能还在完善中</span>
   </div>
