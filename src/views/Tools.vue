@@ -34,6 +34,7 @@ import i18n from '../i18n';
 import Ratio from '../components/Ratio.vue'
 import Flygame from '../components/Flygame.vue'
 import Ratiofigma from '../components/Ratiofigma.vue'
+import Assembly from '../components/Assembly/index.vue'
 import More from '../components/More.vue'
 
 export default {
@@ -45,16 +46,15 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More, Ratiofigma },
+  components: { Ratio,  More, Ratiofigma, Assembly },
   data() {
     return {
-      currentTab: 'ratio',
-      toolsTabs: ['ratio', 'ratioFigma','more', ],
+      currentTab: 'assembly',
+      toolsTabs: ['ratio', 'assembly', 'ratioFigma', 'more', ],
     }
   },
   computed: {
     currentTabComponent() {
-      console.log(this.currentTab.toLowerCase());
       return this.currentTab.toLowerCase()
     }
   }

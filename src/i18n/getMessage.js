@@ -34,6 +34,7 @@ export default {
             more: '更多',
             flygame: '飞机大战',
             ratiofigma: '固定比例 (Figma)',
+            assembly: '组合演算',
         },
         bbs: {
             user: '昵称',
@@ -159,6 +160,7 @@ export default {
             more: 'More',
             flygame: 'Fly Game',
             ratiofigma: 'Ratio (Figma)',
+            assembly: 'Assembly',
         },
         bbs: {
             user: 'User Name',

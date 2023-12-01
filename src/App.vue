@@ -1,105 +1,101 @@
 <template>
+  <div>
+    <div id="ct" class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
+      <div class="header relative select-none">
+        <div class="flex-header title box ">
+          <!-- <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">
+            <img src="./assets/img/mmo.png" alt="">
+            <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
+          </router-link> -->
+          <router-link class="home box flex items-center drop-shadow-box_l hover:drop-shadow-box_l_h dark:drop-shadow-box_d dark:hover:drop-shadow-box_d_h  cursor-pointer transition-all " to="/">
+            <img src="./assets/img/mmo.png" alt="">
+          </router-link>
 
-  <div id="ct" class="container bg-animate mx-auto bg-white dark:bg-gray-800 transition-all duration-200">
-    <div class="header relative select-none">
-      <div class="flex-header title box ">
-        <!-- <router-link class="home box flex items-center shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold cursor-pointer transition-all " to="/">
-          <img src="./assets/img/mmo.png" alt="">
-          <span class="hidden sm:block text-black dark:text-white transition-all duration-200">MMOO.FUN</span>
-        </router-link> -->
-        <router-link class="home box flex items-center drop-shadow-box_l hover:drop-shadow-box_l_h dark:drop-shadow-box_d dark:hover:drop-shadow-box_d_h  cursor-pointer transition-all " to="/">
-          <img src="./assets/img/mmo.png" alt="">
-        </router-link>
-
-        <!-- 语言 -->
-        <div
-          class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="switchLang()">
-          <i class="ri-globe-line"></i>
-        </div>
-
-
-        <!-- 主题 -->
-        <div
-          class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
-          @click="themesMode()">
-          <Transition name="switch-theme">
-            <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
-            <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
-          </Transition>
-        </div>
-
-
-      </div>
-
-      <div class="menu-fun">
-
-        <!-- 菜单 -->
-        <div
-          :class="['flex-header flex-col menu  shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold relative transition-all duration-200 box overflow-hidden']"
-           @click="isActiveMenu = true" @mouseenter="isActiveMenu = !isActiveMenu" @mouseleave="isActiveMenu = false"
->
-          
-          <!-- <div
-            class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
-            @click.stop="isActiveMenu = true"> -->
-          <div class="flex items-center show-menu ">
-            <span class="">{{ $t("menu.menu") }}</span>
-            <i class="ri-menu-2-line"></i>
+          <!-- 语言 -->
+          <div
+            class="flex-header fun lua box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+            @click="switchLang()">
+            <i class="ri-globe-line"></i>
           </div>
-          <nav v-show="isActiveMenu"
-            :class="['show-list flex flex-col w-full border-gray-900 border-t-2 dark:border-white transition-all duration-200  bg-white dark:bg-gray-800 ', { 'box-b': isActiveMenu }]">
 
-            <div v-for="item in routes" :key="item" @click.stop="isActiveMenu = false">
-              <router-link v-if="item.menu" :to="item.path"
-                class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block text-black dark:text-white transition-all duration-200">
-                {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
-              </router-link>
+
+          <!-- 主题 -->
+          <div
+            class="flex-header fun box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all"
+            @click="themesMode()">
+            <Transition name="switch-theme">
+              <i class="ri-sun-line absolute" v-if="theme === 'light'"></i>
+              <i class="ri-moon-line absolute" v-else-if="theme === 'dark'"></i>
+            </Transition>
+          </div>
+
+
+        </div>
+
+        <div class="menu-fun">
+
+          <!-- 菜单 -->
+          <div
+            :class="['flex-header flex-col menu  shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 font-semibold relative transition-all duration-200 box overflow-hidden']"
+            @click="isActiveMenu = true" @mouseenter="isActiveMenu = !isActiveMenu" @mouseleave="isActiveMenu = false"
+  >
+            
+            <!-- <div
+              class="flex-header flex-col menu relative box shadow-box_l hover:shadow-box_l_h dark:shadow-box_d dark:hover:shadow-box_d_h border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 transition-all font-semibold "
+              @click.stop="isActiveMenu = true"> -->
+            <div class="flex items-center show-menu ">
+              <span class="">{{ $t("menu.menu") }}</span>
+              <i class="ri-menu-2-line"></i>
             </div>
+            <nav v-show="isActiveMenu"
+              :class="['show-list flex flex-col w-full border-gray-900 border-t-2 dark:border-white transition-all duration-200  bg-white dark:bg-gray-800 ', { 'box-b': isActiveMenu }]">
 
-          </nav>
+              <div v-for="item in routes" :key="item" @click.stop="isActiveMenu = false">
+                <router-link v-if="item.menu" :to="item.path"
+                  class=" hover:text-red-300 dark:hover:text-indigo-300 w-full inline-block text-black dark:text-white transition-all duration-200">
+                  {{ $t(`menu.${item.name.toLocaleLowerCase()}`) }}
+                </router-link>
+              </div>
 
+            </nav>
+
+          </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-
-  <!-- <perfect-scrollbar class="relative h-screen mx-auto mask-img-top"> -->
-  <div class=" mx-auto mask-img-top transition-all duration-1000">
-    <!-- 路由页面 -->
-    <router-view class="transition-all duration-1000" />
-
-    <!-- 页脚 -->
-    <div class="footer container mx-auto">
-      <div class="container">
-        <div class=" border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
-          <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN </span>
-          <!-- <a class="text-slate-400" href="https://beian.miit.gov.cn/">粤ICP备17077157号</a> -->
-        </div>
       </div>
     </div>
+
+    <!-- <perfect-scrollbar class="relative h-screen mx-auto mask-img-top"> -->
+    <div class=" mx-auto mask-img-top transition-all duration-1000">
+      <!-- 路由页面 -->
+      <router-view class="transition-all duration-1000" />
+
+      <!-- 页脚 -->
+      <div class="footer container mx-auto">
+        <div class="container">
+          <div class=" border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
+            <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN </span>
+            <!-- <a class="text-slate-400" href="https://beian.miit.gov.cn/">粤ICP备17077157号</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 装饰元素 -->
+    <div class="h-screen fixed w-full top-0 decorate">
+      <div class="sphere1"
+        :style="[{ width: _innerWidth * 0.81 + 'px' }, { height: _innerWidth * 0.81 + 'px' }, { top: -(_innerWidth * 0.57) + 'px' }, { right: -(_innerWidth * 0.28) + 'px' }]">
+      </div>
+      <div class="sphere2"
+        :style="[{ width: _innerWidth * 0.41 + 'px' }, { height: _innerWidth * 0.41 + 'px' }, { bottom: -(_innerWidth * 0.16) + 'px' }, { left: -(_innerWidth * 0.07) + 'px' }]">
+      </div>
+      <div class="sphere3"
+        :style="[{ width: _innerWidth * 0.3 + 'px' }, { height: _innerWidth * 0.3 + 'px' }, { bottom: -(_innerWidth * 0.105) + 'px' }, { right: -(_innerWidth * 0.06) + 'px' }]">
+      </div>
+    </div>
+
+    <Flower1 ref="fl"></Flower1>
   </div>
-
-  <!-- 装饰元素 -->
-  <div class="h-screen fixed w-full top-0 decorate">
-    <div class="sphere1"
-      :style="[{ width: _innerWidth * 0.81 + 'px' }, { height: _innerWidth * 0.81 + 'px' }, { top: -(_innerWidth * 0.57) + 'px' }, { right: -(_innerWidth * 0.28) + 'px' }]">
-    </div>
-    <div class="sphere2"
-      :style="[{ width: _innerWidth * 0.41 + 'px' }, { height: _innerWidth * 0.41 + 'px' }, { bottom: -(_innerWidth * 0.16) + 'px' }, { left: -(_innerWidth * 0.07) + 'px' }]">
-    </div>
-    <div class="sphere3"
-      :style="[{ width: _innerWidth * 0.3 + 'px' }, { height: _innerWidth * 0.3 + 'px' }, { bottom: -(_innerWidth * 0.105) + 'px' }, { right: -(_innerWidth * 0.06) + 'px' }]">
-    </div>
-    <!-- <div class="sphere1"></div> -->
-    <!-- <div class="sphere2"></div> -->
-    <!-- <div class="sphere3"></div> -->
-  </div>
-  <!-- </perfect-scrollbar> -->
-
-  <Flower1 ref="fl"></Flower1>
-
 </template>
 
 <script>

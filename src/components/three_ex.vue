@@ -7,7 +7,7 @@
         <button v-for="item in modelNameArr" :key="item.name" class="box p-1 px-2 tools-item border-2 border-gray-300 dark:border-gray-600 m"  @click="onClickLoader(item.glb)">{{ item.name }}</button>
       </div>
 
-      <p class="pb-3">加载进度: {{ onProgress }}</p>
+      <p class="pb-3">加载进度: {{ onProgress >= onTotal ? '渲染中...' : onProgress + ' / ' + onTotal }}</p>
 
       <div id="model-canvas" :class="['box overflow-hidden', {'bg-gray-100': !_isLoading}]"></div>
 
@@ -67,7 +67,7 @@ export default {
 
     return {
       onProgress: this.onProgress,
-      onTotal: this.onProgress,
+      onTotal: this.onTotal,
       modelNameArr: [
         {
           name: 'Three 官方示例 (4MB)',
