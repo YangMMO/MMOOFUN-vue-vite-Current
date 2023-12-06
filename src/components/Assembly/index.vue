@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mx-auto text-white">
-    <div class="calculate bg-gradient-to-b from-slate-700 to-slate-900 mx-auto box overflow-hidden border-2">
-      <div class="calculate-c " >
+    <div class="calculate bg-slate-100 mx-auto box overflow-hidden border-2">
+      <div class="calculate-c text-slate-500" >
         <!-- 组合项 -->
         <div class="bg-white p-6 text-slate-500 flex gap-x-3 overflow-x-auto ">
 
@@ -31,10 +31,15 @@
           </div>
         </div>
 
-        <!-- 结果项 -->
-        <div class="py-3 px-3 flex items-center">
-          <div @click="calculate()">功能开发中</div>
+        <!-- 生成栏 -->
+        <div class="py-6 px-6 items-center ">
+          <div class="pb-6">
+            <div @click="calculate()">功能开发中</div>
+          </div>
+          <sheet class=" w-full"></sheet>
         </div>
+
+
         <p class="text-center mb-6 opacity-20">By MMOO.FUN</p>
       </div>
 
@@ -46,12 +51,13 @@
 import i18n from '../../i18n';
 import Card from './card.vue';
 import CardLi from './li.vue';
+import Sheet from './sheet.vue';
 
 
 export default {
   name: 'Assembly',
   components: {
-    Card, CardLi
+    Card, CardLi, Sheet
   },
   provide() {
     return {
@@ -81,8 +87,8 @@ export default {
             value: '',
           }
         ]
-      }]
-    }
+      }],
+    };
   },
   methods: {
     /* 计算 */
@@ -187,10 +193,11 @@ export default {
       this._updateCardArrId();
       this.$forceUpdate();
     },
+
     
   },
   mounted() {
-    
+
   },
   created() {
     
@@ -201,6 +208,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.sheet-container {
+  height: 600px;
+}
+
 .add-card-btn {
   width: 52px;
 
