@@ -1,5 +1,5 @@
 <template>
-  <div class="card transition-all duration-75 ease-linear border-2 border-slate-500 rounded-lg flex overflow-hidden">
+  <div class="card bg-white transition-all duration-75 ease-linear border-2 border-slate-500 rounded-lg flex overflow-hidden">
 
     <div class="box-left bg-slate-200 overflow-hidden" @click="assembly.handleCloseCard(card.id)">
       <div :class="['n bg-slate-200 hover:opacity-0 cursor-pointer']">
@@ -11,10 +11,10 @@
     </div>
     
     <div class="p-3 w-full flex flex-col gap-y-3">
-      <div>
+      <!-- <div>
         <input type="checkbox"  class="align-middle" v-model="card.reckonIn">
         <span class="pl-2">{{ $t("as.reckonIn") }}</span>
-      </div>
+      </div> -->
       <div class="flex">
         <div class="px-2 py-1 text-center flex justify-center bg-slate-200 active:bg-slate-300 rounded-md cursor-pointer text-slate-600" @click="assembly.handleAddItem(card.id)">
           <div class="flex items-center transition-all duration-75 ease-linear">

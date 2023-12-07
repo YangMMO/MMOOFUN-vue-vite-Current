@@ -68,11 +68,11 @@
     <!-- <perfect-scrollbar class="relative h-screen mx-auto mask-img-top"> -->
     <div class=" mx-auto mask-img-top transition-all duration-1000">
       <!-- 路由页面 -->
-      <router-view class="transition-all duration-1000" />
+      <router-view class="transition-all duration-1000 container mx-auto" />
 
       <!-- 页脚 -->
       <div class="footer container mx-auto">
-        <div class="container">
+        <div class="2xl:container">
           <div class=" border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
             <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN </span>
             <!-- <a class="text-slate-400" href="https://beian.miit.gov.cn/">粤ICP备17077157号</a> -->
@@ -118,7 +118,7 @@ export default {
   },
   provide() {
     return {
-      app: this
+      app: this,
     }
   },
   data() {
