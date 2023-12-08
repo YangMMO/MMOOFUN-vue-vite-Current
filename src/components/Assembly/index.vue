@@ -213,8 +213,6 @@ export default {
 
       this._updateCardArrId();
       this.$forceUpdate();
-      console.log(this.$refs.sheetRef.fc.clear);
-      
     },
 
     /*  下载excel */
