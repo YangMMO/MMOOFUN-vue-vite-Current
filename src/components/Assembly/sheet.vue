@@ -104,6 +104,7 @@ export default {
       luckysheet.setSheetActive(0);
 
       luckysheet.deleteColumn(0, 1);
+      luckysheet.deleteRow(0, 1);
 
       luckysheet.setCellValue(0, 0, '组合名');
       for (let i = 0; i < nType.length; i++) {
@@ -186,6 +187,7 @@ export default {
       luckysheet.setSheetActive(1);
 
       luckysheet.deleteColumn(0, 1);
+      luckysheet.deleteRow(0, 1);
 
       for (let i = 0; i < d.length; i++) {
         luckysheet.setCellValue(0, i, d[i]);
