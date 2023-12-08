@@ -3,11 +3,11 @@
     <div class="calculate bg-slate-100 mx-auto box overflow-hidden border-2">
       <div class="calculate-c text-slate-500" >
         <!-- 组合项 -->
-        <div class="bg-slate-50 p-6 text-slate-500 flex gap-x-3 overflow-x-auto " ref="scrollContainer">
+        <div class="bg-slate-50 p-6 text-slate-500 flex gap-x-3 overflow-x-auto" ref="scrollContainer">
 
           <!-- 卡片组 -->
-          <div ref="scrollContent" class="flex gap-x-3 shrink grow-0 basis-auto " >
-            <Card v-for="card in cardArr" :key="card.id" :card="card">
+          <div ref="scrollContent" class="flex gap-x-3 shrink grow-0 basis-auto" >
+            <Card v-for="card in cardArr" :key="card.id" :card="card" class="">
 
               <CardLi  v-for="item in card.items" :key="item.id" :cardId="card.id" :item="item" >
 
@@ -15,48 +15,51 @@
 
             </Card>
           </div>
-
-
-
         </div>
 
         <!-- 生成栏 -->
         <div class="pt-6">
           <!-- 添加卡片 -->
-          <div class="pb-6 px-6 flex gap-x-3">
-            <button 
-              class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
-               @click="handleAddCard"
-            >
-                <i class="ri-add-box-line  pr-1 "></i>
-                <span class="block">{{ $t("as.add") }}</span>
-            </button>
+          <div class="flex gap-x-3 pb-6 px-6">
+            <div class="flex gap-x-3">
+              <button 
+                class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
+                @click="handleAddCard"
+              >
+                  <i class="ri-add-box-line  pr-1 "></i>
+                  <span class="block">{{ $t("as.add") }}</span>
+              </button>
 
-            <button 
-              class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
-               @click="handleResetCard"
-            >
-                <i class="ri-restart-line pr-1 "></i>
-                <span class="block">{{ $t("as.reset") }}</span>
-            </button>
+              <button 
+                class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
+                @click="handleResetCard"
+              >
+                  <i class="ri-restart-line pr-1 "></i>
+                  <span class="block">{{ $t("as.reset") }}</span>
+              </button>
 
-            <button 
-              class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
-               @click="exportChildGridToExcel"
-            >
-                <i class="ri-file-excel-2-line pr-1 "></i>
-                <span class="block">{{ $t("as.export") }}</span>
-            </button>
+            </div>
+            <div class="flex-1 flex gap-x-3 pl-3 border-l border-slate-300">
+              <input type="text" class="block rounded-md border-0 py-1.5 px-2 ring-1 ring-inset ring-slate-300 leading-1.5" :placeholder="$t('as.assemblyName')" v-model="asName"
+              />
+            </div>
 
+            <div class="flex gap-x-3 pl-3 border-l border-slate-300">
+              <button 
+                class="px-2 py-1 text-center flex justify-center bg-white active:bg-slate-300 rounded-md cursor-pointer text-slate-600 border-2 border-slate-500"
+                @click="handleDownloadExcel"
+              >
+                  <i class="ri-file-excel-2-line pr-1 "></i>
+                  <span class="block">{{ $t("as.export") }}</span>
+              </button>
+            </div>
           </div>
 
-          <!-- <div class="pb-6">
-            <div @click="calculate()">功能开发中</div>
-          </div> -->
+
 
           <!-- 表格 -->
           <div class="relative sheet-container">
-            <sheet class=" w-full" ></sheet>
+            <sheet class=" w-full" ref="sheetRef" ></sheet>
           </div>
           
         </div>
@@ -84,16 +87,17 @@ export default {
     }
   },
   data() {
+    this.asName = '组合';
     return {
       cardArr: [{
         id: 1,
         items: [
           {
             id: 1,
-            value: '1.1',
+            value: '',
           }, {
             id: 2,
-            value: '1.2',
+            value: '',
           }
         ]
       },{
@@ -101,24 +105,8 @@ export default {
         items: [
           {
             id: 1,
-            value: '2.1',
+            value: '',
           },
-          {
-            id: 2,
-            value: '2.2',
-          }
-        ]
-      },{
-        id: 3,
-        items: [
-          {
-            id: 1,
-            value: '3.1',
-          },
-          {
-            id: 2,
-            value: '3.2',
-          }
         ]
       }],
     };
@@ -222,10 +210,17 @@ export default {
           });
         }
       });
+
       this._updateCardArrId();
       this.$forceUpdate();
+      console.log(this.$refs.sheetRef.fc.clear);
+      
     },
 
+    /*  下载excel */
+    handleDownloadExcel() {
+      this.$refs.sheetRef.downloadExcel();
+    },
   },
   mounted() {
 
@@ -240,7 +235,7 @@ export default {
 
 <style lang="scss" scoped>
 .sheet-container {
-  height: 600px;
+  height: 660px;
 }
 
 .add-card-btn {
@@ -308,4 +303,5 @@ export default {
 .container {
     padding: 120px 12px 0 12px;
 }
+
 </style>

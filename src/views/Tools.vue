@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       currentTab: 'assembly',
-      toolsTabs: ['ratio', 'assembly', 'ratioFigma', 'more', ],
+      toolsTabs: ['assembly', 'ratio', 'ratioFigma', 'more', ],
     }
   },
   computed: {
