@@ -5,9 +5,9 @@
       <div class="select-none pb-9" id="sTop">
         <h1 class="text-3xl  font-semibold select-none inline-block align-middle">{{ $t("menu.bbs") }}</h1>
         <span class="align-middle text-sm  ml-2 px-2 py-1 bg-gray-100 box gradient-red mr-1">{{ bbsDataLength }}</span>
-        <div class="align-middle text-sm px-2 py-1 box inline-block float-right text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">
+        <div class="align-middle text-sm py-1 box inline-block float-right text-gray-400 dark:text-gray-500 transition-all duration-75 ease-linear">
           <!-- <i class="ri-emotion-happy-line align-middle mr-1 inline-block"></i> -->
-          <span>{{ $t("_.visitor") + " " + app.visitor }}</span>
+          <span class="px-3 py-1 bg-slate-100 dark:bg-slate-900  transition-all duration-75 ease-linea rounded-full inline-block align-middle">{{ $t("_.visitor") + " " + app.visitor }}</span>
         </div>
      </div>
     

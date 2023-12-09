@@ -5,9 +5,9 @@
 
         <div class=" bg-gradient-to-b from-slate-700 to-slate-800  py-12 px-3">
           <!-- 常见比例 -->
-          <div class="text-center">
+          <div class="text-center flex flex-wrap justify-center items-center">
             <button v-for="ratio in commonRatio" :key="ratio" @click="currentRatio = ratio; clearVal()"
-              :class="['box  p-1 px-2 ratio-item', { 'bg-gradient-to-b from-pink-400 to-pink-600 ': currentRatio === ratio }, { 'bg-gradient-to-b from-blue-700 to-indigo-800 ': currentRatio !== ratio }]">
+              :class="['box p-1 px-2 m-1 sm:w-1/6', { 'bg-gradient-to-b from-pink-400 to-pink-600 ': currentRatio === ratio }, { 'bg-gradient-to-b from-blue-700 to-indigo-800 ': currentRatio !== ratio }]">
               <!-- {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}:${Math.round(ratio.h * 1000) / 1000}` : 'Custom' }} -->
               {{ ratio.w ? `${Math.round(ratio.w * 1000) / 1000}` : 'Custom' }}
               {{ ratio.h > 1 ? ` : ${Math.round(ratio.h * 1000) / 1000}` : '' }}

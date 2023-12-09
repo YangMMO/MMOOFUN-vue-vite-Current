@@ -40,7 +40,9 @@
 
             </div>
             <div class="flex-1 flex gap-x-3 pl-3 border-l border-slate-300">
-              <input type="text" class="block rounded-md border-0 py-1.5 px-2 ring-1 ring-inset ring-slate-300 leading-1.5" :placeholder="$t('as.assemblyName')" v-model="asName"
+              <input type="text" class="block rounded-md border-0 py-1.5 px-2 ring-1 ring-inset ring-slate-300 leading-1.5" :placeholder="$t('as.assemblyName')" 
+              v-model="asName"
+              @input="handleInputChange"
               />
             </div>
 
@@ -89,6 +91,7 @@ export default {
   data() {
     this.asName = '组合';
     return {
+      asName: this.asName,
       cardArr: [{
         id: 1,
         items: [
@@ -109,6 +112,41 @@ export default {
           },
         ]
       }],
+      // 开发测试数据
+      // cardArr: [{
+      //   id: 1,
+      //   items: [
+      //     {
+      //       id: 1,
+      //       value: 'aa',
+      //     }, {
+      //       id: 2,
+      //       value: 'bb',
+      //     }, {
+      //       id: 3,
+      //       value: 'cc',
+      //     }
+      //   ]
+      // },{
+      //   id: 2,
+      //   items: [
+      //     {
+      //       id: 1,
+      //       value: '11',
+      //     }, {
+      //       id: 1,
+      //       value: '22',
+      //     },
+      //   ]
+      // },{
+      //   id: 3,
+      //   items: [
+      //     {
+      //       id: 1,
+      //       value: '//',
+      //     }
+      //   ]
+      // }],
     };
   },
   methods: {
@@ -219,13 +257,19 @@ export default {
     handleDownloadExcel() {
       this.$refs.sheetRef.downloadExcel();
     },
+
+    /* 输入框改变 */
+    handleInputChange(e) {
+      // 通过合并空对象，对整个cardArr进行数据更新
+      this.cardArr = Object.assign([], this.cardArr);
+    },
   },
   mounted() {
 
   },
   created() {
     
-  },
+  }
 }
 
 </script>

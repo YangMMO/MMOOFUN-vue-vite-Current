@@ -84,6 +84,12 @@ export default {
       let n = this.sheetAssemblyData;
       let o = this.sheetAssemblyData_old;
 
+      for (let i = 0; i < o.length; i++) {
+          for (let j = 0; j < o[i].length; j++) {
+              o[i][j] = '';
+          }
+      }
+
       let result = n.map((item, index) => {
           // 如果 o 数组存在并且 o 数组长度大于 n 数组长度
           if (o[index] && o[index].length > item.length) {
@@ -93,6 +99,8 @@ export default {
           // 否则返回原始的 n 数组
           return item;
       });
+
+      result = result.concat(o)
 
       return result;
     },
@@ -104,7 +112,6 @@ export default {
       luckysheet.setSheetActive(0);
 
       luckysheet.deleteColumn(0, 1);
-      luckysheet.deleteRow(0, 1);
 
       luckysheet.setCellValue(0, 0, '组合名');
       for (let i = 0; i < nType.length; i++) {
@@ -119,6 +126,11 @@ export default {
           luckysheet.setCellValue(i+1, j, d[i][j]);
         }
       }
+
+      // 删除多余的''单元数row
+      this.sheetAssemblyData_old = d.filter(function(item) {  
+          return item[0] !== "" && item[1] !== "";  
+      });
 
       luckysheet.setSheetActive(0);
     },
@@ -150,18 +162,20 @@ export default {
       return result;
     },
 
-
     // sheet assembly arr 处理
     toAssemblyArr(newVal, oldVal) {
-      this.sheetAssemblyData = [];
+      this.sheetAssemblyData_old = [];
       if (this.sheetAssemblyData!= null) {
         this.sheetAssemblyData.forEach(item => {
           this.sheetAssemblyData_old.push(item);
         });
       }
+
+      this.sheetAssemblyData = [];
       let result = this.processData(newVal, this.assembly.asName);
       this.sheetAssemblyData = result;
     },
+
 
     // 清除 sheet type 表
     clearTypeTable() {
@@ -187,7 +201,6 @@ export default {
       luckysheet.setSheetActive(1);
 
       luckysheet.deleteColumn(0, 1);
-      luckysheet.deleteRow(0, 1);
 
       for (let i = 0; i < d.length; i++) {
         luckysheet.setCellValue(0, i, d[i]);
@@ -230,49 +243,55 @@ export default {
       celldata: [{
         r:0,
         c:0,
-        ct: {
-          fa: "General",
-          t: "s"
-        },
-        v:'本表格由MMOO.FUN生成，感谢使用与支持！',
-        m:"本表格由MMOO.FUN生成，感谢使用与支持！",
+        v:'工具用途：',
+        m:"工具用途：",
       },{
         r:1,
         c:0,
-        ct: {
-          fa: "General",
-          t: "s"
-        },
-        v:'说明：如A1/B1/C1 与 A2/B2/C2 会交叉组合成不同的结果，可则使用该工具进行预设性演算！',
-        m:"说明：如A1/B1/C1 与 A2/B2/C2 会交叉组合成不同的结果，可则使用该工具进行预设性演算！",
-      },{
-        r:2,
-        c:0,
-        ct: {
-          fa: "General",
-          t: "s"
-        },
-        v:'1.请在顶部类型进行子项的输入（输入后系统会自动演算）；',
-        m:"1.请在顶部类型进行子项的输入（输入后系统会自动演算）；",
+        v:'A1/B1/C1 与 A2/B2/C2 会交叉组合成不同的结果，该工具则对这类预设性组合进行演算！',
+        m:"A1/B1/C1 与 A2/B2/C2 会交叉组合成不同的结果，该工具则对这类预设性组合进行演算！",
       },{
         r:3,
         c:0,
-        ct: {
-          fa: "General",
-          t: "s"
-        },
-        v:'2.可自定义修改组合名字段的名称；',
-        m:"2.可自定义修改组合名字段的名称；",
+        v:'使用说明：',
+        m:"使用说明：",
       },{
         r:4,
         c:0,
-        ct: {
-          fa: "General",
-          t: "s"
-        },
+        v:'1.请在顶部类型进行子项的输入（输入后系统会自动演算）；',
+        m:"1.请在顶部类型进行子项的输入（输入后系统会自动演算）；",
+      },{
+        r:5,
+        c:0,
+        v:'2.可自定义修改组合名字段的名称；',
+        m:"2.可自定义修改组合名字段的名称；",
+      },{
+        r:6,
+        c:0,
         v:'3.建议在演算“满意”后再对表格进行修改，最后导出！',
         m:"3.建议在演算“满意”后再对表格进行修改，最后导出！",
-      }], 
+      },{
+        r:8,
+        c:0,
+        v:'温馨提醒：',
+        m:"温馨提醒：",
+      },{
+        r:9,
+        c:0,
+        v:'1.由于数据实时演算，当您的类型与子项过多时，可能会出现卡顿现象；',
+        m:"1.由于数据实时演算，当您的类型与子项过多时，可能会出现卡顿现象；",
+      },{
+        r:10,
+        c:0,
+        v:'2.请思考类型与子项过多的情况是必定出现，或建议您考虑适当性、合理拆分！',
+        m:"2.请思考类型与子项过多的情况是必定出现，或建议您考虑适当性、合理拆分！",
+      },{
+        r:12,
+        c:0,
+        v:'本表格由MMOO.FUN生成，感谢使用与支持！',
+        m:"本表格由MMOO.FUN生成，感谢使用与支持！",
+        bg: "#fff000",
+      },], 
       index: 2,
     }
 
