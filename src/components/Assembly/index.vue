@@ -91,7 +91,7 @@ export default {
   data() {
     this.asName = '组合';
     return {
-      asName: this.asName,
+      // asName: this.asName,
       cardArr: [{
         id: 1,
         items: [
@@ -261,9 +261,10 @@ export default {
     /* 输入框改变 */
     handleInputChange(e) {
       // 通过合并空对象，对整个cardArr进行数据更新
-      let arr = Object.assign([], this.cardArr);
-      this.cardArr = [];
-      this.cardArr = arr;
+      this.cardArr = Object.assign([], this.cardArr);
+      // this.cardArr = [];
+      // this.cardArr = arr;
+      // console.log(this.asName);
     },
   },
   mounted() {

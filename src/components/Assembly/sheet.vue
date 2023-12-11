@@ -163,7 +163,7 @@ export default {
     },
 
     // sheet assembly arr 处理
-    toAssemblyArr(newVal, oldVal) {
+    toAssemblyArr(newVal, oldVal, name) {
       this.sheetAssemblyData_old = [];
       if (this.sheetAssemblyData!= null) {
         this.sheetAssemblyData.forEach(item => {
@@ -172,7 +172,7 @@ export default {
       }
 
       this.sheetAssemblyData = [];
-      let result = this.processData(newVal, this.assembly.asName);
+      let result = this.processData(newVal, name);
       this.sheetAssemblyData = result;
     },
 
@@ -315,7 +315,7 @@ export default {
       handler(newVal, oldVal) {
         luckysheet.setSheetActive(0);
         this.toTypeArr(newVal, oldVal);
-        this.toAssemblyArr(newVal, oldVal);
+        this.toAssemblyArr(newVal, oldVal, this.assembly.asName);
         this.insertData();
       },
       deep: true,
