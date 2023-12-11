@@ -261,7 +261,9 @@ export default {
     /* 输入框改变 */
     handleInputChange(e) {
       // 通过合并空对象，对整个cardArr进行数据更新
-      this.cardArr = Object.assign([], this.cardArr);
+      let arr = Object.assign([], this.cardArr);
+      this.cardArr = [];
+      this.cardArr = arr;
     },
   },
   mounted() {
