@@ -36,7 +36,7 @@
         <!-- 瀑布流列内个数 -->
         <div v-for="(data, index) in designData" :key="index" class="design-item box overflow-hidden text-sm ">
           <!-- 判断json的每个item即（data的index）所处于哪一列内 -->
-          <div v-if="index % col === colInedx - 1" class="mb-3">
+          <div v-if="index % col === colInedx - 1 && data.fields.show" class="mb-3">
             <a :href="data.fields.url.text" target="_blank">
               <img :src="data.fields.image[0].url" class="w-full bg-gray-50 dark:bg-slate-600 transition-all duration-75 ease-linear">
               <div
