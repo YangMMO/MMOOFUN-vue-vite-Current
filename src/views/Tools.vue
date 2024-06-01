@@ -34,6 +34,7 @@ import i18n from '../i18n';
 import Ratio from '../components/Ratio.vue'
 import Flygame from '../components/Flygame.vue'
 import Ratiofigma from '../components/Ratiofigma.vue'
+import Statistics from '../components/Statistics.vue'
 import Assembly from '../components/Assembly/index.vue'
 import More from '../components/More.vue'
 
@@ -46,11 +47,11 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More, Ratiofigma, Assembly },
+  components: { Ratio,  More, Ratiofigma,Statistics, Assembly },
   data() {
     return {
-      currentTab: 'assembly',
-      toolsTabs: ['assembly', 'ratio', 'ratioFigma', 'more', ],
+      currentTab: 'statistics',
+      toolsTabs: ['statistics', 'assembly', 'ratio', 'ratioFigma', 'more', ],
     }
   },
   computed: {
