@@ -30,7 +30,7 @@ export default {
         },
         tools: {
             view: '查看',
-            ratio: '固定比例计算器',
+            ratio: '比例换算',
             more: '更多',
             flygame: '飞机大战',
             ratiofigma: '固定比例 (Figma)',
@@ -158,7 +158,7 @@ export default {
         },
         tools: {
             view:  'View',
-            ratio: 'Ratio Calculation',
+            ratio: 'Ratio Conversion',
             more: 'More',
             flygame: 'Fly Game',
             ratiofigma: 'Ratio (Figma)',

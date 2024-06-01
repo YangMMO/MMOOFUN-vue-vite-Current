@@ -50,8 +50,8 @@ export default {
   components: { Ratio,  More, Ratiofigma,Statistics, Assembly },
   data() {
     return {
-      currentTab: 'statistics',
-      toolsTabs: ['statistics', 'assembly', 'ratio', 'ratioFigma', 'more', ],
+      currentTab: 'ratio',
+      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'more', ],
     }
   },
   computed: {
