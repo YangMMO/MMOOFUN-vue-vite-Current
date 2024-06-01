@@ -1181,10 +1181,11 @@ export default {
 
       // 
       await msgDatasheet.records.query({
-        viewId: "viwhuh8Q1ikXw",
+        viewId: "viw6uL1syB24S",
         pageSize: that.getNum,
         pageNum: that.currentPage
       }).then(response => {
+
         if (response.success) {
           success = true; // 获取成功
           that.bbsData = response.data.records;
