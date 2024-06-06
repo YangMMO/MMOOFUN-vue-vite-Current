@@ -36,7 +36,7 @@ export default {
             ratiofigma: '固定比例 (Figma)',
             assembly: '组合演算',
             statistics: '统计(Figma插件)',
-
+            time: '时间计算',
         },
         bbs: {
             user: '昵称',
@@ -164,6 +164,7 @@ export default {
             ratiofigma: 'Ratio (Figma)',
             assembly: 'Assembly',
             statistics: 'Statistics (Figma Plugin)',
+            time: 'Time Calculator',
         },
         bbs: {
             user: 'User Name',

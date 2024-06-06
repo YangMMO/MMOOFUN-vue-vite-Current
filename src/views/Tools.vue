@@ -36,6 +36,7 @@ import Flygame from '../components/Flygame.vue'
 import Ratiofigma from '../components/Ratiofigma.vue'
 import Statistics from '../components/Statistics.vue'
 import Assembly from '../components/Assembly/index.vue'
+import Time from '../components/Time.vue'
 import More from '../components/More.vue'
 
 export default {
@@ -47,11 +48,11 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More, Ratiofigma,Statistics, Assembly },
+  components: { Ratio,  More, Ratiofigma,Statistics, Assembly, Time },
   data() {
     return {
       currentTab: 'ratio',
-      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'more', ],
+      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'Time', 'more', ],
     }
   },
   computed: {
