@@ -37,6 +37,7 @@ import Ratiofigma from '../components/Ratiofigma.vue'
 import Statistics from '../components/Statistics.vue'
 import Assembly from '../components/Assembly/index.vue'
 import Time from '../components/Time.vue'
+import MinioPhoto from '../components/MinioPhoto.vue'
 import More from '../components/More.vue'
 
 export default {
@@ -48,15 +49,16 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More, Ratiofigma,Statistics, Assembly, Time },
+  components: { Ratio,  More, Ratiofigma,Statistics, Assembly, MinioPhoto, Time },
   data() {
     return {
       currentTab: 'ratio',
-      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'Time', 'more', ],
+      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'time', 'minioPhoto', 'more', ],
     }
   },
   computed: {
     currentTabComponent() {
+      console.log(this.currentTab)
       return this.currentTab.toLowerCase()
     }
   }

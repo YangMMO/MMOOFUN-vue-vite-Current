@@ -37,6 +37,7 @@ export default {
             assembly: '组合演算',
             statistics: '统计(Figma插件)',
             time: '时间计算',
+            miniophoto: 'MinIO照片管理',
         },
         bbs: {
             user: '昵称',
@@ -165,6 +166,7 @@ export default {
             assembly: 'Assembly',
             statistics: 'Statistics (Figma Plugin)',
             time: 'Time Calculator',
+            miniophoto: 'MinIO Photo Management',
         },
         bbs: {
             user: 'User Name',
