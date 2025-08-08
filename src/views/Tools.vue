@@ -49,19 +49,28 @@ export default {
       content: 'MMOO.FUN, 个人网站, MMO,'
     }]
   },
-  components: { Ratio,  More, Ratiofigma,Statistics, Assembly, MinioPhoto, Time },
+  components: { Ratio, More, Ratiofigma, Statistics, Assembly, MinioPhoto, Time },
   data() {
     return {
       currentTab: 'ratio',
-      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratioFigma', 'time', 'minioPhoto', 'more', ],
+      toolsTabs: ['ratio', 'statistics', 'assembly', 'ratiofigma', 'time', 'minioPhoto', 'more'],
     }
   },
   computed: {
     currentTabComponent() {
-      console.log(this.currentTab)
-      return this.currentTab.toLowerCase()
+      const map = {
+        ratio: 'Ratio',
+        statistics: 'Statistics',
+        assembly: 'Assembly',
+        ratiofigma: 'Ratiofigma',
+        time: 'Time',
+        minioPhoto: 'MinioPhoto',
+        more: 'More',
+      }
+      return map[this.currentTab] || 'Ratio'
     }
   }
+
 }
 </script>
 

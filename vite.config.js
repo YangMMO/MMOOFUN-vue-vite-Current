@@ -2,14 +2,19 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
-import PrerenderSPAPlugin from 'prerender-spa-plugin/es6'
+// import PrerenderSPAPlugin from 'prerender-spa-plugin/es6'
 import routes from './src/router/path.js'
-import Markdown from 'vite-plugin-md'
+// import Markdown from 'vite-plugin-md'
 
 
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
   plugins: [
     vue({
       template: {
@@ -38,7 +43,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "./src/assets/scss/global.scss";'
+        additionalData: `@use "@/assets/scss/global.scss" as *;`
       }
     }
   },
@@ -48,10 +53,10 @@ export default defineConfig({
   publicPath: './',
   configureWebpack: {
     plugins: [
-      new PrerenderSPAPlugin({
-        staticDir: path.join(__dirname, 'dist'),
-        routes: routes  // 需要预渲染的路由地址(需要打包成几个页面就配置几个路由)
-      }),
+      // new PrerenderSPAPlugin({
+      //   staticDir: path.join(__dirname, 'dist'),
+      //   routes: routes  // 需要预渲染的路由地址(需要打包成几个页面就配置几个路由)
+      // }),
     ],
   },
   server: {

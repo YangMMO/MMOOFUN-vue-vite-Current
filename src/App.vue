@@ -73,7 +73,7 @@
       <!-- 页脚 -->
       <div class="footer container mx-auto">
         <div class="2xl:container">
-          <div class=" border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
+          <div class="py-2 border-t text-xs text-slate-400 border-slate-200 dark:border-slate-600 text-center cursor-default transition-all duration-200">
             <span>©2018-{{ moment().format("YYYY") }} MMOO.FUN </span>
             <!-- <a class="text-slate-400" href="https://beian.miit.gov.cn/">粤ICP备17077157号</a> -->
           </div>

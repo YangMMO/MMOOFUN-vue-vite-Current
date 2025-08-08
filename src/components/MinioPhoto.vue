@@ -25,10 +25,10 @@
           <div class="relative select-none">
             <!-- Arnold图片 -->
 
-            <img :src="data[0].fields.image[0].url" />
+            <img :src="data[2].fields.image[0].url" />
             <!-- 按钮 -->
             <div class="b-btn box absolute inset-x-0 bottom-0 text-center flex pb-4 justify-center">
-              <a :href="data[0].fields.url" target="_blank"
+              <a :href="data[2].fields.url" target="_blank"
                 rel="noopener noreferrer"
                 class="box px-4 py-1 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white bg-white dark:bg-gray-800 flex items-center">
                 <i class="ri-external-link-line icon-font-size pr-2"></i>

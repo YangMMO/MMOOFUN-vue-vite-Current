@@ -182,9 +182,9 @@ $B100: #000;
 */
 @mixin font-stroke($width, $blur, $color) {
     $obliqueWidth: $width * 1.414;
-    text-shadow: 0 -$width $blur $color,
+    text-shadow: 0 (-$width) $blur $color,
         /*上*/
-        $obliqueWidth -$obliqueWidth $blur $color,
+        ($obliqueWidth) (-$obliqueWidth) $blur $color,
         /*右上*/
         $width 0 $blur $color,
         /*右*/
@@ -192,13 +192,14 @@ $B100: #000;
         /*右下*/
         0 $width $blur $color,
         /*下*/
-        -$obliqueWidth $obliqueWidth $blur $color,
+        (-$obliqueWidth) $obliqueWidth $blur $color,
         /*左下*/
-        -$width 0 $blur $color,
+        (-$width) 0 $blur $color,
         /*左*/
-        -$obliqueWidth -$obliqueWidth $blur $color;
-    /*左上*/
+        (-$obliqueWidth) (-$obliqueWidth) $blur $color;
+        /*左上*/
 }
+
 
 //调用
 .text-stroke {
