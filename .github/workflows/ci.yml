@@ -1,7 +1,7 @@
 name: Build and Deploy Demo
 #手动触发
 on:
-  #workflow_dispatch:  #手动触发
+  workflow_dispatch:  #手动触发
   push:    #push触发
     branches: [ master ]
 
